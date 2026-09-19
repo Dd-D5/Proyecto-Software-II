@@ -1,0 +1,28 @@
+{
+  "name": "aegistrap-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "mock": "node mock-server.js"
+  },
+  "dependencies": {
+    "@xterm/addon-attach": "0.12.0",
+    "@xterm/addon-fit": "0.11.0",
+    "@xterm/addon-webgl": "0.19.0",
+    "@xterm/xterm": "6.0.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.5.2",
+    "tailwindcss": "3.4.17",
+    "vite": "8.3.0",
+    "ws": "^8.21.3"
+  }
+}
