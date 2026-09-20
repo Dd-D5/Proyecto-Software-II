@@ -36,6 +36,7 @@ export default function LiveTerminalView({
         {/* Left: Terminal Console Frame (7 cols) */}
         <div className="col-span-7 flex flex-col h-[600px]">
           <TerminalFrame
+            activeService={activeService}
             registerTerminalListener={registerTerminalListener}
             isPaused={isPaused}
             onTogglePause={onTogglePause}

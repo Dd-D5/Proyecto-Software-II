@@ -3,12 +3,21 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
 
-export default function TerminalFrame({ registerTerminalListener, isPaused, onTogglePause }) {
+export default function TerminalFrame({ activeService, registerTerminalListener, isPaused, onTogglePause }) {
   const terminalRef = useRef(null);
   const termInstanceRef = useRef(null);
   const fitAddonRef = useRef(null);
+  const lastMsgTypeRef = useRef(null);
   const [bufferLines, setBufferLines] = useState(10000);
   const [dumpStatus, setDumpStatus] = useState(null);
+
+  // Clear terminal screen when active service changes (child effect runs before parent hook replay effect)
+  useEffect(() => {
+    if (termInstanceRef.current) {
+      termInstanceRef.current.clear();
+      lastMsgTypeRef.current = null;
+    }
+  }, [activeService]);
 
   useEffect(() => {
     if (!terminalRef.current) return;
@@ -83,11 +92,15 @@ export default function TerminalFrame({ registerTerminalListener, isPaused, onTo
     const unregister = registerTerminalListener ? registerTerminalListener((msg) => {
       if (termInstanceRef.current) {
         if (msg.type === 'io' && msg.payload) {
+          lastMsgTypeRef.current = 'io';
           termInstanceRef.current.write(msg.payload);
-        } else if (msg.type === 'command' && msg.command) {
-          termInstanceRef.current.writeln(`\r\n\x1b[1;32mwww-data@prod-db-02:~$\x1b[0m ${msg.command}`);
+        } else if (msg.type === 'command' && (msg.command || msg.payload)) {
+          const prefix = lastMsgTypeRef.current === 'io' ? '\r\n' : '';
+          lastMsgTypeRef.current = 'command';
+          termInstanceRef.current.writeln(`${prefix}\x1b[1;32mwww-data@prod-db-02:~$\x1b[0m ${msg.command || msg.payload}`);
         } else if (msg.type === 'alert' && msg.payload) {
-          termInstanceRef.current.writeln(`\r\n\x1b[31m[ALERTA]: ${msg.payload}\x1b[0m`);
+          lastMsgTypeRef.current = 'alert';
+          termInstanceRef.current.writeln(`\x1b[31m[ALERTA]: ${msg.payload}\x1b[0m`);
         }
       }
     }) : () => {};
@@ -109,6 +122,7 @@ export default function TerminalFrame({ registerTerminalListener, isPaused, onTo
   const handleClear = () => {
     if (termInstanceRef.current) {
       termInstanceRef.current.clear();
+      lastMsgTypeRef.current = null;
     }
   };
 
