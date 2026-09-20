@@ -28,8 +28,16 @@ export default function DashboardView() {
       wsUrl={wsUrl}
       wsStatus={wsStatus}
     >
-      {/* Vista 1: Live Terminal (Pestaña Principal) */}
-      {activeTab === 'terminal' && (
+      {/*
+       * ESTRATEGIA 1: Todas las vistas permanecen montadas en el DOM.
+       * La visibilidad se controla únicamente por CSS (hidden / block),
+       * lo que preserva el buffer de xterm.js y el historial del
+       * Inspector de Pulsaciones sin importar cuántas veces se cambie
+       * entre pestañas.
+       */}
+
+      {/* Vista 1: Live Terminal — siempre montada, visible solo si activeTab === 'terminal' */}
+      <div className={activeTab === 'terminal' ? 'flex flex-col flex-1 h-full' : 'hidden'}>
         <LiveTerminalView
           activeService={activeService}
           onSelectService={setActiveService}
@@ -41,10 +49,12 @@ export default function DashboardView() {
           onTogglePause={togglePause}
           registerTerminalListener={registerTerminalListener}
         />
-      )}
+      </div>
 
-      {/* Vista 2: Gestión de Servicios */}
-      {activeTab === 'servicios' && <AdminServiciosView />}
+      {/* Vista 2: Gestión de Servicios — siempre montada, visible solo si activeTab === 'servicios' */}
+      <div className={activeTab === 'servicios' ? 'flex flex-col flex-1 h-full' : 'hidden'}>
+        <AdminServiciosView />
+      </div>
     </AppLayout>
   );
 }

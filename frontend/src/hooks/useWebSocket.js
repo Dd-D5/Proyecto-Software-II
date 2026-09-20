@@ -3,14 +3,7 @@ import { wsClient, getWebSocketUrl } from '../services/wsClient';
 import { EventType, ServiceType } from '../services/types';
 
 // Mock inicial idéntico a code.html
-const INITIAL_KEYSTROKES = [
-  { timestamp: '[21:40:03.171]', event: 'KeyDown', key: "'/'", scancode: 'code:191', delta: 'Δ 47ms', rawTime: 1726782003171 },
-  { timestamp: '[21:40:01.089]', event: 'KeyDown', key: "'Space'", scancode: 'code:32', delta: 'Δ 92ms', rawTime: 1726782001089 },
-  { timestamp: '[21:39:59.348]', event: 'KeyDown', key: "'t'", scancode: 'code:84', delta: 'Δ 67ms', rawTime: 1726781999348 },
-  { timestamp: '[21:39:58.340]', event: 'KeyDown', key: "'a'", scancode: 'code:65', delta: 'Δ 85ms', rawTime: 1726781998340 },
-  { timestamp: '[21:34:09.355]', event: 'KeyDown', key: "'w'", scancode: 'code:87', delta: 'Δ 71ms', rawTime: 1726781649355 },
-  { timestamp: '[21:30:27.449]', event: 'KeyDown', key: "'o'", scancode: 'code:79', delta: 'Δ 82ms', rawTime: 1726781427449 }
-];
+const INITIAL_KEYSTROKES = [];
 
 export function useWebSocket(activeService = ServiceType.SSH) {
   const [status, setStatus] = useState(wsClient.status);
