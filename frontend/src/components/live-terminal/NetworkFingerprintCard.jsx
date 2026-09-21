@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-export default function NetworkFingerprintCard({ mac = '00:1A:2B:3C:4D:5E' }) {
+export default function NetworkFingerprintCard({
+  mac = '00:1A:2B:3C:4D:5E',
+  sessionId = ''
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -51,6 +54,18 @@ export default function NetworkFingerprintCard({ mac = '00:1A:2B:3C:4D:5E' }) {
               {copied ? 'check' : 'content_copy'}
             </span>
           </button>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-[#1e2330] pt-1.5">
+          <span className="font-label-caps text-[9px] text-outline uppercase tracking-wider">
+            ID DE SESIÓN
+          </span>
+          <span
+            className="font-mono-sm text-[10px] text-secondary max-w-[62%] truncate"
+            title={sessionId || 'Esperando una sesión SSH'}
+          >
+            {sessionId || 'Esperando conexión'}
+          </span>
         </div>
       </div>
     </section>

@@ -10,6 +10,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
   const [attackerIp, setAttackerIp] = useState('185.220.101.44');
   const [attackerMac, setAttackerMac] = useState('00:1A:2B:3C:4D:5E');
+  const [sessionId, setSessionId] = useState('');
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
   const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -56,6 +57,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       }
       if (msg.mac) {
         setAttackerMac(msg.mac);
+      }
+      if (msg.session_id) {
+        setSessionId(msg.session_id);
       }
 
       // Procesar eventos de pulsaciones / IO
@@ -109,6 +113,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     wsUrl,
     attackerIp,
     attackerMac,
+    sessionId,
     keystrokes,
     lastMessage,
     isPaused,
