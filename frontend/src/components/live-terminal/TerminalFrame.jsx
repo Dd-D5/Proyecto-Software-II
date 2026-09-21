@@ -3,6 +3,16 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
 
+// Desnormalización: el backend (normalizeInput) envía <BACKSPACE> etc. como texto legible.
+// El inspector de teclas conserva la versión normalizada; solo la terminal recibe secuencias reales.
+// ponytail: <ARROW> no se puede reconstruir (el backend colapsa las 4 direcciones en una sola);
+// se suprime. Upgrade path: preservar la secuencia original (\x1b[A..D) en el backend.
+const DENORMALIZE = {
+  '<BACKSPACE>': '\b \b', // borrado real en terminal: backspace + espacio + backspace
+  '<TAB>': '\t',
+  '<CTRL+C>': '^C' // eco esperable de una terminal real para Ctrl+C
+};
+
 export default function TerminalFrame({ activeService, breached = false, registerTerminalListener, isPaused, onTogglePause }) {
   const terminalRef = useRef(null);
   const termInstanceRef = useRef(null);
@@ -93,7 +103,10 @@ export default function TerminalFrame({ activeService, breached = false, registe
       if (termInstanceRef.current) {
         if (msg.type === 'io' && msg.payload) {
           lastMsgTypeRef.current = 'io';
-          termInstanceRef.current.write(msg.payload);
+          const raw = DENORMALIZE[msg.payload] ?? msg.payload;
+          if (raw && raw !== '<ARROW>') {
+            termInstanceRef.current.write(raw);
+          }
         } else if (msg.type === 'command' && (msg.command || msg.payload)) {
           const prefix = lastMsgTypeRef.current === 'io' ? '\r\n' : '';
           lastMsgTypeRef.current = 'command';
