@@ -1,9 +1,9 @@
 import React from 'react';
 
 export default function MetricsRow({
-  attackerIp = '185.220.101.44',
-  totalKeystrokes = 7247,
-  totalAttacks = '69,792',
+  attackerIp = '0.0.0.0',
+  totalKeystrokes = 0,
+  totalAttacks = '0',
   attacksPerSec = '+14.8k/s',
   cpuPercent = 14.2,
   ramUsedMb = 148.6,
@@ -104,8 +104,7 @@ export default function MetricsRow({
             {attackerIp}
           </div>
         </div>
-        <div className="flex items-center justify-between font-mono-sm text-[10px]">
-          <span className="text-on-surface-variant">GeoIP: Moscú, RU</span>
+        <div className="flex items-center justify-end font-mono-sm text-[10px]">
           <span className="text-error font-bold font-label-caps text-[8px] bg-error-container/20 px-1 py-0.5 rounded border border-error/30">
             TOR EXIT NODE
           </span>

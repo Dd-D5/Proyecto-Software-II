@@ -3,7 +3,7 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
 
-export default function TerminalFrame({ activeService, registerTerminalListener, isPaused, onTogglePause }) {
+export default function TerminalFrame({ activeService, breached = false, registerTerminalListener, isPaused, onTogglePause }) {
   const terminalRef = useRef(null);
   const termInstanceRef = useRef(null);
   const fitAddonRef = useRef(null);
@@ -101,6 +101,11 @@ export default function TerminalFrame({ activeService, registerTerminalListener,
         } else if (msg.type === 'alert' && msg.payload) {
           lastMsgTypeRef.current = 'alert';
           termInstanceRef.current.writeln(`\x1b[31m[ALERTA]: ${msg.payload}\x1b[0m`);
+        } else if (msg.type === 'connection') {
+          lastMsgTypeRef.current = 'connection';
+          termInstanceRef.current.writeln(
+            `\x1b[31m[INTRUSION DETECTADA]: ${msg.service || 'ssh'} - ${msg.ip || 'IP desconocida'} (MAC: ${msg.mac || 'n/a'})\x1b[0m`
+          );
         }
       }
     }) : () => {};
@@ -154,8 +159,8 @@ export default function TerminalFrame({ activeService, registerTerminalListener,
           <span className="font-label-caps text-[9px] bg-surface-container-lowest px-2 py-0.5 rounded text-outline uppercase font-mono-sm border border-outline-variant/30">
             xterm.js WebGL Engine
           </span>
-          <span className="font-mono-sm text-[11px] text-primary flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+          <span className={`font-mono-sm text-[11px] flex items-center gap-1 ${breached ? 'text-primary' : 'text-outline'}`}>
+            <span className={`w-1.5 h-1.5 rounded-full bg-primary ${breached ? 'animate-ping' : 'opacity-30'}`}></span>
             LIVE_INTRUSION
           </span>
         </div>

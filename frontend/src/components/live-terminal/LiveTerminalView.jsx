@@ -14,6 +14,7 @@ export default function LiveTerminalView({
   sessionId,
   keystrokes,
   isPaused,
+  breachByService,
   onTogglePause,
   registerTerminalListener
 }) {
@@ -24,12 +25,13 @@ export default function LiveTerminalView({
         activeService={activeService}
         onSelectService={onSelectService}
         wsUrl={wsUrl}
+        breachByService={breachByService}
       />
 
       {/* 2. Top 5 KPI Metrics Cards Row */}
       <MetricsRow
         attackerIp={attackerIp}
-        totalKeystrokes={7247 + (keystrokes ? keystrokes.length - 6 : 0)}
+        totalKeystrokes={keystrokes ? keystrokes.length : 0}
       />
 
       {/* 3. Main Center Split (7 cols left Terminal, 5 cols right Fingerprint + Keystrokes) */}
@@ -38,6 +40,7 @@ export default function LiveTerminalView({
         <div className="col-span-7 flex flex-col h-[600px]">
           <TerminalFrame
             activeService={activeService}
+            breached={breachByService ? breachByService[activeService] : false}
             registerTerminalListener={registerTerminalListener}
             isPaused={isPaused}
             onTogglePause={onTogglePause}

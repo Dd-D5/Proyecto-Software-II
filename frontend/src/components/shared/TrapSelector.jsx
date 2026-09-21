@@ -4,31 +4,23 @@ import { ServiceType } from '../../services/types';
 export default function TrapSelector({
   activeService = ServiceType.SSH,
   onSelectService,
-  wsUrl = 'ws://127.0.0.1:8080/stream/pts3'
+  wsUrl = 'ws://127.0.0.1:8080/stream/pts3',
+  breachByService = {}
 }) {
   const honeypots = [
     {
       id: ServiceType.SSH,
       name: 'SSH Honeypot (:2222)',
-      badge: 'BREACH',
-      badgeClass: 'bg-error/30 text-white',
-      dotClass: 'bg-on-error',
       activeClass: 'bg-error-container text-on-error font-semibold shadow-sm'
     },
     {
       id: ServiceType.FTP,
       name: 'FTP Honeypot (:2121)',
-      badge: 'IDLE',
-      badgeClass: 'text-outline',
-      dotClass: 'bg-secondary',
       activeClass: 'bg-secondary-container/30 text-secondary border border-secondary/30 font-semibold shadow-sm'
     },
     {
       id: ServiceType.HTTP,
       name: 'HTTP Portal (:8080)',
-      badge: 'PROBE',
-      badgeClass: 'text-tertiary',
-      dotClass: 'bg-tertiary',
       activeClass: 'bg-tertiary-container/30 text-tertiary border border-tertiary/30 font-semibold shadow-sm'
     }
   ];
@@ -70,6 +62,10 @@ export default function TrapSelector({
         <div className="flex items-center gap-1.5 bg-surface-container-lowest p-0.5 rounded-lg border border-[#1e2330]">
           {honeypots.map((hp) => {
             const isActive = activeService === hp.id;
+            // Estado de intrusión por servicio: todas IDLE por defecto, BREACH con evento connection
+            const isBreached = !!breachByService[hp.id];
+            const badge = isBreached ? 'BREACH' : 'IDLE';
+            const badgeClass = isBreached ? 'bg-error/30 text-white' : 'text-outline';
             return (
               <button
                 key={hp.id}
@@ -80,10 +76,10 @@ export default function TrapSelector({
                     : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
                 }`}
               >
-                <span className={`w-1.5 h-1.5 rounded-full ${hp.dotClass}`}></span>
+                <span className={`w-1.5 h-1.5 rounded-full ${isBreached ? 'bg-error animate-pulse' : 'bg-outline/60'}`}></span>
                 <span>{hp.name}</span>
-                <span className={`text-[9px] px-1 rounded font-label-caps font-bold ${hp.badgeClass}`}>
-                  {hp.badge}
+                <span className={`text-[9px] px-1 rounded font-label-caps font-bold ${badgeClass}`}>
+                  {badge}
                 </span>
               </button>
             );

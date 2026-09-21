@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function NetworkFingerprintCard({
-  mac = '00:1A:2B:3C:4D:5E',
+  mac = '00:00:00:00:00:00',
   sessionId = ''
 }) {
   const [copied, setCopied] = useState(false);

@@ -44,6 +44,12 @@ var sensitiveCommands = []string{"sudo", "su", "rm", "passwd", "chmod", "chown",
 // getMACAddress lee la tabla ARP del kernel de Linux para obtener la huella física
 func getMACAddress(ip string) string {
 	data, err := os.ReadFile("/proc/net/arp")
+
+	// Si es localhost (como en tus pruebas), la MAC no pasa por ARP
+	if ip == "127.0.0.1" || ip == "::1" {
+		return "00:00:00:00:00:00 (Localhost)"
+	}
+	
 	if err != nil {
 		return "Desconocida (Error ARP)"
 	}
@@ -53,10 +59,6 @@ func getMACAddress(ip string) string {
 		if len(fields) >= 4 && fields[0] == ip {
 			return fields[3] // El cuarto campo en /proc/net/arp es la HW address (MAC)
 		}
-	}
-	// Si es localhost (como en tus pruebas), la MAC no pasa por ARP
-	if ip == "127.0.0.1" || ip == "::1" {
-		return "00:00:00:00:00:00 (Localhost)"
 	}
 	return "Desconocida (Fuera de LAN)"
 }

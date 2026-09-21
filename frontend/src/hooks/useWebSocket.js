@@ -29,12 +29,13 @@ const buildKeystrokeEntry = (char, rawTime, prevTime) => {
 export function useWebSocket(activeService = ServiceType.SSH) {
   const [status, setStatus] = useState(wsClient.status);
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
-  const [attackerIp, setAttackerIp] = useState('185.220.101.44');
-  const [attackerMac, setAttackerMac] = useState('00:1A:2B:3C:4D:5E');
+  const [attackerIp, setAttackerIp] = useState('0.0.0.0');
+  const [attackerMac, setAttackerMac] = useState('00:00:00:00:00:00');
   const [sessionId, setSessionId] = useState('');
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
   const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
+  const [breachByService, setBreachByService] = useState({ ssh: false, ftp: false, http: false });
   const lastKeystrokeTimeRef = useRef(Date.now());
 
   // ponytail: in-memory per-service message history capped at 500 entries per service.
@@ -98,6 +99,11 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       const currentBucket = historyRef.current[svc] || [];
       historyRef.current[svc] = [...currentBucket, stampedMsg].slice(-500);
 
+      // Estado de intrusión por servicio (antes del filtro: aplica a cualquier trampa)
+      if (msg.type === 'connection') {
+        setBreachByService((prev) => ({ ...prev, [svc]: true }));
+      }
+
       // Filtrar por servicio si el mensaje contiene campo service
       if (msg.service && msg.service !== activeService) {
         return;
@@ -160,6 +166,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     keystrokes,
     lastMessage,
     isPaused,
+    breachByService,
     togglePause,
     clearKeystrokes,
     registerTerminalListener,
