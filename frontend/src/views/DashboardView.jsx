@@ -15,6 +15,7 @@ export default function DashboardView() {
     wsUrl,
     attackerIp,
     attackerMac,
+    sessionId,
     keystrokes,
     isPaused,
     togglePause,
@@ -44,6 +45,7 @@ export default function DashboardView() {
           wsUrl={wsUrl}
           attackerIp={attackerIp}
           attackerMac={attackerMac}
+          sessionId={sessionId}
           keystrokes={keystrokes}
           isPaused={isPaused}
           onTogglePause={togglePause}

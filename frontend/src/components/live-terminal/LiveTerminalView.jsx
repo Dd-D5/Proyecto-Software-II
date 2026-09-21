@@ -11,6 +11,7 @@ export default function LiveTerminalView({
   wsUrl,
   attackerIp,
   attackerMac,
+  sessionId,
   keystrokes,
   isPaused,
   onTogglePause,
@@ -45,7 +46,7 @@ export default function LiveTerminalView({
 
         {/* Right: Network Fingerprint + Keystroke Inspector (5 cols) */}
         <div className="col-span-5 flex flex-col gap-3 h-[600px]">
-          <NetworkFingerprintCard mac={attackerMac} />
+          <NetworkFingerprintCard mac={attackerMac} sessionId={sessionId} />
           <KeystrokeInspector keystrokes={keystrokes} />
         </div>
       </div>

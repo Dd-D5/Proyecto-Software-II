@@ -10,17 +10,33 @@ import (
 	"net"
 	"os"
 	"strings"
+	"time"
 
 	"golang.org/x/crypto/ssh"
 )
 
-// TelemetryMessage ahora incluye la IP y MAC del atacante para el Dashboard
+// TelemetryMessage incluye metadatos del atacante y la sesión para la interfaz.
 type TelemetryMessage struct {
-    Service string `json:"service"` // Permite a React filtrar: "ssh", "ftp", "http"
-    Type    string `json:"type"`
-    Payload string `json:"payload"`
-    IP      string `json:"ip"`
-    MAC     string `json:"mac"`
+	Service   string `json:"service"`
+	Type      string `json:"type"`
+	Payload   string `json:"payload"`
+	IP        string `json:"ip"`
+	MAC       string `json:"mac"`
+	SessionID string `json:"session_id,omitempty"`
+	Timestamp string `json:"timestamp,omitempty"`
+}
+
+// KeyEvent representa una pulsación individual o un comando completo ejecutado por el atacante.
+type KeyEvent struct {
+	Timestamp time.Time `json:"timestamp"`
+	SessionID string    `json:"session_id"`
+	Service   string    `json:"service"`
+	IP        string    `json:"ip"`
+	MAC       string    `json:"mac"`
+	Key       string    `json:"key"`
+	Raw       string    `json:"raw,omitempty"`
+	Command   string    `json:"command,omitempty"`
+	Type      string    `json:"type"`
 }
 
 var sensitiveCommands = []string{"sudo", "su", "rm", "passwd", "chmod", "chown", "wget", "curl", "nc", "bash", "sh", "iptables"}
@@ -67,7 +83,7 @@ func startSSHServer() {
 		}
 		privateKeyDER := x509.MarshalPKCS1PrivateKey(privateKey)
 		privateKeyPEM := pem.EncodeToMemory(&pem.Block{Type: "RSA PRIVATE KEY", Bytes: privateKeyDER})
-		
+
 		// Guardar la llave en un archivo físico con permisos restrictivos
 		if err := os.WriteFile(keyPath, privateKeyPEM, 0600); err != nil {
 			log.Fatalf("Error guardando llave RSA: %v", err)
@@ -83,7 +99,7 @@ func startSSHServer() {
 	if err != nil {
 		log.Fatalf("Error parseando llave privada: %v", err)
 	}
-	
+
 	config.AddHostKey(signer)
 
 	listener, err := net.Listen("tcp", "0.0.0.0:2222")
@@ -103,20 +119,15 @@ func startSSHServer() {
 		mac := getMACAddress(ip)
 
 		log.Printf("🚨 INTRUSIÓN DETECTADA - IP: %s | MAC: %s", ip, mac)
-		
-		broadcast <- TelemetryMessage{
-			Service: "ssh",
-			Type:    "connection",
-			Payload: "Nuevo intruso conectado al puerto 2222",
-			IP:      ip,
-			MAC:     mac,
-		}
 
-		go handleSSHConnection(nConn, config, ip, mac)
+		sessionID := newSessionID(ip)
+		emitTelemetry("ssh", "connection", "Nuevo intruso conectado al puerto 2222", ip, mac, sessionID)
+
+		go handleSSHConnection(nConn, config, ip, mac, sessionID)
 	}
 }
 
-func handleSSHConnection(nConn net.Conn, config *ssh.ServerConfig, ip, mac string) {
+func handleSSHConnection(nConn net.Conn, config *ssh.ServerConfig, ip, mac, sessionID string) {
 	_, chans, reqs, err := ssh.NewServerConn(nConn, config)
 	if err != nil {
 		log.Printf("Error en el handshake SSH: %v", err)
@@ -135,9 +146,9 @@ func handleSSHConnection(nConn net.Conn, config *ssh.ServerConfig, ip, mac strin
 			continue
 		}
 		go handleSessionRequests(requests)
-		
+
 		// Pasamos la IP y MAC al FakeShell para asociar la telemetría
-		go startFakeShell(channel, ip, mac)
+		go startFakeShell(channel, ip, mac, sessionID)
 	}
 }
 
@@ -149,8 +160,62 @@ func handleSessionRequests(in <-chan *ssh.Request) {
 	}
 }
 
-func startFakeShell(channel ssh.Channel, ip, mac string) {
+func newSessionID(ip string) string {
+	cleanIP := strings.ReplaceAll(ip, ":", "_")
+	if cleanIP == "" {
+		cleanIP = "unknown"
+	}
+	return fmt.Sprintf("%s-%d", cleanIP, time.Now().UnixNano())
+}
+
+func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
+	broadcast <- TelemetryMessage{
+		Service:   service,
+		Type:      eventType,
+		Payload:   payload,
+		IP:        ip,
+		MAC:       mac,
+		SessionID: sessionID,
+		Timestamp: time.Now().Format(time.RFC3339Nano),
+	}
+}
+
+func normalizeInput(input string) string {
+	switch input {
+	case "\x03":
+		return "<CTRL+C>"
+	case "\x1b[A", "\x1b[B", "\x1b[C", "\x1b[D":
+		return "<ARROW>"
+	case "\t":
+		return "<TAB>"
+	case "\x7f", "\b":
+		return "<BACKSPACE>"
+	default:
+		return input
+	}
+}
+
+func recordKeyEvent(sessionID, ip, mac, service, raw string) {
+	if raw == "" {
+		return
+	}
+	key := normalizeInput(raw)
+	if key == "" {
+		return
+	}
+	emitTelemetry(service, "io", key, ip, mac, sessionID)
+}
+
+func recordCommandEvent(sessionID, ip, mac, service, cmd string) {
+	if strings.TrimSpace(cmd) == "" {
+		return
+	}
+	emitTelemetry(service, "command", cmd, ip, mac, sessionID)
+}
+
+func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 	defer channel.Close()
+
 	prompt := "root@ubuntu:~# "
 	channel.Write([]byte(prompt))
 
@@ -164,29 +229,16 @@ func startFakeShell(channel ssh.Channel, ip, mac string) {
 		}
 
 		input := string(buf[:n])
-
-		// Emitir pulsaciones en bruto para xterm.js
-		broadcast <- TelemetryMessage{Service: "ssh", Type: "io", Payload: input, IP: ip, MAC: mac}
+		recordKeyEvent(sessionID, ip, mac, "ssh", input)
 
 		if containsEnter(buf[:n]) {
 			channel.Write([]byte("\r\n"))
 
 			cleanCmd := strings.TrimSpace(lineBuffer)
 			if cleanCmd != "" {
-				// 1. REGISTRAR CADA COMANDO (Log y Telemetría completa)
 				log.Printf("💻 [Atacante %s] ejecutó: %s", mac, cleanCmd)
-				broadcast <- TelemetryMessage{
-					Service: "ssh",
-					Type:    "command",
-					Payload: cleanCmd,
-					IP:      ip,
-					MAC:     mac,
-				}
-
-				// 2. Verificar si es comando crítico
-				analyzeCommand(cleanCmd, ip, mac)
-				
-				// 3. Simular respuesta SO
+				recordCommandEvent(sessionID, ip, mac, "ssh", cleanCmd)
+				analyzeCommand(cleanCmd, ip, mac, sessionID)
 				simulateOSResponse(channel, cleanCmd)
 			}
 
@@ -204,7 +256,7 @@ func startFakeShell(channel ssh.Channel, ip, mac string) {
 	}
 }
 
-func analyzeCommand(cmdLine, ip, mac string) {
+func analyzeCommand(cmdLine, ip, mac, sessionID string) {
 	parts := strings.Fields(cmdLine)
 	if len(parts) == 0 {
 		return
@@ -215,14 +267,8 @@ func analyzeCommand(cmdLine, ip, mac string) {
 		if baseCmd == bad {
 			alertMsg := fmt.Sprintf("Intento de ejecución crítica: '%s'", cmdLine)
 			log.Printf("⚠️ ¡ALERTA! %s (Origen: %s)", alertMsg, mac)
-			
-			broadcast <- TelemetryMessage{
-				Service: "ssh",
-				Type:    "alert",
-				Payload: alertMsg,
-				IP:      ip,
-				MAC:     mac,
-			}
+
+			emitTelemetry("ssh", "alert", alertMsg, ip, mac, sessionID)
 			break
 		}
 	}

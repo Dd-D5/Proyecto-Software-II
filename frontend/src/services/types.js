@@ -19,6 +19,7 @@ export const ServiceType = {
  * @property {string} [command] - Full executed command
  * @property {string} [ip] - Attacker IP address
  * @property {string} [mac] - Attacker MAC address
+ * @property {string} [session_id] - Identifier shared by events from one session
  * @property {string} [timestamp] - ISO timestamp or local time string
  * @property {Object} [metadata] - Additional honeynet metrics
  */
