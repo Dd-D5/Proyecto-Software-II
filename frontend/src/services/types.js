@@ -2,7 +2,8 @@ export const EventType = {
   IO: 'io',
   COMMAND: 'command',
   ALERT: 'alert',
-  CONNECTION: 'connection'
+  CONNECTION: 'connection',
+  OUTPUT: 'output'
 };
 
 export const ServiceType = {
@@ -13,7 +14,7 @@ export const ServiceType = {
 
 /**
  * @typedef {Object} TelemetryMessage
- * @property {string} type - EventType ('io' | 'command' | 'alert' | 'connection')
+ * @property {string} type - EventType ('io' | 'command' | 'alert' | 'connection' | 'output')
  * @property {string} service - ServiceType ('ssh' | 'ftp' | 'http')
  * @property {string} [payload] - Keystroke or data chunk
  * @property {string} [command] - Full executed command

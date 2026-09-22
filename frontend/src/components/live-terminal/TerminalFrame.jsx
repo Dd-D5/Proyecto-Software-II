@@ -5,7 +5,7 @@ import { WebglAddon } from '@xterm/addon-webgl';
 
 // Desnormalización: el backend (normalizeInput) envía <BACKSPACE> etc. como texto legible.
 // El inspector de teclas conserva la versión normalizada; solo la terminal recibe secuencias reales.
-// ponytail: <ARROW> no se puede reconstruir (el backend colapsa las 4 direcciones en una sola);
+//  <ARROW> no se puede reconstruir (el backend colapsa las 4 direcciones en una sola);
 // se suprime. Upgrade path: preservar la secuencia original (\x1b[A..D) en el backend.
 const DENORMALIZE = {
   '<BACKSPACE>': '\b \b', // borrado real en terminal: backspace + espacio + backspace
@@ -119,6 +119,10 @@ export default function TerminalFrame({ activeService, breached = false, registe
           termInstanceRef.current.writeln(
             `\x1b[31m[INTRUSION DETECTADA]: ${msg.service || 'ssh'} - ${msg.ip || 'IP desconocida'} (MAC: ${msg.mac || 'n/a'})\x1b[0m`
           );
+        } else if (msg.type === 'output' && msg.payload) {
+          lastMsgTypeRef.current = 'output';
+          // write crudo (NO writeln): el payload ya trae \r\n y puede contener ANSI (clear)
+          termInstanceRef.current.write(msg.payload);
         }
       }
     }) : () => {};

@@ -15,6 +15,7 @@ export default function LiveTerminalView({
   keystrokes,
   isPaused,
   breachByService,
+  keystrokeCountByService,
   onTogglePause,
   registerTerminalListener
 }) {
@@ -31,7 +32,7 @@ export default function LiveTerminalView({
       {/* 2. Top 5 KPI Metrics Cards Row */}
       <MetricsRow
         attackerIp={attackerIp}
-        totalKeystrokes={keystrokes ? keystrokes.length : 0}
+        totalKeystrokes={keystrokeCountByService ? keystrokeCountByService[activeService] : 0}
       />
 
       {/* 3. Main Center Split (7 cols left Terminal, 5 cols right Fingerprint + Keystrokes) */}

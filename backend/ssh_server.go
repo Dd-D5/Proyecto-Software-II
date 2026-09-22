@@ -241,7 +241,7 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 				log.Printf("💻 [Atacante %s] ejecutó: %s", mac, cleanCmd)
 				recordCommandEvent(sessionID, ip, mac, "ssh", cleanCmd)
 				analyzeCommand(cleanCmd, ip, mac, sessionID)
-				simulateOSResponse(channel, cleanCmd)
+				simulateOSResponse(channel, cleanCmd, ip, mac, sessionID)
 			}
 
 			channel.Write([]byte(prompt))
@@ -276,38 +276,55 @@ func analyzeCommand(cmdLine, ip, mac, sessionID string) {
 	}
 }
 
-func simulateOSResponse(channel ssh.Channel, cmdLine string) {
+// simulateOSResponse construye la respuesta UNA vez y con el mismo string
+// escribe al canal del atacante y emite telemetría "output" al panel,
+// garantizando que ambas vistas nunca diverjan.
+// emisión por caso; cada comando simulado nuevo debe construir su
+// respuesta en la variable. Upgrade path: TeeWriter sobre channel para espejo
+// 1:1 total (prompts redibujados, eco de backspace, banners).
+func simulateOSResponse(channel ssh.Channel, cmdLine, ip, mac, sessionID string) {
 	parts := strings.Fields(cmdLine)
 	if len(parts) == 0 {
 		return
 	}
 	baseCmd := parts[0]
+	response := ""
 
 	switch baseCmd {
 	case "ls":
-		channel.Write([]byte("Desktop  Documents  Downloads  snap  .bashrc\r\n"))
+		response = "Desktop  Documents  Downloads  snap  .bashrc\r\n"
 	case "whoami":
-		channel.Write([]byte("root\r\n"))
+		response = "root\r\n"
 	case "pwd":
-		channel.Write([]byte("/root\r\n"))
+		response = "/root\r\n"
 	case "uname":
-		channel.Write([]byte("Linux ubuntu 5.4.0-150-generic x86_64 GNU/Linux\r\n"))
+		response = "Linux ubuntu 5.4.0-150-generic x86_64 GNU/Linux\r\n"
 	case "id":
-		channel.Write([]byte("uid=0(root) gid=0(root) groups=0(root)\r\n"))
+		response = "uid=0(root) gid=0(root) groups=0(root)\r\n"
 	case "cd":
 		if len(parts) == 1 || parts[1] == ".." || parts[1] == "/" || parts[1] == "~" {
 			return
 		}
-		errorMsg := fmt.Sprintf("bash: cd: %s: No such file or directory\r\n", parts[1])
-		channel.Write([]byte(errorMsg))
+		response = fmt.Sprintf("bash: cd: %s: No such file or directory\r\n", parts[1])
 	case "clear":
-		channel.Write([]byte("\033[H\033[2J"))
+		response = "\033[H\033[2J"
 	case "exit", "logout":
-		channel.Write([]byte("logout\r\n"))
-		channel.Close()
+		response = "logout\r\n"
 	default:
-		errorMsg := fmt.Sprintf("bash: %s: command not found\r\n", baseCmd)
-		channel.Write([]byte(errorMsg))
+		response = fmt.Sprintf("bash: %s: command not found\r\n", baseCmd)
+	}
+
+	if response != "" {
+		channel.Write([]byte(response))
+		// clear: limpiar pantalla es local al atacante; el panel del defensor
+		// conserva la evidencia y no debe vaciarse, así que no se emite.
+		if baseCmd != "clear" {
+			emitTelemetry("ssh", "output", response, ip, mac, sessionID)
+		}
+	}
+
+	if baseCmd == "exit" || baseCmd == "logout" {
+		channel.Close()
 	}
 }
 

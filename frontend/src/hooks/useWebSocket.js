@@ -36,9 +36,12 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [breachByService, setBreachByService] = useState({ ssh: false, ftp: false, http: false });
+  //  contador general en memoria; recarga de página lo reinicia.
+  // Upgrade path: localStorage o evento system_metrics del backend.
+  const [keystrokeCountByService, setKeystrokeCountByService] = useState({ ssh: 0, ftp: 0, http: 0 });
   const lastKeystrokeTimeRef = useRef(Date.now());
 
-  // ponytail: in-memory per-service message history capped at 500 entries per service.
+  //  in-memory per-service message history capped at 500 entries per service.
   // Upgrade path: persist to localStorage or IndexedDB if history must survive page reloads.
   const historyRef = useRef({ ssh: [], ftp: [], http: [] });
 
@@ -66,7 +69,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     });
     setKeystrokes(activeKeystrokes.slice(0, 50));
 
-    // ponytail: instant replay, no pacing delay. Upgrade path: setTimeout loop if typing animation is needed.
+    //  instant replay, no pacing delay. Upgrade path: setTimeout loop if typing animation is needed.
     bucket.forEach((m) => {
       terminalListenersRef.current.forEach((listener) => {
         try {
@@ -95,13 +98,18 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       const stampedMsg = { ...msg, rawTime: now };
       const svc = msg.service || ServiceType.SSH;
 
-      // ponytail: 500 msg cap per service. Upgrade path: configurable limit or eviction strategy.
+      //  500 msg cap per service. Upgrade path: configurable limit or eviction strategy.
       const currentBucket = historyRef.current[svc] || [];
       historyRef.current[svc] = [...currentBucket, stampedMsg].slice(-500);
 
       // Estado de intrusión por servicio (antes del filtro: aplica a cualquier trampa)
       if (msg.type === 'connection') {
         setBreachByService((prev) => ({ ...prev, [svc]: true }));
+      }
+
+      // Contador general de pulsaciones por servicio (antes del filtro: cuenta todas las trampas)
+      if (msg.type === EventType.IO && msg.payload) {
+        setKeystrokeCountByService((prev) => ({ ...prev, [svc]: prev[svc] + 1 }));
       }
 
       // Filtrar por servicio si el mensaje contiene campo service
@@ -167,6 +175,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     lastMessage,
     isPaused,
     breachByService,
+    keystrokeCountByService,
     togglePause,
     clearKeystrokes,
     registerTerminalListener,

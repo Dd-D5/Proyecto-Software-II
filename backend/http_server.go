@@ -17,7 +17,17 @@ func startHTTPServer() {
 		// Capturar la petición exacta (Método, Ruta, Navegador/Herramienta)
 		reqInfo := fmt.Sprintf("%s %s %s", r.Method, r.URL.Path, r.UserAgent())
 		log.Printf("🌐 [HTTP] Petición de %s (%s): %s", ip, mac, reqInfo)
-		
+
+		// connection por request (cada curl repite el evento); inofensivo
+		// porque el frontend es idempotente. Upgrade path: dedupe por IP+timestamp.
+		broadcast <- TelemetryMessage{
+			Service: "http",
+			Type:    "connection",
+			Payload: "Nuevo intruso conectado al puerto HTTP",
+			IP:      ip,
+			MAC:     mac,
+		}
+
 		// Emitir la telemetría al Dashboard
 		broadcast <- TelemetryMessage{
 			Service: "http",
