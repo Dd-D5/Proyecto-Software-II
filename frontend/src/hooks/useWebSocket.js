@@ -2,6 +2,25 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { wsClient, getWebSocketUrl } from '../services/wsClient';
 import { EventType, ServiceType } from '../services/types';
 
+const STORAGE_KEY = 'aegistrap:history:v1';
+
+const loadPersistedState = () => {
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (data && data.history) return data;
+  } catch {}
+  return null;
+};
+
+const findLastValue = (buckets, field) => {
+  if (!buckets) return '';
+  const allMsgs = Object.values(buckets).flat();
+  for (let i = allMsgs.length - 1; i >= 0; i--) {
+    if (allMsgs[i][field]) return allMsgs[i][field];
+  }
+  return '';
+};
+
 // Mock inicial idéntico a code.html
 const INITIAL_KEYSTROKES = [];
 
@@ -27,23 +46,48 @@ const buildKeystrokeEntry = (char, rawTime, prevTime) => {
 };
 
 export function useWebSocket(activeService = ServiceType.SSH) {
+  const persistedRef = useRef(null);
+  if (persistedRef.current === null) {
+    persistedRef.current = loadPersistedState();
+  }
+  const persisted = persistedRef.current;
+
+  const historyRef = useRef(persisted?.history || { ssh: [], ftp: [], http: [] });
+  const countRef = useRef(persisted?.counters || { ssh: 0, ftp: 0, http: 0 });
+  const breachRef = useRef(persisted?.breach || { ssh: false, ftp: false, http: false });
+
   const [status, setStatus] = useState(wsClient.status);
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
-  const [attackerIp, setAttackerIp] = useState('0.0.0.0');
-  const [attackerMac, setAttackerMac] = useState('00:00:00:00:00:00');
-  const [sessionId, setSessionId] = useState('');
+  const [attackerIp, setAttackerIp] = useState(() => findLastValue(persisted?.history, 'ip') || '0.0.0.0');
+  const [attackerMac, setAttackerMac] = useState(() => findLastValue(persisted?.history, 'mac') || '00:00:00:00:00:00');
+  const [sessionId, setSessionId] = useState(() => findLastValue(persisted?.history, 'session_id') || '');
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
   const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
-  const [breachByService, setBreachByService] = useState({ ssh: false, ftp: false, http: false });
-  //  contador general en memoria; recarga de página lo reinicia.
-  // Upgrade path: localStorage o evento system_metrics del backend.
-  const [keystrokeCountByService, setKeystrokeCountByService] = useState({ ssh: 0, ftp: 0, http: 0 });
+  const [breachByService, setBreachByService] = useState(breachRef.current);
+  const [keystrokeCountByService, setKeystrokeCountByService] = useState(countRef.current);
   const lastKeystrokeTimeRef = useRef(Date.now());
+  const saveTimerRef = useRef(null);
 
-  //  in-memory per-service message history capped at 500 entries per service.
-  // Upgrade path: persist to localStorage or IndexedDB if history must survive page reloads.
-  const historyRef = useRef({ ssh: [], ftp: [], http: [] });
+  // ponytail: throttle 2s + flush en pagehide; crash pierde <2s de eventos.
+  // Upgrade path: IndexedDB + flush sincrónico si la durabilidad requiere cero pérdida.
+  const saveNow = useCallback(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        history: historyRef.current,
+        counters: countRef.current,
+        breach: breachRef.current
+      }));
+    } catch {}
+  }, []);
+
+  const scheduleSave = useCallback(() => {
+    if (saveTimerRef.current) return;
+    saveTimerRef.current = setTimeout(() => {
+      saveTimerRef.current = null;
+      saveNow();
+    }, 2000);
+  }, [saveNow]);
 
   // Terminal terminal-write subscriber callbacks
   const terminalListenersRef = useRef(new Set());
@@ -104,13 +148,17 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
       // Estado de intrusión por servicio (antes del filtro: aplica a cualquier trampa)
       if (msg.type === 'connection') {
-        setBreachByService((prev) => ({ ...prev, [svc]: true }));
+        breachRef.current = { ...breachRef.current, [svc]: true };
+        setBreachByService(breachRef.current);
       }
 
       // Contador general de pulsaciones por servicio (antes del filtro: cuenta todas las trampas)
       if (msg.type === EventType.IO && msg.payload) {
-        setKeystrokeCountByService((prev) => ({ ...prev, [svc]: prev[svc] + 1 }));
+        countRef.current = { ...countRef.current, [svc]: (countRef.current[svc] || 0) + 1 };
+        setKeystrokeCountByService(countRef.current);
       }
+
+      scheduleSave();
 
       // Filtrar por servicio si el mensaje contiene campo service
       if (msg.service && msg.service !== activeService) {
@@ -146,11 +194,16 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       });
     });
 
+    // Flush inmediato al cerrar la pestaña/navegador
+    const handlePageHide = () => saveNow();
+    window.addEventListener('pagehide', handlePageHide);
+
     return () => {
       unsubStatus();
       unsubMsg();
+      window.removeEventListener('pagehide', handlePageHide);
     };
-  }, [activeService, isPaused]);
+  }, [activeService, isPaused, saveNow]);
 
   const togglePause = useCallback(() => {
     setIsPaused((prev) => !prev);
@@ -162,8 +215,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       historyRef.current[activeService] = historyRef.current[activeService].filter(
         (m) => m.type !== EventType.IO
       );
+      saveNow();
     }
-  }, [activeService]);
+  }, [activeService, saveNow]);
 
   return {
     status,
