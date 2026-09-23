@@ -2,130 +2,116 @@ import React from 'react';
 
 export default function KeystrokeInspector({ keystrokes = [] }) {
   return (
-    <section className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 shadow-sm flex flex-col gap-2 flex-1 overflow-hidden select-none">
-      {/* Title & Intercept Status Header */}
-      <div className="flex items-center justify-between border-b border-[#1e2330] pb-1.5">
+    <section className="bg-white border-2 border-black p-3.5 shadow-[4px_4px_0px_0px_#000] flex flex-col gap-2 flex-1 overflow-hidden select-none min-w-0">
+      {/* Encabezado */}
+      <div className="flex items-center justify-between border-b-2 border-black pb-2 flex-wrap gap-2">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-tertiary border border-outline-variant/30">
-            <span className="material-symbols-outlined text-[16px]">keyboard</span>
+          <div className="w-8 h-8 bg-[#FEF08A] border-2 border-black flex items-center justify-center text-black font-black shadow-[2px_2px_0px_0px_#000]">
+            <span className="material-symbols-outlined text-[18px]">keyboard</span>
           </div>
           <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="font-title-md text-[12px] text-on-surface font-semibold">
-                Inspector de Pulsaciones
-              </span>
-              <span className="font-title-md text-[12px] text-primary font-bold">
-                Tecla a Tecla
-              </span>
-            </div>
-            <span className="font-mono-sm text-[9px] text-outline">
-              Daemon Hook Millisecond Telemetry (Live Raw Stream)
+            <h2 className="font-black text-xs text-black uppercase tracking-wider">
+              Inspector de Pulsaciones · Tecla a Tecla
+            </h2>
+            <span className="font-mono text-[9px] font-bold text-gray-800">
+              Telemetría en Tiempo Real de Milisegundos
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-surface-container-lowest px-2 py-0.5 rounded-lg border border-primary/30">
-          <div className="flex flex-col text-right">
-            <span className="font-label-caps text-[8px] text-outline uppercase tracking-wider font-bold">
-              FULL INTERCEPT
-            </span>
-            <span className="font-mono-sm text-[9px] text-primary font-bold flex items-center justify-end gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-              LIVE
-            </span>
-          </div>
+        <div className="bg-[#A7F3D0] border-2 border-black px-2.5 py-1 shadow-[2px_2px_0px_0px_#000]">
+          <span className="font-black text-[9px] text-black uppercase tracking-wider flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-black animate-pulse"></span>
+            FULL INTERCEPT LIVE
+          </span>
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 flex-1 overflow-hidden">
-        {/* Upper Heuristics Metrics Box */}
-        <div className="bg-surface-container-lowest border border-[#1e2330] p-2 rounded-xl grid grid-cols-3 gap-2.5 items-center">
-          {/* Col 1: Bot Heuristic */}
-          <div className="flex flex-col gap-0.5 border-r border-[#1e2330]/60 pr-2">
-            <div className="flex items-center justify-between text-outline">
-              <span className="font-label-caps text-[8px] uppercase tracking-wider">HEURÍSTICA BOT</span>
-              <span className="font-mono-sm text-[9px] text-secondary">±42ms Jitter</span>
+      <div className="flex flex-col gap-2 flex-1 overflow-hidden min-w-0">
+        {/* Caja de Métricas Heurísticas Neobrutalista */}
+        <div className="bg-[#FAF7F2] border-2 border-black p-2.5 grid grid-cols-1 sm:grid-cols-3 gap-2 items-center shadow-[2px_2px_0px_0px_#000]">
+          {/* Col 1: Heurística Bot */}
+          <div className="flex flex-col gap-1 border-b-2 sm:border-b-0 sm:border-r-2 border-black pb-2 sm:pb-0 sm:pr-2">
+            <div className="flex items-center justify-between text-black font-black text-[9px]">
+              <span>HEURÍSTICA BOT</span>
+              <span className="bg-[#BAE6FD] px-1 border border-black text-[9px]">±42ms Jitter</span>
             </div>
             <div className="flex items-baseline justify-between">
-              <span className="font-mono-lg text-[13px] text-primary font-bold">Humano</span>
-              <span className="font-label-caps text-[8px] text-primary bg-primary/10 border border-primary/20 px-1 py-0.5 rounded font-semibold uppercase">
-                Verificado
+              <span className="font-mono text-sm font-black text-black">HUMANO</span>
+              <span className="bg-[#A7F3D0] border border-black px-1.5 py-0.5 text-[9px] font-black text-black uppercase">
+                VERIFICADO
               </span>
             </div>
-            <div className="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden my-0.5">
-              <div className="bg-primary h-full rounded-full" style={{ width: '82%' }}></div>
+            <div className="w-full bg-white border border-black h-2 overflow-hidden">
+              <div className="bg-black h-full" style={{ width: '82%' }}></div>
             </div>
           </div>
 
-          {/* Col 2: Automation Scores */}
-          <div className="flex flex-col justify-center gap-0.5 border-r border-[#1e2330]/60 px-2">
-            <div className="flex items-center justify-between text-[10px] font-mono-sm">
-              <span className="text-on-surface-variant">Score Auto:</span>
-              <span className="text-primary font-semibold">18%</span>
+          {/* Col 2: Scores de Automatización */}
+          <div className="flex flex-col justify-center gap-1 border-b-2 sm:border-b-0 sm:border-r-2 border-black pb-2 sm:pb-0 px-0 sm:px-2 font-mono text-[11px] font-black text-black">
+            <div className="flex items-center justify-between">
+              <span className="text-gray-900">Score Auto:</span>
+              <span className="bg-[#FEF08A] px-1.5 border border-black">18%</span>
             </div>
-            <div className="flex items-center justify-between text-[10px] font-mono-sm">
-              <span className="text-on-surface-variant">Copy-Paste:</span>
-              <span className="text-outline font-semibold">0 flags</span>
+            <div className="flex items-center justify-between">
+              <span className="text-gray-900">Copy-Paste:</span>
+              <span className="bg-white px-1.5 border border-black">0 flags</span>
             </div>
-            <div className="flex items-center justify-between text-[10px] font-mono-sm">
-              <span className="text-on-surface-variant">Macro:</span>
-              <span className="text-secondary font-semibold">Negativo</span>
+            <div className="flex items-center justify-between">
+              <span className="text-gray-900">Macro:</span>
+              <span className="bg-[#DDD6FE] px-1.5 border border-black">Negativo</span>
             </div>
           </div>
 
-          {/* Col 3: WPM Cadence */}
-          <div className="flex flex-col justify-center pl-1.5">
-            <div className="flex items-center justify-between text-outline">
-              <span className="font-label-caps text-[8px] uppercase tracking-wider">WPM CADENCIA</span>
-              <span className="font-mono-sm text-[8px] text-primary bg-primary/10 border border-primary/20 px-1 py-0.5 rounded font-semibold">
-                Matched
-              </span>
+          {/* Col 3: Cadencia WPM */}
+          <div className="flex flex-col justify-center pl-0 sm:pl-2">
+            <div className="flex items-center justify-between text-black font-black text-[9px]">
+              <span>WPM CADENCIA</span>
+              <span className="bg-[#A7F3D0] border border-black px-1 text-[9px]">Matched</span>
             </div>
-            <div className="flex items-baseline gap-1 mt-0.5">
-              <span className="font-headline-xl text-[18px] text-tertiary font-bold leading-tight">48</span>
-              <span className="text-[10px] font-mono-sm text-on-surface-variant">WPM</span>
+            <div className="flex items-baseline gap-1 mt-1">
+              <span className="font-mono font-black text-xl text-black">48</span>
+              <span className="text-xs font-black text-black">WPM</span>
             </div>
           </div>
         </div>
 
-        {/* Keystroke Table (5 Columns) */}
-        <div className="flex flex-col bg-surface-container-lowest border border-[#1e2330] rounded-xl overflow-hidden flex-1 min-h-[280px]">
-          {/* Table Header */}
-          <div className="bg-surface-container-high px-3 py-1.5 flex items-center justify-between border-b border-[#1e2330] text-outline font-label-caps text-[9px]">
-            <div className="flex items-center gap-6">
-              <span className="w-24">TIMESTAMP</span>
-              <span className="w-20">EVENTO</span>
-              <span>TECLA CAPTURADA</span>
-            </div>
-            <div className="flex items-center gap-6">
-              <span className="w-20 text-right">SCANCODE</span>
-              <span className="w-16 text-right">DELTA (Δ)</span>
-            </div>
+        {/* Tabla de Pulsaciones (5 Columnas Alineadas por Grid) */}
+        <div className="flex flex-col bg-white border-2 border-black overflow-hidden flex-1 min-h-[260px] shadow-[2px_2px_0px_0px_#000] min-w-0">
+          {/* Encabezado de Tabla */}
+          <div className="bg-[#FEF08A] px-2.5 py-1.5 grid grid-cols-[85px_65px_1fr_65px_65px] gap-1.5 items-center border-b-2 border-black font-black text-[10px] text-black uppercase select-none min-w-[340px]">
+            <span>TIMESTAMP</span>
+            <span>EVENTO</span>
+            <span>TECLA</span>
+            <span className="text-right">SCANCODE</span>
+            <span className="text-right">DELTA (Δ)</span>
           </div>
 
-          {/* Table Rows (Scrollable) */}
-          <div className="p-2 flex flex-col gap-1.5 font-mono-sm text-[10px] overflow-y-auto flex-1">
+          {/* Filas de Tabla */}
+          <div className="p-2 flex flex-col gap-1.5 font-mono text-xs font-bold text-black overflow-y-auto overflow-x-auto flex-1">
             {keystrokes && keystrokes.length > 0 ? (
               keystrokes.map((row, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between bg-surface-container/30 px-2.5 py-1 rounded border border-[#1e2330]/40 transition-colors hover:bg-surface-container/60"
+                  className="grid grid-cols-[85px_65px_1fr_65px_65px] gap-1.5 items-center bg-[#FAF7F2] hover:bg-[#FEF08A]/40 px-2 py-1 border border-black transition-colors min-w-[340px]"
                 >
-                  <div className="flex items-center gap-6">
-                    <span className="text-outline text-[9px] w-24">{row.timestamp}</span>
-                    <span className="text-on-surface font-semibold w-20">{row.event || 'KeyDown'}</span>
-                    <span className="text-primary font-bold bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20 font-mono-sm">
+                  <span className="text-gray-800 text-[10px] font-bold truncate">{row.timestamp}</span>
+                  <span className="text-black font-black text-[11px] truncate">{row.event || 'KeyDown'}</span>
+                  <div className="overflow-hidden">
+                    <span className="text-black font-black bg-[#A7F3D0] px-1.5 py-0.5 border border-black text-[11px] inline-block truncate max-w-full">
                       {row.key}
                     </span>
                   </div>
-                  <div className="flex items-center gap-6">
-                    <span className="text-outline text-[9px] w-20 text-right">{row.scancode}</span>
-                    <span className="text-secondary font-semibold w-16 text-right">{row.delta}</span>
+                  <span className="text-gray-800 text-[10px] text-right font-bold truncate">{row.scancode}</span>
+                  <div className="flex justify-end overflow-hidden">
+                    <span className="text-black font-black bg-[#BAE6FD] px-1 py-0.5 border border-black text-[10px] text-right truncate">
+                      {row.delta}
+                    </span>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="text-center text-outline text-[11px] py-4">
+              <div className="text-center font-bold text-gray-700 text-xs py-6">
                 Esperando eventos de teclado en vivo...
               </div>
             )}

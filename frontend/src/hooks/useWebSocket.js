@@ -88,7 +88,14 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
   const [attackerIp, setAttackerIp] = useState(() => normalizeIPv4(findLastValue(persisted?.history, 'ip')) || '0.0.0.0');
   const [attackerMac, setAttackerMac] = useState(() => findLastValue(persisted?.history, 'mac') || '00:00:00:00:00:00');
+  const [attackerGeo, setAttackerGeo] = useState('Red Local / LAN (Prueba Interna)');
   const [sessionId, setSessionId] = useState(() => normalizeSessionId(findLastValue(persisted?.history, 'session_id')) || '');
+  const [systemStats, setSystemStats] = useState({
+    cpu_percent: 14.2,
+    ram_used_mb: 148.6,
+    ram_total_mb: 2048,
+    total_attacks: 0
+  });
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
   const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -96,12 +103,27 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [keystrokeCountByService, setKeystrokeCountByService] = useState(countRef.current);
   const lastKeystrokeTimeRef = useRef(Date.now());
   const saveTimerRef = useRef(null);
-  // ponytail: timer booleano por servicio; si pausa activa, mensajes no llegan y timer puede
-  // apagar breach HTTP aunque el atacante siga — techo aceptado. Upgrade: pausar el timer también.
   const httpBreachTimerRef = useRef(null);
 
-  // ponytail: throttle 2s + flush en pagehide; crash pierde <2s de eventos.
-  // Upgrade path: IndexedDB + flush sincrónico si la durabilidad requiere cero pérdida.
+  const resolveGeoLocation = useCallback(async (ip) => {
+    const clean = normalizeIPv4(ip);
+    if (!clean || clean === '0.0.0.0' || clean === '127.0.0.1' || clean === '::1' || clean.startsWith('192.168.') || clean.startsWith('10.')) {
+      setAttackerGeo('Red Local / LAN (Prueba Interna)');
+      return;
+    }
+    try {
+      const res = await fetch(`https://ipapi.co/${clean}/json/`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.city && data.country_name) {
+          setAttackerGeo(`${data.city}, ${data.country_name} (${data.org || 'ISP'})`);
+          return;
+        }
+      }
+    } catch {}
+    setAttackerGeo(`Ubicación IP (${clean})`);
+  }, []);
+
   const saveNow = useCallback(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
@@ -119,7 +141,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     }, 2000);
   }, [saveNow]);
 
-  // Terminal terminal-write subscriber callbacks
   const terminalListenersRef = useRef(new Set());
 
   const registerTerminalListener = useCallback((cb) => {
@@ -127,8 +148,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     return () => terminalListenersRef.current.delete(cb);
   }, []);
 
-  // Si al montar el breach HTTP está restaurado como activo, arrancar timer de inactividad.
-  // Cuando el atacante se fue con la página cerrada, esto apaga el rojo zombie en 10s.
   useEffect(() => {
     if (breachRef.current.http) {
       httpBreachTimerRef.current = setTimeout(() => {
@@ -138,10 +157,8 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       }, 10000);
     }
     return () => clearTimeout(httpBreachTimerRef.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Replay historical messages and recompute keystrokes when activeService changes
   useEffect(() => {
     const bucket = historyRef.current[activeService] || [];
 
@@ -157,7 +174,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     });
     setKeystrokes(activeKeystrokes.slice(0, 50));
 
-    //  instant replay, no pacing delay. Upgrade path: setTimeout loop if typing animation is needed.
     bucket.forEach((m) => {
       terminalListenersRef.current.forEach((listener) => {
         try {
@@ -170,40 +186,44 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   }, [activeService]);
 
   useEffect(() => {
-    // Escuchar cambios de estado
     const unsubStatus = wsClient.onStatusChange((newStatus) => {
       setStatus(newStatus);
     });
 
-    // Conectar WS singleton
     wsClient.connect();
 
-    // Escuchar mensajes
     const unsubMsg = wsClient.onMessage((msg) => {
       if (isPaused) return;
+
+      // Escuchar métricas del sistema
+      if (msg.type === 'system_stats') {
+        setSystemStats({
+          cpu_percent: msg.cpu_percent || 12.0,
+          ram_used_mb: msg.ram_used_mb || 140,
+          ram_total_mb: msg.ram_total_mb || 2048,
+          total_attacks: msg.total_attacks || 0
+        });
+        return;
+      }
 
       const now = Date.now();
       const stampedMsg = { ...msg, rawTime: now };
       const svc = msg.service || ServiceType.SSH;
 
-      //  500 msg cap per service. Upgrade path: configurable limit or eviction strategy.
       const currentBucket = historyRef.current[svc] || [];
       historyRef.current[svc] = [...currentBucket, stampedMsg].slice(-500);
 
-      // Estado de intrusión por servicio (antes del filtro: aplica a cualquier trampa)
       if (msg.type === 'connection') {
         breachRef.current = { ...breachRef.current, [svc]: true };
         setBreachByService(breachRef.current);
       }
 
-      // Apagar breach cuando el atacante cierra la sesión (SSH/FTP envían connection_end)
       if (msg.type === EventType.CONNECTION_END) {
         breachRef.current = { ...breachRef.current, [svc]: false };
         setBreachByService({ ...breachRef.current });
         scheduleSave();
       }
 
-      // Timer de inactividad 10s solo para HTTP (no tiene señal de desconexión real)
       if (svc === ServiceType.HTTP) {
         clearTimeout(httpBreachTimerRef.current);
         httpBreachTimerRef.current = setTimeout(() => {
@@ -213,7 +233,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
         }, 10000);
       }
 
-      // Contador general de pulsaciones por servicio (antes del filtro: cuenta todas las trampas)
       if (msg.type === EventType.IO && msg.payload) {
         countRef.current = { ...countRef.current, [svc]: (countRef.current[svc] || 0) + 1 };
         setKeystrokeCountByService(countRef.current);
@@ -221,7 +240,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
       scheduleSave();
 
-      // Filtrar por servicio si el mensaje contiene campo service
       if (msg.service && msg.service !== activeService) {
         return;
       }
@@ -229,7 +247,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       setLastMessage(stampedMsg);
 
       if (msg.ip) {
-        setAttackerIp(normalizeIPv4(msg.ip));
+        const norm = normalizeIPv4(msg.ip);
+        setAttackerIp(norm);
+        resolveGeoLocation(norm);
       }
       if (msg.mac) {
         setAttackerMac(msg.mac);
@@ -285,7 +305,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     wsUrl,
     attackerIp,
     attackerMac,
+    attackerGeo,
     sessionId,
+    systemStats,
     keystrokes,
     lastMessage,
     isPaused,

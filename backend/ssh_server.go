@@ -52,7 +52,14 @@ type KeyEvent struct {
 	Type      string    `json:"type"`
 }
 
-var sensitiveCommands = []string{"sudo", "su", "rm", "passwd", "chmod", "chown", "wget", "curl", "nc", "bash", "sh", "iptables"}
+var sensitiveCommands = []string{
+	"sudo", "su", "rm", "passwd", "chmod", "chown", "wget", "curl", "nc", "bash", "sh", "iptables",
+	"pacman", "apt", "yum", "apk", "dd", "mkfifo", "perl", "python", "ruby", "nc.openbsd", "ncat",
+}
+
+var sensitivePatterns = []string{
+	":(){", ":|:&", "forkbomb", "rm -rf", "chmod 777", "chmod -R", "> /dev/sda", "/dev/urandom",
+}
 
 // getMACAddress lee la tabla ARP del kernel de Linux para obtener la huella física
 func getMACAddress(ip string) string {
@@ -129,6 +136,16 @@ func startSSHServer() {
 		}
 
 		ip, _, _ := net.SplitHostPort(nConn.RemoteAddr().String())
+
+		// Intercepción inmediata contra lista negra de IPs / DNS baneados
+		if globalBanManager != nil {
+			if banned, reason := globalBanManager.IsBanned(ip); banned {
+				log.Printf("⛔ CONEXIÓN RECHAZADA - IP Baneada %s: %s", ip, reason)
+				nConn.Close()
+				continue
+			}
+		}
+
 		mac := getMACAddress(ip)
 
 		log.Printf("🚨 INTRUSIÓN DETECTADA - IP: %s | MAC: %s", ip, mac)
@@ -323,7 +340,9 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 			if cleanCmd != "" {
 				log.Printf("💻 [Atacante %s] ejecutó: %s", mac, cleanCmd)
 				recordCommandEvent(sessionID, ip, mac, "ssh", cleanCmd)
-				analyzeCommand(cleanCmd, ip, mac, sessionID)
+				if analyzeCommand(cleanCmd, ip, mac, sessionID, channel) {
+					return
+				}
 				simulateOSResponse(channel, cleanCmd, ip, mac, sessionID)
 			}
 
@@ -341,22 +360,55 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 	}
 }
 
-func analyzeCommand(cmdLine, ip, mac, sessionID string) {
-	parts := strings.Fields(cmdLine)
-	if len(parts) == 0 {
-		return
+func analyzeCommand(cmdLine, ip, mac, sessionID string, channel ssh.Channel) bool {
+	cleanCmd := strings.TrimSpace(cmdLine)
+	if cleanCmd == "" {
+		return false
 	}
-	baseCmd := parts[0]
 
-	for _, bad := range sensitiveCommands {
-		if baseCmd == bad {
-			alertMsg := fmt.Sprintf("Intento de ejecución crítica: '%s'", cmdLine)
-			log.Printf("⚠️ ¡ALERTA! %s (Origen: %s)", alertMsg, mac)
+	isDangerous := false
+	reason := ""
 
-			emitTelemetry("ssh", "alert", alertMsg, ip, mac, sessionID)
+	// 1. Verificación por patrón (Bash bomb, fork bomb, etc.)
+	for _, pattern := range sensitivePatterns {
+		if strings.Contains(cleanCmd, pattern) {
+			isDangerous = true
+			reason = fmt.Sprintf("Patrón crítico/Bash Bomb detectado: '%s'", pattern)
 			break
 		}
 	}
+
+	// 2. Verificación por comando base
+	if !isDangerous {
+		parts := strings.Fields(cleanCmd)
+		if len(parts) > 0 {
+			baseCmd := strings.ToLower(parts[0])
+			for _, bad := range sensitiveCommands {
+				if baseCmd == bad || strings.Contains(cleanCmd, bad) {
+					isDangerous = true
+					reason = fmt.Sprintf("Comando de alto riesgo ejecutado en SSH: '%s'", cleanCmd)
+					break
+				}
+			}
+		}
+	}
+
+	if isDangerous {
+		alertMsg := fmt.Sprintf("Intento de ejecución crítica: '%s'", cleanCmd)
+		log.Printf("⚠️ ¡ALERTA BASH BOMB / BANEO! %s (Origen: %s)", alertMsg, mac)
+
+		emitTelemetry("ssh", "alert", alertMsg, ip, mac, sessionID)
+
+		if globalBanManager != nil {
+			globalBanManager.Ban(ip, reason, "auto")
+		}
+
+		channel.Write([]byte(fmt.Sprintf("\r\n⛔ [DEFENSA ACTIVA] IP %s BANEADA POR COMANDO MALICIOSO.\r\nConexión cerrada automáticamente.\r\n", ip)))
+		channel.Close()
+		return true
+	}
+
+	return false
 }
 
 // simulateOSResponse construye la respuesta UNA vez y con el mismo string

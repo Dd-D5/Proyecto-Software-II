@@ -1,75 +1,79 @@
 import React from 'react';
 
-export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1:8080/stream/pts3', wsStatus = 'conectado' }) {
-  // Tabs definition
+export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1:8080/ws', wsStatus = 'conectado', onLogout }) {
   const tabs = [
-    { id: 'terminal', label: 'Live Terminal' },
-    { id: 'servicios', label: 'Servicios' },
-    { id: 'historial', label: 'Historial' }
+    { id: 'terminal', label: 'Live Terminal', icon: 'terminal' },
+    { id: 'servicios', label: 'Gestión & Honeypots', icon: 'dns' },
+    { id: 'historial', label: 'Historial de Ataques', icon: 'history' }
   ];
 
   return (
-    <header className="fixed top-0 left-16 h-14 bg-[#0f131c]/90 backdrop-blur-md border-b border-[#1e2330] z-40 flex items-center justify-between px-6 shadow-sm w-[calc(100%-4rem)]">
-      {/* Brand and Tab Navigation */}
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => onSelectTab('terminal')}>
-          <span className="font-title-lg text-title-lg font-bold tracking-tight text-on-surface">AEGISTRAP</span>
-          <span className="font-label-caps text-[10px] bg-primary/15 text-primary border border-primary/30 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-            v4.2-SEC
+    <header className="sticky top-0 w-full bg-[#FAF7F2] border-b-3 border-black z-40 flex items-center justify-between px-4 sm:px-6 py-2.5 flex-wrap gap-2 shadow-[0px_4px_0px_0px_#000]">
+      {/* Marca & Pestañas */}
+      <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
+        <div 
+          className="flex items-center gap-2 cursor-pointer bg-[#FEF08A] border-2 border-black px-3 py-1 shadow-[3px_3px_0px_0px_#000] active:translate-x-[1px] active:translate-y-[1px]"
+          onClick={() => onSelectTab('terminal')}
+        >
+          <span className="font-black text-base sm:text-lg tracking-tight text-black">AEGISTRAP</span>
+          <span className="font-black text-[9px] sm:text-[10px] bg-[#A7F3D0] border border-black px-1.5 py-0.5 text-black uppercase">
+            v2.0 SOC
           </span>
         </div>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => onSelectTab(tab.id)}
-                className={`px-3 py-1.5 rounded-lg font-mono-sm text-mono-sm flex items-center gap-1.5 transition-all ${
+                className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 font-bold text-[10px] sm:text-xs uppercase flex items-center gap-1.5 border-2 border-black transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-surface-container-high text-primary font-semibold border border-primary/20 shadow-sm'
-                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+                    ? 'bg-[#A7F3D0] text-black shadow-[3px_3px_0px_0px_#000] font-black'
+                    : 'bg-white text-black hover:bg-[#BAE6FD] shadow-[2px_2px_0px_0px_#000]'
                 }`}
               >
-                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>}
-                {tab.label}
+                <span className="material-symbols-outlined text-[14px] sm:text-[16px]">{tab.icon}</span>
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="inline sm:hidden">{tab.id.toUpperCase()}</span>
               </button>
             );
           })}
         </nav>
       </div>
 
-      {/* Right: LAN WS & Operator Badges */}
-      <div className="flex items-center gap-3">
-        {/* LAN WS Indicator */}
-        <div className="flex items-center gap-2 bg-surface-container-lowest border border-[#1e2330] px-3 py-1 rounded-lg">
-          <span className="material-symbols-outlined text-secondary text-[15px]">wifi_tethering</span>
-          <span className="font-label-caps text-label-caps text-outline uppercase">LAN:</span>
-          <span className="font-mono-sm text-mono-sm text-secondary font-medium truncate max-w-xs" id="lan-ws-url">
+      {/* Derecha: Indicador LAN & Sesión */}
+      <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+        {/* Indicador WebSocket */}
+        <div className="hidden md:flex items-center gap-1.5 sm:gap-2 bg-white border-2 border-black px-2 sm:px-3 py-1 shadow-[2px_2px_0px_0px_#000]">
+          <span className="material-symbols-outlined text-black text-[14px] sm:text-[16px]">wifi_tethering</span>
+          <span className="font-black text-[9px] sm:text-[10px] uppercase text-black">WS:</span>
+          <span className="font-mono text-[10px] sm:text-xs font-bold text-black truncate max-w-[120px] sm:max-w-xs">
             {wsUrl}
           </span>
-          <span className="font-label-caps text-[9px] text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
-            DHCP
+          <span className={`px-1.5 sm:px-2 py-0.5 border border-black text-[8px] sm:text-[9px] font-black uppercase ${
+            wsStatus === 'conectado' ? 'bg-[#A7F3D0]' : 'bg-[#FECACA]'
+          }`}>
+            {wsStatus}
           </span>
         </div>
 
-        {/* Operator Badge */}
-        <div className="flex items-center gap-2 bg-surface-container-low border border-[#1e2330] px-2.5 py-1 rounded-lg">
-          <span
-            className={`w-2 h-2 rounded-full ${
-              wsStatus === 'conectado'
-                ? 'bg-primary animate-pulse'
-                : wsStatus === 'conectando'
-                ? 'bg-tertiary animate-pulse'
-                : 'bg-error'
-            }`}
-          ></span>
-          <span className="font-mono-sm text-mono-sm text-on-surface font-semibold">OPERATOR_0X8F</span>
-          <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[#003824]">
-            <span className="material-symbols-outlined text-[14px]">person</span>
-          </div>
+        {/* Badge de Operador & Botón Logout */}
+        <div className="flex items-center gap-1.5 bg-[#DDD6FE] border-2 border-black px-2 sm:px-3 py-1 shadow-[2px_2px_0px_0px_#000]">
+          <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-black animate-pulse"></span>
+          <span className="font-black text-[10px] sm:text-xs text-black">ADMIN_SOC</span>
         </div>
+
+        {onLogout && (
+          <button
+            onClick={onLogout}
+            title="Cerrar Sesión"
+            className="bg-[#FECACA] hover:bg-[#FCA5A5] text-black font-black text-[10px] sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 border-2 border-black shadow-[2px_2px_0px_0px_#000] cursor-pointer active:translate-x-[1px] active:translate-y-[1px]"
+          >
+            SALIR
+          </button>
+        )}
       </div>
     </header>
   );

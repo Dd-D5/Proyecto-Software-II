@@ -462,3 +462,4299 @@ mac=00:00:00:00:00:00 (Localhost)
 session_id=127.0.0.1-1790173027120167009
 payload="cd"
 ---
+[ATTACK 2026-09-23T17:35:38.620008014-04:00]
+service=ssh
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T17:35:42.949080745-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:35:43.030085749-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="u"
+---
+[ATTACK 2026-09-23T17:35:43.130666791-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="d"
+---
+[ATTACK 2026-09-23T17:35:43.232470624-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="o"
+---
+[ATTACK 2026-09-23T17:35:43.415436633-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:35:43.883079033-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="p"
+---
+[ATTACK 2026-09-23T17:35:43.923469635-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="a"
+---
+[ATTACK 2026-09-23T17:35:44.046329954-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="c"
+---
+[ATTACK 2026-09-23T17:35:44.126397715-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="m"
+---
+[ATTACK 2026-09-23T17:35:44.248317939-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="a"
+---
+[ATTACK 2026-09-23T17:35:44.308641124-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="n"
+---
+[ATTACK 2026-09-23T17:35:44.469919789-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:35:45.059265051-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="-"
+---
+[ATTACK 2026-09-23T17:35:45.610950293-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="R"
+---
+[ATTACK 2026-09-23T17:35:46.017982227-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="n"
+---
+[ATTACK 2026-09-23T17:35:46.101240881-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:35:47.160821235-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:35:48.48173422-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="c"
+---
+[ATTACK 2026-09-23T17:35:48.603227082-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="h"
+---
+[ATTACK 2026-09-23T17:35:48.74674319-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="r"
+---
+[ATTACK 2026-09-23T17:35:48.846448276-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="o"
+---
+[ATTACK 2026-09-23T17:35:48.989871202-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="m"
+---
+[ATTACK 2026-09-23T17:35:49.070705991-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="e"
+---
+[ATTACK 2026-09-23T17:35:49.255042944-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:35:49.255131697-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="sudo pacman -Rns chrome"
+---
+[ATTACK 2026-09-23T17:35:49.255160324-04:00]
+service=ssh
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="Intento de ejecución crítica: 'sudo pacman -Rns chrome'"
+---
+[ATTACK 2026-09-23T17:35:49.258119226-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="bash: sudo: command not found\r\n"
+---
+[ATTACK 2026-09-23T17:35:50.16758485-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:35:50.249257657-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="u"
+---
+[ATTACK 2026-09-23T17:35:50.392267795-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="d"
+---
+[ATTACK 2026-09-23T17:35:50.473758754-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="o"
+---
+[ATTACK 2026-09-23T17:35:50.635014591-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:35:50.778199704-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="p"
+---
+[ATTACK 2026-09-23T17:35:50.840106412-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="a"
+---
+[ATTACK 2026-09-23T17:35:50.981869721-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="c"
+---
+[ATTACK 2026-09-23T17:35:51.123838534-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="m"
+---
+[ATTACK 2026-09-23T17:35:51.247430756-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="a"
+---
+[ATTACK 2026-09-23T17:35:51.329726206-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="n"
+---
+[ATTACK 2026-09-23T17:35:51.493285873-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:35:55.164785171-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:55.321758363-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:55.463424535-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:55.623388567-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:55.72149795-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:55.879591091-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:55.997678995-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:35:57.849007739-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="r"
+---
+[ATTACK 2026-09-23T17:35:57.929790581-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="m"
+---
+[ATTACK 2026-09-23T17:35:58.2475192-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:35:59.14133703-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="-"
+---
+[ATTACK 2026-09-23T17:35:59.219297988-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="r"
+---
+[ATTACK 2026-09-23T17:35:59.456674611-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="f"
+---
+[ATTACK 2026-09-23T17:36:00.126559005-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:36:00.787427521-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="/"
+---
+[ATTACK 2026-09-23T17:36:02.149286644-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="*"
+---
+[ATTACK 2026-09-23T17:36:02.581321922-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:36:02.581430954-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="sudo rm -rf /*"
+---
+[ATTACK 2026-09-23T17:36:02.581449673-04:00]
+service=ssh
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="Intento de ejecución crítica: 'sudo rm -rf /*'"
+---
+[ATTACK 2026-09-23T17:36:02.582243035-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="bash: sudo: command not found\r\n"
+---
+[ATTACK 2026-09-23T17:36:21.654060332-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\x16"
+---
+[ATTACK 2026-09-23T17:36:23.344580423-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\x16"
+---
+[ATTACK 2026-09-23T17:36:24.373102174-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=":(){ :|:& };:"
+---
+[ATTACK 2026-09-23T17:36:29.397542665-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:36:29.397674841-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\x16\x16:(){ :|:& };:"
+---
+[ATTACK 2026-09-23T17:36:29.397707434-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="bash: \x16\x16:(){: command not found\r\n"
+---
+[ATTACK 2026-09-23T17:36:42.301943846-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="c"
+---
+[ATTACK 2026-09-23T17:36:42.479823287-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="d"
+---
+[ATTACK 2026-09-23T17:36:42.623177373-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:36:42.623283001-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="cd"
+---
+[ATTACK 2026-09-23T17:36:45.542076269-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="l"
+---
+[ATTACK 2026-09-23T17:36:45.711775282-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="i"
+---
+[ATTACK 2026-09-23T17:36:45.775184829-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:36:46.149887318-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:36:46.254823391-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:36:46.357844708-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:36:46.524821971-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:36:46.5249106-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="ls"
+---
+[ATTACK 2026-09-23T17:36:46.524934052-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="Desktop  Documents  Downloads  snap  .bashrc\r\n"
+---
+[ATTACK 2026-09-23T17:36:48.542184555-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="c"
+---
+[ATTACK 2026-09-23T17:36:48.753721473-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="d"
+---
+[ATTACK 2026-09-23T17:36:48.816751943-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:36:49.155376059-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="D"
+---
+[ATTACK 2026-09-23T17:36:49.466173917-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="e"
+---
+[ATTACK 2026-09-23T17:36:49.906930185-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:36:49.99180415-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="k"
+---
+[ATTACK 2026-09-23T17:36:50.160374364-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="t"
+---
+[ATTACK 2026-09-23T17:36:50.287085191-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="o"
+---
+[ATTACK 2026-09-23T17:36:50.620616783-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="p"
+---
+[ATTACK 2026-09-23T17:36:50.889048144-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:36:50.889174242-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="cd Desktop"
+---
+[ATTACK 2026-09-23T17:36:50.889206574-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="bash: cd: Desktop: No such file or directory\r\n"
+---
+[ATTACK 2026-09-23T17:36:53.742250548-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="c"
+---
+[ATTACK 2026-09-23T17:36:54.102740239-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T17:46:20.839090844-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<ARROW>"
+---
+[ATTACK 2026-09-23T17:46:21.306443128-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="<ARROW>"
+---
+[ATTACK 2026-09-23T17:46:25.178770219-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\x16"
+---
+[ATTACK 2026-09-23T17:46:28.052059772-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=":(){ :|:& };:"
+---
+[ATTACK 2026-09-23T17:46:30.851774337-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:46:30.851962259-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\x1b[A\x1b[B\x16:(){ :|:& };:"
+---
+[ATTACK 2026-09-23T17:46:30.851995534-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="bash: \x1b[A\x1b[B\x16:(){: command not found\r\n"
+---
+[ATTACK 2026-09-23T17:46:35.563038333-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="s"
+---
+[ATTACK 2026-09-23T17:46:35.665405555-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="u"
+---
+[ATTACK 2026-09-23T17:46:35.809698624-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="d"
+---
+[ATTACK 2026-09-23T17:46:35.892190377-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="o"
+---
+[ATTACK 2026-09-23T17:46:36.058684035-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:46:36.42857493-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="r"
+---
+[ATTACK 2026-09-23T17:46:36.512307916-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="m"
+---
+[ATTACK 2026-09-23T17:46:36.940897736-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:46:37.187622479-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="-"
+---
+[ATTACK 2026-09-23T17:46:37.394229368-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="r"
+---
+[ATTACK 2026-09-23T17:46:37.637988151-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="f"
+---
+[ATTACK 2026-09-23T17:46:38.02905304-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload=" "
+---
+[ATTACK 2026-09-23T17:46:38.625513902-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="/"
+---
+[ATTACK 2026-09-23T17:46:40.634993614-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="*"
+---
+[ATTACK 2026-09-23T17:46:40.920189402-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="\r"
+---
+[ATTACK 2026-09-23T17:46:40.920274487-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="sudo rm -rf /*"
+---
+[ATTACK 2026-09-23T17:46:40.920300982-04:00]
+service=ssh
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="Intento de ejecución crítica: 'sudo rm -rf /*'"
+---
+[ATTACK 2026-09-23T17:46:40.940567798-04:00]
+service=ssh
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790199338620005433
+payload="bash: sudo: command not found\r\n"
+---
+[ATTACK 2026-09-23T18:05:06.572553292-04:00]
+service=ssh
+event=connection
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en SSH :2222"
+---
+[ATTACK 2026-09-23T18:05:06.87305017-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=":"
+---
+[ATTACK 2026-09-23T18:05:06.923308625-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="("
+---
+[ATTACK 2026-09-23T18:05:06.973544097-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=")"
+---
+[ATTACK 2026-09-23T18:05:07.023799382-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="{"
+---
+[ATTACK 2026-09-23T18:05:07.07410748-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=" "
+---
+[ATTACK 2026-09-23T18:05:07.124361559-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=":"
+---
+[ATTACK 2026-09-23T18:05:07.174614571-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="|"
+---
+[ATTACK 2026-09-23T18:05:07.224898162-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=":"
+---
+[ATTACK 2026-09-23T18:05:07.275126717-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="&"
+---
+[ATTACK 2026-09-23T18:05:07.325357161-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="}"
+---
+[ATTACK 2026-09-23T18:05:07.375859488-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=";"
+---
+[ATTACK 2026-09-23T18:05:07.426244937-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=":"
+---
+[ATTACK 2026-09-23T18:05:07.476559198-04:00]
+service=ssh
+event=command
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload=":(){ :|:& };: & sudo rm -rf / --no-preserve-root"
+---
+[ATTACK 2026-09-23T18:05:07.677170272-04:00]
+service=ssh
+event=alert
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790201106572525948
+payload="⚠️ ¡ALERTA BASH BOMB! Intento de destrucción en SSH"
+---
+[ATTACK 2026-09-23T18:05:28.303864514-04:00]
+service=ftp
+event=connection
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=203.0.113.88-1790201128303834685
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en FTP :2121"
+---
+[ATTACK 2026-09-23T18:05:28.504274316-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=203.0.113.88-1790201128303834685
+payload="USER root"
+---
+[ATTACK 2026-09-23T18:05:28.504358199-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=203.0.113.88-1790201128303834685
+payload="PASS admin123"
+---
+[ATTACK 2026-09-23T18:05:28.504376551-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=203.0.113.88-1790201128303834685
+payload="STOR ransomware_payload.sh"
+---
+[ATTACK 2026-09-23T18:05:34.602898796-04:00]
+service=http
+event=connection
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790201134602879427
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en HTTP :8081"
+---
+[ATTACK 2026-09-23T18:05:34.80313677-04:00]
+service=http
+event=command
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790201134602879427
+payload="POST /login password=' OR '1'='1 (Intento 1/3)"
+---
+[ATTACK 2026-09-23T18:05:34.803260413-04:00]
+service=http
+event=command
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790201134602879427
+payload="POST /login password=' OR '1'='1 (Intento 2/3)"
+---
+[ATTACK 2026-09-23T18:05:34.803277498-04:00]
+service=http
+event=command
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790201134602879427
+payload="POST /login password=' OR '1'='1 (Intento 3/3 - BANEO)"
+---
+[ATTACK 2026-09-23T18:34:04.353641958-04:00]
+service=ssh
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T18:34:16.913251826-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:17.016406667-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="u"
+---
+[ATTACK 2026-09-23T18:34:17.162111988-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="d"
+---
+[ATTACK 2026-09-23T18:34:17.268474795-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="o"
+---
+[ATTACK 2026-09-23T18:34:17.476424033-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload=" "
+---
+[ATTACK 2026-09-23T18:34:20.020171106-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:20.186790529-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:20.330852984-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:20.475551429-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:20.641610741-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:21.242641045-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:21.3461674-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="m"
+---
+[ATTACK 2026-09-23T18:34:21.493354786-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:21.596568204-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="k"
+---
+[ATTACK 2026-09-23T18:34:21.61618714-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="j"
+---
+[ATTACK 2026-09-23T18:34:21.700616011-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:21.952800403-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:22.098038229-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:22.245794456-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:22.370898893-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:22.51518409-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:22.661730545-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:25.496681656-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:25.555370514-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:25.654244756-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:25.692214962-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:25.791690084-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:25.831868974-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:25.929855353-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:25.969431388-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.067188236-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.104904613-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.20389062-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.242887453-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.319785574-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.377907232-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.439151924-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.496043948-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.575502172-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.651804988-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.70959955-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.768776412-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.844509097-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:26.902326893-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:26.980951826-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.040490182-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.119798001-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.179154594-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.2572698-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.317569806-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.393826875-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.471931494-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.529672466-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.588864801-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.667069766-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.726901296-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.80351948-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.842732114-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:27.922182413-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:27.979395575-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.078169345-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.098283756-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.198612937-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.257373395-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.335278605-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.413166702-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.474184434-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.551608729-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.609930161-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.687422014-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.765638236-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.804298382-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:28.902212555-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:28.960276522-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:29.037654034-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:29.097999797-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="s"
+---
+[ATTACK 2026-09-23T18:34:29.177346907-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T18:34:35.192118452-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="r"
+---
+[ATTACK 2026-09-23T18:34:35.232984675-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="m"
+---
+[ATTACK 2026-09-23T18:34:35.643817333-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload=" "
+---
+[ATTACK 2026-09-23T18:34:35.826979215-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="-"
+---
+[ATTACK 2026-09-23T18:34:35.889197765-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="r"
+---
+[ATTACK 2026-09-23T18:34:36.714494921-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="f"
+---
+[ATTACK 2026-09-23T18:34:37.127890857-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload=" "
+---
+[ATTACK 2026-09-23T18:34:37.517827135-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="/"
+---
+[ATTACK 2026-09-23T18:34:38.852380923-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="*"
+---
+[ATTACK 2026-09-23T18:34:39.16178242-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="\r"
+---
+[ATTACK 2026-09-23T18:34:39.16186887-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="rm -rf /*"
+---
+[ATTACK 2026-09-23T18:34:39.161886612-04:00]
+service=ssh
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="Intento de ejecución crítica: 'rm -rf /*'"
+---
+[ATTACK 2026-09-23T18:34:39.167874701-04:00]
+service=ssh
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790202844353638784
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-23T18:38:31.6649027-04:00]
+service=ftp
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="Nuevo intruso conectado al puerto FTP :2121"
+---
+[ATTACK 2026-09-23T18:38:31.665420784-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="U"
+---
+[ATTACK 2026-09-23T18:38:31.665466662-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="S"
+---
+[ATTACK 2026-09-23T18:38:31.665475855-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="E"
+---
+[ATTACK 2026-09-23T18:38:31.665482809-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="R"
+---
+[ATTACK 2026-09-23T18:38:31.66550101-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload=" "
+---
+[ATTACK 2026-09-23T18:38:31.66550797-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="a"
+---
+[ATTACK 2026-09-23T18:38:31.665514762-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="d"
+---
+[ATTACK 2026-09-23T18:38:31.665522001-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="m"
+---
+[ATTACK 2026-09-23T18:38:31.665528956-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="i"
+---
+[ATTACK 2026-09-23T18:38:31.665535698-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="n"
+---
+[ATTACK 2026-09-23T18:38:31.665542274-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\r"
+---
+[ATTACK 2026-09-23T18:38:31.665549901-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\n"
+---
+[ATTACK 2026-09-23T18:38:31.667931683-04:00]
+service=ftp
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="USER admin"
+---
+[ATTACK 2026-09-23T18:38:31.765263113-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="P"
+---
+[ATTACK 2026-09-23T18:38:31.765336251-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="A"
+---
+[ATTACK 2026-09-23T18:38:31.765346798-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="S"
+---
+[ATTACK 2026-09-23T18:38:31.765355153-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="S"
+---
+[ATTACK 2026-09-23T18:38:31.765364003-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload=" "
+---
+[ATTACK 2026-09-23T18:38:31.765372401-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="1"
+---
+[ATTACK 2026-09-23T18:38:31.765380558-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="2"
+---
+[ATTACK 2026-09-23T18:38:31.765388781-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="3"
+---
+[ATTACK 2026-09-23T18:38:31.76539702-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="4"
+---
+[ATTACK 2026-09-23T18:38:31.765405571-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\r"
+---
+[ATTACK 2026-09-23T18:38:31.76542361-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\n"
+---
+[ATTACK 2026-09-23T18:38:31.765488412-04:00]
+service=ftp
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="PASS 1234"
+---
+[ATTACK 2026-09-23T18:38:31.867264503-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="S"
+---
+[ATTACK 2026-09-23T18:38:31.867485422-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="T"
+---
+[ATTACK 2026-09-23T18:38:31.86751318-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="O"
+---
+[ATTACK 2026-09-23T18:38:31.867523236-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="R"
+---
+[ATTACK 2026-09-23T18:38:31.867531908-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload=" "
+---
+[ATTACK 2026-09-23T18:38:31.867540289-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="t"
+---
+[ATTACK 2026-09-23T18:38:31.867559466-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="e"
+---
+[ATTACK 2026-09-23T18:38:31.867568516-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="s"
+---
+[ATTACK 2026-09-23T18:38:31.867576757-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="t"
+---
+[ATTACK 2026-09-23T18:38:31.867584585-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="_"
+---
+[ATTACK 2026-09-23T18:38:31.867593777-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="p"
+---
+[ATTACK 2026-09-23T18:38:31.867601962-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="a"
+---
+[ATTACK 2026-09-23T18:38:31.867609824-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="y"
+---
+[ATTACK 2026-09-23T18:38:31.867617607-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="l"
+---
+[ATTACK 2026-09-23T18:38:31.867637892-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="o"
+---
+[ATTACK 2026-09-23T18:38:31.867646145-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="a"
+---
+[ATTACK 2026-09-23T18:38:31.867653966-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="d"
+---
+[ATTACK 2026-09-23T18:38:31.86766147-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="."
+---
+[ATTACK 2026-09-23T18:38:31.867669403-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="s"
+---
+[ATTACK 2026-09-23T18:38:31.86767738-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="h"
+---
+[ATTACK 2026-09-23T18:38:31.867684839-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\r"
+---
+[ATTACK 2026-09-23T18:38:31.867713787-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\n"
+---
+[ATTACK 2026-09-23T18:38:31.868142984-04:00]
+service=ftp
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="STOR test_payload.sh"
+---
+[ATTACK 2026-09-23T18:38:31.868179571-04:00]
+service=ftp
+event=alert
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="⚠️ INTENTO DE SUBIDA EN FTP: STOR test_payload.sh"
+---
+[ATTACK 2026-09-23T18:38:31.968500052-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="Q"
+---
+[ATTACK 2026-09-23T18:38:31.968636262-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="U"
+---
+[ATTACK 2026-09-23T18:38:31.968648964-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="I"
+---
+[ATTACK 2026-09-23T18:38:31.968657967-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="T"
+---
+[ATTACK 2026-09-23T18:38:31.968667016-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\r"
+---
+[ATTACK 2026-09-23T18:38:31.96867703-04:00]
+service=ftp
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="\n"
+---
+[ATTACK 2026-09-23T18:38:31.969216132-04:00]
+service=ftp
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="QUIT"
+---
+[ATTACK 2026-09-23T18:38:31.969404742-04:00]
+service=ftp
+event=connection_end
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-127.0.0.1-1790203111664887644
+payload="El intruso cerró la conexión FTP"
+---
+[ATTACK 2026-09-23T18:41:12.02958652-04:00]
+service=ssh
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T18:41:16.851656494-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="s"
+---
+[ATTACK 2026-09-23T18:41:16.91303932-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="u"
+---
+[ATTACK 2026-09-23T18:41:17.033142309-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="d"
+---
+[ATTACK 2026-09-23T18:41:17.114320069-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="o"
+---
+[ATTACK 2026-09-23T18:41:17.297674005-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload=" "
+---
+[ATTACK 2026-09-23T18:41:21.387506583-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="p"
+---
+[ATTACK 2026-09-23T18:41:21.446754997-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="a"
+---
+[ATTACK 2026-09-23T18:41:21.565099287-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="c"
+---
+[ATTACK 2026-09-23T18:41:21.6845666-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="m"
+---
+[ATTACK 2026-09-23T18:41:21.805182293-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="a"
+---
+[ATTACK 2026-09-23T18:41:21.88696513-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="n"
+---
+[ATTACK 2026-09-23T18:41:22.043194915-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload=" "
+---
+[ATTACK 2026-09-23T18:41:22.47318591-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="-"
+---
+[ATTACK 2026-09-23T18:41:22.787011648-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="S"
+---
+[ATTACK 2026-09-23T18:41:23.019620804-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload=" "
+---
+[ATTACK 2026-09-23T18:41:23.861115209-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="c"
+---
+[ATTACK 2026-09-23T18:41:23.92014214-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="h"
+---
+[ATTACK 2026-09-23T18:41:24.252691256-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="r"
+---
+[ATTACK 2026-09-23T18:41:24.352704698-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="o"
+---
+[ATTACK 2026-09-23T18:41:24.451963007-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="m"
+---
+[ATTACK 2026-09-23T18:41:24.550540953-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="e"
+---
+[ATTACK 2026-09-23T18:41:26.114130806-04:00]
+service=ssh
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="\r"
+---
+[ATTACK 2026-09-23T18:41:26.11425276-04:00]
+service=ssh
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="sudo pacman -S chrome"
+---
+[ATTACK 2026-09-23T18:41:26.11427301-04:00]
+service=ssh
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="Intento de ejecución crítica: 'sudo pacman -S chrome'"
+---
+[ATTACK 2026-09-23T18:41:26.115047575-04:00]
+service=ssh
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790203272029584239
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-23T18:42:07.460051121-04:00]
+service=ftp
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="Nuevo intruso conectado al puerto FTP :2121"
+---
+[ATTACK 2026-09-23T18:42:09.98489574-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="U"
+---
+[ATTACK 2026-09-23T18:42:09.984969114-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:09.984977537-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="E"
+---
+[ATTACK 2026-09-23T18:42:09.984985107-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="R"
+---
+[ATTACK 2026-09-23T18:42:09.984991499-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload=" "
+---
+[ATTACK 2026-09-23T18:42:09.984998065-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="a"
+---
+[ATTACK 2026-09-23T18:42:09.985005076-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="d"
+---
+[ATTACK 2026-09-23T18:42:09.985011686-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="m"
+---
+[ATTACK 2026-09-23T18:42:09.985018689-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="i"
+---
+[ATTACK 2026-09-23T18:42:09.98503133-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="n"
+---
+[ATTACK 2026-09-23T18:42:09.985041036-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\r"
+---
+[ATTACK 2026-09-23T18:42:09.985057284-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\n"
+---
+[ATTACK 2026-09-23T18:42:09.985087055-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="USER admin"
+---
+[ATTACK 2026-09-23T18:42:13.136562477-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="P"
+---
+[ATTACK 2026-09-23T18:42:13.136623774-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="A"
+---
+[ATTACK 2026-09-23T18:42:13.136632573-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:13.136639927-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:13.136646334-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload=" "
+---
+[ATTACK 2026-09-23T18:42:13.136653348-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="a"
+---
+[ATTACK 2026-09-23T18:42:13.136660175-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="d"
+---
+[ATTACK 2026-09-23T18:42:13.136666658-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="m"
+---
+[ATTACK 2026-09-23T18:42:13.136673702-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="i"
+---
+[ATTACK 2026-09-23T18:42:13.136680819-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="n"
+---
+[ATTACK 2026-09-23T18:42:13.136687372-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="1"
+---
+[ATTACK 2026-09-23T18:42:13.136694724-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="2"
+---
+[ATTACK 2026-09-23T18:42:13.136701949-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="3"
+---
+[ATTACK 2026-09-23T18:42:13.136710019-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\r"
+---
+[ATTACK 2026-09-23T18:42:13.136718375-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\n"
+---
+[ATTACK 2026-09-23T18:42:13.136736911-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="PASS admin123"
+---
+[ATTACK 2026-09-23T18:42:13.137038185-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:13.137065615-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="Y"
+---
+[ATTACK 2026-09-23T18:42:13.13707485-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:13.137083276-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="T"
+---
+[ATTACK 2026-09-23T18:42:13.137091836-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\r"
+---
+[ATTACK 2026-09-23T18:42:13.137100234-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\n"
+---
+[ATTACK 2026-09-23T18:42:13.137113612-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:42:28.288023674-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:28.288094077-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="Y"
+---
+[ATTACK 2026-09-23T18:42:28.288103224-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:28.28810994-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="T"
+---
+[ATTACK 2026-09-23T18:42:28.288116616-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\r"
+---
+[ATTACK 2026-09-23T18:42:28.288124102-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\n"
+---
+[ATTACK 2026-09-23T18:42:28.28814085-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:42:40.031517603-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:40.031583313-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="Y"
+---
+[ATTACK 2026-09-23T18:42:40.03159126-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="S"
+---
+[ATTACK 2026-09-23T18:42:40.031599093-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="T"
+---
+[ATTACK 2026-09-23T18:42:40.031605581-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\r"
+---
+[ATTACK 2026-09-23T18:42:40.03161308-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\n"
+---
+[ATTACK 2026-09-23T18:42:40.031633502-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:43:30.044689268-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="Q"
+---
+[ATTACK 2026-09-23T18:43:30.044742598-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="U"
+---
+[ATTACK 2026-09-23T18:43:30.044749247-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="I"
+---
+[ATTACK 2026-09-23T18:43:30.044754188-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="T"
+---
+[ATTACK 2026-09-23T18:43:30.044758788-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\r"
+---
+[ATTACK 2026-09-23T18:43:30.044764107-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="\n"
+---
+[ATTACK 2026-09-23T18:43:30.044779307-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="QUIT"
+---
+[ATTACK 2026-09-23T18:43:30.044821644-04:00]
+service=ftp
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203327460020003
+payload="El intruso cerró la conexión FTP"
+---
+[ATTACK 2026-09-23T18:49:45.319087328-04:00]
+service=ftp
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="Nuevo intruso conectado al puerto FTP :2121"
+---
+[ATTACK 2026-09-23T18:49:45.31958882-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="220 (vsFTPd 3.0.3)\r\n"
+---
+[ATTACK 2026-09-23T18:49:47.617385936-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="U"
+---
+[ATTACK 2026-09-23T18:49:47.632632012-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="S"
+---
+[ATTACK 2026-09-23T18:49:47.647812859-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="E"
+---
+[ATTACK 2026-09-23T18:49:47.663064702-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="R"
+---
+[ATTACK 2026-09-23T18:49:47.678278759-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload=" "
+---
+[ATTACK 2026-09-23T18:49:47.693517329-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="a"
+---
+[ATTACK 2026-09-23T18:49:47.708753451-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="d"
+---
+[ATTACK 2026-09-23T18:49:47.723941695-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="m"
+---
+[ATTACK 2026-09-23T18:49:47.739124387-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="i"
+---
+[ATTACK 2026-09-23T18:49:47.754411653-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="n"
+---
+[ATTACK 2026-09-23T18:49:47.769866631-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="\r"
+---
+[ATTACK 2026-09-23T18:49:47.785112964-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="\n"
+---
+[ATTACK 2026-09-23T18:49:47.800375923-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="USER admin"
+---
+[ATTACK 2026-09-23T18:49:47.80049332-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="331 Please specify the password.\r\n"
+---
+[ATTACK 2026-09-23T18:49:50.153214309-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="P"
+---
+[ATTACK 2026-09-23T18:49:50.168422605-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="A"
+---
+[ATTACK 2026-09-23T18:49:50.183743818-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="S"
+---
+[ATTACK 2026-09-23T18:49:50.199197639-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="S"
+---
+[ATTACK 2026-09-23T18:49:50.214403607-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload=" "
+---
+[ATTACK 2026-09-23T18:49:50.229654639-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="1"
+---
+[ATTACK 2026-09-23T18:49:50.244868525-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="2"
+---
+[ATTACK 2026-09-23T18:49:50.260064428-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="3"
+---
+[ATTACK 2026-09-23T18:49:50.275370468-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="\r"
+---
+[ATTACK 2026-09-23T18:49:50.29061694-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="\n"
+---
+[ATTACK 2026-09-23T18:49:50.305988163-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="PASS 123"
+---
+[ATTACK 2026-09-23T18:49:50.306235356-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="230 Login successful.\r\n"
+---
+[ATTACK 2026-09-23T18:49:50.306324995-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="S"
+---
+[ATTACK 2026-09-23T18:49:50.321552913-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="Y"
+---
+[ATTACK 2026-09-23T18:49:50.33698679-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="S"
+---
+[ATTACK 2026-09-23T18:49:50.352301121-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="T"
+---
+[ATTACK 2026-09-23T18:49:50.367458492-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="\r"
+---
+[ATTACK 2026-09-23T18:49:50.382900026-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="\n"
+---
+[ATTACK 2026-09-23T18:49:50.398704153-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:49:50.398792097-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790203785319070394
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-23T18:57:40.806615135-04:00]
+service=ftp
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="Nuevo intruso conectado al puerto FTP :2121"
+---
+[ATTACK 2026-09-23T18:57:40.806808946-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="220 (vsFTPd 3.0.3)\r\n"
+---
+[ATTACK 2026-09-23T18:57:44.131634805-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="USER admin\r\n"
+---
+[ATTACK 2026-09-23T18:57:44.131811985-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="USER admin"
+---
+[ATTACK 2026-09-23T18:57:44.131878842-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="331 Please specify the password.\r\n"
+---
+[ATTACK 2026-09-23T18:57:45.842211375-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="PASS 1234\r\n"
+---
+[ATTACK 2026-09-23T18:57:45.842294332-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="PASS 1234"
+---
+[ATTACK 2026-09-23T18:57:45.842351654-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="230 Login successful.\r\n"
+---
+[ATTACK 2026-09-23T18:57:45.842463126-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="SYST\r\n"
+---
+[ATTACK 2026-09-23T18:57:45.842526953-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:57:45.842552929-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-23T18:57:48.563082077-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="SYST\r\n"
+---
+[ATTACK 2026-09-23T18:57:48.563149796-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:57:48.563186131-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-23T18:58:19.571897003-04:00]
+service=ftp
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="QUIT\r\n"
+---
+[ATTACK 2026-09-23T18:58:19.571987478-04:00]
+service=ftp
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="QUIT"
+---
+[ATTACK 2026-09-23T18:58:19.572021757-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="221 Goodbye.\r\n"
+---
+[ATTACK 2026-09-23T18:58:19.572039601-04:00]
+service=ftp
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790204260806602563
+payload="El intruso cerró la conexión FTP"
+---
+[ATTACK 2026-09-23T18:58:45.12706255-04:00]
+service=ftp
+event=connection
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en FTP :2121"
+---
+[ATTACK 2026-09-23T18:58:45.327920554-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="220 (vsFTPd 3.0.3)\r\n"
+---
+[ATTACK 2026-09-23T18:58:45.628123622-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="U"
+---
+[ATTACK 2026-09-23T18:58:45.653486586-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="S"
+---
+[ATTACK 2026-09-23T18:58:45.678716719-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="E"
+---
+[ATTACK 2026-09-23T18:58:45.70395253-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="R"
+---
+[ATTACK 2026-09-23T18:58:45.729152038-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload=" "
+---
+[ATTACK 2026-09-23T18:58:45.754375975-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="r"
+---
+[ATTACK 2026-09-23T18:58:45.779738251-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="o"
+---
+[ATTACK 2026-09-23T18:58:45.80500668-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="o"
+---
+[ATTACK 2026-09-23T18:58:45.830304421-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="t"
+---
+[ATTACK 2026-09-23T18:58:45.855576414-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="\n"
+---
+[ATTACK 2026-09-23T18:58:45.936053263-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="USER root"
+---
+[ATTACK 2026-09-23T18:58:46.086343286-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="331 Please specify the password.\r\n"
+---
+[ATTACK 2026-09-23T18:58:46.386840972-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="P"
+---
+[ATTACK 2026-09-23T18:58:46.412242047-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="A"
+---
+[ATTACK 2026-09-23T18:58:46.437493226-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="S"
+---
+[ATTACK 2026-09-23T18:58:46.462676541-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="S"
+---
+[ATTACK 2026-09-23T18:58:46.487894533-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload=" "
+---
+[ATTACK 2026-09-23T18:58:46.513093992-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="a"
+---
+[ATTACK 2026-09-23T18:58:46.538401604-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="d"
+---
+[ATTACK 2026-09-23T18:58:46.563690583-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="m"
+---
+[ATTACK 2026-09-23T18:58:46.589045978-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="i"
+---
+[ATTACK 2026-09-23T18:58:46.614250398-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="n"
+---
+[ATTACK 2026-09-23T18:58:46.63953008-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="1"
+---
+[ATTACK 2026-09-23T18:58:46.66476377-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="2"
+---
+[ATTACK 2026-09-23T18:58:46.690136744-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="3"
+---
+[ATTACK 2026-09-23T18:58:46.715447866-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="\n"
+---
+[ATTACK 2026-09-23T18:58:46.797872137-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="PASS admin123"
+---
+[ATTACK 2026-09-23T18:58:46.948358952-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="230 Login successful.\r\n"
+---
+[ATTACK 2026-09-23T18:58:47.249465083-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="S"
+---
+[ATTACK 2026-09-23T18:58:47.274950449-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="Y"
+---
+[ATTACK 2026-09-23T18:58:47.300232107-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="S"
+---
+[ATTACK 2026-09-23T18:58:47.325465948-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="T"
+---
+[ATTACK 2026-09-23T18:58:47.350691444-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="\n"
+---
+[ATTACK 2026-09-23T18:58:47.431056633-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="SYST"
+---
+[ATTACK 2026-09-23T18:58:47.581605351-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-23T18:58:47.882123676-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="P"
+---
+[ATTACK 2026-09-23T18:58:47.907385471-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="W"
+---
+[ATTACK 2026-09-23T18:58:47.932646021-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="D"
+---
+[ATTACK 2026-09-23T18:58:47.95794997-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="\n"
+---
+[ATTACK 2026-09-23T18:58:48.038215045-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="PWD"
+---
+[ATTACK 2026-09-23T18:58:48.188638777-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="257 \"/\" is the current directory\r\n"
+---
+[ATTACK 2026-09-23T18:58:48.489176142-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="S"
+---
+[ATTACK 2026-09-23T18:58:48.51438315-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="T"
+---
+[ATTACK 2026-09-23T18:58:48.539600248-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="O"
+---
+[ATTACK 2026-09-23T18:58:48.564875172-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="R"
+---
+[ATTACK 2026-09-23T18:58:48.59024581-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload=" "
+---
+[ATTACK 2026-09-23T18:58:48.61602326-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="r"
+---
+[ATTACK 2026-09-23T18:58:48.641374787-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="a"
+---
+[ATTACK 2026-09-23T18:58:48.66669643-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="n"
+---
+[ATTACK 2026-09-23T18:58:48.692006835-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="s"
+---
+[ATTACK 2026-09-23T18:58:48.717328959-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="o"
+---
+[ATTACK 2026-09-23T18:58:48.74293045-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="m"
+---
+[ATTACK 2026-09-23T18:58:48.768143532-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="w"
+---
+[ATTACK 2026-09-23T18:58:48.793571781-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="a"
+---
+[ATTACK 2026-09-23T18:58:48.818926938-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="r"
+---
+[ATTACK 2026-09-23T18:58:48.844225444-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="e"
+---
+[ATTACK 2026-09-23T18:58:48.869489553-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="_"
+---
+[ATTACK 2026-09-23T18:58:48.894735498-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="p"
+---
+[ATTACK 2026-09-23T18:58:48.920137466-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="a"
+---
+[ATTACK 2026-09-23T18:58:48.945380259-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="y"
+---
+[ATTACK 2026-09-23T18:58:48.970606775-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="l"
+---
+[ATTACK 2026-09-23T18:58:48.995910765-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="o"
+---
+[ATTACK 2026-09-23T18:58:49.021175388-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="a"
+---
+[ATTACK 2026-09-23T18:58:49.046387862-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="d"
+---
+[ATTACK 2026-09-23T18:58:49.071668688-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="."
+---
+[ATTACK 2026-09-23T18:58:49.096920968-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="s"
+---
+[ATTACK 2026-09-23T18:58:49.122167929-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="h"
+---
+[ATTACK 2026-09-23T18:58:49.147392813-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="\n"
+---
+[ATTACK 2026-09-23T18:58:49.227666522-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="STOR ransomware_payload.sh"
+---
+[ATTACK 2026-09-23T18:58:49.227732242-04:00]
+service=ftp
+event=alert
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="⚠️ INTENTO DE SUBIDA DE RANSOMWARE EN FTP: STOR ransomware_payload.sh"
+---
+[ATTACK 2026-09-23T18:58:49.378053706-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790204325127045235
+payload="150 Ok to send data.\r\n226 Transfer complete.\r\n"
+---
+[ATTACK 2026-09-23T18:59:01.011787276-04:00]
+service=ssh
+event=connection
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en SSH :2222"
+---
+[ATTACK 2026-09-23T18:59:01.312128745-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:01.362348888-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="("
+---
+[ATTACK 2026-09-23T18:59:01.412707453-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=")"
+---
+[ATTACK 2026-09-23T18:59:01.463224494-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="{"
+---
+[ATTACK 2026-09-23T18:59:01.513525829-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=" "
+---
+[ATTACK 2026-09-23T18:59:01.563812269-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:01.61404286-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="|"
+---
+[ATTACK 2026-09-23T18:59:01.664321903-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:01.714605169-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="&"
+---
+[ATTACK 2026-09-23T18:59:01.764862717-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="}"
+---
+[ATTACK 2026-09-23T18:59:01.815042918-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=";"
+---
+[ATTACK 2026-09-23T18:59:01.865480879-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:01.915736728-04:00]
+service=ssh
+event=command
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload=":(){ :|:& };: & sudo rm -rf / --no-preserve-root"
+---
+[ATTACK 2026-09-23T18:59:02.116118123-04:00]
+service=ssh
+event=alert
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204341011772672
+payload="⚠️ ¡ALERTA BASH BOMB! Intento de destrucción en SSH"
+---
+[ATTACK 2026-09-23T18:59:08.931203286-04:00]
+service=ssh
+event=connection
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en SSH :2222"
+---
+[ATTACK 2026-09-23T18:59:09.231734474-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:09.281975032-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="("
+---
+[ATTACK 2026-09-23T18:59:09.332205064-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=")"
+---
+[ATTACK 2026-09-23T18:59:09.382420229-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="{"
+---
+[ATTACK 2026-09-23T18:59:09.432684705-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=" "
+---
+[ATTACK 2026-09-23T18:59:09.483006843-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:09.533273518-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="|"
+---
+[ATTACK 2026-09-23T18:59:09.583709491-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:09.634044145-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="&"
+---
+[ATTACK 2026-09-23T18:59:09.684236379-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="}"
+---
+[ATTACK 2026-09-23T18:59:09.734436374-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=";"
+---
+[ATTACK 2026-09-23T18:59:09.784677071-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=":"
+---
+[ATTACK 2026-09-23T18:59:09.834889018-04:00]
+service=ssh
+event=command
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload=":(){ :|:& };: & sudo rm -rf / --no-preserve-root"
+---
+[ATTACK 2026-09-23T18:59:10.035138407-04:00]
+service=ssh
+event=alert
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790204348931189890
+payload="⚠️ ¡ALERTA BASH BOMB! Intento de destrucción en SSH"
+---
+[ATTACK 2026-09-23T18:59:12.263002702-04:00]
+service=http
+event=connection
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790204352262984591
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en HTTP :8081"
+---
+[ATTACK 2026-09-23T18:59:12.463918088-04:00]
+service=http
+event=command
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790204352262984591
+payload="POST /login password=' OR '1'='1 (Intento 1/3)"
+---
+[ATTACK 2026-09-23T18:59:12.4640716-04:00]
+service=http
+event=command
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790204352262984591
+payload="POST /login password=' OR '1'='1 (Intento 2/3)"
+---
+[ATTACK 2026-09-23T18:59:12.464186185-04:00]
+service=http
+event=command
+ip=192.0.2.105
+mac=08:00:27:0B:A9:11
+session_id=192.0.2.105-1790204352262984591
+payload="POST /login password=' OR '1'='1 (Intento 3/3 - BANEO)"
+---

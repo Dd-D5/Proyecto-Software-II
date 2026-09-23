@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 export default function NetworkFingerprintCard({
   mac = '00:00:00:00:00:00',
-  sessionId = ''
+  sessionId = '',
+  attackerGeo = 'Red Local / LAN (Prueba Interna)'
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -15,55 +16,60 @@ export default function NetworkFingerprintCard({
   };
 
   return (
-    <section className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 shadow-sm flex flex-col gap-1.5 select-none">
+    <section className="bg-white border-2 border-black p-3.5 shadow-[4px_4px_0px_0px_#000] flex flex-col gap-2 select-none">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b-2 border-black pb-2">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-secondary text-[16px]">memory_alt</span>
-          <h2 className="font-title-md text-[13px] text-on-surface font-semibold">
-            Huella de Red L2/L3 · NIC &amp; MAC Atacante
+          <span className="material-symbols-outlined text-black text-[18px]">memory_alt</span>
+          <h2 className="font-black text-xs text-black uppercase tracking-wider">
+            Huella L2/L3 · MAC & Geolocalización
           </h2>
         </div>
-        <span className="font-label-caps text-[9px] bg-secondary-container/20 text-secondary border border-secondary/30 px-2 py-0.5 rounded uppercase font-bold">
-          ARP SNOOP OK
+        <span className="bg-[#A7F3D0] text-black border border-black px-2 py-0.5 text-[9px] font-black uppercase">
+          ARP OK
         </span>
       </div>
 
-      {/* MAC Address Content Card */}
-      <div className="bg-surface-container-lowest border border-[#1e2330] p-2 rounded-xl flex flex-col gap-1 shadow-inner">
+      {/* Tarjeta de Contenido MAC & Geo */}
+      <div className="bg-[#FAF7F2] border-2 border-black p-2.5 flex flex-col gap-2 shadow-[2px_2px_0px_0px_#000]">
         <div className="flex items-center justify-between">
-          <span className="font-label-caps text-[9px] text-outline uppercase tracking-wider">
-            DIRECCIÓN FÍSICA ETHERNET (MAC)
+          <span className="font-black text-[9px] text-black uppercase tracking-wider">
+            DIRECCIÓN MAC ETHERNET
           </span>
-          <span className="font-mono-sm text-[11px] text-primary font-semibold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-            VERIFICADA (NO SPOOF)
+          <span className="font-mono text-[10px] text-black font-black bg-[#FEF08A] px-1.5 py-0.5 border border-black">
+            VERIFICADA
           </span>
         </div>
 
         <div className="flex items-center justify-between my-0.5">
-          <div className="font-mono-lg text-[15px] text-primary font-bold tracking-widest bg-surface-container px-2 py-0.5 rounded-lg border border-primary/20">
+          <div className="font-mono text-sm font-black text-black bg-white px-2 py-1 border border-black shadow-[2px_2px_0px_0px_#000]">
             {mac}
           </div>
           <button
             onClick={handleCopy}
-            className="bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface p-1 rounded-lg transition-colors flex items-center border border-outline-variant/30"
-            title={copied ? '¡Copiado!' : 'Copiar MAC al portapapeles'}
+            className="bg-[#BAE6FD] hover:bg-[#7DD3FC] text-black font-bold p-1.5 border border-black shadow-[2px_2px_0px_0px_#000] active:translate-x-[1px] cursor-pointer"
+            title={copied ? '¡Copiado!' : 'Copiar MAC'}
           >
-            <span className="material-symbols-outlined text-[15px]">
+            <span className="material-symbols-outlined text-[16px]">
               {copied ? 'check' : 'content_copy'}
             </span>
           </button>
         </div>
 
-        <div className="flex items-center justify-between border-t border-[#1e2330] pt-1.5">
-          <span className="font-label-caps text-[9px] text-outline uppercase tracking-wider">
-            ID DE SESIÓN
+        <div className="flex items-center justify-between border-t border-black pt-1.5">
+          <span className="font-black text-[9px] text-black uppercase">
+            UBICACIÓN GEO:
           </span>
-          <span
-            className="font-mono-sm text-[10px] text-secondary max-w-[62%] truncate"
-            title={sessionId || 'Esperando una sesión SSH'}
-          >
+          <span className="font-mono text-[10px] font-bold text-black max-w-[65%] truncate bg-[#FEF08A] px-1.5 border border-black" title={attackerGeo}>
+            📍 {attackerGeo}
+          </span>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-black pt-1.5">
+          <span className="font-black text-[9px] text-black uppercase">
+            ID DE SESIÓN:
+          </span>
+          <span className="font-mono text-[10px] font-bold text-black max-w-[65%] truncate bg-white px-1.5 border border-black">
             {sessionId || 'Esperando conexión'}
           </span>
         </div>

@@ -11,7 +11,9 @@ export default function LiveTerminalView({
   wsUrl,
   attackerIp,
   attackerMac,
+  attackerGeo,
   sessionId,
+  systemStats,
   keystrokes,
   isPaused,
   breachByService,
@@ -21,7 +23,7 @@ export default function LiveTerminalView({
 }) {
   return (
     <div className="flex flex-col gap-3 pb-4">
-      {/* 1. Subheader and Trap Selector */}
+      {/* 1. Selector de Trampas / Honeypot activo */}
       <TrapSelector
         activeService={activeService}
         onSelectService={onSelectService}
@@ -29,16 +31,18 @@ export default function LiveTerminalView({
         breachByService={breachByService}
       />
 
-      {/* 2. Top 5 KPI Metrics Cards Row */}
+      {/* 2. Fila de Tarjetas de Métricas KPI Dinámicas */}
       <MetricsRow
         attackerIp={attackerIp}
+        attackerGeo={attackerGeo}
+        systemStats={systemStats}
         totalKeystrokes={keystrokeCountByService ? keystrokeCountByService[activeService] : 0}
       />
 
-      {/* 3. Main Center Split (7 cols left Terminal, 5 cols right Fingerprint + Keystrokes) */}
-      <div className="grid grid-cols-12 gap-3 min-h-[600px]">
-        {/* Left: Terminal Console Frame (7 cols) */}
-        <div className="col-span-7 flex flex-col h-[600px]">
+      {/* 3. Panel Central: Terminal e Inspección */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-[600px]">
+        {/* Izquierda: Marco de la Consola Terminal (7 cols) */}
+        <div className="lg:col-span-7 flex flex-col h-[600px]">
           <TerminalFrame
             activeService={activeService}
             breached={breachByService ? breachByService[activeService] : false}
@@ -48,9 +52,9 @@ export default function LiveTerminalView({
           />
         </div>
 
-        {/* Right: Network Fingerprint + Keystroke Inspector (5 cols) */}
-        <div className="col-span-5 flex flex-col gap-3 h-[600px]">
-          <NetworkFingerprintCard mac={attackerMac} sessionId={sessionId} />
+        {/* Derecha: Huella L2/L3 + Inspector de Teclado (5 cols) */}
+        <div className="lg:col-span-5 flex flex-col gap-3 h-[600px]">
+          <NetworkFingerprintCard mac={attackerMac} sessionId={sessionId} attackerGeo={attackerGeo} />
           <KeystrokeInspector keystrokes={keystrokes} />
         </div>
       </div>

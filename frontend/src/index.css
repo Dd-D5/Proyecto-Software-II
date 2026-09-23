@@ -8,8 +8,8 @@
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #0f131c;
-    color: #dfe2ef;
+    background-color: #FAF7F2;
+    color: #000000;
     overscroll-behavior-y: auto;
     font-family: 'Inter', sans-serif;
   }
@@ -21,20 +21,21 @@
     margin-bottom: 0 !important;
   }
 
-  /* Custom tactical scrollbar */
+  /* Scrollbar Neobrutalista */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a0e17;
+    background: #FAF7F2;
+    border-left: 2px solid #000000;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e2330;
-    border-radius: 3px;
+    background: #FEF08A;
+    border: 2px solid #000000;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #31353f;
+    background: #A7F3D0;
   }
 }
 
