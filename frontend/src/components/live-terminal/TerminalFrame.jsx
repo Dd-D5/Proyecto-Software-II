@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
+import { normalizeIPv4 } from '../../hooks/useWebSocket';
 
 // Desnormalización: el backend (normalizeInput) envía <BACKSPACE> etc. como texto legible.
 // El inspector de teclas conserva la versión normalizada; solo la terminal recibe secuencias reales.
@@ -14,6 +15,54 @@ const DENORMALIZE = {
 };
 
 const SERVICE_PORTS = { ssh: 2222, ftp: 2121, http: 8080 };
+
+// Tema xterm dual — light.html: bg #faf8f5, texto #1c1917, prompt verde #047857.
+// xterm no transiciona por CSS (tema JS): cambia de golpe al togglear.
+const TERM_THEME_DARK = {
+  background: '#121212',
+  foreground: '#ededed',
+  cursor: '#3ecf8e',
+  selectionBackground: 'rgba(62, 207, 142, 0.3)',
+  black: '#171717',
+  red: '#ff5f56',
+  green: '#3ecf8e',
+  yellow: '#ffdb13',
+  blue: '#a1a1a1',
+  magenta: '#ffbd2e',
+  cyan: '#4ade80',
+  white: '#ededed',
+  brightBlack: '#8e8e8e',
+  brightRed: '#ff2201',
+  brightGreen: '#4ade80',
+  brightYellow: '#ffdb13',
+  brightBlue: '#ededed',
+  brightMagenta: '#ffbd2e',
+  brightCyan: '#71fcb6',
+  brightWhite: '#ffffff'
+};
+
+const TERM_THEME_LIGHT = {
+  background: '#faf8f5',
+  foreground: '#1c1917',
+  cursor: '#047857',
+  selectionBackground: 'rgba(4, 120, 87, 0.3)',
+  black: '#1c1917',
+  red: '#dc2626',
+  green: '#047857',
+  yellow: '#ca8a04',
+  blue: '#57534e',
+  magenta: '#9333ea',
+  cyan: '#0e7490',
+  white: '#faf8f5',
+  brightBlack: '#78716c',
+  brightRed: '#b91c1c',
+  brightGreen: '#059669',
+  brightYellow: '#a16207',
+  brightBlue: '#44403c',
+  brightMagenta: '#7e22ce',
+  brightCyan: '#155e75',
+  brightWhite: '#ffffff'
+};
 
 export default function TerminalFrame({ activeService, breached = false, registerTerminalListener, isPaused, onTogglePause }) {
   const terminalRef = useRef(null);
@@ -40,28 +89,7 @@ export default function TerminalFrame({ activeService, breached = false, registe
       fontSize: 11,
       lineHeight: 1.3,
       letterSpacing: 0,
-      theme: {
-        background: '#121212',
-        foreground: '#ededed',
-        cursor: '#3ecf8e',
-        selectionBackground: 'rgba(62, 207, 142, 0.3)',
-        black: '#171717',
-        red: '#ff5f56',
-        green: '#3ecf8e',
-        yellow: '#ffdb13',
-        blue: '#a1a1a1',
-        magenta: '#ffbd2e',
-        cyan: '#4ade80',
-        white: '#ededed',
-        brightBlack: '#8e8e8e',
-        brightRed: '#ff2201',
-        brightGreen: '#4ade80',
-        brightYellow: '#ffdb13',
-        brightBlue: '#ededed',
-        brightMagenta: '#ffbd2e',
-        brightCyan: '#71fcb6',
-        brightWhite: '#ffffff'
-      },
+      theme: document.documentElement.classList.contains('light') ? TERM_THEME_LIGHT : TERM_THEME_DARK,
       scrollback: 10000,
       convertEol: true
     });
@@ -70,6 +98,15 @@ export default function TerminalFrame({ activeService, breached = false, registe
     term.loadAddon(fitAddon);
 
     term.open(terminalRef.current);
+
+    // Aplicar tema xterm cuando el Sidebar togglea el modo claro
+    const applyTermTheme = () => {
+      if (termInstanceRef.current) {
+        termInstanceRef.current.options.theme =
+          document.documentElement.classList.contains('light') ? TERM_THEME_LIGHT : TERM_THEME_DARK;
+      }
+    };
+    window.addEventListener('aegistrap:theme', applyTermTheme);
 
     // Intentar WebGL addon de forma segura
     try {
@@ -118,7 +155,7 @@ export default function TerminalFrame({ activeService, breached = false, registe
         } else if (msg.type === 'connection') {
           lastMsgTypeRef.current = 'connection';
           termInstanceRef.current.writeln(
-            `\x1b[31m[INTRUSION DETECTADA]: ${msg.service || 'ssh'} - ${msg.ip || 'IP desconocida'} (MAC: ${msg.mac || 'n/a'})\x1b[0m`
+            `\x1b[31m[INTRUSION DETECTADA]: ${msg.service || 'ssh'} - ${normalizeIPv4(msg.ip) || 'IP desconocida'} (MAC: ${msg.mac || 'n/a'})\x1b[0m`
           );
         } else if (msg.type === 'output' && msg.payload) {
           lastMsgTypeRef.current = 'output';
@@ -138,6 +175,7 @@ export default function TerminalFrame({ activeService, breached = false, registe
       clearTimeout(fitTimer);
       unregister();
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('aegistrap:theme', applyTermTheme);
       term.dispose();
     };
   }, [registerTerminalListener]);
@@ -167,7 +205,7 @@ export default function TerminalFrame({ activeService, breached = false, registe
             <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
             <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
           </div>
-          <div className="flex items-center gap-2 text-white/70">
+          <div className="flex items-center gap-2 text-on-surface-variant">
             <span className="material-symbols-outlined text-[16px]">terminal</span>
             <span className="font-label-code text-label-code text-on-surface">
               Sesión {activeService.toUpperCase()} Interceptada en Tiempo Real (Puerto {SERVICE_PORTS[activeService] || 2222})

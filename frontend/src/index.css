@@ -4,12 +4,126 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Tokens en variables CSS "R G B" (Tailwind los consume via
+ * rgb(var(--c-*) / <alpha-value>)). :root = modo oscuro (idéntico al hex
+ * previo); html.light = paleta cálida de light.html.
+ */
+:root {
+  --c-surface: 19 19 19;
+  --c-surface-dim: 19 19 19;
+  --c-surface-bright: 40 40 40;
+  --c-surface-container-lowest: 18 18 18;
+  --c-surface-container-low: 28 28 28;
+  --c-surface-container: 32 32 32;
+  --c-surface-container-high: 36 36 36;
+  --c-surface-container-highest: 51 51 51;
+  --c-surface-variant: 51 51 51;
+  --c-on-surface: 237 237 237;
+  --c-on-surface-variant: 142 142 142;
+  --c-inverse-surface: 237 237 237;
+  --c-inverse-on-surface: 23 23 23;
+  --c-outline: 142 142 142;
+  --c-outline-variant: 51 51 51;
+  --c-surface-tint: 62 207 142;
+  --c-primary: 62 207 142;
+  --c-on-primary: 23 23 23;
+  --c-primary-container: 74 222 128;
+  --c-on-primary-container: 23 23 23;
+  --c-inverse-primary: 36 180 126;
+  --c-secondary: 161 161 161;
+  --c-on-secondary: 23 23 23;
+  --c-secondary-container: 71 71 70;
+  --c-on-secondary-container: 161 161 161;
+  --c-tertiary: 255 219 19;
+  --c-on-tertiary: 23 23 23;
+  --c-tertiary-container: 255 219 19;
+  --c-on-tertiary-container: 23 23 23;
+  --c-error: 255 95 86;
+  --c-on-error: 23 23 23;
+  --c-error-container: 255 34 1;
+  --c-on-error-container: 237 237 237;
+  --c-primary-fixed: 74 222 128;
+  --c-primary-fixed-dim: 62 207 142;
+  --c-on-primary-fixed: 23 23 23;
+  --c-on-primary-fixed-variant: 23 23 23;
+  --c-secondary-fixed: 237 237 237;
+  --c-secondary-fixed-dim: 161 161 161;
+  --c-on-secondary-fixed: 23 23 23;
+  --c-on-secondary-fixed-variant: 71 71 70;
+  --c-tertiary-fixed: 255 219 19;
+  --c-tertiary-fixed-dim: 255 219 19;
+  --c-on-tertiary-fixed: 23 23 23;
+  --c-on-tertiary-fixed-variant: 23 23 23;
+  --c-background: 19 19 19;
+  --c-on-background: 237 237 237;
+  --c-hairline: 46 46 46;
+  --c-hairline-strong: 56 56 56;
+  --c-ink: 23 23 23;
+  --c-edge-soft: 40 40 40;
+}
+
+/* Modo claro — paleta warm-stone extraída de light.html */
+html.light {
+  --c-surface: 245 242 235;
+  --c-surface-dim: 245 242 235;
+  --c-surface-bright: 234 230 220;
+  --c-surface-container-lowest: 250 248 245;
+  --c-surface-container-low: 239 236 228;
+  --c-surface-container: 247 245 239;
+  --c-surface-container-high: 226 222 212;
+  --c-surface-container-highest: 211 206 191;
+  --c-surface-variant: 211 206 191;
+  --c-on-surface: 28 25 23;
+  --c-on-surface-variant: 87 83 78;
+  --c-inverse-surface: 28 25 23;
+  --c-inverse-on-surface: 252 251 249;
+  --c-outline: 120 113 108;
+  --c-outline-variant: 211 206 191;
+  --c-surface-tint: 5 150 105;
+  --c-primary: 5 150 105;
+  --c-on-primary: 252 251 249;
+  --c-primary-container: 5 150 105;
+  --c-on-primary-container: 252 251 249;
+  --c-inverse-primary: 4 120 87;
+  --c-secondary: 87 83 78;
+  --c-on-secondary: 252 251 249;
+  --c-secondary-container: 71 71 70;
+  --c-on-secondary-container: 87 83 78;
+  --c-tertiary: 202 138 4;
+  --c-on-tertiary: 252 251 249;
+  --c-tertiary-container: 202 138 4;
+  --c-on-tertiary-container: 252 251 249;
+  --c-error: 220 38 38;
+  --c-on-error: 252 251 249;
+  --c-error-container: 254 202 202;
+  --c-on-error-container: 153 27 27;
+  --c-primary-fixed: 62 207 142;
+  --c-primary-fixed-dim: 5 150 105;
+  --c-on-primary-fixed: 23 23 23;
+  --c-on-primary-fixed-variant: 23 23 23;
+  --c-secondary-fixed: 28 25 23;
+  --c-secondary-fixed-dim: 87 83 78;
+  --c-on-secondary-fixed: 252 251 249;
+  --c-on-secondary-fixed-variant: 211 206 191;
+  --c-tertiary-fixed: 202 138 4;
+  --c-tertiary-fixed-dim: 202 138 4;
+  --c-on-tertiary-fixed: 252 251 249;
+  --c-on-tertiary-fixed-variant: 252 251 249;
+  --c-background: 245 242 235;
+  --c-on-background: 28 25 23;
+  --c-hairline: 222 217 206;
+  --c-hairline-strong: 211 206 191;
+  --c-ink: 245 242 235;
+  --c-edge-soft: 231 227 216;
+}
+
 @layer base {
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #131313;
-    color: #ededed;
+    background-color: rgb(var(--c-background));
+    color: rgb(var(--c-on-surface));
     overscroll-behavior-y: auto;
     font-family: 'Inter', sans-serif;
   }
@@ -37,6 +151,21 @@
   }
   .keystroke-scroll::-webkit-scrollbar-thumb:hover {
     background: #383838;
+  }
+}
+
+/*
+ * Transición suave de tema: la clase la agrega el toggle SOLO durante el
+ * switch (350ms) para no ralentizar los hovers permanentemente.
+ * ponytail: xterm cambia de golpe (tema JS, no CSS) — ceiling aceptado.
+ */
+html.theme-transition * {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, fill 0.3s ease, stroke 0.3s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition * {
+    transition: none !important;
   }
 }
 

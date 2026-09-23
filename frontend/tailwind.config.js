@@ -1,12 +1,35 @@
 /**
- * Tokens remapeados a la paleta Supabase-dark de code.html (y DESIGN.md alpha).
- * Se conservan los nombres de clave M3 para re-skinnear TopBar/Sidebar/Admin sin
- * tocar esos archivos, más los nuevos `ink`/`edge-soft` que el marcado necesita.
+ * Tokens como variables CSS (modo claro/oscuro). Mismos nombres de clave → cero
+ * cambios en componentes. Valores dark en index.css (:root) y light en html.light.
+ * El modo oscuro es pixel-idéntico al hex anterior: :root replica exactamente
+ * los valores previos en formato "R G B".
  *
- * ponytail: hex fijos (no variables CSS). El stash del modo claro espera
- * rgb(var(--c-*)); al re-aplicarlo habrá conflicto y se reconcilia a mano.
- * Upgrade path: migrar colors a `rgb(var(--c-*) / <alpha-value>)` + :root/html.light.
+ * ponytail: tokens de doble rol resueltos por compromiso en light — primary y
+ * primary-container colapsan a #059669 (texto verde legible Y fills/barras);
+ * error a #dc2626 (texto de amenaza y bg de badge); ink cubre TopBar/barras
+ * terminal/tabla con UN valor (#f5f2eb) donde light.html usa 3. Upgrade path:
+ * tokens dedicados (ej. --c-green-text) si la fidelidad a light.html exige.
  */
+const COLOR_TOKENS = [
+  'surface', 'surface-dim', 'surface-bright',
+  'surface-container-lowest', 'surface-container-low', 'surface-container',
+  'surface-container-high', 'surface-container-highest', 'surface-variant',
+  'on-surface', 'on-surface-variant', 'inverse-surface', 'inverse-on-surface',
+  'outline', 'outline-variant', 'surface-tint',
+  'primary', 'on-primary', 'primary-container', 'on-primary-container', 'inverse-primary',
+  'secondary', 'on-secondary', 'secondary-container', 'on-secondary-container',
+  'tertiary', 'on-tertiary', 'tertiary-container', 'on-tertiary-container',
+  'error', 'on-error', 'error-container', 'on-error-container',
+  'primary-fixed', 'primary-fixed-dim', 'on-primary-fixed', 'on-primary-fixed-variant',
+  'secondary-fixed', 'secondary-fixed-dim', 'on-secondary-fixed', 'on-secondary-fixed-variant',
+  'tertiary-fixed', 'tertiary-fixed-dim', 'on-tertiary-fixed', 'on-tertiary-fixed-variant',
+  'background', 'on-background', 'hairline', 'hairline-strong', 'ink', 'edge-soft'
+];
+
+const colors = Object.fromEntries(
+  COLOR_TOKENS.map((t) => [t, `rgb(var(--c-${t}) / <alpha-value>)`])
+);
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
@@ -16,59 +39,7 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        'surface': '#131313',
-        'surface-dim': '#131313',
-        'surface-bright': '#282828',
-        'surface-container-lowest': '#121212',
-        'surface-container-low': '#1c1c1c',
-        'surface-container': '#202020',
-        'surface-container-high': '#242424',
-        'surface-container-highest': '#333333',
-        'surface-variant': '#333333',
-        'on-surface': '#ededed',
-        'on-surface-variant': '#8e8e8e',
-        'inverse-surface': '#ededed',
-        'inverse-on-surface': '#171717',
-        'outline': '#8e8e8e',
-        'outline-variant': '#333333',
-        'surface-tint': '#3ecf8e',
-        'primary': '#3ecf8e',
-        'on-primary': '#171717',
-        'primary-container': '#4ade80',
-        'on-primary-container': '#171717',
-        'inverse-primary': '#24b47e',
-        'secondary': '#a1a1a1',
-        'on-secondary': '#171717',
-        'secondary-container': '#474746',
-        'on-secondary-container': '#a1a1a1',
-        'tertiary': '#ffdb13',
-        'on-tertiary': '#171717',
-        'tertiary-container': '#ffdb13',
-        'on-tertiary-container': '#171717',
-        'error': '#ff5f56',
-        'on-error': '#171717',
-        'error-container': '#ff2201',
-        'on-error-container': '#ededed',
-        'primary-fixed': '#4ade80',
-        'primary-fixed-dim': '#3ecf8e',
-        'on-primary-fixed': '#171717',
-        'on-primary-fixed-variant': '#171717',
-        'secondary-fixed': '#ededed',
-        'secondary-fixed-dim': '#a1a1a1',
-        'on-secondary-fixed': '#171717',
-        'on-secondary-fixed-variant': '#474746',
-        'tertiary-fixed': '#ffdb13',
-        'tertiary-fixed-dim': '#ffdb13',
-        'on-tertiary-fixed': '#171717',
-        'on-tertiary-fixed-variant': '#171717',
-        'background': '#131313',
-        'on-background': '#ededed',
-        'hairline': '#2e2e2e',
-        'hairline-strong': '#383838',
-        'ink': '#171717',
-        'edge-soft': '#282828',
-      },
+      colors,
       borderRadius: {
         'DEFAULT': '0.25rem',
         'sm': '0.25rem',

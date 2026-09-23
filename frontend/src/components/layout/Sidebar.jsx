@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Sidebar({ activeTab, onSelectTab }) {
+  const [theme, setTheme] = useState(() =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('light') ? 'light' : 'dark'
+  );
+
+  // Toggle: classList + persistencia + transición scoped + evento para xterm
+  // (sin prop drilling: Sidebar y TerminalFrame son lejanos en el árbol)
+  const toggleTheme = () => {
+    const isLight = document.documentElement.classList.toggle('light');
+    document.documentElement.classList.add('theme-transition');
+    setTimeout(() => document.documentElement.classList.remove('theme-transition'), 350);
+    try {
+      localStorage.setItem('aegistrap:theme', isLight ? 'light' : 'dark');
+    } catch {}
+    setTheme(isLight ? 'light' : 'dark');
+    window.dispatchEvent(new CustomEvent('aegistrap:theme', { detail: isLight ? 'light' : 'dark' }));
+  };
+
   return (
     <aside className="fixed left-0 top-0 w-16 bg-ink border-r border-edge-soft z-50 flex flex-col items-center justify-between py-4 select-none h-full">
       {/* Top: Logo & Main Navigation */}
@@ -68,8 +85,19 @@ export default function Sidebar({ activeTab, onSelectTab }) {
         </nav>
       </div>
 
-      {/* Bottom: Settings & Daemon Status Indicator */}
+      {/* Bottom: Theme Toggle, Settings & Daemon Status Indicator */}
       <div className="flex flex-col items-center gap-3">
+        {/* Toggle Modo Claro / Oscuro */}
+        <button
+          onClick={toggleTheme}
+          className="w-10 h-10 rounded-xl text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"
+          title={theme === 'dark' ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
+        >
+          <span className="material-symbols-outlined text-[20px]">
+            {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+          </span>
+        </button>
+
         <button
           className="w-10 h-10 rounded-xl text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"
           title="Configuración de Daemon & Sandboxes"

@@ -21,22 +21,6 @@ const findLastValue = (buckets, field) => {
   return '';
 };
 
-// Deriva breach por servicio del histórico: el último evento connection/connection_end
-// por servicio decide el estado. Más preciso que el objeto breach persistido (que
-// no captura cierres ocurridos mientras la página estaba cerrada).
-const deriveBreach = (history) => {
-  const svcs = ['ssh', 'ftp', 'http'];
-  return Object.fromEntries(svcs.map((svc) => {
-    const bucket = history?.[svc] || [];
-    for (let i = bucket.length - 1; i >= 0; i--) {
-      const t = bucket[i].type;
-      if (t === 'connection') return [svc, true];
-      if (t === 'connection_end') return [svc, false];
-    }
-    return [svc, false];
-  }));
-};
-
 // ponytail: WSL2 localhost-forwarding entrega ::1 como IP fuente; mapeo puntual,
 // no parser IPv6 completo. Upgrade path: normalizar en backend si IPv6 LAN fuese real.
 export const normalizeIPv4 = (ip) =>
@@ -82,7 +66,11 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
   const historyRef = useRef(persisted?.history || { ssh: [], ftp: [], http: [] });
   const countRef = useRef(persisted?.counters || { ssh: 0, ftp: 0, http: 0 });
-  const breachRef = useRef(deriveBreach(persisted?.history));
+  // breach en vivo — NO se restaura del histórico. Recargar con un
+  // atacante aún conectado no re-enciende el rojo (el backend no re-emite 'connection'
+  // de una sesión ya establecida). Upgrade path: snapshot de sesiones activas al
+  // conectarse el WS si ese falso negativo llega a molestar.
+  const breachRef = useRef({ ssh: false, ftp: false, http: false });
 
   const [status, setStatus] = useState(wsClient.status);
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
@@ -126,20 +114,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const registerTerminalListener = useCallback((cb) => {
     terminalListenersRef.current.add(cb);
     return () => terminalListenersRef.current.delete(cb);
-  }, []);
-
-  // Si al montar el breach HTTP está restaurado como activo, arrancar timer de inactividad.
-  // Cuando el atacante se fue con la página cerrada, esto apaga el rojo zombie en 10s.
-  useEffect(() => {
-    if (breachRef.current.http) {
-      httpBreachTimerRef.current = setTimeout(() => {
-        breachRef.current = { ...breachRef.current, http: false };
-        setBreachByService({ ...breachRef.current });
-        saveNow();
-      }, 10000);
-    }
-    return () => clearTimeout(httpBreachTimerRef.current);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Replay historical messages and recompute keystrokes when activeService changes
