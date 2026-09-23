@@ -3,6 +3,7 @@ export const EventType = {
   COMMAND: 'command',
   ALERT: 'alert',
   CONNECTION: 'connection',
+  CONNECTION_END: 'connection_end',
   OUTPUT: 'output'
 };
 

@@ -21,6 +21,22 @@ const findLastValue = (buckets, field) => {
   return '';
 };
 
+// Deriva breach por servicio del histórico: el último evento connection/connection_end
+// por servicio decide el estado. Más preciso que el objeto breach persistido (que
+// no captura cierres ocurridos mientras la página estaba cerrada).
+const deriveBreach = (history) => {
+  const svcs = ['ssh', 'ftp', 'http'];
+  return Object.fromEntries(svcs.map((svc) => {
+    const bucket = history?.[svc] || [];
+    for (let i = bucket.length - 1; i >= 0; i--) {
+      const t = bucket[i].type;
+      if (t === 'connection') return [svc, true];
+      if (t === 'connection_end') return [svc, false];
+    }
+    return [svc, false];
+  }));
+};
+
 // Mock inicial idéntico a code.html
 const INITIAL_KEYSTROKES = [];
 
@@ -54,7 +70,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
   const historyRef = useRef(persisted?.history || { ssh: [], ftp: [], http: [] });
   const countRef = useRef(persisted?.counters || { ssh: 0, ftp: 0, http: 0 });
-  const breachRef = useRef(persisted?.breach || { ssh: false, ftp: false, http: false });
+  const breachRef = useRef(deriveBreach(persisted?.history));
 
   const [status, setStatus] = useState(wsClient.status);
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
@@ -68,6 +84,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [keystrokeCountByService, setKeystrokeCountByService] = useState(countRef.current);
   const lastKeystrokeTimeRef = useRef(Date.now());
   const saveTimerRef = useRef(null);
+  // ponytail: timer booleano por servicio; si pausa activa, mensajes no llegan y timer puede
+  // apagar breach HTTP aunque el atacante siga — techo aceptado. Upgrade: pausar el timer también.
+  const httpBreachTimerRef = useRef(null);
 
   // ponytail: throttle 2s + flush en pagehide; crash pierde <2s de eventos.
   // Upgrade path: IndexedDB + flush sincrónico si la durabilidad requiere cero pérdida.
@@ -75,8 +94,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         history: historyRef.current,
-        counters: countRef.current,
-        breach: breachRef.current
+        counters: countRef.current
       }));
     } catch {}
   }, []);
@@ -95,6 +113,20 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const registerTerminalListener = useCallback((cb) => {
     terminalListenersRef.current.add(cb);
     return () => terminalListenersRef.current.delete(cb);
+  }, []);
+
+  // Si al montar el breach HTTP está restaurado como activo, arrancar timer de inactividad.
+  // Cuando el atacante se fue con la página cerrada, esto apaga el rojo zombie en 10s.
+  useEffect(() => {
+    if (breachRef.current.http) {
+      httpBreachTimerRef.current = setTimeout(() => {
+        breachRef.current = { ...breachRef.current, http: false };
+        setBreachByService({ ...breachRef.current });
+        saveNow();
+      }, 10000);
+    }
+    return () => clearTimeout(httpBreachTimerRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Replay historical messages and recompute keystrokes when activeService changes
@@ -150,6 +182,23 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       if (msg.type === 'connection') {
         breachRef.current = { ...breachRef.current, [svc]: true };
         setBreachByService(breachRef.current);
+      }
+
+      // Apagar breach cuando el atacante cierra la sesión (SSH/FTP envían connection_end)
+      if (msg.type === EventType.CONNECTION_END) {
+        breachRef.current = { ...breachRef.current, [svc]: false };
+        setBreachByService({ ...breachRef.current });
+        scheduleSave();
+      }
+
+      // Timer de inactividad 10s solo para HTTP (no tiene señal de desconexión real)
+      if (svc === ServiceType.HTTP) {
+        clearTimeout(httpBreachTimerRef.current);
+        httpBreachTimerRef.current = setTimeout(() => {
+          breachRef.current = { ...breachRef.current, http: false };
+          setBreachByService({ ...breachRef.current });
+          saveNow();
+        }, 10000);
       }
 
       // Contador general de pulsaciones por servicio (antes del filtro: cuenta todas las trampas)

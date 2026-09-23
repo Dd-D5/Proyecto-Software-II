@@ -84,6 +84,7 @@ Cada interacción del atacante con cualquier trampa emitirá un objeto JSON esta
 * `"command"`: Línea de comando completada (ej. `GET /admin` en HTTP, o `whoami` en SSH). Ideal para tablas de registro e historiales.
 * `"alert"`: El atacante ejecutó un comando de alto nivel de privilegios (ej. `rm`, `sudo`, `wget`). Ideal para disparar notificaciones rojas (Toasts) en la UI.
 * `"connection"`: Notifica que un nuevo intruso estableció un handshake con una de las trampas.
+* `"connection_end"`: Notifica que el intruso cerró la sesión (SSH/FTP). El Frontend debe apagar el indicador de intrusión para ese servicio.
 
 
 

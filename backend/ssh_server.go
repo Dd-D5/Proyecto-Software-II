@@ -217,6 +217,8 @@ func recordCommandEvent(sessionID, ip, mac, service, cmd string) {
 
 func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 	defer channel.Close()
+	// breach booleano por servicio
+	defer emitTelemetry("ssh", "connection_end", "El intruso cerró la terminal", ip, mac, sessionID)
 
 	prompt := "root@ubuntu:~# "
 	channel.Write([]byte(prompt))

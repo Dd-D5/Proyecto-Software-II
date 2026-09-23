@@ -27,7 +27,13 @@ func handleFTPConnection(conn net.Conn) {
 	defer conn.Close()
 	ip, _, _ := net.SplitHostPort(conn.RemoteAddr().String())
 	mac := getMACAddress(ip)
-	
+	// ponytail: breach booleano por servicio; sesión concurrente que cierra apaga el indicador.
+	// Upgrade path: contador de sesiones activas.
+	defer func() {
+		broadcast <- TelemetryMessage{Service: "ftp", Type: "connection_end",
+			Payload: "El intruso cerró la conexión FTP", IP: ip, MAC: mac}
+	}()
+
 	log.Printf("🚨 [FTP] Intrusión detectada - IP: %s | MAC: %s", ip, mac)
 	broadcast <- TelemetryMessage{
 		Service: "ftp",
