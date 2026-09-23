@@ -37,6 +37,18 @@ const deriveBreach = (history) => {
   }));
 };
 
+// ponytail: WSL2 localhost-forwarding entrega ::1 como IP fuente; mapeo puntual,
+// no parser IPv6 completo. Upgrade path: normalizar en backend si IPv6 LAN fuese real.
+export const normalizeIPv4 = (ip) =>
+  !ip ? ip : ip === '::1' ? '127.0.0.1' : ip.startsWith('::ffff:') ? ip.slice(7) : ip;
+
+// ponytail: session_id se acuña en el backend (newSessionID) desde el IP crudo:
+// ::1 → "__1-<ts>". Reemplazo del prefijo, acoplado a ese formato. Solo coincide al
+// inicio para no corromper un IPv6 real embebido. Upgrade path: normalizar el IP
+// en el backend antes de acuñar el ID.
+export const normalizeSessionId = (sid) =>
+  sid && sid.startsWith('__1-') ? `127.0.0.1${sid.slice(3)}` : sid;
+
 // Mock inicial idéntico a code.html
 const INITIAL_KEYSTROKES = [];
 
@@ -74,9 +86,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
   const [status, setStatus] = useState(wsClient.status);
   const [wsUrl, setWsUrl] = useState(getWebSocketUrl());
-  const [attackerIp, setAttackerIp] = useState(() => findLastValue(persisted?.history, 'ip') || '0.0.0.0');
+  const [attackerIp, setAttackerIp] = useState(() => normalizeIPv4(findLastValue(persisted?.history, 'ip')) || '0.0.0.0');
   const [attackerMac, setAttackerMac] = useState(() => findLastValue(persisted?.history, 'mac') || '00:00:00:00:00:00');
-  const [sessionId, setSessionId] = useState(() => findLastValue(persisted?.history, 'session_id') || '');
+  const [sessionId, setSessionId] = useState(() => normalizeSessionId(findLastValue(persisted?.history, 'session_id')) || '');
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
   const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -217,13 +229,13 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       setLastMessage(stampedMsg);
 
       if (msg.ip) {
-        setAttackerIp(msg.ip);
+        setAttackerIp(normalizeIPv4(msg.ip));
       }
       if (msg.mac) {
         setAttackerMac(msg.mac);
       }
       if (msg.session_id) {
-        setSessionId(msg.session_id);
+        setSessionId(normalizeSessionId(msg.session_id));
       }
 
       // Procesar eventos de pulsaciones / IO
