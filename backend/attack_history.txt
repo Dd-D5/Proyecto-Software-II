@@ -1,0 +1,464 @@
+[ATTACK 2026-09-23T09:47:22.201199701-04:00]
+service=ssh
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T09:47:58.010632229-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="l"
+---
+[ATTACK 2026-09-23T09:47:58.11015649-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="s"
+---
+[ATTACK 2026-09-23T09:47:58.719338796-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\r"
+---
+[ATTACK 2026-09-23T09:47:58.72253934-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="ls"
+---
+[ATTACK 2026-09-23T09:48:03.806279833-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="w"
+---
+[ATTACK 2026-09-23T09:48:03.913237367-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="h"
+---
+[ATTACK 2026-09-23T09:48:04.100908899-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="o"
+---
+[ATTACK 2026-09-23T09:48:04.334634534-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="a"
+---
+[ATTACK 2026-09-23T09:48:04.587078607-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="m"
+---
+[ATTACK 2026-09-23T09:48:04.756826565-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="i"
+---
+[ATTACK 2026-09-23T09:48:06.544714408-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\r"
+---
+[ATTACK 2026-09-23T09:48:06.544927333-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="whoami"
+---
+[ATTACK 2026-09-23T09:48:44.346848655-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="c"
+---
+[ATTACK 2026-09-23T09:48:44.534182871-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="d"
+---
+[ATTACK 2026-09-23T09:48:44.914478499-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\r"
+---
+[ATTACK 2026-09-23T09:48:44.915163111-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="cd"
+---
+[ATTACK 2026-09-23T09:52:24.542542954-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="ssh -vvv -p 2222 root@127.0.0.1"
+---
+[ATTACK 2026-09-23T09:52:25.4118776-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\r"
+---
+[ATTACK 2026-09-23T09:52:25.418116449-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="ssh -vvv -p 2222 root@127.0.0.1"
+---
+[ATTACK 2026-09-23T09:52:29.823340085-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\x15"
+---
+[ATTACK 2026-09-23T09:52:30.290715588-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="j"
+---
+[ATTACK 2026-09-23T09:52:31.292203395-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T09:52:33.176686972-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\n"
+---
+[ATTACK 2026-09-23T09:52:33.181823608-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\x15"
+---
+[ATTACK 2026-09-23T09:52:34.324026667-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\f"
+---
+[ATTACK 2026-09-23T09:52:35.444252605-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\f"
+---
+[ATTACK 2026-09-23T09:52:44.848210237-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171242201163671
+payload="\f"
+---
+[ATTACK 2026-09-23T09:52:55.174018048-04:00]
+service=ssh
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T09:53:25.475367602-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="c"
+---
+[ATTACK 2026-09-23T09:53:25.658580995-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="d"
+---
+[ATTACK 2026-09-23T09:53:26.91326754-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T09:53:27.263118262-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-23T09:54:09.284807536-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="ss -tulpn | grep 2222"
+---
+[ATTACK 2026-09-23T09:54:10.442379913-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="\r"
+---
+[ATTACK 2026-09-23T09:54:10.445033074-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="ss -tulpn | grep 2222"
+---
+[ATTACK 2026-09-23T09:54:17.954897325-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="\f"
+---
+[ATTACK 2026-09-23T09:54:18.976306586-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="\f"
+---
+[ATTACK 2026-09-23T09:54:19.485446599-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="\f"
+---
+[ATTACK 2026-09-23T09:54:21.803278644-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171575173997670
+payload="\f"
+---
+[ATTACK 2026-09-23T09:58:59.926794407-04:00]
+service=ssh
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T09:59:58.162469836-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="sudo rm -rf /"
+---
+[ATTACK 2026-09-23T09:59:58.998261542-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="\r"
+---
+[ATTACK 2026-09-23T09:59:58.998992049-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="sudo rm -rf /"
+---
+[ATTACK 2026-09-23T09:59:58.999620669-04:00]
+service=ssh
+event=alert
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="Intento de ejecución crítica: 'sudo rm -rf /'"
+---
+[ATTACK 2026-09-23T10:04:27.599868513-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="c"
+---
+[ATTACK 2026-09-23T10:04:27.740925276-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="d"
+---
+[ATTACK 2026-09-23T10:04:28.302292692-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="\r"
+---
+[ATTACK 2026-09-23T10:04:28.302623916-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="cd"
+---
+[ATTACK 2026-09-23T10:09:53.745521761-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="c"
+---
+[ATTACK 2026-09-23T10:09:53.891488754-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="d"
+---
+[ATTACK 2026-09-23T10:09:54.524834765-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="\r"
+---
+[ATTACK 2026-09-23T10:09:54.528566943-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790171939926597462
+payload="cd"
+---
+[ATTACK 2026-09-23T10:17:07.120191197-04:00]
+service=ssh
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790173027120167009
+payload="Nuevo intruso conectado al puerto 2222"
+---
+[ATTACK 2026-09-23T10:19:07.5017301-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790173027120167009
+payload="c"
+---
+[ATTACK 2026-09-23T10:19:07.728609656-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790173027120167009
+payload="d"
+---
+[ATTACK 2026-09-23T10:19:07.994618342-04:00]
+service=ssh
+event=io
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790173027120167009
+payload="\r"
+---
+[ATTACK 2026-09-23T10:19:07.996756332-04:00]
+service=ssh
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=127.0.0.1-1790173027120167009
+payload="cd"
+---

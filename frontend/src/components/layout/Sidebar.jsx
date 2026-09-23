@@ -44,6 +44,19 @@ export default function Sidebar({ activeTab, onSelectTab }) {
             <span className="material-symbols-outlined text-[22px]">dns</span>
           </button>
 
+          {/* Historial */}
+          <button
+            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+              activeTab === 'historial'
+                ? 'bg-[#10b981] text-[#003824] shadow-md shadow-[#10b981]/25 hover:brightness-110'
+                : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+            }`}
+            title="Historial de ataques"
+            onClick={() => onSelectTab('historial')}
+          >
+            <span className="material-symbols-outlined text-[22px]">history</span>
+          </button>
+
           {/* Radar */}
           <button
             className="w-10 h-10 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"

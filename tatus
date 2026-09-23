@@ -1,0 +1,10 @@
+[33mf0417b7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m feat(breach): resetear estado de intrusión al cerrar sesión o inactividad
+[33mb540bca[m feat(frontend): persistir telemetría en localStorage para sobrevivir recargas
+[33mfff7f5b[m feat: Impresion en terminal de las respuestas del fake Shell SSH
+[33m5cfae6e[m feat: Desnormalizacion de teclas enviadas del backend para impresion en terminal
+[33mffa233b[m feat: indicadores visuales de intrusión por servicio con eventos connection y fix minimo en la obtencion de la direccion MAC
+[33m4121d8b[m Merge branch 'main' of https://github.com/Dd-D5/Proyecto-Software-II
+[33m8b6325b[m feat: agregar session_id y documentación
+[33m1e158f7[m feat(frontend): integracion de historial de mensajes por servicio en el WebSocket
+[33m3c7a223[m feat(front/Live Terminal): Preservacion de historial de envios a terminal e inspector de pulsaciones
+[33m23bb6cc[m Feat(frontend): inicializacion de aplicacion en React. Panel de Terminal e integracion de ws

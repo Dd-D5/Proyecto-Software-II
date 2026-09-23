@@ -15,6 +15,19 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+const attackHistoryPath = "attack_history.txt"
+
+// AttackHistoryEntry registra una entrada textual del historial de ataques.
+type AttackHistoryEntry struct {
+	Timestamp time.Time
+	Service   string
+	EventType string
+	Payload   string
+	IP        string
+	MAC       string
+	SessionID string
+}
+
 // TelemetryMessage incluye metadatos del atacante y la sesión para la interfaz.
 type TelemetryMessage struct {
 	Service   string `json:"service"`
@@ -44,12 +57,6 @@ var sensitiveCommands = []string{"sudo", "su", "rm", "passwd", "chmod", "chown",
 // getMACAddress lee la tabla ARP del kernel de Linux para obtener la huella física
 func getMACAddress(ip string) string {
 	data, err := os.ReadFile("/proc/net/arp")
-
-	// Si es localhost (como en tus pruebas), la MAC no pasa por ARP
-	if ip == "127.0.0.1" || ip == "::1" {
-		return "00:00:00:00:00:00 (Localhost)"
-	}
-	
 	if err != nil {
 		return "Desconocida (Error ARP)"
 	}
@@ -59,6 +66,10 @@ func getMACAddress(ip string) string {
 		if len(fields) >= 4 && fields[0] == ip {
 			return fields[3] // El cuarto campo en /proc/net/arp es la HW address (MAC)
 		}
+	}
+	// Si es localhost (como en tus pruebas), la MAC no pasa por ARP
+	if ip == "127.0.0.1" || ip == "::1" {
+		return "00:00:00:00:00:00 (Localhost)"
 	}
 	return "Desconocida (Fuera de LAN)"
 }
@@ -170,15 +181,85 @@ func newSessionID(ip string) string {
 	return fmt.Sprintf("%s-%d", cleanIP, time.Now().UnixNano())
 }
 
+func appendAttackHistoryEntry(filePath string, entry AttackHistoryEntry) error {
+	block := fmt.Sprintf("[ATTACK %s]\nservice=%s\nevent=%s\nip=%s\nmac=%s\nsession_id=%s\npayload=%q\n---\n",
+		entry.Timestamp.Format(time.RFC3339Nano),
+		entry.Service,
+		entry.EventType,
+		entry.IP,
+		entry.MAC,
+		entry.SessionID,
+		entry.Payload,
+	)
+
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	_, err = file.WriteString(block)
+	return err
+}
+
+func appendAttackerSessionSummary(filePath string, entries []AttackHistoryEntry) error {
+	if len(entries) == 0 {
+		return nil
+	}
+
+	first := entries[0]
+	sessionHeader := fmt.Sprintf("[SESSION %s]\nservice=%s\nip=%s\nmac=%s\nsession_id=%s\n",
+		first.Timestamp.Format(time.RFC3339Nano),
+		first.Service,
+		first.IP,
+		first.MAC,
+		first.SessionID,
+	)
+
+	var body strings.Builder
+	body.WriteString(sessionHeader)
+	for _, entry := range entries {
+		body.WriteString(fmt.Sprintf("timestamp=%s\nevent=%s\npayload=%q\n---\n",
+			entry.Timestamp.Format(time.RFC3339Nano),
+			entry.EventType,
+			entry.Payload,
+		))
+	}
+
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	_, err = file.WriteString(body.String())
+	return err
+}
+
 func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
-	broadcast <- TelemetryMessage{
+	timestamp := time.Now()
+	msg := TelemetryMessage{
 		Service:   service,
 		Type:      eventType,
 		Payload:   payload,
 		IP:        ip,
 		MAC:       mac,
 		SessionID: sessionID,
-		Timestamp: time.Now().Format(time.RFC3339Nano),
+		Timestamp: timestamp.Format(time.RFC3339Nano),
+	}
+
+	broadcast <- msg
+
+	if err := appendAttackHistoryEntry(attackHistoryPath, AttackHistoryEntry{
+		Timestamp: timestamp,
+		Service:   service,
+		EventType: eventType,
+		Payload:   payload,
+		IP:        ip,
+		MAC:       mac,
+		SessionID: sessionID,
+	}); err != nil {
+		log.Printf("Error guardando historial de ataque: %v", err)
 	}
 }
 
@@ -217,8 +298,6 @@ func recordCommandEvent(sessionID, ip, mac, service, cmd string) {
 
 func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 	defer channel.Close()
-	// breach booleano por servicio
-	defer emitTelemetry("ssh", "connection_end", "El intruso cerró la terminal", ip, mac, sessionID)
 
 	prompt := "root@ubuntu:~# "
 	channel.Write([]byte(prompt))
@@ -243,7 +322,7 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 				log.Printf("💻 [Atacante %s] ejecutó: %s", mac, cleanCmd)
 				recordCommandEvent(sessionID, ip, mac, "ssh", cleanCmd)
 				analyzeCommand(cleanCmd, ip, mac, sessionID)
-				simulateOSResponse(channel, cleanCmd, ip, mac, sessionID)
+				simulateOSResponse(channel, cleanCmd)
 			}
 
 			channel.Write([]byte(prompt))
@@ -278,55 +357,38 @@ func analyzeCommand(cmdLine, ip, mac, sessionID string) {
 	}
 }
 
-// simulateOSResponse construye la respuesta UNA vez y con el mismo string
-// escribe al canal del atacante y emite telemetría "output" al panel,
-// garantizando que ambas vistas nunca diverjan.
-// emisión por caso; cada comando simulado nuevo debe construir su
-// respuesta en la variable. Upgrade path: TeeWriter sobre channel para espejo
-// 1:1 total (prompts redibujados, eco de backspace, banners).
-func simulateOSResponse(channel ssh.Channel, cmdLine, ip, mac, sessionID string) {
+func simulateOSResponse(channel ssh.Channel, cmdLine string) {
 	parts := strings.Fields(cmdLine)
 	if len(parts) == 0 {
 		return
 	}
 	baseCmd := parts[0]
-	response := ""
 
 	switch baseCmd {
 	case "ls":
-		response = "Desktop  Documents  Downloads  snap  .bashrc\r\n"
+		channel.Write([]byte("Desktop  Documents  Downloads  snap  .bashrc\r\n"))
 	case "whoami":
-		response = "root\r\n"
+		channel.Write([]byte("root\r\n"))
 	case "pwd":
-		response = "/root\r\n"
+		channel.Write([]byte("/root\r\n"))
 	case "uname":
-		response = "Linux ubuntu 5.4.0-150-generic x86_64 GNU/Linux\r\n"
+		channel.Write([]byte("Linux ubuntu 5.4.0-150-generic x86_64 GNU/Linux\r\n"))
 	case "id":
-		response = "uid=0(root) gid=0(root) groups=0(root)\r\n"
+		channel.Write([]byte("uid=0(root) gid=0(root) groups=0(root)\r\n"))
 	case "cd":
 		if len(parts) == 1 || parts[1] == ".." || parts[1] == "/" || parts[1] == "~" {
 			return
 		}
-		response = fmt.Sprintf("bash: cd: %s: No such file or directory\r\n", parts[1])
+		errorMsg := fmt.Sprintf("bash: cd: %s: No such file or directory\r\n", parts[1])
+		channel.Write([]byte(errorMsg))
 	case "clear":
-		response = "\033[H\033[2J"
+		channel.Write([]byte("\033[H\033[2J"))
 	case "exit", "logout":
-		response = "logout\r\n"
-	default:
-		response = fmt.Sprintf("bash: %s: command not found\r\n", baseCmd)
-	}
-
-	if response != "" {
-		channel.Write([]byte(response))
-		// clear: limpiar pantalla es local al atacante; el panel del defensor
-		// conserva la evidencia y no debe vaciarse, así que no se emite.
-		if baseCmd != "clear" {
-			emitTelemetry("ssh", "output", response, ip, mac, sessionID)
-		}
-	}
-
-	if baseCmd == "exit" || baseCmd == "logout" {
+		channel.Write([]byte("logout\r\n"))
 		channel.Close()
+	default:
+		errorMsg := fmt.Sprintf("bash: %s: command not found\r\n", baseCmd)
+		channel.Write([]byte(errorMsg))
 	}
 }
 

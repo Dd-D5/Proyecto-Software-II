@@ -4,7 +4,8 @@ export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1
   // Tabs definition
   const tabs = [
     { id: 'terminal', label: 'Live Terminal' },
-    { id: 'servicios', label: 'Servicios' }
+    { id: 'servicios', label: 'Servicios' },
+    { id: 'historial', label: 'Historial' }
   ];
 
   return (
