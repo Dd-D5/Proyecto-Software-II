@@ -8,8 +8,8 @@
   html, body {
     margin: 0;
     padding: 0;
-    background-color: #0f131c;
-    color: #dfe2ef;
+    background-color: #131313;
+    color: #ededed;
     overscroll-behavior-y: auto;
     font-family: 'Inter', sans-serif;
   }
@@ -21,20 +21,22 @@
     margin-bottom: 0 !important;
   }
 
-  /* Custom tactical scrollbar */
+  /* code.html oculta las scrollbars nativas */
   ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Excepción: la ventana del Inspector de Pulsaciones sí muestra slider */
+  .keystroke-scroll::-webkit-scrollbar {
+    display: block;
     width: 6px;
-    height: 6px;
   }
-  ::-webkit-scrollbar-track {
-    background: #0a0e17;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #1e2330;
+  .keystroke-scroll::-webkit-scrollbar-thumb {
+    background: #333333;
     border-radius: 3px;
   }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #31353f;
+  .keystroke-scroll::-webkit-scrollbar-thumb:hover {
+    background: #383838;
   }
 }
 

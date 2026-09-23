@@ -1,7 +1,14 @@
 import React from 'react';
+import { wsClient } from '../../services/wsClient';
 
-export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1:8080/stream/pts3', wsStatus = 'conectado' }) {
-  // Tabs definition
+// Estado visual del enlace WS + reintento manual al click (connect() es idempotente)
+const WS_STATUS = {
+  conectado: { label: 'Conectado', cls: 'bg-primary/10 text-primary-container border-primary/20', dot: 'bg-primary' },
+  conectando: { label: 'Conectando', cls: 'bg-tertiary/10 text-tertiary border-tertiary/30', dot: 'bg-tertiary animate-pulse' },
+  desconectado: { label: 'Desconectado', cls: 'bg-error-container/10 text-error border-error-container/30', dot: 'bg-error' }
+};
+
+export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1:8080/stream/pts3', wsStatus = 'desconectado' }) {
   const tabs = [
     { id: 'terminal', label: 'Live Terminal' },
     { id: 'servicios', label: 'Servicios' },
@@ -9,13 +16,17 @@ export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1
   ];
 
   return (
-    <header className="fixed top-0 left-16 h-14 bg-[#0f131c]/90 backdrop-blur-md border-b border-[#1e2330] z-40 flex items-center justify-between px-6 shadow-sm w-[calc(100%-4rem)]">
+    <header className="fixed top-0 left-16 h-14 bg-ink/90 backdrop-blur-md border-b border-edge-soft z-40 flex items-center justify-between px-6 shadow-sm w-[calc(100%-4rem)]">
       {/* Brand and Tab Navigation */}
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => onSelectTab('terminal')}>
-          <span className="font-title-lg text-title-lg font-bold tracking-tight text-on-surface">AEGISTRAP</span>
-          <span className="font-label-caps text-[10px] bg-primary/15 text-primary border border-primary/30 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-            v4.2-SEC
+          <span className="material-symbols-outlined text-primary text-[22px]">shield</span>
+          <span className="font-title-lg text-[17px] font-bold tracking-tight text-on-surface">AegisTrap</span>
+          <span className="font-label-caps text-[9px] bg-surface-container-high text-outline border border-hairline px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+            V4.2-STABLE SEC
+          </span>
+          <span className="font-label-caps text-[9px] bg-primary/10 text-primary border border-primary/30 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
           </span>
         </div>
 
@@ -40,34 +51,31 @@ export default function TopBar({ activeTab, onSelectTab, wsUrl = 'ws://127.0.0.1
         </nav>
       </div>
 
-      {/* Right: LAN WS & Operator Badges */}
+      {/* Right: WS node & Operator */}
       <div className="flex items-center gap-3">
-        {/* LAN WS Indicator */}
-        <div className="flex items-center gap-2 bg-surface-container-lowest border border-[#1e2330] px-3 py-1 rounded-lg">
+        <div className="flex items-center gap-2 bg-surface-container-lowest border border-hairline px-3 py-1 rounded-lg">
           <span className="material-symbols-outlined text-secondary text-[15px]">wifi_tethering</span>
-          <span className="font-label-caps text-label-caps text-outline uppercase">LAN:</span>
           <span className="font-mono-sm text-mono-sm text-secondary font-medium truncate max-w-xs" id="lan-ws-url">
             {wsUrl}
           </span>
-          <span className="font-label-caps text-[9px] text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
-            DHCP
-          </span>
         </div>
 
-        {/* Operator Badge */}
-        <div className="flex items-center gap-2 bg-surface-container-low border border-[#1e2330] px-2.5 py-1 rounded-lg">
-          <span
-            className={`w-2 h-2 rounded-full ${
-              wsStatus === 'conectado'
-                ? 'bg-primary animate-pulse'
-                : wsStatus === 'conectando'
-                ? 'bg-tertiary animate-pulse'
-                : 'bg-error'
-            }`}
-          ></span>
-          <span className="font-mono-sm text-mono-sm text-on-surface font-semibold">OPERATOR_0X8F</span>
-          <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[#003824]">
-            <span className="material-symbols-outlined text-[14px]">person</span>
+        <button
+          onClick={() => wsClient.connect()}
+          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border font-label-caps text-label-caps font-semibold uppercase transition-colors ${WS_STATUS[wsStatus]?.cls || WS_STATUS.desconectado.cls}`}
+          title={wsStatus === 'desconectado' ? 'Click para reintentar conexión' : `WebSocket: ${wsStatus}`}
+        >
+          <span className={`w-1.5 h-1.5 rounded-full ${WS_STATUS[wsStatus]?.dot || WS_STATUS.desconectado.dot}`}></span>
+          {WS_STATUS[wsStatus]?.label || 'Desconectado'}
+        </button>
+
+        <div className="flex items-center gap-2 bg-surface-container-low border border-hairline px-3 py-1 rounded-lg">
+          <div className="flex flex-col items-end leading-tight">
+            <span className="font-mono-sm text-[11px] text-on-surface font-semibold">sec-ops@node-01</span>
+            <span className="font-label-caps text-[8px] text-outline uppercase tracking-wider">SOC Admin</span>
+          </div>
+          <div className="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+            <span className="material-symbols-outlined text-[15px]">person</span>
           </div>
         </div>
       </div>

@@ -3,11 +3,11 @@ import React from 'react';
 export default function StatusBadge({ status, label, className = '' }) {
   const normalized = (status || label || '').toUpperCase();
 
-  let colorClasses = 'bg-surface-container-highest text-secondary border-[#1e2330]';
+  let colorClasses = 'bg-surface-container-highest text-secondary border-hairline';
   if (normalized.includes('BREACH') || normalized.includes('ERROR') || normalized.includes('CRITICAL')) {
     colorClasses = 'bg-error-container/30 text-error border-error/30';
   } else if (normalized.includes('IDLE')) {
-    colorClasses = 'bg-surface-container-highest text-outline border-[#1e2330]';
+    colorClasses = 'bg-surface-container-highest text-outline border-hairline';
   } else if (normalized.includes('PROBE')) {
     colorClasses = 'bg-tertiary-container/30 text-tertiary border-tertiary/30';
   } else if (normalized.includes('LIVE') || normalized.includes('ACTIVE') || normalized.includes('VERIFICAD')) {

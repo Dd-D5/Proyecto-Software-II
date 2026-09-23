@@ -15,58 +15,56 @@ export default function NetworkFingerprintCard({
   };
 
   return (
-    <section className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 shadow-sm flex flex-col gap-1.5 select-none">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <section className="p-4 rounded-xl bg-surface-container-low border border-hairline shadow-sm flex flex-col gap-3">
+      <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-secondary text-[16px]">memory_alt</span>
-          <h2 className="font-title-md text-[13px] text-on-surface font-semibold">
-            Huella de Red L2/L3 · NIC &amp; MAC Atacante
-          </h2>
+          <span className="material-symbols-outlined text-primary-container text-[20px]">fingerprint</span>
+          <div className="flex flex-col">
+            <h2 className="font-headline-sm text-[16px] leading-[20px] font-semibold text-on-surface">
+              Identidad de Red del Atacante
+            </h2>
+            <span className="font-caption text-caption text-outline">
+              Telemetría de Enlace Físico / L2-L4
+            </span>
+          </div>
         </div>
-        <span className="font-label-caps text-[9px] bg-secondary-container/20 text-secondary border border-secondary/30 px-2 py-0.5 rounded uppercase font-bold">
-          ARP SNOOP OK
+        <span className="font-label-caps text-[10px] px-2 py-0.5 rounded bg-primary/15 text-primary-container border border-primary/20 font-semibold shrink-0">
+          VERIFICADO
         </span>
       </div>
 
-      {/* MAC Address Content Card */}
-      <div className="bg-surface-container-lowest border border-[#1e2330] p-2 rounded-xl flex flex-col gap-1 shadow-inner">
-        <div className="flex items-center justify-between">
-          <span className="font-label-caps text-[9px] text-outline uppercase tracking-wider">
-            DIRECCIÓN FÍSICA ETHERNET (MAC)
+      {/* MAC Address Display Box */}
+      <div className="flex items-center justify-between gap-2 p-3 rounded-lg bg-surface-container border border-hairline">
+        <div className="flex flex-col min-w-0">
+          <span className="font-label-caps text-[10px] text-outline uppercase font-medium tracking-wider">
+            Dirección MAC Clonada/Detectada
           </span>
-          <span className="font-mono-sm text-[11px] text-primary font-semibold flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-            VERIFICADA (NO SPOOF)
-          </span>
-        </div>
-
-        <div className="flex items-center justify-between my-0.5">
-          <div className="font-mono-lg text-[15px] text-primary font-bold tracking-widest bg-surface-container px-2 py-0.5 rounded-lg border border-primary/20">
+          <span className="font-label-code text-[15px] font-bold text-on-surface tracking-wider truncate">
             {mac}
-          </div>
-          <button
-            onClick={handleCopy}
-            className="bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface p-1 rounded-lg transition-colors flex items-center border border-outline-variant/30"
-            title={copied ? '¡Copiado!' : 'Copiar MAC al portapapeles'}
-          >
-            <span className="material-symbols-outlined text-[15px]">
-              {copied ? 'check' : 'content_copy'}
-            </span>
-          </button>
+          </span>
         </div>
+        <button
+          onClick={handleCopy}
+          className="p-1.5 rounded hover:bg-surface-bright text-outline hover:text-on-surface transition-colors border border-transparent hover:border-outline-variant shrink-0"
+          title={copied ? '¡Copiado!' : 'Copiar MAC'}
+        >
+          <span className="material-symbols-outlined text-[18px]">
+            {copied ? 'check' : 'content_copy'}
+          </span>
+        </button>
+      </div>
 
-        <div className="flex items-center justify-between border-t border-[#1e2330] pt-1.5">
-          <span className="font-label-caps text-[9px] text-outline uppercase tracking-wider">
-            ID DE SESIÓN
-          </span>
-          <span
-            className="font-mono-sm text-[10px] text-secondary max-w-[62%] truncate"
-            title={sessionId || 'Esperando una sesión SSH'}
-          >
-            {sessionId || 'Esperando conexión'}
-          </span>
-        </div>
+      {/* Session ID (funcionalidad: no está en code.html pero es telemetría) */}
+      <div className="flex items-center justify-between gap-2 text-caption font-caption">
+        <span className="font-label-caps text-[10px] text-outline uppercase tracking-wider shrink-0">
+          ID de Sesión
+        </span>
+        <span
+          className="font-label-code text-[11px] text-secondary truncate"
+          title={sessionId || 'Esperando una sesión SSH'}
+        >
+          {sessionId || 'Esperando conexión'}
+        </span>
       </div>
     </section>
   );

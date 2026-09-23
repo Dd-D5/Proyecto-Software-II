@@ -100,7 +100,7 @@ export default function AdminServiciosView() {
   return (
     <div className="flex flex-col gap-3 h-full overflow-y-auto select-none p-1">
       {/* Top Banner */}
-      <section className="bg-surface-container-low border border-[#1e2330] rounded-xl px-4 py-3 flex items-center justify-between shadow-sm">
+      <section className="bg-surface-container-low border border-hairline rounded-xl px-4 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary border border-outline-variant/30">
             <span className="material-symbols-outlined text-[20px]">dns</span>
@@ -135,8 +135,8 @@ export default function AdminServiciosView() {
       />
 
       {/* Deploy New Trap Form */}
-      <section className="bg-surface-container-low border border-[#1e2330] rounded-xl p-4 shadow-sm flex flex-col gap-3">
-        <div className="flex items-center gap-2 border-b border-[#1e2330] pb-2">
+      <section className="bg-surface-container-low border border-hairline rounded-xl p-4 shadow-sm flex flex-col gap-3">
+        <div className="flex items-center gap-2 border-b border-hairline pb-2">
           <span className="material-symbols-outlined text-secondary text-[18px]">add_moderator</span>
           <h2 className="font-title-md text-[13px] text-on-surface font-bold">
             Desplegar Nueva Trampa / Servicio de Emulación
@@ -153,7 +153,7 @@ export default function AdminServiciosView() {
               value={newServiceName}
               onChange={(e) => setNewServiceName(e.target.value)}
               placeholder="Ej: MySQL Decoy Daemon v8.0"
-              className="bg-surface-container-lowest border border-[#1e2330] rounded-lg px-3 py-1.5 font-mono-sm text-[11px] text-on-surface focus:outline-none focus:border-secondary"
+              className="bg-surface-container-lowest border border-hairline rounded-lg px-3 py-1.5 font-mono-sm text-[11px] text-on-surface focus:outline-none focus:border-secondary"
             />
           </div>
 
@@ -166,7 +166,7 @@ export default function AdminServiciosView() {
               value={newPort}
               onChange={(e) => setNewPort(e.target.value)}
               placeholder=":3306"
-              className="bg-surface-container-lowest border border-[#1e2330] rounded-lg px-3 py-1.5 font-mono-sm text-[11px] text-on-surface focus:outline-none focus:border-secondary"
+              className="bg-surface-container-lowest border border-hairline rounded-lg px-3 py-1.5 font-mono-sm text-[11px] text-on-surface focus:outline-none focus:border-secondary"
             />
           </div>
 
@@ -177,7 +177,7 @@ export default function AdminServiciosView() {
             <select
               value={newProtocol}
               onChange={(e) => setNewProtocol(e.target.value)}
-              className="bg-surface-container-lowest border border-[#1e2330] rounded-lg px-3 py-1.5 font-mono-sm text-[11px] text-on-surface focus:outline-none focus:border-secondary"
+              className="bg-surface-container-lowest border border-hairline rounded-lg px-3 py-1.5 font-mono-sm text-[11px] text-on-surface focus:outline-none focus:border-secondary"
             >
               <option value="TCP">TCP</option>
               <option value="UDP">UDP</option>
@@ -189,7 +189,7 @@ export default function AdminServiciosView() {
           <div className="col-span-2">
             <button
               type="submit"
-              className="w-full bg-[#10b981] hover:brightness-110 text-[#003824] font-bold font-mono-sm text-[11px] py-2 px-3 rounded-lg shadow transition-all"
+              className="w-full bg-primary-container hover:brightness-110 text-on-primary font-bold font-mono-sm text-[11px] py-2 px-3 rounded-lg shadow transition-all"
             >
               + Desplegar
             </button>

@@ -85,6 +85,7 @@ Cada interacción del atacante con cualquier trampa emitirá un objeto JSON esta
 * `"alert"`: El atacante ejecutó un comando de alto nivel de privilegios (ej. `rm`, `sudo`, `wget`). Ideal para disparar notificaciones rojas (Toasts) en la UI.
 * `"connection"`: Notifica que un nuevo intruso estableció un handshake con una de las trampas.
 * `"connection_end"`: Notifica que el intruso cerró la sesión (SSH/FTP). El Frontend debe apagar el indicador de intrusión para ese servicio.
+* `"metrics"`: Sample periódico (cada 5s) con `service: "daemon"`. El `payload` es un JSON: `{"ssh":{"connections":N},"ftp":{"connections":N},"http":{"connections":N},"cpu":%,"ram":MB}`. Conexiones = total acumulado por trampa; CPU/RAM son del proceso honeypot completo (las trampas son goroutines del mismo binario, no medibles por servicio a nivel OS). No se registra en `attack_history.txt` (no es evidencia de ataque).
 
 
 

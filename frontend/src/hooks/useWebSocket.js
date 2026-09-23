@@ -94,6 +94,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [isPaused, setIsPaused] = useState(false);
   const [breachByService, setBreachByService] = useState(breachRef.current);
   const [keystrokeCountByService, setKeystrokeCountByService] = useState(countRef.current);
+  const [metrics, setMetrics] = useState(null);
   const lastKeystrokeTimeRef = useRef(Date.now());
   const saveTimerRef = useRef(null);
   // ponytail: timer booleano por servicio; si pausa activa, mensajes no llegan y timer puede
@@ -181,6 +182,16 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     // Escuchar mensajes
     const unsubMsg = wsClient.onMessage((msg) => {
       if (isPaused) return;
+
+      // Métricas del daemon (service="daemon"): sample periódico, no evidencia.
+      // ponytail: sin persistencia ni history; en recarga hay sample fresco en ≤5s.
+      // Upgrade path: persistir el último sample si se requiere tras recarga offline.
+      if (msg.type === EventType.METRICS) {
+        try {
+          setMetrics(JSON.parse(msg.payload));
+        } catch {}
+        return;
+      }
 
       const now = Date.now();
       const stampedMsg = { ...msg, rawTime: now };
@@ -291,6 +302,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     isPaused,
     breachByService,
     keystrokeCountByService,
+    metrics,
     togglePause,
     clearKeystrokes,
     registerTerminalListener,

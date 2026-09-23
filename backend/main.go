@@ -21,6 +21,7 @@ func main() {
 	// 3. Levantar los Honeypots en hilos separados
 	go startHTTPServer() // Escucha en 8081
 	go startFTPServer()  // Escucha en 2121
+	go startMetricsSampler() // Métricas del daemon cada 5s
 
 	// 4. Levantar el Honeypot SSH (Bloqueante, mantiene el programa vivo)
 	startSSHServer()     // Escucha en 2222

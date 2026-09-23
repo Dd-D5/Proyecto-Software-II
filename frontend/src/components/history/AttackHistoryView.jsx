@@ -51,17 +51,17 @@ export default function AttackHistoryView() {
         <button
           type="button"
           onClick={handleDownload}
-          className="px-3 py-2 rounded-xl bg-[#10b981] text-[#003824] font-semibold hover:brightness-110 transition"
+          className="px-3 py-2 rounded-xl bg-primary-container text-on-primary font-semibold hover:brightness-110 transition"
         >
           Descargar historial
         </button>
       </div>
 
-      <div className="rounded-2xl border border-[#1e2330] bg-[#0a0e17] p-3 h-full min-h-[420px]">
+      <div className="rounded-2xl border border-hairline bg-surface-container-lowest p-3 h-full min-h-[420px]">
         <textarea
           readOnly
           value={history}
-          className="w-full h-full min-h-[380px] resize-none rounded-xl border border-[#1e2330] bg-[#0f131c] text-[#dfe2ef] p-3 font-mono text-xs leading-5 outline-none"
+          className="w-full h-full min-h-[380px] resize-none rounded-xl border border-hairline bg-background text-on-surface p-3 font-mono text-xs leading-5 outline-none"
           aria-label="Historial de ataques"
         />
       </div>

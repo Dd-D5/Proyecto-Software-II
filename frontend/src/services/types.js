@@ -4,7 +4,8 @@ export const EventType = {
   ALERT: 'alert',
   CONNECTION: 'connection',
   CONNECTION_END: 'connection_end',
-  OUTPUT: 'output'
+  OUTPUT: 'output',
+  METRICS: 'metrics'
 };
 
 export const ServiceType = {

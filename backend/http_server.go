@@ -32,6 +32,7 @@ func startHTTPServer() {
 
 		// connection por request (cada curl repite el evento); inofensivo
 		// porque el frontend es idempotente. Upgrade path: dedupe por IP+timestamp.
+		bumpConnCount("http")
 		broadcast <- TelemetryMessage{
 			Service: "http",
 			Type:    "connection",

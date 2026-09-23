@@ -21,6 +21,7 @@ export default function DashboardView() {
     isPaused,
     breachByService,
     keystrokeCountByService,
+    metrics,
     togglePause,
     registerTerminalListener
   } = useWebSocket(activeService);
@@ -53,6 +54,7 @@ export default function DashboardView() {
           isPaused={isPaused}
           breachByService={breachByService}
           keystrokeCountByService={keystrokeCountByService}
+          metrics={metrics}
           onTogglePause={togglePause}
           registerTerminalListener={registerTerminalListener}
         />

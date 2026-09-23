@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Sidebar({ activeTab, onSelectTab }) {
   return (
-    <aside className="fixed left-0 top-0 w-16 bg-[#0a0e17] border-r border-[#1e2330] z-50 flex flex-col items-center justify-between py-4 select-none h-full">
+    <aside className="fixed left-0 top-0 w-16 bg-ink border-r border-edge-soft z-50 flex flex-col items-center justify-between py-4 select-none h-full">
       {/* Top: Logo & Main Navigation */}
       <div className="flex flex-col items-center gap-4 w-full">
         {/* Brand Shield Icon */}
@@ -22,7 +22,7 @@ export default function Sidebar({ activeTab, onSelectTab }) {
           <button
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'terminal'
-                ? 'bg-[#10b981] text-[#003824] shadow-md shadow-[#10b981]/25 hover:brightness-110'
+                ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
                 : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
             }`}
             title="Live Terminal Multi-Widget"
@@ -35,7 +35,7 @@ export default function Sidebar({ activeTab, onSelectTab }) {
           <button
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'servicios'
-                ? 'bg-[#10b981] text-[#003824] shadow-md shadow-[#10b981]/25 hover:brightness-110'
+                ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
                 : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
             }`}
             title="Gestión de Honeypots & Servicios Falsos"
@@ -48,7 +48,7 @@ export default function Sidebar({ activeTab, onSelectTab }) {
           <button
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'historial'
-                ? 'bg-[#10b981] text-[#003824] shadow-md shadow-[#10b981]/25 hover:brightness-110'
+                ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
                 : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
             }`}
             title="Historial de ataques"

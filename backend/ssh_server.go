@@ -134,6 +134,7 @@ func startSSHServer() {
 		log.Printf("🚨 INTRUSIÓN DETECTADA - IP: %s | MAC: %s", ip, mac)
 
 		sessionID := newSessionID(ip)
+		bumpConnCount("ssh")
 		emitTelemetry("ssh", "connection", "Nuevo intruso conectado al puerto 2222", ip, mac, sessionID)
 
 		go handleSSHConnection(nConn, config, ip, mac, sessionID)

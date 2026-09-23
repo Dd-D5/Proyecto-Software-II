@@ -13,12 +13,13 @@ const DENORMALIZE = {
   '<CTRL+C>': '^C' // eco esperable de una terminal real para Ctrl+C
 };
 
+const SERVICE_PORTS = { ssh: 2222, ftp: 2121, http: 8080 };
+
 export default function TerminalFrame({ activeService, breached = false, registerTerminalListener, isPaused, onTogglePause }) {
   const terminalRef = useRef(null);
   const termInstanceRef = useRef(null);
   const fitAddonRef = useRef(null);
   const lastMsgTypeRef = useRef(null);
-  const [bufferLines, setBufferLines] = useState(10000);
   const [dumpStatus, setDumpStatus] = useState(null);
 
   // Clear terminal screen when active service changes (child effect runs before parent hook replay effect)
@@ -40,25 +41,25 @@ export default function TerminalFrame({ activeService, breached = false, registe
       lineHeight: 1.3,
       letterSpacing: 0,
       theme: {
-        background: '#05080e',
-        foreground: '#dfe2ef',
-        cursor: '#4edea3',
-        selectionBackground: 'rgba(78, 222, 163, 0.3)',
-        black: '#0a0e17',
-        red: '#ffb4ab',
-        green: '#4edea3',
-        yellow: '#ffb95f',
-        blue: '#4cd7f6',
-        magenta: '#d0bcff',
-        cyan: '#03b5d3',
-        white: '#dfe2ef',
-        brightBlack: '#86948a',
-        brightRed: '#f43f5e',
-        brightGreen: '#10b981',
-        brightYellow: '#e29100',
-        brightBlue: '#acedff',
-        brightMagenta: '#e8def8',
-        brightCyan: '#acedff',
+        background: '#121212',
+        foreground: '#ededed',
+        cursor: '#3ecf8e',
+        selectionBackground: 'rgba(62, 207, 142, 0.3)',
+        black: '#171717',
+        red: '#ff5f56',
+        green: '#3ecf8e',
+        yellow: '#ffdb13',
+        blue: '#a1a1a1',
+        magenta: '#ffbd2e',
+        cyan: '#4ade80',
+        white: '#ededed',
+        brightBlack: '#8e8e8e',
+        brightRed: '#ff2201',
+        brightGreen: '#4ade80',
+        brightYellow: '#ffdb13',
+        brightBlue: '#ededed',
+        brightMagenta: '#ffbd2e',
+        brightCyan: '#71fcb6',
         brightWhite: '#ffffff'
       },
       scrollback: 10000,
@@ -157,80 +158,79 @@ export default function TerminalFrame({ activeService, breached = false, registe
   };
 
   return (
-    <section className="bg-surface-container-lowest border border-[#1e2330] rounded-xl shadow-md overflow-hidden flex flex-col flex-1 h-full select-none">
-      {/* Terminal Title Bar */}
-      <div className="bg-surface-container-high px-3 py-1.5 flex items-center justify-between border-b border-[#1e2330]">
-        <div className="flex items-center gap-2.5">
+    <section className="flex flex-col rounded-xl bg-surface-container-lowest border border-hairline shadow-lg overflow-hidden flex-1 h-full select-none">
+      {/* Terminal Window Top Bar */}
+      <div className="flex items-center justify-between px-3 py-2.5 bg-ink border-b border-edge-soft select-none">
+        <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
-            <span className="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
-            <span className="w-2.5 h-2.5 rounded-full bg-primary inline-block"></span>
+            <span className="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+            <span className="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+            <span className="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
           </div>
-          <div className="flex items-center gap-1.5 font-mono-sm text-[12px] text-on-surface font-semibold">
-            <span className="material-symbols-outlined text-[15px] text-secondary">terminal</span>
-            <span>aegistrap-pty03 · bash (emulated pty :2222)</span>
+          <div className="flex items-center gap-2 text-white/70">
+            <span className="material-symbols-outlined text-[16px]">terminal</span>
+            <span className="font-label-code text-label-code text-on-surface">
+              Sesión {activeService.toUpperCase()} Interceptada en Tiempo Real (Puerto {SERVICE_PORTS[activeService] || 2222})
+            </span>
           </div>
         </div>
-
         <div className="flex items-center gap-2">
-          <span className="font-label-caps text-[9px] bg-surface-container-lowest px-2 py-0.5 rounded text-outline uppercase font-mono-sm border border-outline-variant/30">
-            xterm.js WebGL Engine
+          <span className="font-label-code text-[11px] px-1.5 py-0.5 rounded bg-surface-container border border-hairline text-secondary">
+            pts/3
           </span>
-          <span className={`font-mono-sm text-[11px] flex items-center gap-1 ${breached ? 'text-primary' : 'text-outline'}`}>
-            <span className={`w-1.5 h-1.5 rounded-full bg-primary ${breached ? 'animate-ping' : 'opacity-30'}`}></span>
-            LIVE_INTRUSION
-          </span>
+          <div
+            className={`flex items-center gap-1.5 px-2 py-0.5 rounded font-label-caps text-label-caps font-medium border ${
+              breached
+                ? 'bg-primary/10 text-primary-container border-primary/20'
+                : 'bg-surface-container text-outline border-hairline'
+            }`}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full ${breached ? 'bg-primary animate-pulse' : 'bg-outline'}`}></span>
+            <span>{breached ? 'TRANSMITIENDO' : 'EN ESPERA'}</span>
+          </div>
         </div>
       </div>
 
       {/* xterm.js Mount Container */}
-      <div className="p-3 bg-[#05080e] flex-1 overflow-hidden relative">
+      <div className="p-3 flex-1 overflow-hidden relative bg-surface-container-lowest">
         <div ref={terminalRef} className="w-full h-full" />
       </div>
 
-      {/* Terminal Footer Controls */}
-      <div className="bg-surface-container px-3 py-1.5 flex items-center justify-between text-outline font-mono-sm text-[11px] border-t border-[#1e2330]">
-        <div className="flex items-center gap-4">
-          <span>
-            Buffer: <strong className="text-on-surface">{bufferLines.toLocaleString()} líneas</strong>
-          </span>
-          <span>
-            Retardo Sintético: <strong className="text-secondary">450ms</strong>
-          </span>
-          <span>
-            Escape Jail: <strong className="text-primary">ACTIVO (Read-Only OverlayFS)</strong>
-          </span>
-          {dumpStatus && (
-            <span className="text-tertiary font-semibold animate-pulse">
-              [{dumpStatus}]
-            </span>
-          )}
-        </div>
-
-        <div className="flex items-center gap-1.5">
+      {/* Terminal Action Bottom Bar */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 px-3 py-2.5 bg-ink border-t border-edge-soft">
+        <div className="flex items-center gap-2">
           <button
             onClick={onTogglePause}
-            className={`px-2 py-0.5 rounded text-[11px] transition-colors ${
-              isPaused
-                ? 'bg-tertiary text-[#472a00] font-bold'
-                : 'bg-surface-container-high hover:bg-surface-bright text-on-surface'
-            }`}
+            className="px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-bright text-on-surface border border-outline-variant font-body-sm text-body-sm transition-colors flex items-center gap-1"
           >
-            {isPaused ? 'Reanudar Feed' : 'Pausar Feed'}
+            <span className="material-symbols-outlined text-[16px]">{isPaused ? 'play_arrow' : 'pause'}</span>
+            <span>{isPaused ? 'Reanudar Captura' : 'Pausar Captura'}</span>
           </button>
           <button
             onClick={handleClear}
-            className="bg-surface-container-high hover:bg-surface-bright text-on-surface px-2 py-0.5 rounded text-[11px] transition-colors"
+            className="px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-bright text-on-surface border border-outline-variant font-body-sm text-body-sm transition-colors flex items-center gap-1"
           >
-            Limpiar Pantalla
+            <span className="material-symbols-outlined text-[16px]">backspace</span>
+            <span>Limpiar Consola</span>
           </button>
           <button
             onClick={handleDumpMemory}
-            className="bg-error hover:bg-rose-600 text-surface px-2 py-0.5 rounded text-[11px] font-bold transition-colors"
+            className="px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-bright text-error border border-outline-variant font-body-sm text-body-sm transition-colors flex items-center gap-1"
+            title="Volcar memoria del sandbox"
           >
-            Dump Memoria
+            <span className="material-symbols-outlined text-[16px]">developer_board</span>
+            <span>Dump Memoria</span>
           </button>
+          <span className="font-label-code text-[11px] text-outline hidden md:inline ml-2">
+            Evasión activa: Atacante auditado en /dev/pts3
+          </span>
         </div>
+
+        {dumpStatus && (
+          <span className="font-label-code text-[11px] text-primary-container font-semibold animate-pulse">
+            [{dumpStatus}]
+          </span>
+        )}
       </div>
     </section>
   );

@@ -35,6 +35,7 @@ func handleFTPConnection(conn net.Conn) {
 	}()
 
 	log.Printf("🚨 [FTP] Intrusión detectada - IP: %s | MAC: %s", ip, mac)
+	bumpConnCount("ftp")
 	broadcast <- TelemetryMessage{
 		Service: "ftp",
 		Type:    "connection",

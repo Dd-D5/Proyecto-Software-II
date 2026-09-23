@@ -1,113 +1,111 @@
 import React from 'react';
 
 export default function MetricsRow({
+  activeService = 'ssh',
   attackerIp = '0.0.0.0',
+  metrics = null,
   totalKeystrokes = 0,
-  totalAttacks = '0',
-  attacksPerSec = '+14.8k/s',
-  cpuPercent = 14.2,
-  ramUsedMb = 148.6,
   ramTotalMb = 512
 }) {
+  // Datos reales del sampler backend (event "metrics"); null hasta el primer sample (≤5s)
+  const totalAttacks = metrics?.[activeService]?.connections ?? 0;
+  const cpuPercent = metrics?.cpu ?? 0;
+  const ramUsedMb = metrics?.ram ?? 0;
   const ramPercent = ((ramUsedMb / ramTotalMb) * 100).toFixed(1);
 
   return (
-    <section className="grid grid-cols-5 gap-2.5 select-none">
-      {/* 1. Total Ataques / Pkts */}
-      <div className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 flex flex-col justify-between shadow-sm h-[88px]">
-        <div className="flex items-center justify-between text-outline">
-          <span className="font-label-caps text-[9px] uppercase tracking-wider">TOTAL ATAQUES / PKTS</span>
-          <span className="material-symbols-outlined text-[15px] text-secondary">analytics</span>
+    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      {/* KPI 1: Ataques Totales / Tráfico */}
+      <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
+        <div className="flex items-center justify-between">
+          <span className="font-label-code text-label-code text-outline">Ataques Totales / Tráfico</span>
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="font-headline-xl text-[22px] leading-tight text-on-surface font-bold">
-            {totalAttacks}
+        <div className="mt-2 mb-1">
+          <span className="font-display text-[26px] leading-[30px] tracking-tight font-semibold text-on-surface">
+            {totalAttacks.toLocaleString('en-US')}
           </span>
-          <span className="font-mono-sm text-[11px] text-primary">{attacksPerSec}</span>
+          <span className="font-body-sm text-body-sm text-outline"> conexiones</span>
         </div>
-        <div className="flex items-center justify-between font-mono-sm text-[10px] text-on-surface-variant">
-          <span>SSH Dionaea Hook</span>
-          <span className="text-primary font-semibold">99.4% CAPTURE</span>
+        <div className="flex items-center gap-1 text-primary-container text-caption font-caption">
+          <span className="material-symbols-outlined text-[14px]">check_circle</span>
+          <span className="text-secondary">99.4% neutralizado en señuelo</span>
         </div>
       </div>
 
-      {/* 2. Pulsaciones Registradas */}
-      <div className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 flex flex-col justify-between shadow-sm h-[88px]">
-        <div className="flex items-center justify-between text-outline">
-          <span className="font-label-caps text-[9px] uppercase tracking-wider">PULSACIONES REGISTRADAS</span>
-          <span className="material-symbols-outlined text-[15px] text-tertiary">keyboard</span>
+      {/* KPI 2: Comportamiento Intruso */}
+      <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
+        <div className="flex items-center justify-between">
+          <span className="font-label-code text-label-code text-outline">Comportamiento Intruso</span>
+          <span className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold border border-outline-variant">
+            48 WPM
+          </span>
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="font-headline-xl text-[22px] leading-tight text-tertiary font-bold">
+        <div className="mt-2 mb-1">
+          <span className="font-display text-[26px] leading-[30px] tracking-tight font-semibold text-on-surface">
             {typeof totalKeystrokes === 'number' ? totalKeystrokes.toLocaleString('en-US') : totalKeystrokes}
           </span>
-          <span className="font-mono-sm text-[11px] text-tertiary font-medium">TTY/PTS3</span>
+          <span className="font-body-sm text-body-sm text-outline"> pulsaciones</span>
         </div>
-        <div className="flex items-center justify-between font-mono-sm text-[10px] text-on-surface-variant">
-          <span>Patrón Tipeo: Humano</span>
-          <span className="text-secondary font-semibold">48 WPM</span>
-        </div>
-      </div>
-
-      {/* 3. Consumo CPU CFS */}
-      <div className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 flex flex-col justify-between shadow-sm h-[88px]">
-        <div className="flex items-center justify-between text-outline">
-          <span className="font-label-caps text-[9px] uppercase tracking-wider">CONSUMO CPU CFS</span>
-          <span className="material-symbols-outlined text-[15px] text-primary">memory</span>
-        </div>
-        <div className="flex items-baseline gap-2">
-          <span className="font-headline-xl text-[22px] leading-tight text-primary font-bold">
-            {cpuPercent}%
-          </span>
-          <span className="font-mono-sm text-[11px] text-outline">/ 100%</span>
-        </div>
-        <div className="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
-          <div
-            className="bg-primary h-full rounded-full transition-all duration-500"
-            style={{ width: `${Math.min(cpuPercent, 100)}%` }}
-          ></div>
+        <div className="flex items-center gap-1.5 text-caption font-caption">
+          <span className="w-1.5 h-1.5 rounded-full bg-error"></span>
+          <span className="text-secondary">Patrón humano detectado</span>
         </div>
       </div>
 
-      {/* 4. Memoria RAM CGroup */}
-      <div className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 flex flex-col justify-between shadow-sm h-[88px]">
-        <div className="flex items-center justify-between text-outline">
-          <span className="font-label-caps text-[9px] uppercase tracking-wider">MEMORIA RAM CGROUP</span>
-          <span className="material-symbols-outlined text-[15px] text-secondary">storage</span>
-        </div>
-        <div className="flex items-baseline gap-2">
-          <span className="font-headline-xl text-[22px] leading-tight text-secondary font-bold">
-            {ramUsedMb}
-          </span>
-          <span className="font-mono-sm text-[11px] text-on-surface-variant">
-            MB / {ramTotalMb} MB
+      {/* KPI 3: Uso CPU Aislamiento */}
+      <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
+        <div className="flex items-center justify-between">
+          <span className="font-label-code text-label-code text-outline">Uso CPU Aislamiento</span>
+          <span className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-primary/15 text-primary-container font-semibold border border-primary/20">
+            SEGURO
           </span>
         </div>
-        <div className="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
-          <div
-            className="bg-secondary h-full rounded-full transition-all duration-500"
-            style={{ width: `${Math.min(Number(ramPercent), 100)}%` }}
-          ></div>
+        <div className="mt-2 mb-2">
+          <span className="font-display text-[26px] leading-[30px] tracking-tight font-semibold text-on-surface">
+            {cpuPercent.toFixed(1)}%
+          </span>
+          <span className="font-body-sm text-body-sm text-outline"> / daemon</span>
+        </div>
+        <div className="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden border border-hairline">
+          <div className="h-full bg-primary-container rounded-full" style={{ width: `${Math.min(cpuPercent, 100)}%` }}></div>
         </div>
       </div>
 
-      {/* 5. IP Atacante */}
-      <div className="bg-surface-container-low border border-[#1e2330] rounded-xl p-2.5 flex flex-col justify-between shadow-sm h-[88px]">
-        <div className="flex items-center justify-between text-outline">
-          <span className="font-label-caps text-[9px] uppercase tracking-wider text-error font-bold">
-            IP Atacante
+      {/* KPI 4: Memoria RAM Asignada */}
+      <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
+        <div className="flex items-center justify-between">
+          <span className="font-label-code text-label-code text-outline">Memoria RAM Asignada</span>
+          <span className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold border border-outline-variant">
+            {Math.round(Number(ramPercent))}% USO
           </span>
-          <span className="material-symbols-outlined text-[15px] text-error">public</span>
         </div>
-        <div className="my-0.5">
-          <div className="font-mono-lg text-[13px] text-error font-bold tracking-wider truncate bg-error-container/20 px-2 py-0.5 rounded border border-error/30 text-center">
+        <div className="mt-2 mb-1">
+          <span className="font-display text-[26px] leading-[30px] tracking-tight font-semibold text-on-surface">
+            {ramUsedMb.toFixed(1)}
+          </span>
+          <span className="font-body-sm text-body-sm text-outline"> / {ramTotalMb} MB</span>
+        </div>
+        <div className="flex items-center gap-1 text-caption font-caption text-outline">
+          <span className="material-symbols-outlined text-[14px] text-primary-container">memory</span>
+          <span className="text-secondary">Estable sin riesgo OOM</span>
+        </div>
+      </div>
+
+      {/* KPI 5: Origen del Atacante */}
+      <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
+        <div className="flex items-center justify-between">
+          <span className="font-label-code text-label-code text-outline">Origen del Atacante</span>
+          <span className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-error-container/15 text-error font-bold uppercase tracking-wider border border-error-container/30">
+            CRÍTICO
+          </span>
+        </div>
+        <div className="mt-2 mb-1">
+          <span className="font-display text-[22px] leading-[30px] tracking-tight font-semibold font-label-code text-on-surface">
             {attackerIp}
-          </div>
-        </div>
-        <div className="flex items-center justify-end font-mono-sm text-[10px]">
-          <span className="text-error font-bold font-label-caps text-[8px] bg-error-container/20 px-1 py-0.5 rounded border border-error/30">
-            TOR EXIT NODE
           </span>
+        </div>
+        <div className="flex items-center gap-1 text-caption font-caption text-outline">
+          <span className="text-secondary">Nodo de salida externo</span>
         </div>
       </div>
     </section>

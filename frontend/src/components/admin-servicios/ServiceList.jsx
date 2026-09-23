@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function ServiceList({ services, onToggleService, onRestartService }) {
   return (
-    <div className="bg-surface-container-lowest border border-[#1e2330] rounded-xl overflow-hidden shadow-sm">
+    <div className="bg-surface-container-lowest border border-hairline rounded-xl overflow-hidden shadow-sm">
       <table className="w-full text-left font-mono-sm text-[11px]">
-        <thead className="bg-surface-container-high border-b border-[#1e2330] text-outline font-label-caps text-[9px] uppercase tracking-wider">
+        <thead className="bg-surface-container-high border-b border-hairline text-outline font-label-caps text-[9px] uppercase tracking-wider">
           <tr>
             <th className="py-2.5 px-4">Servicio / Trap</th>
             <th className="py-2.5 px-3">Puerto Fake</th>
@@ -15,7 +15,7 @@ export default function ServiceList({ services, onToggleService, onRestartServic
             <th className="py-2.5 px-4 text-right">Acciones</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#1e2330]/50">
+        <tbody className="divide-y divide-hairline/50">
           {services.map((srv) => (
             <tr key={srv.id} className="hover:bg-surface-container/40 transition-colors">
               <td className="py-2.5 px-4 flex items-center gap-2">
@@ -38,7 +38,7 @@ export default function ServiceList({ services, onToggleService, onRestartServic
                       ? 'bg-primary/10 text-primary border-primary/20'
                       : srv.status === 'BREACH'
                       ? 'bg-error-container/30 text-error border-error/30 animate-pulse'
-                      : 'bg-surface-container text-outline border-[#1e2330]'
+                      : 'bg-surface-container text-outline border-hairline'
                   }`}
                 >
                   <span
