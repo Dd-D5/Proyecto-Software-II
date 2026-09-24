@@ -11,12 +11,13 @@ export default function LiveTerminalView({
   wsUrl,
   attackerIp,
   attackerMac,
+  attackerGeo,
   sessionId,
+  systemStats,
   keystrokes,
   isPaused,
   breachByService,
   keystrokeCountByService,
-  metrics,
   onTogglePause,
   registerTerminalListener
 }) {
@@ -35,7 +36,8 @@ export default function LiveTerminalView({
       <MetricsRow
         activeService={activeService}
         attackerIp={attackerIp}
-        metrics={metrics}
+        attackerGeo={attackerGeo}
+        systemStats={systemStats}
         totalKeystrokes={keystrokeCountByService ? keystrokeCountByService[activeService] : 0}
       />
 

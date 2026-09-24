@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Sidebar({ activeTab, onSelectTab }) {
+export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogout }) {
   const [theme, setTheme] = useState(() =>
     typeof document !== 'undefined' && document.documentElement.classList.contains('light') ? 'light' : 'dark'
   );
@@ -26,8 +26,11 @@ export default function Sidebar({ activeTab, onSelectTab }) {
         <div className="flex flex-col items-center">
           <div
             className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-sm hover:scale-105 transition-transform cursor-pointer"
-            title="AegisTrap Defense SOC"
-            onClick={() => onSelectTab('terminal')}
+            title="AegisTrap Defense SOC (presionar 5 veces)"
+            onClick={() => {
+              onSelectTab('terminal');
+              if (onShieldClick) onShieldClick();
+            }}
           >
             <span className="material-symbols-outlined text-[22px]">shield</span>
           </div>
@@ -74,18 +77,22 @@ export default function Sidebar({ activeTab, onSelectTab }) {
             <span className="material-symbols-outlined text-[22px]">history</span>
           </button>
 
-          {/* Radar */}
+          {/* Reporte Forense */}
           <button
-            className="w-10 h-10 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"
-            title="Dashboard Telemetría Radar"
-            onClick={() => onSelectTab('terminal')}
+            className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+              activeTab === 'reporte'
+                ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
+                : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container'
+            }`}
+            title="Reporte Forense Post-Ataque"
+            onClick={() => onSelectTab('reporte')}
           >
-            <span className="material-symbols-outlined text-[22px]">radar</span>
+            <span className="material-symbols-outlined text-[22px]">plagiarism</span>
           </button>
         </nav>
       </div>
 
-      {/* Bottom: Theme Toggle, Settings & Daemon Status Indicator */}
+      {/* Bottom: Theme Toggle, Logout & Daemon Status Indicator */}
       <div className="flex flex-col items-center gap-3">
         {/* Toggle Modo Claro / Oscuro */}
         <button
@@ -98,12 +105,15 @@ export default function Sidebar({ activeTab, onSelectTab }) {
           </span>
         </button>
 
-        <button
-          className="w-10 h-10 rounded-xl text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"
-          title="Configuración de Daemon & Sandboxes"
-        >
-          <span className="material-symbols-outlined text-[20px]">settings</span>
-        </button>
+        {onLogout && (
+          <button
+            onClick={onLogout}
+            className="w-10 h-10 rounded-xl text-error hover:bg-error-container/10 flex items-center justify-center transition-colors"
+            title="Cerrar sesión del SOC"
+          >
+            <span className="material-symbols-outlined text-[20px]">logout</span>
+          </button>
+        )}
 
         <div className="relative flex items-center justify-center" title="Kernel Daemon Activo">
           <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>

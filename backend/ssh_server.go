@@ -52,7 +52,14 @@ type KeyEvent struct {
 	Type      string    `json:"type"`
 }
 
-var sensitiveCommands = []string{"sudo", "su", "rm", "passwd", "chmod", "chown", "wget", "curl", "nc", "bash", "sh", "iptables"}
+var sensitiveCommands = []string{
+	"sudo", "su", "rm", "passwd", "chmod", "chown", "wget", "curl", "nc", "bash", "sh", "iptables",
+	"pacman", "apt", "yum", "apk", "dd", "mkfifo", "perl", "python", "ruby", "nc.openbsd", "ncat",
+}
+
+var sensitivePatterns = []string{
+	":(){", ":|:&", "forkbomb", "rm -rf", "chmod 777", "chmod -R", "> /dev/sda", "/dev/urandom",
+}
 
 // getMACAddress lee la tabla ARP del kernel de Linux para obtener la huella física
 func getMACAddress(ip string) string {
@@ -129,12 +136,21 @@ func startSSHServer() {
 		}
 
 		ip, _, _ := net.SplitHostPort(nConn.RemoteAddr().String())
+
+		// Intercepción inmediata contra lista negra de IPs / DNS baneados
+		if globalBanManager != nil {
+			if banned, reason := globalBanManager.IsBanned(ip); banned {
+				log.Printf("⛔ CONEXIÓN RECHAZADA - IP Baneada %s: %s", ip, reason)
+				nConn.Close()
+				continue
+			}
+		}
+
 		mac := getMACAddress(ip)
 
 		log.Printf("🚨 INTRUSIÓN DETECTADA - IP: %s | MAC: %s", ip, mac)
 
 		sessionID := newSessionID(ip)
-		bumpConnCount("ssh")
 		emitTelemetry("ssh", "connection", "Nuevo intruso conectado al puerto 2222", ip, mac, sessionID)
 
 		go handleSSHConnection(nConn, config, ip, mac, sessionID)
@@ -238,6 +254,13 @@ func appendAttackerSessionSummary(filePath string, entries []AttackHistoryEntry)
 }
 
 func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
+	if eventType == "connection" {
+		bumpConnCount(service)
+	}
+	if eventType == "connection" || eventType == "command" || eventType == "alert" {
+		incrementAttackCounter()
+	}
+
 	timestamp := time.Now()
 	msg := TelemetryMessage{
 		Service:   service,
@@ -298,9 +321,12 @@ func recordCommandEvent(sessionID, ip, mac, service, cmd string) {
 }
 
 func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
+	startFakeShellForService(channel, ip, mac, sessionID, "ssh")
+}
+
+func startFakeShellForService(channel ssh.Channel, ip, mac, sessionID, serviceName string) {
 	defer channel.Close()
-	// breach booleano por servicio
-	defer emitTelemetry("ssh", "connection_end", "El intruso cerró la terminal", ip, mac, sessionID)
+	defer emitTelemetry(serviceName, "connection_end", "El intruso cerró la terminal", ip, mac, sessionID)
 
 	prompt := "root@ubuntu:~# "
 	channel.Write([]byte(prompt))
@@ -315,17 +341,19 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 		}
 
 		input := string(buf[:n])
-		recordKeyEvent(sessionID, ip, mac, "ssh", input)
+		recordKeyEvent(sessionID, ip, mac, serviceName, input)
 
 		if containsEnter(buf[:n]) {
 			channel.Write([]byte("\r\n"))
 
 			cleanCmd := strings.TrimSpace(lineBuffer)
 			if cleanCmd != "" {
-				log.Printf("💻 [Atacante %s] ejecutó: %s", mac, cleanCmd)
-				recordCommandEvent(sessionID, ip, mac, "ssh", cleanCmd)
-				analyzeCommand(cleanCmd, ip, mac, sessionID)
-				simulateOSResponse(channel, cleanCmd, ip, mac, sessionID)
+				log.Printf("💻 [Atacante %s] ejecutó en %s: %s", mac, serviceName, cleanCmd)
+				recordCommandEvent(sessionID, ip, mac, serviceName, cleanCmd)
+				if analyzeCommandForService(cleanCmd, ip, mac, sessionID, channel, serviceName) {
+					return
+				}
+				simulateOSResponseForService(channel, cleanCmd, ip, mac, sessionID, serviceName)
 			}
 
 			channel.Write([]byte(prompt))
@@ -342,31 +370,66 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 	}
 }
 
-func analyzeCommand(cmdLine, ip, mac, sessionID string) {
-	parts := strings.Fields(cmdLine)
-	if len(parts) == 0 {
-		return
+func analyzeCommand(cmdLine, ip, mac, sessionID string, channel ssh.Channel) bool {
+	return analyzeCommandForService(cmdLine, ip, mac, sessionID, channel, "ssh")
+}
+
+func analyzeCommandForService(cmdLine, ip, mac, sessionID string, channel ssh.Channel, serviceName string) bool {
+	cleanCmd := strings.TrimSpace(cmdLine)
+	if cleanCmd == "" {
+		return false
 	}
-	baseCmd := parts[0]
 
-	for _, bad := range sensitiveCommands {
-		if baseCmd == bad {
-			alertMsg := fmt.Sprintf("Intento de ejecución crítica: '%s'", cmdLine)
-			log.Printf("⚠️ ¡ALERTA! %s (Origen: %s)", alertMsg, mac)
+	isDangerous := false
+	reason := ""
 
-			emitTelemetry("ssh", "alert", alertMsg, ip, mac, sessionID)
+	// 1. Verificación por patrón (Bash bomb, fork bomb, etc.)
+	for _, pattern := range sensitivePatterns {
+		if strings.Contains(cleanCmd, pattern) {
+			isDangerous = true
+			reason = fmt.Sprintf("Patrón crítico/Bash Bomb detectado: '%s'", pattern)
 			break
 		}
 	}
+
+	// 2. Verificación por comando base
+	if !isDangerous {
+		parts := strings.Fields(cleanCmd)
+		if len(parts) > 0 {
+			baseCmd := strings.ToLower(parts[0])
+			for _, bad := range sensitiveCommands {
+				if baseCmd == bad || strings.Contains(cleanCmd, bad) {
+					isDangerous = true
+					reason = fmt.Sprintf("Comando de alto riesgo ejecutado en SSH: '%s'", cleanCmd)
+					break
+				}
+			}
+		}
+	}
+
+	if isDangerous {
+		alertMsg := fmt.Sprintf("Intento de ejecución crítica en %s: '%s'", serviceName, cleanCmd)
+		log.Printf("⚠️ ¡ALERTA BASH BOMB / BANEO! %s (Origen: %s)", alertMsg, mac)
+
+		emitTelemetry(serviceName, "alert", alertMsg, ip, mac, sessionID)
+
+		if globalBanManager != nil {
+			globalBanManager.Ban(ip, reason, "auto")
+		}
+
+		channel.Write([]byte(fmt.Sprintf("\r\n⛔ [DEFENSA ACTIVA] IP %s BANEADA POR COMANDO MALICIOSO.\r\nConexión cerrada automáticamente.\r\n", ip)))
+		channel.Close()
+		return true
+	}
+
+	return false
 }
 
-// simulateOSResponse construye la respuesta UNA vez y con el mismo string
-// escribe al canal del atacante y emite telemetría "output" al panel,
-// garantizando que ambas vistas nunca diverjan.
-// emisión por caso; cada comando simulado nuevo debe construir su
-// respuesta en la variable. Upgrade path: TeeWriter sobre channel para espejo
-// 1:1 total (prompts redibujados, eco de backspace, banners).
 func simulateOSResponse(channel ssh.Channel, cmdLine, ip, mac, sessionID string) {
+	simulateOSResponseForService(channel, cmdLine, ip, mac, sessionID, "ssh")
+}
+
+func simulateOSResponseForService(channel ssh.Channel, cmdLine, ip, mac, sessionID, serviceName string) {
 	parts := strings.Fields(cmdLine)
 	if len(parts) == 0 {
 		return
@@ -400,10 +463,8 @@ func simulateOSResponse(channel ssh.Channel, cmdLine, ip, mac, sessionID string)
 
 	if response != "" {
 		channel.Write([]byte(response))
-		// clear: limpiar pantalla es local al atacante; el panel del defensor
-		// conserva la evidencia y no debe vaciarse, así que no se emite.
 		if baseCmd != "clear" {
-			emitTelemetry("ssh", "output", response, ip, mac, sessionID)
+			emitTelemetry(serviceName, "output", response, ip, mac, sessionID)
 		}
 	}
 

@@ -1,24 +1,23 @@
 /**
- * AegisTrap WebSocket Client
- * Conecta dinámicamente a ws://${window.location.hostname}:8080/ws
- * Con fallback a ws://127.0.0.1:8080/ws y reconexión automática cada 2s.
+ * AegisTrap WebSocket Client con Token de Autenticación
  */
 
 export function getWebSocketUrl() {
   const hostname = window.location.hostname;
   const host = (!hostname || hostname === 'localhost') ? '127.0.0.1' : hostname;
-  return `ws://${host}:8080/ws`;
+  const token = localStorage.getItem('aegis_token') || '';
+  return `ws://${host}:8080/ws?token=${encodeURIComponent(token)}`;
 }
 
 export class WebSocketClient {
-  constructor(url = null) {
-    this.url = url || getWebSocketUrl();
+  constructor() {
+    this.url = null;
     this.socket = null;
     this.reconnectInterval = 2000;
     this.reconnectTimer = null;
     this.listeners = new Set();
     this.statusListeners = new Set();
-    this.status = 'desconectado'; // 'conectando' | 'conectado' | 'desconectado'
+    this.status = 'desconectado';
     this.shouldReconnect = true;
   }
 
@@ -27,6 +26,8 @@ export class WebSocketClient {
       return;
     }
 
+    this.url = getWebSocketUrl();
+    this.shouldReconnect = true;
     this.setStatus('conectando');
 
     try {
@@ -45,14 +46,11 @@ export class WebSocketClient {
           const data = JSON.parse(event.data);
           this.notifyListeners(data);
         } catch {
-          // If not valid JSON, send as raw string payload
           this.notifyListeners({ type: 'raw', payload: event.data });
         }
       };
 
-      this.socket.onerror = () => {
-        // Socket errors are followed by onclose
-      };
+      this.socket.onerror = () => {};
 
       this.socket.onclose = () => {
         this.setStatus('desconectado');
@@ -128,5 +126,4 @@ export class WebSocketClient {
   }
 }
 
-// Global shared client instance
 export const wsClient = new WebSocketClient();

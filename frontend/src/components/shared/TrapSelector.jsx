@@ -13,6 +13,7 @@ const serviceState = (isBreached, activity) => {
 export default function TrapSelector({
   activeService = ServiceType.SSH,
   onSelectService,
+  wsUrl = 'ws://127.0.0.1:8080/ws',
   breachByService = {},
   keystrokeCountByService = {}
 }) {
@@ -52,7 +53,13 @@ export default function TrapSelector({
               Canal Seguro WebSocket Sincronizado
             </span>
           </div>
-          <p className="font-body-sm text-body-sm text-outline">Monitor Forense de Ciberdefensa</p>
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="font-body-sm text-body-sm text-outline">Monitor Forense de Ciberdefensa</p>
+            <span className="flex items-center gap-1.5 bg-surface-container-lowest border border-hairline px-2 py-0.5 rounded-lg font-mono-sm text-mono-sm text-secondary">
+              <span className="material-symbols-outlined text-[13px]">wifi_tethering</span>
+              <span className="truncate max-w-[240px]" id="active-ws-node">{wsUrl}</span>
+            </span>
+          </div>
         </div>
       </div>
 

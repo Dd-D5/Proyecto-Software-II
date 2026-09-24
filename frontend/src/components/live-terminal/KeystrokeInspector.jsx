@@ -11,20 +11,8 @@ export default function KeystrokeInspector({ keystrokes = [] }) {
           </h2>
         </div>
         <p className="font-caption text-caption text-outline">
-          Análisis de cadencia y tiempo de respuesta para verificar presencia humana.
+          Análisis de cadencia y tiempo de respuesta de cada pulsación.
         </p>
-      </div>
-
-      {/* Progress Metric */}
-      <div className="flex flex-col gap-1.5">
-        <div className="flex justify-between font-label-code text-body-sm">
-          <span className="text-on-surface font-semibold">82% Humano (Cadencia Irregular)</span>
-          <span className="text-outline">18% Script/Macro</span>
-        </div>
-        <div className="w-full h-2 rounded-full bg-surface-container border border-hairline overflow-hidden flex">
-          <div className="h-full bg-primary-container rounded-l-full" style={{ width: '82%' }}></div>
-          <div className="h-full bg-surface-container-highest rounded-r-full" style={{ width: '18%' }}></div>
-        </div>
       </div>
 
       {/* Forensics Keystroke Table — ventana con slider propio (la scrollbar

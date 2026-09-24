@@ -76,18 +76,51 @@ Cada interacción del atacante con cualquier trampa emitirá un objeto JSON esta
 
 ### Diccionario de Datos
 
-* **`service`**: Identifica el origen de la trampa. Valores posibles: `"ssh"`, `"ftp"`, `"http"`.
+* **`service`**: Identifica el origen de la trampa. Valores posibles: `"ssh"`, `"ftp"`, `"http"`, o IDs dinámicos (`"ssh:2222"`, `"ftp:2121"`, `"http:8081"`) de honeypots desplegados vía `/api/honeypots`.
 * **`ip`**: Dirección IPv4 origen del intruso.
 * **`mac`**: Dirección MAC física interceptada desde la tabla ARP (preparación para el clonado y contención).
 * **`type`**: Clasifica el nivel del evento. Define cómo el Frontend debe renderizar el `payload`:
 * `"io"`: *Keystrokes* en bruto (letras individuales y retrocesos). **Exclusivo de SSH**. Debe pasarse directamente al emulador visual (ej. `xterm.js`).
 * `"command"`: Línea de comando completada (ej. `GET /admin` en HTTP, o `whoami` en SSH). Ideal para tablas de registro e historiales.
 * `"alert"`: El atacante ejecutó un comando de alto nivel de privilegios (ej. `rm`, `sudo`, `wget`). Ideal para disparar notificaciones rojas (Toasts) en la UI.
-* `"connection"`: Notifica que un nuevo intruso estableció un handshake con una de las trampas.
+* `"connection"`: Notifica que un nuevo intruso estableció un handshake con una de las trampas. Incrementa el contador global de ataques y el mapa `connections` por tipo de servicio.
 * `"connection_end"`: Notifica que el intruso cerró la sesión (SSH/FTP). El Frontend debe apagar el indicador de intrusión para ese servicio.
-* `"metrics"`: Sample periódico (cada 5s) con `service: "daemon"`. El `payload` es un JSON: `{"ssh":{"connections":N},"ftp":{"connections":N},"http":{"connections":N},"cpu":%,"ram":MB}`. Conexiones = total acumulado por trampa; CPU/RAM son del proceso honeypot completo (las trampas son goroutines del mismo binario, no medibles por servicio a nivel OS). No se registra en `attack_history.txt` (no es evidencia de ataque).
 
+### Telemetría del sistema (`system_stats`)
 
+Un mensaje con forma distinta (NO usa `service`/`payload`) se emite **cada 1s** directo al canal:
+
+```json
+{
+  "type": "system_stats",
+  "cpu_percent": 12.5,
+  "ram_used_mb": 1480.2,
+  "ram_total_mb": 8012.0,
+  "uptime_seconds": 3600,
+  "total_attacks": 42,
+  "server_mac": "a1:b2:c3:d4:e5:f6",
+  "nic": "eth0",
+  "connections": { "ssh": 5, "ftp": 3, "http": 34 }
+}
+```
+
+* `total_attacks`: contador global persistido — se inicializa al arrancar contando bloques `[ATTACK]` de `attack_history.txt`.
+* `connections`: conexiones acumuladas por tipo base (`ssh`/`ftp`/`http`); los IDs dinámicos (`ssh:2222`, `default-ssh`) cuentan en su tipo base.
+* `cpu_percent` es el consumo de CPU del **proceso honeypot** (delta de `utime+stime` de `/proc/self/stat`, ventana de 1s, resolución ~1%); `ram_used_mb` es su RSS (`VmRSS`). `ram_total_mb` es la memoria total **del sistema** (`/proc/meminfo`), para que el Frontend calcule el % que ocupa el proceso.
+* No se registra en `attack_history.txt` (sample periódico, no evidencia de ataque).
+
+---
+
+## 🔐 API REST v2 (Auth, Baneos y Honeypots Dinámicos)
+
+El servidor WebSocket (`:8080`) también expone endpoints REST. Los protegidos requieren `Authorization: Bearer <token>` obtenido en el login.
+
+| Endpoint | Método | Descripción |
+| :--- | :--- | :--- |
+| `/api/login` | POST | `{"password": "..."}` → `{"token": "..."}`. Bcrypt; password por env `AEGIS_ADMIN_PASSWORD` (default `admin123`). |
+| `/api/bans` | GET/POST/DELETE | Gestión de baneos DNS/IP (persistidos en `banned_list.json`). Los IPs baneadas reciben una página de bloqueo en HTTP y rechazo en SSH/FTP. |
+| `/api/honeypots` | GET/POST/DELETE | CRUD de honeypots dinámicos (name, type, port, banner). `POST /api/honeypots/:id/toggle` alterna running/stopped. |
+| `/ws?token=<token>` | WS | El WebSocket valida el token; sin token o token inválido la conexión se rechaza. |
 
 ---
 

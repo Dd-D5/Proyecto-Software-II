@@ -5,20 +5,20 @@ import TopBar from './TopBar';
 export default function AppLayout({
   activeTab,
   onSelectTab,
-  wsUrl,
   wsStatus,
+  onLogout,
+  onShieldClick,
   children
 }) {
   return (
     <div className="min-h-screen w-full bg-background text-on-surface flex flex-col relative font-sans">
       {/* 1. Sidebar Dock (64px) */}
-      <Sidebar activeTab={activeTab} onSelectTab={onSelectTab} />
+      <Sidebar activeTab={activeTab} onSelectTab={onSelectTab} onShieldClick={onShieldClick} onLogout={onLogout} />
 
       {/* 2. Top Header (h-14 / 56px) */}
       <TopBar
         activeTab={activeTab}
         onSelectTab={onSelectTab}
-        wsUrl={wsUrl}
         wsStatus={wsStatus}
       />
 

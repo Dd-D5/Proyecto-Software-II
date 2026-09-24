@@ -3,15 +3,19 @@ import React from 'react';
 export default function MetricsRow({
   activeService = 'ssh',
   attackerIp = '0.0.0.0',
-  metrics = null,
+  attackerGeo = '',
+  systemStats = null,
   totalKeystrokes = 0,
-  ramTotalMb = 512
+  attacksPerSec = '+14.8k/s',
+  ramTotalMb = null
 }) {
-  // Datos reales del sampler backend (event "metrics"); null hasta el primer sample (≤5s)
-  const totalAttacks = metrics?.[activeService]?.connections ?? 0;
-  const cpuPercent = metrics?.cpu ?? 0;
-  const ramUsedMb = metrics?.ram ?? 0;
-  const ramPercent = ((ramUsedMb / ramTotalMb) * 100).toFixed(1);
+  // Datos reales del evento "system_stats" (backend, cada 1s); null hasta el primer sample
+  const totalAttacks = systemStats?.total_attacks ?? 0;
+  const serviceConns = systemStats?.connections?.[activeService] ?? 0;
+  const cpuPercent = systemStats?.cpu_percent ?? 0;
+  const ramUsed = systemStats?.ram_used_mb ?? 0;
+  const ramTotal = ramTotalMb || systemStats?.ram_total_mb || 1;
+  const ramPercent = ((ramUsed / ramTotal) * 100).toFixed(1);
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
@@ -19,16 +23,21 @@ export default function MetricsRow({
       <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
         <div className="flex items-center justify-between">
           <span className="font-label-code text-label-code text-outline">Ataques Totales / Tráfico</span>
+          <span className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-primary/15 text-primary-container font-semibold border border-primary/20">
+            {attacksPerSec}
+          </span>
         </div>
         <div className="mt-2 mb-1">
           <span className="font-display text-[26px] leading-[30px] tracking-tight font-semibold text-on-surface">
             {totalAttacks.toLocaleString('en-US')}
           </span>
-          <span className="font-body-sm text-body-sm text-outline"> conexiones</span>
+          <span className="font-body-sm text-body-sm text-outline"> ataques</span>
         </div>
         <div className="flex items-center gap-1 text-primary-container text-caption font-caption">
           <span className="material-symbols-outlined text-[14px]">check_circle</span>
-          <span className="text-secondary">99.4% neutralizado en señuelo</span>
+          <span className="text-secondary">
+            {serviceConns.toLocaleString('en-US')} conexiones en {activeService.toUpperCase()}
+          </span>
         </div>
       </div>
 
@@ -46,13 +55,9 @@ export default function MetricsRow({
           </span>
           <span className="font-body-sm text-body-sm text-outline"> pulsaciones</span>
         </div>
-        <div className="flex items-center gap-1.5 text-caption font-caption">
-          <span className="w-1.5 h-1.5 rounded-full bg-error"></span>
-          <span className="text-secondary">Patrón humano detectado</span>
-        </div>
       </div>
 
-      {/* KPI 3: Uso CPU Aislamiento */}
+      {/* KPI 3: Uso CPU (host) */}
       <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
         <div className="flex items-center justify-between">
           <span className="font-label-code text-label-code text-outline">Uso CPU Aislamiento</span>
@@ -71,19 +76,19 @@ export default function MetricsRow({
         </div>
       </div>
 
-      {/* KPI 4: Memoria RAM Asignada */}
+      {/* KPI 4: Memoria RAM (proceso) */}
       <div className="flex flex-col justify-between p-3 rounded-xl bg-surface-container-low border border-hairline shadow-sm hover:border-hairline-strong transition-colors">
         <div className="flex items-center justify-between">
-          <span className="font-label-code text-label-code text-outline">Memoria RAM Asignada</span>
+          <span className="font-label-code text-label-code text-outline">Memoria RAM del Daemon</span>
           <span className="font-label-caps text-label-caps px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold border border-outline-variant">
             {Math.round(Number(ramPercent))}% USO
           </span>
         </div>
         <div className="mt-2 mb-1">
           <span className="font-display text-[26px] leading-[30px] tracking-tight font-semibold text-on-surface">
-            {ramUsedMb.toFixed(1)}
+            {ramUsed.toFixed(0)}
           </span>
-          <span className="font-body-sm text-body-sm text-outline"> / {ramTotalMb} MB</span>
+          <span className="font-body-sm text-body-sm text-outline"> MB</span>
         </div>
         <div className="flex items-center gap-1 text-caption font-caption text-outline">
           <span className="material-symbols-outlined text-[14px] text-primary-container">memory</span>
@@ -105,7 +110,8 @@ export default function MetricsRow({
           </span>
         </div>
         <div className="flex items-center gap-1 text-caption font-caption text-outline">
-          <span className="text-secondary">Nodo de salida externo</span>
+          <span className="material-symbols-outlined text-[14px]">public</span>
+          <span className="text-secondary truncate">{attackerGeo || 'Resolviendo geolocalización...'}</span>
         </div>
       </div>
     </section>
