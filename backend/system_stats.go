@@ -28,6 +28,21 @@ func incrementAttackCounter() {
 	atomic.AddInt64(&globalAttackCounter, 1)
 }
 
+func initAttackCounter() {
+	data, err := os.ReadFile(attackHistoryPath)
+	if err != nil {
+		return
+	}
+	var count int64 = 0
+	lines := strings.Split(string(data), "\n")
+	for _, line := range lines {
+		if strings.HasPrefix(line, "[ATTACK ") {
+			count++
+		}
+	}
+	atomic.StoreInt64(&globalAttackCounter, count)
+}
+
 func getRealRAM() (float64, float64) {
 	data, err := os.ReadFile("/proc/meminfo")
 	if err != nil {

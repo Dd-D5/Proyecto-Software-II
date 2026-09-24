@@ -25,7 +25,8 @@ func main() {
 	// 3. Inicializar Gestor Dinámico de Honeypots
 	initHoneypotManager()
 
-	// 4. Iniciar Ticker de Telemetría de Sistema
+	// 4. Inicializar Contador de Ataques desde Histórico y Ticker de Telemetría
+	initAttackCounter()
 	startSystemStatsTicker()
 
 	// 5. Iniciar la transmisión de telemetría por WebSockets

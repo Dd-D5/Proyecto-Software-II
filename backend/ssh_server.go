@@ -254,6 +254,10 @@ func appendAttackerSessionSummary(filePath string, entries []AttackHistoryEntry)
 }
 
 func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
+	if eventType == "connection" || eventType == "command" || eventType == "alert" {
+		incrementAttackCounter()
+	}
+
 	timestamp := time.Now()
 	msg := TelemetryMessage{
 		Service:   service,

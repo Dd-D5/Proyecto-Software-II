@@ -25,16 +25,32 @@ const findLastValue = (buckets, field) => {
 // por servicio decide el estado. Más preciso que el objeto breach persistido (que
 // no captura cierres ocurridos mientras la página estaba cerrada).
 const deriveBreach = (history) => {
-  const svcs = ['ssh', 'ftp', 'http'];
-  return Object.fromEntries(svcs.map((svc) => {
-    const bucket = history?.[svc] || [];
+  if (!history) return {};
+  const result = {};
+  for (const svc of Object.keys(history)) {
+    const bucket = history[svc] || [];
     for (let i = bucket.length - 1; i >= 0; i--) {
       const t = bucket[i].type;
-      if (t === 'connection') return [svc, true];
-      if (t === 'connection_end') return [svc, false];
+      if (t === 'connection') {
+        result[svc] = true;
+        break;
+      }
+      if (t === 'connection_end') {
+        result[svc] = false;
+        break;
+      }
     }
-    return [svc, false];
-  }));
+  }
+  return result;
+};
+
+export const isServiceMatch = (msgSvc, activeSvc) => {
+  if (!msgSvc || !activeSvc) return false;
+  if (msgSvc === activeSvc) return true;
+  if (activeSvc === 'ssh' && (msgSvc === 'ssh' || msgSvc === 'ssh:2222' || msgSvc === 'default-ssh')) return true;
+  if (activeSvc === 'ftp' && (msgSvc === 'ftp' || msgSvc === 'ftp:2121' || msgSvc === 'default-ftp')) return true;
+  if (activeSvc === 'http' && (msgSvc === 'http' || msgSvc === 'http:8081' || msgSvc === 'default-http')) return true;
+  return false;
 };
 
 // ponytail: WSL2 localhost-forwarding entrega ::1 como IP fuente; mapeo puntual,
@@ -197,12 +213,12 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
       // Escuchar métricas del sistema
       if (msg.type === 'system_stats') {
-        setSystemStats({
+        setSystemStats((prev) => ({
           cpu_percent: msg.cpu_percent || 12.0,
           ram_used_mb: msg.ram_used_mb || 140,
           ram_total_mb: msg.ram_total_mb || 2048,
-          total_attacks: msg.total_attacks || 0
-        });
+          total_attacks: Math.max(prev.total_attacks || 0, msg.total_attacks || 0)
+        }));
         return;
       }
 
@@ -212,6 +228,14 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
       const currentBucket = historyRef.current[svc] || [];
       historyRef.current[svc] = [...currentBucket, stampedMsg].slice(-500);
+
+      // Incrementar contador de ataques en tiempo real ante eventos significativos
+      if (msg.type === 'connection' || msg.type === 'command' || msg.type === 'alert') {
+        setSystemStats((prev) => ({
+          ...prev,
+          total_attacks: (prev.total_attacks || 0) + 1
+        }));
+      }
 
       if (msg.type === 'connection') {
         breachRef.current = { ...breachRef.current, [svc]: true };
@@ -224,10 +248,10 @@ export function useWebSocket(activeService = ServiceType.SSH) {
         scheduleSave();
       }
 
-      if (svc === ServiceType.HTTP) {
+      if (svc === ServiceType.HTTP || svc.startsWith('http:')) {
         clearTimeout(httpBreachTimerRef.current);
         httpBreachTimerRef.current = setTimeout(() => {
-          breachRef.current = { ...breachRef.current, http: false };
+          breachRef.current = { ...breachRef.current, [svc]: false };
           setBreachByService({ ...breachRef.current });
           saveNow();
         }, 10000);
@@ -240,7 +264,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
       scheduleSave();
 
-      if (msg.service && msg.service !== activeService) {
+      if (msg.service && !isServiceMatch(msg.service, activeService)) {
         return;
       }
 

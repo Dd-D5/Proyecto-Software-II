@@ -139,14 +139,10 @@ func startHTTPServer() {
 		reqInfo := fmt.Sprintf("%s %s %s", r.Method, r.URL.Path, r.UserAgent())
 		log.Printf("🌐 [HTTP Honeypot] Petición de %s (%s): %s", ip, mac, reqInfo)
 
+		sessionID := fmt.Sprintf("http-%s-%d", strings.ReplaceAll(ip, ":", "_"), time.Now().UnixNano())
+
 		// Emisión de conexión inicial
-		broadcast <- TelemetryMessage{
-			Service: "http",
-			Type:    "connection",
-			Payload: "Nuevo intruso conectado al Honeypot HTTP de Login Clonado",
-			IP:      ip,
-			MAC:     mac,
-		}
+		emitTelemetry("http", "connection", "Nuevo intruso conectado al Honeypot HTTP de Login Clonado", ip, mac, sessionID)
 
 		// 2. Manejo de Intentos de Login en /login o POST
 		var inputPassword string
@@ -158,22 +154,10 @@ func startHTTPServer() {
 		// Emitir tecleo carácter por carácter si envió contraseña
 		if inputPassword != "" {
 			for _, ch := range inputPassword {
-				broadcast <- TelemetryMessage{
-					Service: "http",
-					Type:    "io",
-					Payload: string(ch),
-					IP:      ip,
-					MAC:     mac,
-				}
+				emitTelemetry("http", "io", string(ch), ip, mac, sessionID)
 				time.Sleep(15 * time.Millisecond)
 			}
-			broadcast <- TelemetryMessage{
-				Service: "http",
-				Type:    "io",
-				Payload: "\n",
-				IP:      ip,
-				MAC:     mac,
-			}
+			emitTelemetry("http", "io", "\n", ip, mac, sessionID)
 		}
 
 		// Conteo de Peticiones e Inyecciones
@@ -187,13 +171,7 @@ func startHTTPServer() {
 			payloadToLog = fmt.Sprintf("POST /login password='%s' (Intento %d/3)", inputPassword, reqCount)
 		}
 
-		broadcast <- TelemetryMessage{
-			Service: "http",
-			Type:    "command",
-			Payload: payloadToLog,
-			IP:      ip,
-			MAC:     mac,
-		}
+		emitTelemetry("http", "command", payloadToLog, ip, mac, sessionID)
 
 		pathLower := strings.ToLower(r.URL.Path + " " + inputPassword)
 		isSuspicious := strings.Contains(pathLower, "' or '") || strings.Contains(pathLower, "1=1") || strings.Contains(pathLower, "select") || strings.Contains(pathLower, ".env") || strings.Contains(pathLower, "passwd")
