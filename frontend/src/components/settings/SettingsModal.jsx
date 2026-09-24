@@ -117,7 +117,6 @@ export default function SettingsModal({ isOpen, onClose, wsUrl }) {
             >
               <option value="v2-isolated">cgroup-v2 / Strict Read-Only OverlayFS</option>
               <option value="chroot">chroot jail (Legacy)</option>
-              <option value="docker-container">Docker Isolated Container Sandbox</option>
             </select>
           </div>
 

@@ -22,24 +22,7 @@ El script verificará las dependencias (Go y Node.js), compilará el backend de 
 
 ---
 
-## 🐳 OPCIÓN 2: Despliegue con Docker / Docker Compose
-
-Si prefieres ejecutar el proyecto mediante contenedores aislados:
-
-```bash
-docker compose up --build
-```
-
-Esto compilará la imagen de AegisTrap en multi-etapa y expondrá los siguientes puertos en tu máquina:
-- `:5173` - Dashboard React
-- `:8080` - Servidor WebSocket de Telemetría y Control
-- `:8081` - Trap HTTP (Fake AegisTrap Login & Decoy Malware)
-- `:2121` - Trap FTP (Streaming de comandos e E/S en vivo)
-- `:2222` - Trap SSH (Emulación Ubuntu 22.04 LTS en tiempo real)
-
----
-
-## 🛠️ OPCIÓN 3: Despliegue Manual por Consolas
+## 🛠️ OPCIÓN 2: Despliegue Manual por Consolas
 
 ### 1. Iniciar Backend (Go)
 ```bash
