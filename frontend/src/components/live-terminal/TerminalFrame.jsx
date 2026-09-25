@@ -14,7 +14,7 @@ const DENORMALIZE = {
   '<CTRL+C>': '^C' // eco esperable de una terminal real para Ctrl+C
 };
 
-const SERVICE_PORTS = { ssh: 2222, ftp: 2121, http: 8080 };
+const SERVICE_PORTS = { ssh: 2222, ftp: 2121, http: 8081 };
 
 // Tema xterm dual — light.html: bg #faf8f5, texto #1c1917, prompt verde #047857.
 // xterm no transiciona por CSS (tema JS): cambia de golpe al togglear.
@@ -195,6 +195,12 @@ export default function TerminalFrame({ activeService, breached = false, registe
     }, 1000);
   };
 
+  // Clave de servicio dinámica: "ssh:2223" → ("SSH", 2223); base "ssh" → ("SSH", default)
+  const svcBase = String(activeService).split(':')[0].replace('default-', '');
+  const svcPort = String(activeService).includes(':')
+    ? String(activeService).split(':')[1]
+    : (SERVICE_PORTS[svcBase] || 2222);
+
   return (
     <section className="flex flex-col rounded-xl bg-surface-container-lowest border border-hairline shadow-lg overflow-hidden flex-1 h-full select-none">
       {/* Terminal Window Top Bar */}
@@ -208,7 +214,7 @@ export default function TerminalFrame({ activeService, breached = false, registe
           <div className="flex items-center gap-2 text-on-surface-variant">
             <span className="material-symbols-outlined text-[16px]">terminal</span>
             <span className="font-label-code text-label-code text-on-surface">
-              Sesión {activeService.toUpperCase()} Interceptada en Tiempo Real (Puerto {SERVICE_PORTS[activeService] || 2222})
+              Sesión {svcBase.toUpperCase()} Interceptada en Tiempo Real (Puerto {svcPort})
             </span>
           </div>
         </div>

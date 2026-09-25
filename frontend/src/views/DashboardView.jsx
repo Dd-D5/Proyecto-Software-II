@@ -6,16 +6,18 @@ import AttackHistoryView from '../components/history/AttackHistoryView';
 import ForensicReportTab from '../components/history/ForensicReportTab';
 import LoginView from '../components/auth/LoginView';
 import DevModeBanner from '../components/shared/DevModeBanner';
+import BreachToast from '../components/shared/BreachToast';
 import { useWebSocket } from '../hooks/useWebSocket';
-import { ServiceType } from '../services/types';
 import { wsClient } from '../services/wsClient';
 
 const KONAMI_CODE = ['w', 'w', 's', 's', 'a', 'd', 'a', 'd', 'b', 'a'];
+// Breach sobre estas claves NO redirige (solo toast): bases + 3 defaults
+const DEFAULT_BREACH_KEYS = ['ssh', 'ftp', 'http', 'ssh:2222', 'ftp:2121', 'http:8081'];
 
 export default function DashboardView() {
   const [token, setToken] = useState(() => localStorage.getItem('aegis_token') || '');
   const [activeTab, setActiveTab] = useState('terminal'); // 'terminal' | 'servicios' | 'historial' | 'reporte'
-  const [activeService, setActiveService] = useState(ServiceType.SSH);
+  const [activeService, setActiveService] = useState('ssh:2222'); // instancia default SSH
   const [shieldClicks, setShieldClicks] = useState(0);
   const [devModeActive, setDevModeActive] = useState(false);
   const [devHintMsg, setDevHintMsg] = useState(null);
@@ -96,6 +98,20 @@ export default function DashboardView() {
     return <LoginView onLoginSuccess={handleLoginSuccess} />;
   }
 
+  // Breach en honeypot NO predeterminado → redirigir al panel de despliegue
+  // para que el operador vea la fila en ALERTA (defaults: solo toast)
+  const handleNewBreach = (keys) => {
+    if (keys.some((k) => !DEFAULT_BREACH_KEYS.includes(k))) {
+      setActiveTab('servicios');
+    }
+  };
+
+  // Fila de honeypot → terminal de ESA instancia
+  const handleOpenService = (serviceKey) => {
+    setActiveService(serviceKey);
+    setActiveTab('terminal');
+  };
+
   return (
     <AppLayout
       activeTab={activeTab}
@@ -109,6 +125,9 @@ export default function DashboardView() {
        * La visibilidad se controla únicamente por CSS (hidden / block),
        * preservando el buffer de xterm.js y el historial del Inspector.
        */}
+
+      {/* Toasts de intrusión (top-right) */}
+      <BreachToast breachByService={breachByService} onNewBreach={handleNewBreach} />
 
       {/* Banner de Pista / Mensaje Dev */}
       {devHintMsg && (
@@ -142,7 +161,10 @@ export default function DashboardView() {
 
       {/* Vista 2: Gestión de Servicios — siempre montada */}
       <div className={activeTab === 'servicios' ? 'flex flex-col flex-1 h-full' : 'hidden'}>
-        <AdminServiciosView />
+        <AdminServiciosView
+          breachByService={breachByService}
+          onOpenService={handleOpenService}
+        />
       </div>
 
       {/* Vista 3: Historial de ataques — siempre montada */}

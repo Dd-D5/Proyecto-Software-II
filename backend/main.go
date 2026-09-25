@@ -284,10 +284,20 @@ func main() {
 		}
 	}()
 
-	// 7. Levantar Honeypots Principales
-	go startHTTPServer() // Escucha en puerto 8081
-	go startFTPServer()  // Escucha en puerto 2121
+	// 7. Honeypots: los 3 default corren vía el manager (handlers dinámicos con
+	// baneo integrado); ya no existen servidores viejos hardcodeados. El
+	// endpoint /logs/attacks vive aquí (8080) junto al resto de la API.
+	mux.HandleFunc("/logs/attacks", func(w http.ResponseWriter, r *http.Request) {
+		data, err := os.ReadFile(attackHistoryPath)
+		if err != nil {
+			http.Error(w, "Historial no disponible aún", http.StatusNotFound)
+			return
+		}
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Write(data)
+	})
 
-	// 8. Levantar Honeypot SSH (Bloqueante para mantener la aplicación viva)
-	startSSHServer() // Escucha en puerto 2222
+	// 8. Bloquear para mantener la aplicación viva
+	select {}
 }

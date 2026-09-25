@@ -140,16 +140,17 @@ html.light {
     display: none;
   }
 
-  /* Excepción: la ventana del Inspector de Pulsaciones sí muestra slider */
-  .keystroke-scroll::-webkit-scrollbar {
+  /* Excepción: ventanas con scroll propio (tabla honeypots, inspector de
+     pulsaciones) re-habilitan la slider que la regla global oculta */
+  .panel-scroll::-webkit-scrollbar {
     display: block;
     width: 6px;
   }
-  .keystroke-scroll::-webkit-scrollbar-thumb {
+  .panel-scroll::-webkit-scrollbar-thumb {
     background: #333333;
     border-radius: 3px;
   }
-  .keystroke-scroll::-webkit-scrollbar-thumb:hover {
+  .panel-scroll::-webkit-scrollbar-thumb:hover {
     background: #383838;
   }
 }

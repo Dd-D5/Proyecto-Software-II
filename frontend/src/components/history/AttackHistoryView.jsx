@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const HISTORY_URL = 'http://localhost:8081/logs/attacks';
+const HISTORY_URL = 'http://localhost:8080/logs/attacks';
 
 export default function AttackHistoryView() {
   const [history, setHistory] = useState('Cargando historial...');

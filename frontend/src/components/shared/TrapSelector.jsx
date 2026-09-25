@@ -1,26 +1,27 @@
 import React from 'react';
-import { ServiceType } from '../../services/types';
 
 // ponytail: SONDEADO se deriva de keystrokeCountByService (actividad IO sin sesión
 // activa). No hay estado dedicado en el backend. Upgrade path: emitir un evento
 // "probe" real si se necesita distinguir sondeo de conexión.
 const serviceState = (isBreached, activity) => {
   if (isBreached) return 'ALERTA';
-  if (activity > 0) return 'SONDEADO';
   return 'ESPERA';
 };
 
 export default function TrapSelector({
-  activeService = ServiceType.SSH,
+  activeService = 'ssh:2222',
   onSelectService,
   wsUrl = 'ws://127.0.0.1:8080/ws',
   breachByService = {},
   keystrokeCountByService = {}
 }) {
+  // Chips = SOLO los 3 honeypots default, por CLAVE DE INSTANCIA (igual que emite
+  // el backend). Intrusión en un custom (ssh:7777) NO enciende estos chips —
+  // solo la pill global de amenaza. Los customs se monitorean desde el panel.
   const honeypots = [
-    { id: ServiceType.SSH, label: 'SSH', port: ':2222' },
-    { id: ServiceType.HTTP, label: 'HTTP', port: ':8080' },
-    { id: ServiceType.FTP, label: 'FTP', port: ':2121' }
+    { key: 'ssh:2222', label: 'SSH', port: ':2222' },
+    { key: 'http:8081', label: 'HTTP', port: ':8081' },
+    { key: 'ftp:2121', label: 'FTP', port: ':2121' }
   ];
 
   const anyBreach = Object.values(breachByService).some(Boolean);
@@ -83,12 +84,13 @@ export default function TrapSelector({
       {/* Right Honeypot Selector */}
       <div className="flex items-center gap-1.5 bg-ink p-1 rounded-lg border border-hairline">
         {honeypots.map((hp) => {
-          const isActive = activeService === hp.id;
-          const state = serviceState(!!breachByService[hp.id], keystrokeCountByService[hp.id] || 0);
+          // Brilla solo si ESTA instancia default está seleccionada
+          const isActive = activeService === hp.key;
+          const state = serviceState(!!breachByService[hp.key], keystrokeCountByService[hp.key] || 0);
           return (
             <button
-              key={hp.id}
-              onClick={() => onSelectService && onSelectService(hp.id)}
+              key={hp.key}
+              onClick={() => onSelectService && onSelectService(hp.key)}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded transition-all ${
                 isActive
                   ? 'bg-surface-container-high border border-hairline-strong shadow-sm'

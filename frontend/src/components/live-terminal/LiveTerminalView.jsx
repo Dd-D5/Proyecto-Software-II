@@ -4,6 +4,7 @@ import MetricsRow from '../shared/MetricsRow';
 import TerminalFrame from './TerminalFrame';
 import NetworkFingerprintCard from './NetworkFingerprintCard';
 import KeystrokeInspector from './KeystrokeInspector';
+import { baseServiceOf } from '../../hooks/useWebSocket';
 
 export default function LiveTerminalView({
   activeService,
@@ -38,7 +39,11 @@ export default function LiveTerminalView({
         attackerIp={attackerIp}
         attackerGeo={attackerGeo}
         systemStats={systemStats}
-        totalKeystrokes={keystrokeCountByService ? keystrokeCountByService[activeService] : 0}
+        totalKeystrokes={
+          keystrokeCountByService
+            ? (keystrokeCountByService[activeService] ?? keystrokeCountByService[baseServiceOf(activeService)] ?? 0)
+            : 0
+        }
       />
 
       {/* 3. Main Center Split (65% / 35% — code.html grid) */}

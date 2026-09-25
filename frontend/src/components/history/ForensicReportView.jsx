@@ -49,7 +49,7 @@ export default function ForensicReportView({ report, onBack }) {
           </div>
           <div>
             <h2 className="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">
-              Reporte Forense Post-Ataque
+              Reporte de Ataques
             </h2>
             <p className="font-caption text-caption text-outline">
               Generado {generatedAt} · AegisTrap Honeypot · Documento de análisis interno

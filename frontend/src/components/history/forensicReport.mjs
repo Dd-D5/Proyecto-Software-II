@@ -3,7 +3,7 @@
 
 export function fetchAttackHistory() {
   const host = window.location.hostname || '127.0.0.1';
-  return fetch(`http://${host}:8081/logs/attacks`, { mode: 'cors' }).then((r) => {
+  return fetch(`http://${host}:8080/logs/attacks`, { mode: 'cors' }).then((r) => {
     if (!r.ok) throw new Error('No hay historial disponible');
     return r.text();
   });
@@ -47,7 +47,7 @@ export function reportToPdfDoc(r) {
   const zebra = (cells, i) => cells.map((c) => ({ text: c, fillColor: i % 2 ? '#f7f7f7' : undefined }));
   const content = [
     { text: 'AEGISTRAP SOC · HONEYPOT INTELLIGENCE', style: 'brand' },
-    { text: 'REPORTE FORENSE POST-ATAQUE', style: 'title' },
+    { text: 'REPORTE DE ATAQUES', style: 'title' },
     { text: 'Documento de análisis post-incidente', style: 'subtitle' },
     {
       table: {

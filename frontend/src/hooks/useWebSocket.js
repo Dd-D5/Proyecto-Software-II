@@ -4,10 +4,26 @@ import { EventType, ServiceType } from '../services/types';
 
 const STORAGE_KEY = 'aegistrap:history:v1';
 
+// Migración one-time de claves legacy del histórico: los servidores viejos
+// emitían "ssh"/"ftp"/"http" planos; hoy las instancias default son
+// "ssh:2222"/"ftp:2121"/"http:8081". Sin esto, el histórico previo al cambio
+// queda invisible en la terminal/inspector.
+// ponytail: sin versionado de esquema — la detección es la presencia de la
+// clave plana. Upgrade path: campo "version" en el payload si hay más migraciones.
+const LEGACY_KEYS = { ssh: 'ssh:2222', ftp: 'ftp:2121', http: 'http:8081' };
+
 const loadPersistedState = () => {
   try {
     const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (data && data.history) return data;
+    if (data && data.history) {
+      for (const [oldKey, newKey] of Object.entries(LEGACY_KEYS)) {
+        if (data.history[oldKey]) {
+          data.history[newKey] = [...(data.history[oldKey] || []), ...data.history[newKey] || []];
+          delete data.history[oldKey];
+        }
+      }
+      return data;
+    }
   } catch {}
   return null;
 };
@@ -33,15 +49,15 @@ export const normalizeIPv4 = (ip) =>
 export const normalizeSessionId = (sid) =>
   sid && sid.startsWith('__1-') ? `127.0.0.1${sid.slice(3)}` : sid;
 
-// Match de servicio activo contra IDs dinámicos de honeypots desplegados:
-// "ssh", "ssh:2222" y "default-ssh" matchean activeService "ssh".
+// Clave base de un servicio: "ssh:2223"/"default-ssh" → "ssh"
+export const baseServiceOf = (svc) => String(svc || '').split(':')[0].replace('default-', '');
+
+// Match de servicio activo. Si activeSvc es una INSTANCIA ("ssh:2223"): match
+// exacto. Si es tipo base ("ssh"): matchea todo de ese tipo (defaults + customs).
 export const isServiceMatch = (msgSvc, activeSvc) => {
   if (!msgSvc || !activeSvc) return false;
   if (msgSvc === activeSvc) return true;
-  if (activeSvc === 'ssh' && (msgSvc === 'ssh:2222' || msgSvc === 'default-ssh')) return true;
-  if (activeSvc === 'ftp' && (msgSvc === 'ftp:2121' || msgSvc === 'default-ftp')) return true;
-  if (activeSvc === 'http' && (msgSvc === 'http:8081' || msgSvc === 'default-http')) return true;
-  return false;
+  return String(activeSvc).includes(':') ? false : baseServiceOf(msgSvc) === activeSvc;
 };
 
 // Mock inicial idéntico a code.html
@@ -223,8 +239,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       const currentBucket = historyRef.current[svc] || [];
       historyRef.current[svc] = [...currentBucket, stampedMsg].slice(-500);
 
-      // Clave base para estados agregados: "ssh:2222"/"default-ssh" → "ssh"
-      const baseSvc = svc.split(':')[0].replace('default-', '');
+      // Clave base para estados agregados + doble clave por instancia:
+      // breach/contadores viven en "ssh" (agregado) Y en "ssh:2223" (instancia)
+      const baseSvc = baseServiceOf(svc);
 
       // Contador de ataques en vivo entre samples del backend (1s)
       if (msg.type === 'connection' || msg.type === 'command' || msg.type === 'alert') {
@@ -234,15 +251,15 @@ export function useWebSocket(activeService = ServiceType.SSH) {
         }));
       }
 
-      // Estado de intrusión por servicio base (antes del filtro: aplica a cualquier trampa)
+      // Estado de intrusión por servicio (antes del filtro: aplica a cualquier trampa)
       if (msg.type === 'connection') {
-        breachRef.current = { ...breachRef.current, [baseSvc]: true };
+        breachRef.current = { ...breachRef.current, [svc]: true, [baseSvc]: true };
         setBreachByService(breachRef.current);
       }
 
       // Apagar breach cuando el atacante cierra la sesión (SSH/FTP envían connection_end)
       if (msg.type === EventType.CONNECTION_END) {
-        breachRef.current = { ...breachRef.current, [baseSvc]: false };
+        breachRef.current = { ...breachRef.current, [svc]: false, [baseSvc]: false };
         setBreachByService({ ...breachRef.current });
         scheduleSave();
       }
@@ -252,15 +269,20 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       if (baseSvc === ServiceType.HTTP) {
         clearTimeout(httpBreachTimerRef.current);
         httpBreachTimerRef.current = setTimeout(() => {
-          breachRef.current = { ...breachRef.current, [baseSvc]: false };
+          breachRef.current = { ...breachRef.current, [svc]: false, [baseSvc]: false };
           setBreachByService({ ...breachRef.current });
           saveNow();
         }, 10000);
       }
 
-      // Contador general de pulsaciones por servicio base (antes del filtro: cuenta todas las trampas)
+      // Contador general de pulsaciones por servicio (antes del filtro: cuenta todas las trampas)
       if (msg.type === EventType.IO && msg.payload) {
-        countRef.current = { ...countRef.current, [baseSvc]: (countRef.current[baseSvc] || 0) + 1 };
+        const c = countRef.current;
+        countRef.current = {
+          ...c,
+          [svc]: (c[svc] || 0) + 1,
+          [baseSvc]: (c[baseSvc] || 0) + 1
+        };
         setKeystrokeCountByService(countRef.current);
       }
 

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import DnsBanManagerView from './DnsBanManagerView';
+import ServiceSearchBar from './ServiceSearchBar';
 import { apiFetch } from '../../services/api';
 
-export default function AdminServiciosView() {
+const EMPTY_FILTERS = { name: '', type: '', port: '', status: '' };
+
+export default function AdminServiciosView({ breachByService = {}, onOpenService }) {
   const [subTab, setSubTab] = useState('honeypots'); // 'honeypots' | 'bans'
   const [honeypots, setHoneypots] = useState([]);
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
   const [name, setName] = useState('');
   const [type, setType] = useState('http');
   const [port, setPort] = useState('');
@@ -12,6 +16,21 @@ export default function AdminServiciosView() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [notice, setNotice] = useState(null);
+
+  // Clave de breach de una instancia: "http:8090" (igual que emite el backend)
+  const breachKeyOf = (hp) => `${hp.type}:${hp.port}`;
+  const isBreached = (hp) => !!breachByService[breachKeyOf(hp)];
+
+  // Filtros de búsqueda: nombre (substring), tipo, puerto exacto y estado
+  // (Alerta = intrusión activa en esa instancia)
+  const filtered = honeypots.filter((hp) => {
+    if (filters.name && !hp.name.toLowerCase().includes(filters.name.toLowerCase())) return false;
+    if (filters.type && hp.type !== filters.type) return false;
+    if (filters.port && String(hp.port) !== filters.port.trim()) return false;
+    if (filters.status === 'alerta' && !isBreached(hp)) return false;
+    if ((filters.status === 'running' || filters.status === 'stopped') && hp.status !== filters.status) return false;
+    return true;
+  });
 
   const fetchHoneypots = async () => {
     try {
@@ -247,9 +266,15 @@ export default function AdminServiciosView() {
               </h3>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="px-4 py-3 border-b border-hairline">
+              <ServiceSearchBar filters={filters} onFilterChange={setFilters} />
+            </div>
+
+            {/* ponytail: cap visual ~20 filas (max-h 880px, fila ≈44px); .panel-scroll
+                re-habilita la scrollbar oculta globalmente. Upgrade path: paginación. */}
+            <div className="panel-scroll overflow-auto max-h-[880px]">
               <table className="w-full text-left font-label-code text-xs">
-                <thead className="bg-surface-container border-b border-hairline font-label-caps text-[10px] text-outline uppercase">
+                <thead className="sticky top-0 z-10 bg-surface-container border-b border-hairline font-label-caps text-[10px] text-outline uppercase">
                   <tr>
                     <th className="p-3">Trampa / Nombre</th>
                     <th className="p-3">Tipo</th>
@@ -260,8 +285,13 @@ export default function AdminServiciosView() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-edge-soft text-on-surface">
-                  {honeypots.map((hp) => (
-                    <tr key={hp.id} className="hover:bg-surface-container transition-colors">
+                  {filtered.map((hp) => (
+                    <tr
+                      key={hp.id}
+                      onClick={() => onOpenService && onOpenService(breachKeyOf(hp))}
+                      className="hover:bg-surface-container transition-colors cursor-pointer"
+                      title="Abrir terminal de esta trampa"
+                    >
                       <td className="p-3 font-semibold flex items-center gap-2">
                         <span className="material-symbols-outlined text-[16px] text-secondary">
                           {hp.type === 'ssh' ? 'terminal' : hp.type === 'ftp' ? 'folder_zip' : 'public'}
@@ -278,17 +308,23 @@ export default function AdminServiciosView() {
                         {hp.banner || 'Apache / Standard'}
                       </td>
                       <td className="p-3">
-                        <span
-                          className={`font-label-caps text-[9px] px-2 py-0.5 rounded border uppercase font-semibold ${
-                            hp.status === 'running'
-                              ? 'bg-primary/10 text-primary-container border-primary/20'
-                              : 'bg-error-container/10 text-error border-error-container/30'
-                          }`}
-                        >
-                          {hp.status === 'running' ? '● Activo' : '○ Detenido'}
-                        </span>
+                        {isBreached(hp) ? (
+                          <span className="font-label-caps text-[9px] px-2 py-0.5 rounded border uppercase font-semibold animate-pulse bg-error-container/15 text-error border-error-container/40">
+                            ● Alerta
+                          </span>
+                        ) : (
+                          <span
+                            className={`font-label-caps text-[9px] px-2 py-0.5 rounded border uppercase font-semibold ${
+                              hp.status === 'running'
+                                ? 'bg-primary/10 text-primary-container border-primary/20'
+                                : 'bg-error-container/10 text-error border-error-container/30'
+                            }`}
+                          >
+                            {hp.status === 'running' ? '● Activo' : '○ Detenido'}
+                          </span>
+                        )}
                       </td>
-                      <td className="p-3 text-right space-x-2">
+                      <td className="p-3 text-right space-x-2" onClick={(e) => e.stopPropagation()}>
                         <button
                           onClick={() => handleToggleHoneypot(hp.id)}
                           className="bg-surface-container hover:bg-surface-bright text-on-surface font-label-caps text-[9px] uppercase font-semibold px-2.5 py-1 rounded border border-hairline-strong transition-colors cursor-pointer"
@@ -308,6 +344,11 @@ export default function AdminServiciosView() {
                   ))}
                 </tbody>
               </table>
+              {filtered.length === 0 && (
+                <div className="p-6 text-center font-label-code text-xs text-outline">
+                  Ningún honeypot coincide con los filtros de búsqueda.
+                </div>
+              )}
             </div>
           </div>
         </div>

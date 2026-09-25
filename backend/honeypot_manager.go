@@ -46,10 +46,20 @@ func initHoneypotManager() *HoneypotManager {
 	}
 	globalHoneypotManager = hm
 
-	// Registrar honeypots por defecto del sistema
+	// Registrar y ARRANCAR los honeypots default. Antes solo se registraban y
+	// los puertos los servían los servidores viejos (emitían "ssh" plano);
+	// ahora corren los handlers dinámicos → emiten "ssh:2222" y aplican baneo.
 	hm.registerDefault("default-ssh", "Honeypot SSH Principal", "ssh", 2222, "Ubuntu 20.04 LTS SSH")
 	hm.registerDefault("default-http", "Honeypot HTTP Principal", "http", 8081, "Apache/2.4.41 (Ubuntu)")
 	hm.registerDefault("default-ftp", "Honeypot FTP Principal", "ftp", 2121, "vsFTPd 3.0.3")
+
+	// ponytail: bind fallido → log sin Fatal (un puerto ocupado no debe tumbar
+	// el daemon; la instancia queda "error" y se reintenta desde el panel).
+	for _, inst := range hm.instances {
+		if err := hm.startInstanceLocked(inst); err != nil {
+			log.Printf("⚠️ No se pudo iniciar %s (: %d): %v", inst.Config.Name, inst.Config.Port, err)
+		}
+	}
 
 	return hm
 }

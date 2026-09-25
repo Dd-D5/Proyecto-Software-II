@@ -1,4 +1,5 @@
 import React from 'react';
+import { baseServiceOf } from '../../hooks/useWebSocket';
 
 export default function MetricsRow({
   activeService = 'ssh',
@@ -9,9 +10,11 @@ export default function MetricsRow({
   attacksPerSec = '+14.8k/s',
   ramTotalMb = null
 }) {
-  // Datos reales del evento "system_stats" (backend, cada 1s); null hasta el primer sample
+  // Datos reales del evento "system_stats" (backend, cada 1s); null hasta el primer sample.
+  // connections viene por tipo base ("ssh") aunque haya una instancia seleccionada ("ssh:2223")
+  const activeBase = baseServiceOf(activeService);
   const totalAttacks = systemStats?.total_attacks ?? 0;
-  const serviceConns = systemStats?.connections?.[activeService] ?? 0;
+  const serviceConns = systemStats?.connections?.[activeBase] ?? 0;
   const cpuPercent = systemStats?.cpu_percent ?? 0;
   const ramUsed = systemStats?.ram_used_mb ?? 0;
   const ramTotal = ramTotalMb || systemStats?.ram_total_mb || 1;
@@ -36,7 +39,7 @@ export default function MetricsRow({
         <div className="flex items-center gap-1 text-primary-container text-caption font-caption">
           <span className="material-symbols-outlined text-[14px]">check_circle</span>
           <span className="text-secondary">
-            {serviceConns.toLocaleString('en-US')} conexiones en {activeService.toUpperCase()}
+            {serviceConns.toLocaleString('en-US')} conexiones en {activeBase.toUpperCase()}
           </span>
         </div>
       </div>

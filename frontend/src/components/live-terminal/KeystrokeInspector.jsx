@@ -16,8 +16,8 @@ export default function KeystrokeInspector({ keystrokes = [] }) {
       </div>
 
       {/* Forensics Keystroke Table — ventana con slider propio (la scrollbar
-          global está oculta; .keystroke-scroll la re-habilita solo aquí) */}
-      <div className="keystroke-scroll border border-hairline rounded-lg bg-ink flex flex-col flex-1 min-h-0 overflow-y-auto">
+          global está oculta; .panel-scroll la re-habilita solo aquí) */}
+      <div className="panel-scroll border border-hairline rounded-lg bg-ink flex flex-col flex-1 min-h-0 overflow-y-auto">
         <table className="w-full text-left font-label-code text-[12px]">
           <thead className="sticky top-0 bg-surface-container border-b border-hairline font-label-caps text-[10px] text-outline uppercase">
             <tr>
