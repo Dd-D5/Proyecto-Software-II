@@ -4,7 +4,8 @@
 
 export function getApiBaseUrl() {
   const host = window.location.hostname || '127.0.0.1';
-  return `http://${host}:8080`;
+  const port = (import.meta && import.meta.env && import.meta.env.VITE_API_PORT) || '8085';
+  return `http://${host}:${port}`;
 }
 
 export async function apiFetch(endpoint, options = {}) {

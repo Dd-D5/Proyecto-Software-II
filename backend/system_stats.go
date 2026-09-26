@@ -96,19 +96,40 @@ func getProcessRAM() (float64, float64) {
 	return rssMB, memTotal
 }
 
-// readSelfCPUTicks lee utime+stime de /proc/self/stat, en clock ticks
+// readSelfCPUTicks lee el porcentaje de CPU del sistema y subprocesos sandbox
 func readSelfCPUTicks() int64 {
-	data, err := os.ReadFile("/proc/self/stat")
+	data, err := os.ReadFile("/proc/stat")
+	if err == nil {
+		lines := strings.Split(string(data), "\n")
+		if len(lines) > 0 && strings.HasPrefix(lines[0], "cpu ") {
+			fields := strings.Fields(lines[0])
+			if len(fields) >= 5 {
+				user, _ := strconv.ParseInt(fields[1], 10, 64)
+				nice, _ := strconv.ParseInt(fields[2], 10, 64)
+				sys, _ := strconv.ParseInt(fields[3], 10, 64)
+				iowait := int64(0)
+				if len(fields) >= 6 {
+					iowait, _ = strconv.ParseInt(fields[5], 10, 64)
+				}
+				busy := user + nice + sys + iowait
+				return busy
+			}
+		}
+	}
+
+	data, err = os.ReadFile("/proc/self/stat")
 	if err != nil {
 		return 0
 	}
 	fields := strings.Fields(string(data))
-	if len(fields) < 15 {
+	if len(fields) < 17 {
 		return 0
 	}
 	utime, _ := strconv.ParseInt(fields[13], 10, 64)
 	stime, _ := strconv.ParseInt(fields[14], 10, 64)
-	return utime + stime
+	cutime, _ := strconv.ParseInt(fields[15], 10, 64)
+	cstime, _ := strconv.ParseInt(fields[16], 10, 64)
+	return utime + stime + cutime + cstime
 }
 
 func getRealUptime() float64 {

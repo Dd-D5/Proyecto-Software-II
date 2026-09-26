@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
@@ -9,10 +10,17 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/exec"
 	"strings"
+	"sync"
 	"time"
 
 	"golang.org/x/crypto/ssh"
+)
+
+var (
+	sessionRiskMutex sync.Mutex
+	sessionRiskCount = make(map[string]int)
 )
 
 const attackHistoryPath = "attack_history.txt"
@@ -325,6 +333,9 @@ func startFakeShell(channel ssh.Channel, ip, mac, sessionID string) {
 }
 
 func startFakeShellForService(channel ssh.Channel, ip, mac, sessionID, serviceName string) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel() // Cancela inmediatamente subprocesos y workers al cerrar/banear sesión
+
 	defer channel.Close()
 	defer emitTelemetry(serviceName, "connection_end", "El intruso cerró la terminal", ip, mac, sessionID)
 
@@ -353,7 +364,7 @@ func startFakeShellForService(channel ssh.Channel, ip, mac, sessionID, serviceNa
 				if analyzeCommandForService(cleanCmd, ip, mac, sessionID, channel, serviceName) {
 					return
 				}
-				simulateOSResponseForService(channel, cleanCmd, ip, mac, sessionID, serviceName)
+				simulateOSResponseForService(ctx, channel, cleanCmd, ip, mac, sessionID, serviceName)
 			}
 
 			channel.Write([]byte(prompt))
@@ -400,7 +411,7 @@ func analyzeCommandForService(cmdLine, ip, mac, sessionID string, channel ssh.Ch
 			for _, bad := range sensitiveCommands {
 				if baseCmd == bad || strings.Contains(cleanCmd, bad) {
 					isDangerous = true
-					reason = fmt.Sprintf("Comando de alto riesgo ejecutado en SSH: '%s'", cleanCmd)
+					reason = fmt.Sprintf("Comando de alto riesgo detectado en SSH: '%s'", cleanCmd)
 					break
 				}
 			}
@@ -408,68 +419,128 @@ func analyzeCommandForService(cmdLine, ip, mac, sessionID string, channel ssh.Ch
 	}
 
 	if isDangerous {
-		alertMsg := fmt.Sprintf("Intento de ejecución crítica en %s: '%s'", serviceName, cleanCmd)
-		log.Printf("⚠️ ¡ALERTA BASH BOMB / BANEO! %s (Origen: %s)", alertMsg, mac)
+		sessionRiskMutex.Lock()
+		sessionRiskCount[sessionID]++
+		strikeCount := sessionRiskCount[sessionID]
+		sessionRiskMutex.Unlock()
 
-		emitTelemetry(serviceName, "alert", alertMsg, ip, mac, sessionID)
+		if strikeCount == 1 {
+			// STRIKE 1: Alerta SILENCIOSA para el Administrador en la Web (Permite continuar al atacante en SSH)
+			warnMsg := fmt.Sprintf("⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en %s: '%s'", serviceName, cleanCmd)
+			log.Printf("⚠️ %s (Origen: %s)", warnMsg, mac)
 
-		if globalBanManager != nil {
-			globalBanManager.Ban(ip, reason, "auto")
+			// Emitir telemetría al Dashboard del Administrador
+			emitTelemetry(serviceName, "alert", warnMsg, ip, mac, sessionID)
+
+			// El atacante NO ve ningún mensaje de advertencia en su SSH.
+			// La ejecución continúa normalmente en el Sandbox para capturar su comportamiento.
+			return false
+		} else {
+			// STRIKE 2: Reincidencia -> BANEO en el Administrador y Desconexión limpia en SSH
+			banMsg := fmt.Sprintf("⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en %s: '%s'", serviceName, cleanCmd)
+			log.Printf("⛔ %s (Origen: %s)", banMsg, mac)
+
+			// Notificar al Administrador
+			emitTelemetry(serviceName, "alert", banMsg, ip, mac, sessionID)
+
+			if globalBanManager != nil {
+				globalBanManager.Ban(ip, reason, "auto")
+			}
+
+			// Desconexión silenciosa de la terminal SSH (simula caída natural de conexión)
+			channel.Close()
+
+			sessionRiskMutex.Lock()
+			delete(sessionRiskCount, sessionID)
+			sessionRiskMutex.Unlock()
+
+			return true
 		}
-
-		channel.Write([]byte(fmt.Sprintf("\r\n⛔ [DEFENSA ACTIVA] IP %s BANEADA POR COMANDO MALICIOSO.\r\nConexión cerrada automáticamente.\r\n", ip)))
-		channel.Close()
-		return true
 	}
 
 	return false
 }
 
 func simulateOSResponse(channel ssh.Channel, cmdLine, ip, mac, sessionID string) {
-	simulateOSResponseForService(channel, cmdLine, ip, mac, sessionID, "ssh")
+	simulateOSResponseForService(context.Background(), channel, cmdLine, ip, mac, sessionID, "ssh")
 }
 
-func simulateOSResponseForService(channel ssh.Channel, cmdLine, ip, mac, sessionID, serviceName string) {
+func simulateOSResponseForService(parentCtx context.Context, channel ssh.Channel, cmdLine, ip, mac, sessionID, serviceName string) {
 	parts := strings.Fields(cmdLine)
 	if len(parts) == 0 {
 		return
 	}
 	baseCmd := parts[0]
-	response := ""
 
+	// Manejador hiper-realista para Fork Bombs y bombas de procesos
+	if strings.Contains(cmdLine, ":(){") || strings.Contains(cmdLine, ":|:&") || strings.Contains(cmdLine, "forkbomb") {
+		forkErr := "bash: fork: retry: No child processes\r\nbash: fork: Resource temporarily unavailable\r\nbash: fork: retry: No child processes\r\n"
+		channel.Write([]byte(forkErr))
+		emitTelemetry(serviceName, "output", forkErr, ip, mac, sessionID)
+
+		// Elevar CPU de forma controlada; se liquida al cerrar/banear la sesión (parentCtx) o a los 8s
+		go func(ctx context.Context) {
+			timer := time.NewTimer(8 * time.Second)
+			defer timer.Stop()
+			for {
+				select {
+				case <-ctx.Done():
+					return
+				case <-timer.C:
+					return
+				default:
+					_ = 999999 * 999999
+					time.Sleep(1 * time.Millisecond)
+				}
+			}
+		}(parentCtx)
+		return
+	}
+
+	// Manejadores internos inmediatos
 	switch baseCmd {
-	case "ls":
-		response = "Desktop  Documents  Downloads  snap  .bashrc\r\n"
-	case "whoami":
-		response = "root\r\n"
-	case "pwd":
-		response = "/root\r\n"
-	case "uname":
-		response = "Linux ubuntu 5.4.0-150-generic x86_64 GNU/Linux\r\n"
-	case "id":
-		response = "uid=0(root) gid=0(root) groups=0(root)\r\n"
-	case "cd":
-		if len(parts) == 1 || parts[1] == ".." || parts[1] == "/" || parts[1] == "~" {
-			return
-		}
-		response = fmt.Sprintf("bash: cd: %s: No such file or directory\r\n", parts[1])
 	case "clear":
-		response = "\033[H\033[2J"
+		channel.Write([]byte("\033[H\033[2J"))
+		return
 	case "exit", "logout":
-		response = "logout\r\n"
-	default:
-		response = fmt.Sprintf("bash: %s: command not found\r\n", baseCmd)
-	}
-
-	if response != "" {
-		channel.Write([]byte(response))
-		if baseCmd != "clear" {
-			emitTelemetry(serviceName, "output", response, ip, mac, sessionID)
-		}
-	}
-
-	if baseCmd == "exit" || baseCmd == "logout" {
+		channel.Write([]byte("logout\r\n"))
 		channel.Close()
+		return
+	case "cd":
+		if len(parts) > 1 && parts[1] != "~" && parts[1] != "/" && parts[1] != ".." {
+			errMsg := fmt.Sprintf("bash: cd: %s: No such file or directory\r\n", parts[1])
+			channel.Write([]byte(errMsg))
+			emitTelemetry(serviceName, "output", errMsg, ip, mac, sessionID)
+		}
+		return
+	}
+
+	// Ejecución nativa del comando en el sistema mediante Go Sandbox
+	cmdCtx, cancel := context.WithTimeout(parentCtx, 10*time.Second)
+	defer cancel()
+
+	cmd := exec.CommandContext(cmdCtx, "sh", "-c", cmdLine)
+	cmd.Env = append(os.Environ(), "TERM=xterm", "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin")
+
+	out, err := cmd.CombinedOutput()
+	outStr := string(out)
+
+	if cmdCtx.Err() == context.DeadlineExceeded {
+		outStr += "\r\n[Sandbox Timeout: Comando excedió el tiempo máximo de 10s]\r\n"
+	} else if err != nil && outStr == "" {
+		outStr = fmt.Sprintf("bash: %s: command failed\r\n", baseCmd)
+	}
+
+	if len(outStr) > 8192 {
+		outStr = outStr[:8192] + "\r\n... [Salida truncada por límite Sandbox (8KB)]\r\n"
+	}
+
+	// Normalizar saltos de línea para terminal SSH
+	outFormatted := strings.ReplaceAll(strings.ReplaceAll(outStr, "\r\n", "\n"), "\n", "\r\n")
+
+	if outFormatted != "" {
+		channel.Write([]byte(outFormatted))
+		emitTelemetry(serviceName, "output", outFormatted, ip, mac, sessionID)
 	}
 }
 

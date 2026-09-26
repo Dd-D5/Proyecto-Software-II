@@ -9,6 +9,7 @@ import { baseServiceOf } from '../../hooks/useWebSocket';
 export default function LiveTerminalView({
   activeService,
   onSelectService,
+  onNavigateToAdmin,
   wsUrl,
   attackerIp,
   attackerMac,
@@ -28,6 +29,7 @@ export default function LiveTerminalView({
       <TrapSelector
         activeService={activeService}
         onSelectService={onSelectService}
+        onNavigateToAdmin={onNavigateToAdmin}
         wsUrl={wsUrl}
         breachByService={breachByService}
         keystrokeCountByService={keystrokeCountByService}

@@ -462,3 +462,5755 @@ mac=00:00:00:00:00:00 (Localhost)
 session_id=127.0.0.1-1790173027120167009
 payload="cd"
 ---
+[ATTACK 2026-09-26T13:52:07.85861499-04:00]
+service=ssh
+event=connection
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en SSH :2222"
+---
+[ATTACK 2026-09-26T13:52:08.158896355-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=":"
+---
+[ATTACK 2026-09-26T13:52:08.209130364-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="("
+---
+[ATTACK 2026-09-26T13:52:08.259346372-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=")"
+---
+[ATTACK 2026-09-26T13:52:08.309532895-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="{"
+---
+[ATTACK 2026-09-26T13:52:08.359811462-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=" "
+---
+[ATTACK 2026-09-26T13:52:08.409996274-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=":"
+---
+[ATTACK 2026-09-26T13:52:08.460198298-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="|"
+---
+[ATTACK 2026-09-26T13:52:08.510385635-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=":"
+---
+[ATTACK 2026-09-26T13:52:08.560766539-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="&"
+---
+[ATTACK 2026-09-26T13:52:08.611615408-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="}"
+---
+[ATTACK 2026-09-26T13:52:08.66180888-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=";"
+---
+[ATTACK 2026-09-26T13:52:08.71203682-04:00]
+service=ssh
+event=io
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=":"
+---
+[ATTACK 2026-09-26T13:52:08.762369766-04:00]
+service=ssh
+event=command
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload=":(){ :|:& };: & sudo rm -rf / --no-preserve-root"
+---
+[ATTACK 2026-09-26T13:52:08.962950139-04:00]
+service=ssh
+event=alert
+ip=198.51.100.42
+mac=00:50:56:C0:00:08
+session_id=198.51.100.42-1790445127858598537
+payload="⚠️ ¡ALERTA BASH BOMB! Intento de destrucción en SSH"
+---
+[ATTACK 2026-09-26T13:52:29.128058789-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T13:53:05.512881881-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload="\x16"
+---
+[ATTACK 2026-09-26T13:53:06.915728442-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload=":(){ :|:& };:"
+---
+[ATTACK 2026-09-26T13:53:09.392921358-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload="\r"
+---
+[ATTACK 2026-09-26T13:53:09.392978793-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload="\x16:(){ :|:& };:"
+---
+[ATTACK 2026-09-26T13:53:09.392993858-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload="Intento de ejecución crítica en ssh:2222: '\x16:(){ :|:& };:'"
+---
+[ATTACK 2026-09-26T13:53:09.395264367-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445149127866116
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T13:59:37.028670683-04:00]
+service=ssh:8082
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="Nuevo intruso conectado a Honeypot SSH SSH CUSTOM (Puerto 8082)"
+---
+[ATTACK 2026-09-26T14:01:00.868621881-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="w"
+---
+[ATTACK 2026-09-26T14:01:01.195644239-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="h"
+---
+[ATTACK 2026-09-26T14:01:01.276429543-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="o"
+---
+[ATTACK 2026-09-26T14:01:01.624196403-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="a"
+---
+[ATTACK 2026-09-26T14:01:01.745977775-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="m"
+---
+[ATTACK 2026-09-26T14:01:01.911487089-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="i"
+---
+[ATTACK 2026-09-26T14:01:02.255928091-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:02.25600287-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="whoami"
+---
+[ATTACK 2026-09-26T14:01:02.25603276-04:00]
+service=ssh:8082
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="root\r\n"
+---
+[ATTACK 2026-09-26T14:01:05.124673441-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:05.320139007-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:05.456553667-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:05.456632173-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:06.525154979-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:06.643776156-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:06.817762716-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:06.817844278-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:07.62994641-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:07.706160544-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:07.898506065-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:07.898591678-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:08.110230307-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:08.167286926-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:08.3437502-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:08.343855208-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:08.595580227-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:08.692650393-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:08.749223612-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:08.749303331-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:11.436365008-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:11.534966214-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:11.554817582-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:11.554901157-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:11.732029117-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:11.830337448-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:11.890931647-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:11.891012236-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:12.030801389-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:12.110949355-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:12.189185818-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:12.189271062-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:12.289156236-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:12.957674559-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T14:01:13.13471697-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:13.191893612-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:13.329579465-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:13.329655862-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:13.50723866-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:13.585974107-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:13.801774136-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:13.801840711-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:13.981451554-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:14.080783666-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:14.259263482-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:14.259347498-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:14.456125107-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:14.533758257-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:14.692643324-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:14.692741271-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:14.930589524-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:14.989211198-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:15.126247293-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:15.126313473-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:15.382926201-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:15.46271408-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:15.599519495-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:15.599594932-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:15.815610005-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:15.915646373-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:15.975831187-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:15.975906126-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd"
+---
+[ATTACK 2026-09-26T14:01:22.876333182-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="l"
+---
+[ATTACK 2026-09-26T14:01:22.916997378-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="s"
+---
+[ATTACK 2026-09-26T14:01:23.134256676-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:23.134338898-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="ls"
+---
+[ATTACK 2026-09-26T14:01:23.134888395-04:00]
+service=ssh:8082
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="Desktop  Documents  Downloads  snap  .bashrc\r\n"
+---
+[ATTACK 2026-09-26T14:01:25.004157901-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="c"
+---
+[ATTACK 2026-09-26T14:01:25.065307029-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="d"
+---
+[ATTACK 2026-09-26T14:01:25.230181892-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload=" "
+---
+[ATTACK 2026-09-26T14:01:25.598870629-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="D"
+---
+[ATTACK 2026-09-26T14:01:25.907574463-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="e"
+---
+[ATTACK 2026-09-26T14:01:26.069745058-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="s"
+---
+[ATTACK 2026-09-26T14:01:26.172595868-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="k"
+---
+[ATTACK 2026-09-26T14:01:26.502807158-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="t"
+---
+[ATTACK 2026-09-26T14:01:26.64766336-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="o"
+---
+[ATTACK 2026-09-26T14:01:26.812389145-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="p"
+---
+[ATTACK 2026-09-26T14:01:27.039342275-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:27.039418241-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="cd Desktop"
+---
+[ATTACK 2026-09-26T14:01:27.039444607-04:00]
+service=ssh:8082
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="bash: cd: Desktop: No such file or directory\r\n"
+---
+[ATTACK 2026-09-26T14:01:30.340536456-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload=":(){ :|:& };:"
+---
+[ATTACK 2026-09-26T14:01:30.812555587-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="\r"
+---
+[ATTACK 2026-09-26T14:01:30.812667761-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload=":(){ :|:& };:"
+---
+[ATTACK 2026-09-26T14:01:30.81268471-04:00]
+service=ssh:8082
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="Intento de ejecución crítica en ssh:8082: ':(){ :|:& };:'"
+---
+[ATTACK 2026-09-26T14:01:30.813588645-04:00]
+service=ssh:8082
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790445577027989391
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T14:10:02.376395824-04:00]
+service=ssh:8082
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790446202376166307
+payload="Nuevo intruso conectado a Honeypot SSH SSH CUSTOM (Puerto 8082)"
+---
+[ATTACK 2026-09-26T14:10:15.211229105-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790446202376166307
+payload="python3 -c \"import time; data = 'X' * (800 * 1024 * 1024); print('RAM cargada...'); time.sleep(30)\""
+---
+[ATTACK 2026-09-26T14:10:17.470077476-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790446202376166307
+payload="\r"
+---
+[ATTACK 2026-09-26T14:10:17.470147447-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790446202376166307
+payload="python3 -c \"import time; data = 'X' * (800 * 1024 * 1024); print('RAM cargada...'); time.sleep(30)\""
+---
+[ATTACK 2026-09-26T14:10:17.470188317-04:00]
+service=ssh:8082
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790446202376166307
+payload="Intento de ejecución crítica en ssh:8082: 'python3 -c \"import time; data = 'X' * (800 * 1024 * 1024); print('RAM cargada...'); time.sleep(30)\"'"
+---
+[ATTACK 2026-09-26T14:10:17.471044068-04:00]
+service=ssh:8082
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790446202376166307
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:06:14.516122234-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T15:06:19.287356293-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="w"
+---
+[ATTACK 2026-09-26T15:06:19.513351415-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="h"
+---
+[ATTACK 2026-09-26T15:06:19.807249534-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="o"
+---
+[ATTACK 2026-09-26T15:06:20.01376225-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="a"
+---
+[ATTACK 2026-09-26T15:06:20.160043369-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="m"
+---
+[ATTACK 2026-09-26T15:06:20.306037103-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="i"
+---
+[ATTACK 2026-09-26T15:06:20.859208209-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:06:20.859288291-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="whoami"
+---
+[ATTACK 2026-09-26T15:06:20.864678281-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="night\r\n"
+---
+[ATTACK 2026-09-26T15:06:23.270823452-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="ssh root@localhost -p 2222\r"
+---
+[ATTACK 2026-09-26T15:06:28.823161243-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="c"
+---
+[ATTACK 2026-09-26T15:06:28.982575842-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="x"
+---
+[ATTACK 2026-09-26T15:06:29.081716122-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="z"
+---
+[ATTACK 2026-09-26T15:06:29.45716929-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:06:29.600933814-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:06:29.758702594-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:06:30.713939939-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:06:31.27038074-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="x"
+---
+[ATTACK 2026-09-26T15:06:31.569030907-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="c"
+---
+[ATTACK 2026-09-26T15:06:31.986311924-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="w"
+---
+[ATTACK 2026-09-26T15:06:32.347949726-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:06:32.348023548-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="xcw"
+---
+[ATTACK 2026-09-26T15:06:32.349446191-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="sh: línea 1: xcw: orden no encontrada\r\n"
+---
+[ATTACK 2026-09-26T15:06:34.323112924-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="c"
+---
+[ATTACK 2026-09-26T15:06:34.720137206-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:06:35.023268392-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="l"
+---
+[ATTACK 2026-09-26T15:06:35.267314421-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="s"
+---
+[ATTACK 2026-09-26T15:06:35.467184876-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:06:35.467255566-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="ls"
+---
+[ATTACK 2026-09-26T15:06:35.498964937-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="aegistrap_backend\r\nattack_history.txt\r\nauth.go\r\nban_manager.go\r\nbanned_list.json\r\nftp_server.go\r\ngo.mod\r\ngo.sum\r\nhoneypot\r\nhoneypot_manager.go\r\nhoneypot_rsa\r\nhttp_server.go\r\nmain.go\r\nREADME.md\r\nsessions.json\r\nssh_server.go\r\nsystem_stats.go\r\nwebsocket.go\r\n"
+---
+[ATTACK 2026-09-26T15:06:39.918722026-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="c"
+---
+[ATTACK 2026-09-26T15:06:39.959780042-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="d"
+---
+[ATTACK 2026-09-26T15:06:40.12227501-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload=" "
+---
+[ATTACK 2026-09-26T15:06:43.214582301-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="a"
+---
+[ATTACK 2026-09-26T15:06:43.617255068-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="u"
+---
+[ATTACK 2026-09-26T15:06:43.718413156-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="t"
+---
+[ATTACK 2026-09-26T15:06:44.057202065-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="h"
+---
+[ATTACK 2026-09-26T15:06:44.677318574-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="."
+---
+[ATTACK 2026-09-26T15:06:45.078269903-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="g"
+---
+[ATTACK 2026-09-26T15:06:45.195782613-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="o"
+---
+[ATTACK 2026-09-26T15:06:45.710700115-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:06:45.710791696-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="cd auth.go"
+---
+[ATTACK 2026-09-26T15:06:45.710963843-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="bash: cd: auth.go: No such file or directory\r\n"
+---
+[ATTACK 2026-09-26T15:07:01.65441681-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="s"
+---
+[ATTACK 2026-09-26T15:07:01.780441032-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="u"
+---
+[ATTACK 2026-09-26T15:07:01.865445636-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="d"
+---
+[ATTACK 2026-09-26T15:07:02.033543154-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="o"
+---
+[ATTACK 2026-09-26T15:07:02.451189112-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload=" "
+---
+[ATTACK 2026-09-26T15:07:02.698914536-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="w"
+---
+[ATTACK 2026-09-26T15:07:02.846074755-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="h"
+---
+[ATTACK 2026-09-26T15:07:03.116672614-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="o"
+---
+[ATTACK 2026-09-26T15:07:03.304992764-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="a"
+---
+[ATTACK 2026-09-26T15:07:03.449474855-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="m"
+---
+[ATTACK 2026-09-26T15:07:03.638218647-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="i"
+---
+[ATTACK 2026-09-26T15:07:03.971748322-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:07:03.971846234-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="sudo whoami"
+---
+[ATTACK 2026-09-26T15:07:03.971874281-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:2222: 'sudo whoami'"
+---
+[ATTACK 2026-09-26T15:07:05.761456378-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper\r\nsudo: a password is required\r\n"
+---
+[ATTACK 2026-09-26T15:07:20.3183747-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:07:21.618785648-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\""
+---
+[ATTACK 2026-09-26T15:07:23.444079867-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\r"
+---
+[ATTACK 2026-09-26T15:07:23.444161651-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="\x16python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\""
+---
+[ATTACK 2026-09-26T15:07:23.444187224-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en ssh:2222: '\x16python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"'"
+---
+[ATTACK 2026-09-26T15:07:23.446787401-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449574515749362
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:07:56.250806982-04:00]
+service=ssh:8082
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449676250613063
+payload="Nuevo intruso conectado a Honeypot SSH SSH TEST (Puerto 8082)"
+---
+[ATTACK 2026-09-26T15:08:01.621949988-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449676250613063
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\""
+---
+[ATTACK 2026-09-26T15:08:02.761058444-04:00]
+service=ssh:8082
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449676250613063
+payload="\r"
+---
+[ATTACK 2026-09-26T15:08:02.761115662-04:00]
+service=ssh:8082
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449676250613063
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\""
+---
+[ATTACK 2026-09-26T15:08:02.761153734-04:00]
+service=ssh:8082
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449676250613063
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:8082: 'python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"'"
+---
+[ATTACK 2026-09-26T15:12:52.455658157-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T15:12:56.290053841-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="s"
+---
+[ATTACK 2026-09-26T15:12:56.409577642-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="u"
+---
+[ATTACK 2026-09-26T15:12:56.571075703-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="d"
+---
+[ATTACK 2026-09-26T15:12:56.695203133-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="o"
+---
+[ATTACK 2026-09-26T15:12:57.389036762-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:12:57.530718504-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:12:57.651715936-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:12:57.793892888-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:12:58.020209943-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="w"
+---
+[ATTACK 2026-09-26T15:12:58.180769112-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="h"
+---
+[ATTACK 2026-09-26T15:12:58.44336124-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="o"
+---
+[ATTACK 2026-09-26T15:12:58.85449225-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="a"
+---
+[ATTACK 2026-09-26T15:12:59.197498158-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="m"
+---
+[ATTACK 2026-09-26T15:12:59.444266664-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="i"
+---
+[ATTACK 2026-09-26T15:13:00.179392617-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:00.179482729-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="whoami"
+---
+[ATTACK 2026-09-26T15:13:00.182122853-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="night\r\n"
+---
+[ATTACK 2026-09-26T15:13:03.050133812-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="l"
+---
+[ATTACK 2026-09-26T15:13:03.110762967-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="s"
+---
+[ATTACK 2026-09-26T15:13:03.305857594-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:03.305927566-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="ls"
+---
+[ATTACK 2026-09-26T15:13:03.308579332-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="aegistrap_backend\r\nattack_history.txt\r\nauth.go\r\nban_manager.go\r\nbanned_list.json\r\nftp_server.go\r\ngo.mod\r\ngo.sum\r\nhoneypot\r\nhoneypot_manager.go\r\nhoneypot_rsa\r\nhttp_server.go\r\nmain.go\r\nREADME.md\r\nsessions.json\r\nssh_server.go\r\nsystem_stats.go\r\nwebsocket.go\r\n"
+---
+[ATTACK 2026-09-26T15:13:06.649934192-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="c"
+---
+[ATTACK 2026-09-26T15:13:06.753948436-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="l"
+---
+[ATTACK 2026-09-26T15:13:06.896835663-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="e"
+---
+[ATTACK 2026-09-26T15:13:06.979511434-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="a"
+---
+[ATTACK 2026-09-26T15:13:07.081984833-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="r"
+---
+[ATTACK 2026-09-26T15:13:07.265565243-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:07.26567501-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="clear"
+---
+[ATTACK 2026-09-26T15:13:09.302252831-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"\r"
+---
+[ATTACK 2026-09-26T15:13:12.2820634-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:16.754006705-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"\r"
+---
+[ATTACK 2026-09-26T15:13:18.475153457-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:13:19.280483307-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:19.28057771-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:13:19.290717885-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="sh: línea 1: $'\\026': orden no encontrada\r\n"
+---
+[ATTACK 2026-09-26T15:13:21.96968206-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"\r"
+---
+[ATTACK 2026-09-26T15:13:22.722037306-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:13:23.118670633-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:13:23.556947149-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:26.753677672-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"\r"
+---
+[ATTACK 2026-09-26T15:13:29.537635477-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:13:50.257302396-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=":"
+---
+[ATTACK 2026-09-26T15:13:53.057250701-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="("
+---
+[ATTACK 2026-09-26T15:13:53.221238855-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=")"
+---
+[ATTACK 2026-09-26T15:13:55.473290218-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="{"
+---
+[ATTACK 2026-09-26T15:13:59.617364695-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="|"
+---
+[ATTACK 2026-09-26T15:14:01.911811311-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=":"
+---
+[ATTACK 2026-09-26T15:14:07.537022605-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="&"
+---
+[ATTACK 2026-09-26T15:14:09.921040736-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="}"
+---
+[ATTACK 2026-09-26T15:14:11.681206875-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=":"
+---
+[ATTACK 2026-09-26T15:14:11.888121655-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\""
+---
+[ATTACK 2026-09-26T15:14:12.795208886-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:14:13.585135904-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:14:16.673065854-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=";"
+---
+[ATTACK 2026-09-26T15:14:17.409382085-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=":"
+---
+[ATTACK 2026-09-26T15:14:30.520901184-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:14:30.520985428-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=":(){|:&};:"
+---
+[ATTACK 2026-09-26T15:14:30.521007571-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:2222: ':(){|:&};:'"
+---
+[ATTACK 2026-09-26T15:14:30.522459785-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="sh: -c: línea 1: error de sintaxis cerca del elemento inesperado `|'\r\nsh: -c: línea 1: `:(){|:&};:'\r\n"
+---
+[ATTACK 2026-09-26T15:14:35.81669406-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="p"
+---
+[ATTACK 2026-09-26T15:14:36.15792606-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="y"
+---
+[ATTACK 2026-09-26T15:14:36.558822851-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="t"
+---
+[ATTACK 2026-09-26T15:14:36.748661436-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="h"
+---
+[ATTACK 2026-09-26T15:14:36.875295562-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="o"
+---
+[ATTACK 2026-09-26T15:14:37.023646056-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="n"
+---
+[ATTACK 2026-09-26T15:14:37.75675464-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="3"
+---
+[ATTACK 2026-09-26T15:14:39.815310938-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:40.109221837-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="-"
+---
+[ATTACK 2026-09-26T15:14:40.193309088-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="c"
+---
+[ATTACK 2026-09-26T15:14:40.466363952-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:40.95283551-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\""
+---
+[ATTACK 2026-09-26T15:14:41.922586539-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="i"
+---
+[ATTACK 2026-09-26T15:14:42.094162811-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="m"
+---
+[ATTACK 2026-09-26T15:14:42.265434097-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="p"
+---
+[ATTACK 2026-09-26T15:14:42.414506703-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="o"
+---
+[ATTACK 2026-09-26T15:14:42.499123946-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="r"
+---
+[ATTACK 2026-09-26T15:14:42.708377148-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="t"
+---
+[ATTACK 2026-09-26T15:14:43.024858032-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:43.211948138-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="t"
+---
+[ATTACK 2026-09-26T15:14:43.318154029-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="i"
+---
+[ATTACK 2026-09-26T15:14:43.466880308-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="m"
+---
+[ATTACK 2026-09-26T15:14:43.633882114-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="e"
+---
+[ATTACK 2026-09-26T15:14:44.221873257-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=";"
+---
+[ATTACK 2026-09-26T15:14:46.197660112-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:46.326187767-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="["
+---
+[ATTACK 2026-09-26T15:14:47.401206601-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="x"
+---
+[ATTACK 2026-09-26T15:14:48.430409183-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="8"
+---
+[ATTACK 2026-09-26T15:14:48.557903221-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="8"
+---
+[ATTACK 2026-09-26T15:14:49.172356435-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:14:49.298298336-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:14:49.804612007-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="*"
+---
+[ATTACK 2026-09-26T15:14:49.952763893-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="*"
+---
+[ATTACK 2026-09-26T15:14:50.291802242-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="2"
+---
+[ATTACK 2026-09-26T15:14:51.279611334-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:51.489254903-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="f"
+---
+[ATTACK 2026-09-26T15:14:51.596153233-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="o"
+---
+[ATTACK 2026-09-26T15:14:51.660563446-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="r"
+---
+[ATTACK 2026-09-26T15:14:51.76879789-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:51.937586515-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="x"
+---
+[ATTACK 2026-09-26T15:14:52.041871356-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:52.251623013-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="i"
+---
+[ATTACK 2026-09-26T15:14:52.355591958-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="n"
+---
+[ATTACK 2026-09-26T15:14:52.547687831-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:14:52.655562092-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="r"
+---
+[ATTACK 2026-09-26T15:14:52.783768202-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="a"
+---
+[ATTACK 2026-09-26T15:14:52.890381142-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="n"
+---
+[ATTACK 2026-09-26T15:14:52.995014787-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="g"
+---
+[ATTACK 2026-09-26T15:14:53.205045768-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="e"
+---
+[ATTACK 2026-09-26T15:14:53.877749958-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="("
+---
+[ATTACK 2026-09-26T15:14:54.696943278-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="1"
+---
+[ATTACK 2026-09-26T15:14:54.867326971-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="0"
+---
+[ATTACK 2026-09-26T15:14:56.299512074-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="*"
+---
+[ATTACK 2026-09-26T15:14:56.445467067-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="*"
+---
+[ATTACK 2026-09-26T15:14:57.437304577-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="7"
+---
+[ATTACK 2026-09-26T15:15:00.288231664-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=")"
+---
+[ATTACK 2026-09-26T15:15:01.292974831-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="]"
+---
+[ATTACK 2026-09-26T15:15:02.844329527-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=";"
+---
+[ATTACK 2026-09-26T15:15:03.012473293-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=" "
+---
+[ATTACK 2026-09-26T15:15:04.184244961-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="t"
+---
+[ATTACK 2026-09-26T15:15:04.309760301-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="i"
+---
+[ATTACK 2026-09-26T15:15:04.413422968-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="m"
+---
+[ATTACK 2026-09-26T15:15:04.497358618-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="e"
+---
+[ATTACK 2026-09-26T15:15:04.810913032-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="."
+---
+[ATTACK 2026-09-26T15:15:05.042769337-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="s"
+---
+[ATTACK 2026-09-26T15:15:05.360939088-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="l"
+---
+[ATTACK 2026-09-26T15:15:05.464887642-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="e"
+---
+[ATTACK 2026-09-26T15:15:05.611758799-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="e"
+---
+[ATTACK 2026-09-26T15:15:05.760134994-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="p"
+---
+[ATTACK 2026-09-26T15:15:07.082682924-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="("
+---
+[ATTACK 2026-09-26T15:15:07.67562649-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="3"
+---
+[ATTACK 2026-09-26T15:15:08.912412954-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload=")"
+---
+[ATTACK 2026-09-26T15:15:10.609952073-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\""
+---
+[ATTACK 2026-09-26T15:15:13.752236246-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="\r"
+---
+[ATTACK 2026-09-26T15:15:13.752330004-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\""
+---
+[ATTACK 2026-09-26T15:15:13.752356367-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en ssh:2222: 'python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"'"
+---
+[ATTACK 2026-09-26T15:15:13.754064252-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790449972455371731
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:22:38.415393326-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T15:22:48.906848119-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:22:50.498894655-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"\r"
+---
+[ATTACK 2026-09-26T15:22:50.498989769-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:22:50.50091437-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="sh: línea 1: $'\\026': orden no encontrada\r\n"
+---
+[ATTACK 2026-09-26T15:22:54.786286163-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="s"
+---
+[ATTACK 2026-09-26T15:22:55.139060997-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:22:59.250225097-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=":"
+---
+[ATTACK 2026-09-26T15:22:59.491833911-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="("
+---
+[ATTACK 2026-09-26T15:22:59.6754248-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=")"
+---
+[ATTACK 2026-09-26T15:23:01.402253055-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="{"
+---
+[ATTACK 2026-09-26T15:23:04.306168902-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=":"
+---
+[ATTACK 2026-09-26T15:23:05.76402211-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="|"
+---
+[ATTACK 2026-09-26T15:23:06.85944819-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=":"
+---
+[ATTACK 2026-09-26T15:23:10.466037598-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="}"
+---
+[ATTACK 2026-09-26T15:23:10.869155017-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=";"
+---
+[ATTACK 2026-09-26T15:23:12.026828784-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=":"
+---
+[ATTACK 2026-09-26T15:23:31.081893457-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:31.442677473-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:31.605512689-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:31.788324657-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:32.497264177-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:34.170277474-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="&"
+---
+[ATTACK 2026-09-26T15:23:36.153927704-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:36.564521414-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="<ARROW>"
+---
+[ATTACK 2026-09-26T15:23:38.157212424-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="}"
+---
+[ATTACK 2026-09-26T15:23:39.525515252-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=";"
+---
+[ATTACK 2026-09-26T15:23:39.970047306-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=":"
+---
+[ATTACK 2026-09-26T15:23:42.061105815-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="\r"
+---
+[ATTACK 2026-09-26T15:23:42.061186801-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=":(){:|:};:\x1b[D\x1b[D\x1b[D\x1b[D\x1b[C&\x1b[C\x1b[D};:"
+---
+[ATTACK 2026-09-26T15:23:42.061205815-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:2222: ':(){:|:};:\x1b[D\x1b[D\x1b[D\x1b[D\x1b[C&\x1b[C\x1b[D};:'"
+---
+[ATTACK 2026-09-26T15:23:42.062622082-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="sh: -c: línea 1: error de sintaxis cerca del elemento inesperado `{:'\r\nsh: -c: línea 1: `:(){:|:};:\x1b[D\x1b[D\x1b[D\x1b[D\x1b[C&\x1b[C\x1b[D};:'\r\n"
+---
+[ATTACK 2026-09-26T15:23:46.977719784-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="s"
+---
+[ATTACK 2026-09-26T15:23:47.100514727-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="u"
+---
+[ATTACK 2026-09-26T15:23:47.324510202-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="d"
+---
+[ATTACK 2026-09-26T15:23:47.448910489-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="o"
+---
+[ATTACK 2026-09-26T15:23:47.858039004-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=" "
+---
+[ATTACK 2026-09-26T15:23:48.10658482-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="r"
+---
+[ATTACK 2026-09-26T15:23:48.3335618-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="m"
+---
+[ATTACK 2026-09-26T15:23:48.6452834-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=" "
+---
+[ATTACK 2026-09-26T15:23:48.750751578-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="-"
+---
+[ATTACK 2026-09-26T15:23:48.916758601-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="r"
+---
+[ATTACK 2026-09-26T15:23:49.123507349-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="f"
+---
+[ATTACK 2026-09-26T15:23:49.636763783-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload=" "
+---
+[ATTACK 2026-09-26T15:23:50.23571761-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="/"
+---
+[ATTACK 2026-09-26T15:23:53.689804513-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="*"
+---
+[ATTACK 2026-09-26T15:23:58.153571004-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="\r"
+---
+[ATTACK 2026-09-26T15:23:58.153640364-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="sudo rm -rf /*"
+---
+[ATTACK 2026-09-26T15:23:58.15367462-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en ssh:2222: 'sudo rm -rf /*'"
+---
+[ATTACK 2026-09-26T15:23:58.154196828-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450558415071178
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:25:50.220723566-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T15:26:00.152086018-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:26:03.520281568-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"\r"
+---
+[ATTACK 2026-09-26T15:26:03.520351201-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="\x16"
+---
+[ATTACK 2026-09-26T15:26:03.521948085-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="sh: línea 1: $'\\026': orden no encontrada\r\n"
+---
+[ATTACK 2026-09-26T15:26:16.240077364-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=":"
+---
+[ATTACK 2026-09-26T15:26:16.514521985-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="("
+---
+[ATTACK 2026-09-26T15:26:16.690466405-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=")"
+---
+[ATTACK 2026-09-26T15:26:19.505441802-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="{"
+---
+[ATTACK 2026-09-26T15:26:20.078427834-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=":"
+---
+[ATTACK 2026-09-26T15:26:20.600923378-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="|"
+---
+[ATTACK 2026-09-26T15:26:22.207815982-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=":"
+---
+[ATTACK 2026-09-26T15:26:22.349599977-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="&"
+---
+[ATTACK 2026-09-26T15:26:23.353083326-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="}"
+---
+[ATTACK 2026-09-26T15:26:24.232837345-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=";"
+---
+[ATTACK 2026-09-26T15:26:24.591647761-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=":"
+---
+[ATTACK 2026-09-26T15:26:26.592126862-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="\r"
+---
+[ATTACK 2026-09-26T15:26:26.592414387-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=":(){:|:&};:"
+---
+[ATTACK 2026-09-26T15:26:26.592447121-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:2222: ':(){:|:&};:'"
+---
+[ATTACK 2026-09-26T15:26:26.594115138-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="sh: -c: línea 1: error de sintaxis cerca del elemento inesperado `{:'\r\nsh: -c: línea 1: `:(){:|:&};:'\r\n"
+---
+[ATTACK 2026-09-26T15:26:36.511451978-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="p"
+---
+[ATTACK 2026-09-26T15:26:36.857807528-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="y"
+---
+[ATTACK 2026-09-26T15:26:37.069133997-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="t"
+---
+[ATTACK 2026-09-26T15:26:37.284354224-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="h"
+---
+[ATTACK 2026-09-26T15:26:37.418526242-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="o"
+---
+[ATTACK 2026-09-26T15:26:37.535125886-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="n"
+---
+[ATTACK 2026-09-26T15:26:37.786642919-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="2"
+---
+[ATTACK 2026-09-26T15:26:38.154629421-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:26:38.213217526-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="3"
+---
+[ATTACK 2026-09-26T15:26:42.471434169-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:42.873682624-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="-"
+---
+[ATTACK 2026-09-26T15:26:42.93358193-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="c"
+---
+[ATTACK 2026-09-26T15:26:43.295342835-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:43.719159637-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="\""
+---
+[ATTACK 2026-09-26T15:26:46.555922198-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="u"
+---
+[ATTACK 2026-09-26T15:26:47.287038999-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:26:47.53049137-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="i"
+---
+[ATTACK 2026-09-26T15:26:47.67229846-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="m"
+---
+[ATTACK 2026-09-26T15:26:47.913165158-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="p"
+---
+[ATTACK 2026-09-26T15:26:48.09280821-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="o"
+---
+[ATTACK 2026-09-26T15:26:48.194048687-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="r"
+---
+[ATTACK 2026-09-26T15:26:48.375987282-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="t"
+---
+[ATTACK 2026-09-26T15:26:48.554485527-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:48.736782222-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="t"
+---
+[ATTACK 2026-09-26T15:26:48.816190124-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="i"
+---
+[ATTACK 2026-09-26T15:26:48.874789821-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="m"
+---
+[ATTACK 2026-09-26T15:26:48.994691715-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="e"
+---
+[ATTACK 2026-09-26T15:26:49.44042687-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=":"
+---
+[ATTACK 2026-09-26T15:26:49.883675331-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:26:51.871439437-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=";"
+---
+[ATTACK 2026-09-26T15:26:52.138464983-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:53.066108737-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="["
+---
+[ATTACK 2026-09-26T15:26:54.081163153-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="x"
+---
+[ATTACK 2026-09-26T15:26:54.850238358-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="*"
+---
+[ATTACK 2026-09-26T15:26:54.982616853-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="*"
+---
+[ATTACK 2026-09-26T15:26:55.42800586-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="2"
+---
+[ATTACK 2026-09-26T15:26:55.922921718-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:56.078242787-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="f"
+---
+[ATTACK 2026-09-26T15:26:56.193424009-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="o"
+---
+[ATTACK 2026-09-26T15:26:56.291357008-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="r"
+---
+[ATTACK 2026-09-26T15:26:56.635373876-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:56.808706521-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="x"
+---
+[ATTACK 2026-09-26T15:26:56.96270233-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:58.372937979-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="i"
+---
+[ATTACK 2026-09-26T15:26:58.452079354-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="n"
+---
+[ATTACK 2026-09-26T15:26:58.647405369-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:26:58.725851805-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="r"
+---
+[ATTACK 2026-09-26T15:26:58.803185793-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="a"
+---
+[ATTACK 2026-09-26T15:26:58.841757151-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="n"
+---
+[ATTACK 2026-09-26T15:26:58.976181909-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="g"
+---
+[ATTACK 2026-09-26T15:26:59.168761639-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="e"
+---
+[ATTACK 2026-09-26T15:27:00.537506617-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="("
+---
+[ATTACK 2026-09-26T15:27:00.943910735-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="1"
+---
+[ATTACK 2026-09-26T15:27:01.001833935-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="0"
+---
+[ATTACK 2026-09-26T15:27:01.869375115-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="*"
+---
+[ATTACK 2026-09-26T15:27:02.022345951-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="*"
+---
+[ATTACK 2026-09-26T15:27:03.711082114-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="7"
+---
+[ATTACK 2026-09-26T15:27:05.36097563-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=")"
+---
+[ATTACK 2026-09-26T15:27:05.673070997-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="]"
+---
+[ATTACK 2026-09-26T15:27:06.691784693-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=";"
+---
+[ATTACK 2026-09-26T15:27:06.795459608-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=" "
+---
+[ATTACK 2026-09-26T15:27:07.023327283-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="t"
+---
+[ATTACK 2026-09-26T15:27:07.105504673-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="i"
+---
+[ATTACK 2026-09-26T15:27:07.167601588-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="m"
+---
+[ATTACK 2026-09-26T15:27:07.292768979-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="e"
+---
+[ATTACK 2026-09-26T15:27:07.688983757-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="."
+---
+[ATTACK 2026-09-26T15:27:07.812279632-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="s"
+---
+[ATTACK 2026-09-26T15:27:08.038650733-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="e"
+---
+[ATTACK 2026-09-26T15:27:08.51358217-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:27:08.71954597-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="l"
+---
+[ATTACK 2026-09-26T15:27:08.823801619-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="e"
+---
+[ATTACK 2026-09-26T15:27:08.968994465-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="e"
+---
+[ATTACK 2026-09-26T15:27:09.094035147-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="p"
+---
+[ATTACK 2026-09-26T15:27:10.511080625-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="("
+---
+[ATTACK 2026-09-26T15:27:11.653821344-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="3"
+---
+[ATTACK 2026-09-26T15:27:13.317050337-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload=")"
+---
+[ATTACK 2026-09-26T15:27:15.137146986-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="\""
+---
+[ATTACK 2026-09-26T15:27:17.887235139-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="\r"
+---
+[ATTACK 2026-09-26T15:27:17.887316932-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\""
+---
+[ATTACK 2026-09-26T15:27:17.887358494-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en ssh:2222: 'python3 -c \"import time; [x**2 for x in range(10**7)]; time.sleep(3)\"'"
+---
+[ATTACK 2026-09-26T15:27:17.888467042-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790450750220530193
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:34:03.773507947-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T15:34:11.926063518-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=":"
+---
+[ATTACK 2026-09-26T15:34:12.251836408-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="("
+---
+[ATTACK 2026-09-26T15:34:12.433801881-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=")"
+---
+[ATTACK 2026-09-26T15:34:14.199344269-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="{"
+---
+[ATTACK 2026-09-26T15:34:16.247641087-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=":"
+---
+[ATTACK 2026-09-26T15:34:17.005643981-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="|"
+---
+[ATTACK 2026-09-26T15:34:17.466232283-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=":"
+---
+[ATTACK 2026-09-26T15:34:19.264572122-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="&"
+---
+[ATTACK 2026-09-26T15:34:20.915850008-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="]"
+---
+[ATTACK 2026-09-26T15:34:21.383341087-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:34:22.077576377-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="}"
+---
+[ATTACK 2026-09-26T15:34:24.440759877-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=";"
+---
+[ATTACK 2026-09-26T15:34:24.809320774-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=":"
+---
+[ATTACK 2026-09-26T15:34:26.19796381-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="\r"
+---
+[ATTACK 2026-09-26T15:34:26.198052625-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=":(){:|:&};:"
+---
+[ATTACK 2026-09-26T15:34:26.198076218-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:2222: ':(){:|:&};:'"
+---
+[ATTACK 2026-09-26T15:34:26.198105509-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="bash: fork: retry: No child processes\r\nbash: fork: Resource temporarily unavailable\r\nbash: fork: retry: No child processes\r\n"
+---
+[ATTACK 2026-09-26T15:34:35.663301316-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="s"
+---
+[ATTACK 2026-09-26T15:34:35.781269974-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="u"
+---
+[ATTACK 2026-09-26T15:34:35.878197246-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="d"
+---
+[ATTACK 2026-09-26T15:34:36.017812079-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="o"
+---
+[ATTACK 2026-09-26T15:34:36.191758581-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=" "
+---
+[ATTACK 2026-09-26T15:34:37.527787166-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="r"
+---
+[ATTACK 2026-09-26T15:34:37.64557478-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="m"
+---
+[ATTACK 2026-09-26T15:34:37.979020597-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=" "
+---
+[ATTACK 2026-09-26T15:34:38.255315494-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="-"
+---
+[ATTACK 2026-09-26T15:34:38.332944177-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="r"
+---
+[ATTACK 2026-09-26T15:34:38.549923411-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="f"
+---
+[ATTACK 2026-09-26T15:34:39.154943527-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload=" "
+---
+[ATTACK 2026-09-26T15:34:39.426844705-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="/"
+---
+[ATTACK 2026-09-26T15:34:39.938556453-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="*"
+---
+[ATTACK 2026-09-26T15:34:40.922469092-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="\r"
+---
+[ATTACK 2026-09-26T15:34:40.922531489-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="sudo rm -rf /*"
+---
+[ATTACK 2026-09-26T15:34:40.922549305-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en ssh:2222: 'sudo rm -rf /*'"
+---
+[ATTACK 2026-09-26T15:34:40.923618296-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790451243773177363
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:53:21.955389937-04:00]
+service=ssh:2222
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="Nuevo intruso conectado a Honeypot SSH Honeypot SSH Principal (Puerto 2222)"
+---
+[ATTACK 2026-09-26T15:53:29.438111309-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="s"
+---
+[ATTACK 2026-09-26T15:53:29.517956762-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="u"
+---
+[ATTACK 2026-09-26T15:53:29.638572947-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="d"
+---
+[ATTACK 2026-09-26T15:53:29.780588505-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="o"
+---
+[ATTACK 2026-09-26T15:53:29.960583499-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=" "
+---
+[ATTACK 2026-09-26T15:53:30.081681795-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="r"
+---
+[ATTACK 2026-09-26T15:53:30.179817848-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="m"
+---
+[ATTACK 2026-09-26T15:53:30.564913831-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=" "
+---
+[ATTACK 2026-09-26T15:53:30.805325761-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="-"
+---
+[ATTACK 2026-09-26T15:53:31.147338825-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="r"
+---
+[ATTACK 2026-09-26T15:53:31.386298034-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="f"
+---
+[ATTACK 2026-09-26T15:53:31.711194287-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=" "
+---
+[ATTACK 2026-09-26T15:53:32.074865914-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="/"
+---
+[ATTACK 2026-09-26T15:53:33.480109597-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="\r"
+---
+[ATTACK 2026-09-26T15:53:33.480175721-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="sudo rm -rf /"
+---
+[ATTACK 2026-09-26T15:53:33.480197326-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="⚠️ [ADVERTENCIA 1/2] Comando de alto riesgo detectado en ssh:2222: 'sudo rm -rf /'"
+---
+[ATTACK 2026-09-26T15:53:34.85760268-04:00]
+service=ssh:2222
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper\r\nsudo: a password is required\r\n"
+---
+[ATTACK 2026-09-26T15:53:39.270508959-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=":"
+---
+[ATTACK 2026-09-26T15:53:41.641618271-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="("
+---
+[ATTACK 2026-09-26T15:53:41.85181439-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=")"
+---
+[ATTACK 2026-09-26T15:53:43.136234506-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="{"
+---
+[ATTACK 2026-09-26T15:53:45.822880101-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=":"
+---
+[ATTACK 2026-09-26T15:53:46.757747344-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="|"
+---
+[ATTACK 2026-09-26T15:53:47.729734031-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=":"
+---
+[ATTACK 2026-09-26T15:53:48.454564454-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="&"
+---
+[ATTACK 2026-09-26T15:53:49.487624249-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="}"
+---
+[ATTACK 2026-09-26T15:53:50.609923548-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=";"
+---
+[ATTACK 2026-09-26T15:53:50.79803304-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=";"
+---
+[ATTACK 2026-09-26T15:53:51.423435271-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="<BACKSPACE>"
+---
+[ATTACK 2026-09-26T15:53:52.129244533-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=":"
+---
+[ATTACK 2026-09-26T15:53:53.752460405-04:00]
+service=ssh:2222
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="\r"
+---
+[ATTACK 2026-09-26T15:53:53.752532931-04:00]
+service=ssh:2222
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload=":(){:|:&};:"
+---
+[ATTACK 2026-09-26T15:53:53.752556-04:00]
+service=ssh:2222
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="⛔ [BANEO 2/2] Reincidencia en ejecución de alto riesgo en ssh:2222: ':(){:|:&};:'"
+---
+[ATTACK 2026-09-26T15:53:53.755685661-04:00]
+service=ssh:2222
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=__1-1790452401955029279
+payload="El intruso cerró la terminal"
+---
+[ATTACK 2026-09-26T15:54:57.697751466-04:00]
+service=ftp:2121
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="Nuevo intruso en Honeypot FTP Honeypot FTP Principal (Puerto 2121)"
+---
+[ATTACK 2026-09-26T15:55:01.058850854-04:00]
+service=ftp:2121
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="USER admin\r\n"
+---
+[ATTACK 2026-09-26T15:55:01.058906761-04:00]
+service=ftp:2121
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="USER admin"
+---
+[ATTACK 2026-09-26T15:55:01.058936512-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="331 Please specify the password.\r\n"
+---
+[ATTACK 2026-09-26T15:55:02.772357566-04:00]
+service=ftp:2121
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="PASS jsd\r\n"
+---
+[ATTACK 2026-09-26T15:55:02.77246095-04:00]
+service=ftp:2121
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="PASS jsd"
+---
+[ATTACK 2026-09-26T15:55:02.772495417-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="230 Login successful.\r\n"
+---
+[ATTACK 2026-09-26T15:55:02.772524684-04:00]
+service=ftp:2121
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="SYST\r\n"
+---
+[ATTACK 2026-09-26T15:55:02.772536617-04:00]
+service=ftp:2121
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="SYST"
+---
+[ATTACK 2026-09-26T15:55:02.772555991-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-26T15:55:06.667268066-04:00]
+service=ftp:2121
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="SYST\r\n"
+---
+[ATTACK 2026-09-26T15:55:06.667329815-04:00]
+service=ftp:2121
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="SYST"
+---
+[ATTACK 2026-09-26T15:55:06.667362038-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-26T15:55:12.867655835-04:00]
+service=ftp:2121
+event=io
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="QUIT\r\n"
+---
+[ATTACK 2026-09-26T15:55:12.867724159-04:00]
+service=ftp:2121
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="QUIT"
+---
+[ATTACK 2026-09-26T15:55:12.867756257-04:00]
+service=ftp
+event=output
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="221 Goodbye.\r\n"
+---
+[ATTACK 2026-09-26T15:55:12.867764814-04:00]
+service=ftp:2121
+event=connection_end
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=ftp-__1-1790452497697745475
+payload="El intruso cerró FTP Honeypot FTP Principal"
+---
+[ATTACK 2026-09-26T15:55:24.386369977-04:00]
+service=ftp
+event=connection
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="🚨 INTRUSIÓN SIMULADA DETECTADA en FTP :2121"
+---
+[ATTACK 2026-09-26T15:55:24.586812783-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="220 (vsFTPd 3.0.3)\r\n"
+---
+[ATTACK 2026-09-26T15:55:24.888002465-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="U"
+---
+[ATTACK 2026-09-26T15:55:24.91319485-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="S"
+---
+[ATTACK 2026-09-26T15:55:24.938418517-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="E"
+---
+[ATTACK 2026-09-26T15:55:24.963627522-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="R"
+---
+[ATTACK 2026-09-26T15:55:24.988822621-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload=" "
+---
+[ATTACK 2026-09-26T15:55:25.01400874-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="r"
+---
+[ATTACK 2026-09-26T15:55:25.039258333-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="o"
+---
+[ATTACK 2026-09-26T15:55:25.064482706-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="o"
+---
+[ATTACK 2026-09-26T15:55:25.089659905-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="t"
+---
+[ATTACK 2026-09-26T15:55:25.115018745-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="\n"
+---
+[ATTACK 2026-09-26T15:55:25.195289444-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="USER root"
+---
+[ATTACK 2026-09-26T15:55:25.345589091-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="331 Please specify the password.\r\n"
+---
+[ATTACK 2026-09-26T15:55:25.646530009-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="P"
+---
+[ATTACK 2026-09-26T15:55:25.671618123-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="A"
+---
+[ATTACK 2026-09-26T15:55:25.696818915-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="S"
+---
+[ATTACK 2026-09-26T15:55:25.722024602-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="S"
+---
+[ATTACK 2026-09-26T15:55:25.747192673-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload=" "
+---
+[ATTACK 2026-09-26T15:55:25.772413047-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="a"
+---
+[ATTACK 2026-09-26T15:55:25.797701483-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="d"
+---
+[ATTACK 2026-09-26T15:55:25.822882235-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="m"
+---
+[ATTACK 2026-09-26T15:55:25.84801908-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="i"
+---
+[ATTACK 2026-09-26T15:55:25.87317977-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="n"
+---
+[ATTACK 2026-09-26T15:55:25.898335755-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="1"
+---
+[ATTACK 2026-09-26T15:55:25.923518979-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="2"
+---
+[ATTACK 2026-09-26T15:55:25.948772491-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="3"
+---
+[ATTACK 2026-09-26T15:55:25.974046707-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="\n"
+---
+[ATTACK 2026-09-26T15:55:26.0545786-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="PASS admin123"
+---
+[ATTACK 2026-09-26T15:55:26.204688184-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="230 Login successful.\r\n"
+---
+[ATTACK 2026-09-26T15:55:26.505079171-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="S"
+---
+[ATTACK 2026-09-26T15:55:26.530244317-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="Y"
+---
+[ATTACK 2026-09-26T15:55:26.555378116-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="S"
+---
+[ATTACK 2026-09-26T15:55:26.580581273-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="T"
+---
+[ATTACK 2026-09-26T15:55:26.605749759-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="\n"
+---
+[ATTACK 2026-09-26T15:55:26.686589134-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="SYST"
+---
+[ATTACK 2026-09-26T15:55:26.836759325-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="215 UNIX Type: L8\r\n"
+---
+[ATTACK 2026-09-26T15:55:27.13725793-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="P"
+---
+[ATTACK 2026-09-26T15:55:27.162491262-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="W"
+---
+[ATTACK 2026-09-26T15:55:27.187742982-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="D"
+---
+[ATTACK 2026-09-26T15:55:27.212940427-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="\n"
+---
+[ATTACK 2026-09-26T15:55:27.293097185-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="PWD"
+---
+[ATTACK 2026-09-26T15:55:27.443682747-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="257 \"/\" is the current directory\r\n"
+---
+[ATTACK 2026-09-26T15:55:27.744778535-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="S"
+---
+[ATTACK 2026-09-26T15:55:27.770610573-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="T"
+---
+[ATTACK 2026-09-26T15:55:27.79574942-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="O"
+---
+[ATTACK 2026-09-26T15:55:27.820930513-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="R"
+---
+[ATTACK 2026-09-26T15:55:27.846145775-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload=" "
+---
+[ATTACK 2026-09-26T15:55:27.87133708-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="r"
+---
+[ATTACK 2026-09-26T15:55:27.896574109-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="a"
+---
+[ATTACK 2026-09-26T15:55:27.921766698-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="n"
+---
+[ATTACK 2026-09-26T15:55:27.947062756-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="s"
+---
+[ATTACK 2026-09-26T15:55:27.972270664-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="o"
+---
+[ATTACK 2026-09-26T15:55:27.997425692-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="m"
+---
+[ATTACK 2026-09-26T15:55:28.022579067-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="w"
+---
+[ATTACK 2026-09-26T15:55:28.047764025-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="a"
+---
+[ATTACK 2026-09-26T15:55:28.073009694-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="r"
+---
+[ATTACK 2026-09-26T15:55:28.098230277-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="e"
+---
+[ATTACK 2026-09-26T15:55:28.123519995-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="_"
+---
+[ATTACK 2026-09-26T15:55:28.149001857-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="p"
+---
+[ATTACK 2026-09-26T15:55:28.174357949-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="a"
+---
+[ATTACK 2026-09-26T15:55:28.199833016-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="y"
+---
+[ATTACK 2026-09-26T15:55:28.224967895-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="l"
+---
+[ATTACK 2026-09-26T15:55:28.250198756-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="o"
+---
+[ATTACK 2026-09-26T15:55:28.275538284-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="a"
+---
+[ATTACK 2026-09-26T15:55:28.300795599-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="d"
+---
+[ATTACK 2026-09-26T15:55:28.325996542-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="."
+---
+[ATTACK 2026-09-26T15:55:28.351198078-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="s"
+---
+[ATTACK 2026-09-26T15:55:28.37638353-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="h"
+---
+[ATTACK 2026-09-26T15:55:28.401631501-04:00]
+service=ftp
+event=io
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="\n"
+---
+[ATTACK 2026-09-26T15:55:28.481870218-04:00]
+service=ftp
+event=command
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="STOR ransomware_payload.sh"
+---
+[ATTACK 2026-09-26T15:55:28.481939041-04:00]
+service=ftp
+event=alert
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="⚠️ INTENTO DE SUBIDA DE RANSOMWARE EN FTP: STOR ransomware_payload.sh"
+---
+[ATTACK 2026-09-26T15:55:28.632778354-04:00]
+service=ftp
+event=output
+ip=203.0.113.88
+mac=02:42:AC:11:00:02
+session_id=ftp-203.0.113.88-1790452524386358574
+payload="150 Ok to send data.\r\n226 Transfer complete.\r\n"
+---
+[ATTACK 2026-09-26T16:04:29.906163618-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453069906159571
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:04:29.906204957-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453069906159571
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:04:33.130201318-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453073130197563
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:04:33.130513667-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453073130197563
+payload="GET /search (Inputs: q=' or '1'='1)"
+---
+[ATTACK 2026-09-26T16:04:33.1305574-04:00]
+service=http:8081
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453073130197563
+payload="⚠️ [ADVERTENCIA 1/2] SQL INJECTION en Tienda HTTP: 'Inyección SQL (SQLi) detectada en Tienda: '' or '''"
+---
+[ATTACK 2026-09-26T16:04:36.804277087-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453076804273470
+payload="Nuevo cliente HTTP en Tienda AegisStore (POST /upload)"
+---
+[ATTACK 2026-09-26T16:04:36.804477834-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453076804273470
+payload="POST /upload file='ransomware_encrypt.sh' (Size: 0 bytes)"
+---
+[ATTACK 2026-09-26T16:04:36.804508894-04:00]
+service=http:8081
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453076804273470
+payload="⛔ [BANEO 2/2] Reincidencia crítica en Tienda HTTP (MALWARE/RANSOMWARE UPLOAD). IP Baneada."
+---
+[ATTACK 2026-09-26T16:04:43.842969509-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453083842965666
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:04:43.842999125-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453083842965666
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:05:38.031216491-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453138031212921
+payload="Nuevo cliente HTTP en Tienda AegisStore (POST /login)"
+---
+[ATTACK 2026-09-26T16:05:38.031271226-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453138031212921
+payload="POST /login (Inputs: password=adsadas)"
+---
+[ATTACK 2026-09-26T16:05:58.633206899-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453158633203511
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:05:58.633238948-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453158633203511
+payload="GET /search (Inputs: q=/admin)"
+---
+[ATTACK 2026-09-26T16:06:41.198199585-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453201198196257
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:06:41.198238675-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453201198196257
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:06:42.347928759-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453202347920378
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /upload)"
+---
+[ATTACK 2026-09-26T16:06:42.347964788-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453202347920378
+payload="GET /upload (Inputs: )"
+---
+[ATTACK 2026-09-26T16:07:45.649761148-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453265649756116
+payload="Nuevo cliente HTTP en Tienda AegisStore (POST /upload)"
+---
+[ATTACK 2026-09-26T16:07:45.649831133-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453265649756116
+payload="POST /upload file='firmware.bash' (Size: 58 bytes)"
+---
+[ATTACK 2026-09-26T16:07:45.649856404-04:00]
+service=http:8081
+event=alert
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453265649756116
+payload="⚠️ [ADVERTENCIA 1/2] MALWARE/RANSOMWARE UPLOAD en Tienda HTTP: 'Intento de subida de Malware/Ransomware detectado: 'firmware.bash''"
+---
+[ATTACK 2026-09-26T16:07:47.32782911-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453267327825214
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:07:47.327862848-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453267327825214
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:07:50.206319873-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453270206315566
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /admin)"
+---
+[ATTACK 2026-09-26T16:07:50.206352589-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453270206315566
+payload="GET /admin (Inputs: )"
+---
+[ATTACK 2026-09-26T16:07:52.794455639-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453272794450426
+payload="Nuevo cliente HTTP en Tienda AegisStore (POST /admin/login)"
+---
+[ATTACK 2026-09-26T16:07:52.794506708-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453272794450426
+payload="POST /admin/login (Inputs: username=sadw password=sadsa)"
+---
+[ATTACK 2026-09-26T16:07:54.99911465-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453274999111817
+payload="Nuevo cliente HTTP en Tienda AegisStore (POST /admin/login)"
+---
+[ATTACK 2026-09-26T16:07:54.999159484-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453274999111817
+payload="POST /admin/login (Inputs: username=asdasd password=sadasd)"
+---
+[ATTACK 2026-09-26T16:08:10.225962162-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453290225958044
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:08:10.226000039-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453290225958044
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:08:12.810226257-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453292810222110
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /upload)"
+---
+[ATTACK 2026-09-26T16:08:12.81026403-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453292810222110
+payload="GET /upload (Inputs: )"
+---
+[ATTACK 2026-09-26T16:08:15.15935391-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453295159349953
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:08:15.159380732-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453295159349953
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:08:16.604359403-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453296604356011
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:08:16.60440503-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453296604356011
+payload="GET /search (Inputs: q=)"
+---
+[ATTACK 2026-09-26T16:08:31.947052761-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453311947046704
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:08:31.947086803-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453311947046704
+payload="GET /search (Inputs: q=curl \"http://localhost:8081/search?q='%20or%20'1'='1\")"
+---
+[ATTACK 2026-09-26T16:08:57.342726217-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453337342721733
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:08:57.342766931-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453337342721733
+payload="GET /search (Inputs: q=' or '1'='1)"
+---
+[ATTACK 2026-09-26T16:08:57.342903042-04:00]
+service=http:8081
+event=alert
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453337342721733
+payload="⛔ [BANEO 2/2] Reincidencia crítica en Tienda HTTP (SQL INJECTION). IP Baneada."
+---
+[ATTACK 2026-09-26T16:15:58.901638161-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453758901633813
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:15:58.901679405-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453758901633813
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:16:10.322153427-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453770322150406
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:16:10.322180332-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453770322150406
+payload="GET /search (Inputs: q=' or '1'='1)"
+---
+[ATTACK 2026-09-26T16:16:10.322197111-04:00]
+service=http:8081
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453770322150406
+payload="⚠️ [ADVERTENCIA 1/2] SQL INJECTION en Tienda HTTP: 'Inyección SQL (SQLi) detectada en Tienda: '' or '''"
+---
+[ATTACK 2026-09-26T16:16:16.678952469-04:00]
+service=http:8081
+event=connection
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453776678949393
+payload="Nuevo cliente HTTP en Tienda AegisStore (POST /upload)"
+---
+[ATTACK 2026-09-26T16:16:16.679234499-04:00]
+service=http:8081
+event=command
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453776678949393
+payload="POST /upload file='patron_malware.sh' (Size: 0 bytes)"
+---
+[ATTACK 2026-09-26T16:16:16.67926991-04:00]
+service=http:8081
+event=alert
+ip=::1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-__1-1790453776678949393
+payload="⛔ [BANEO 2/2] Reincidencia crítica en Tienda HTTP (MALWARE/RANSOMWARE UPLOAD). IP Baneada."
+---
+[ATTACK 2026-09-26T16:17:18.638911024-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453838638905516
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:17:18.639307397-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453838638905516
+payload="GET /search (Inputs: q=' or '1'='1)"
+---
+[ATTACK 2026-09-26T16:17:18.639726317-04:00]
+service=http:8081
+event=alert
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453838638905516
+payload="⚠️ [ADVERTENCIA 1/2] SQL INJECTION en Tienda HTTP: 'Inyección SQL (SQLi) detectada en Tienda: '' or '''"
+---
+[ATTACK 2026-09-26T16:17:27.666265926-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453847666262196
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:17:27.666303525-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453847666262196
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:28.565270197-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453848565265298
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /upload)"
+---
+[ATTACK 2026-09-26T16:17:28.565310434-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453848565265298
+payload="GET /upload (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:30.258847223-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453850258842886
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:17:30.258884959-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453850258842886
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:33.123332173-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453853123328129
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /admin)"
+---
+[ATTACK 2026-09-26T16:17:33.123359015-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453853123328129
+payload="GET /admin (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:35.100900572-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453855100896660
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:17:35.100937024-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453855100896660
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:36.20020538-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453856200202353
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /upload)"
+---
+[ATTACK 2026-09-26T16:17:36.200232968-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453856200202353
+payload="GET /upload (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:40.745633433-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453860745630028
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:17:40.745710079-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453860745630028
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:54.602531196-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453874602527410
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:17:54.602570514-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453874602527410
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:56.963550214-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453876963544461
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /upload)"
+---
+[ATTACK 2026-09-26T16:17:56.963612682-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453876963544461
+payload="GET /upload (Inputs: )"
+---
+[ATTACK 2026-09-26T16:17:59.930192296-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453879930188297
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /)"
+---
+[ATTACK 2026-09-26T16:17:59.930235351-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453879930188297
+payload="GET / (Inputs: )"
+---
+[ATTACK 2026-09-26T16:18:19.026516091-04:00]
+service=http:8081
+event=connection
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453899026512111
+payload="Nuevo cliente HTTP en Tienda AegisStore (GET /search)"
+---
+[ATTACK 2026-09-26T16:18:19.026548504-04:00]
+service=http:8081
+event=command
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453899026512111
+payload="GET /search (Inputs: q=' or '1'='1)"
+---
+[ATTACK 2026-09-26T16:18:19.026571447-04:00]
+service=http:8081
+event=alert
+ip=127.0.0.1
+mac=00:00:00:00:00:00 (Localhost)
+session_id=http-127.0.0.1-1790453899026512111
+payload="⛔ [BANEO 2/2] Reincidencia crítica en Tienda HTTP (SQL INJECTION). IP Baneada."
+---

@@ -6,7 +6,8 @@ export function getWebSocketUrl() {
   const hostname = window.location.hostname;
   const host = (!hostname || hostname === 'localhost') ? '127.0.0.1' : hostname;
   const token = localStorage.getItem('aegis_token') || '';
-  return `ws://${host}:8080/ws?token=${encodeURIComponent(token)}`;
+  const port = (import.meta && import.meta.env && import.meta.env.VITE_API_PORT) || '8085';
+  return `ws://${host}:${port}/ws?token=${encodeURIComponent(token)}`;
 }
 
 export class WebSocketClient {

@@ -98,15 +98,12 @@ export default function DashboardView() {
     return <LoginView onLoginSuccess={handleLoginSuccess} />;
   }
 
-  // Breach en honeypot NO predeterminado → redirigir al panel de despliegue
-  // para que el operador vea la fila en ALERTA (defaults: solo toast)
+  // Breach en cualquier honeypot: se notifica por Toast sin forzar cambio de pestaña involuntario
   const handleNewBreach = (keys) => {
-    if (keys.some((k) => !DEFAULT_BREACH_KEYS.includes(k))) {
-      setActiveTab('servicios');
-    }
+    // Los toasts flotantes informan de la intrusión sin interrumpir la vista activa del operador
   };
 
-  // Fila de honeypot → terminal de ESA instancia
+  // Fila de honeypot / selector → cambiar a la terminal de ESA instancia
   const handleOpenService = (serviceKey) => {
     setActiveService(serviceKey);
     setActiveTab('terminal');
@@ -144,6 +141,7 @@ export default function DashboardView() {
         <LiveTerminalView
           activeService={activeService}
           onSelectService={setActiveService}
+          onNavigateToAdmin={setActiveTab}
           wsUrl={wsUrl}
           attackerIp={attackerIp}
           attackerMac={attackerMac}

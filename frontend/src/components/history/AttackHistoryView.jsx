@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
-const HISTORY_URL = 'http://localhost:8080/logs/attacks';
+import { getApiBaseUrl } from '../../services/api';
 
 export default function AttackHistoryView() {
   const [history, setHistory] = useState('Cargando historial...');
@@ -9,7 +8,7 @@ export default function AttackHistoryView() {
   const loadHistory = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(HISTORY_URL, { mode: 'cors' });
+      const response = await fetch(`${getApiBaseUrl()}/logs/attacks`, { mode: 'cors' });
       if (!response.ok) {
         throw new Error('No hay historial disponible');
       }

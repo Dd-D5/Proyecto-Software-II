@@ -3,6 +3,7 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
 import { normalizeIPv4 } from '../../hooks/useWebSocket';
+import { getApiBaseUrl } from '../../services/api';
 
 // Desnormalización: el backend (normalizeInput) envía <BACKSPACE> etc. como texto legible.
 // El inspector de teclas conserva la versión normalizada; solo la terminal recibe secuencias reales.
@@ -99,6 +100,25 @@ export default function TerminalFrame({ activeService, breached = false, registe
 
     term.open(terminalRef.current);
 
+    // Soporte completo para Copiar / Pegar en xterm.js
+    term.attachCustomKeyEventHandler((arg) => {
+      // Ctrl+C con selección activa -> Copiar al portapapeles
+      if (arg.ctrlKey && arg.code === 'KeyC' && term.hasSelection()) {
+        navigator.clipboard.writeText(term.getSelection());
+        return false;
+      }
+      // Ctrl+V -> Pegar sin deformar el búfer de entrada
+      if (arg.ctrlKey && arg.code === 'KeyV' && arg.type === 'keydown') {
+        navigator.clipboard.readText().then((text) => {
+          if (text && termInstanceRef.current) {
+            termInstanceRef.current.write(text);
+          }
+        }).catch(() => {});
+        return false;
+      }
+      return true;
+    });
+
     // Aplicar tema xterm cuando el Sidebar togglea el modo claro
     const applyTermTheme = () => {
       if (termInstanceRef.current) {
@@ -136,31 +156,37 @@ export default function TerminalFrame({ activeService, breached = false, registe
 
     window.addEventListener('resize', handleResize);
 
-    // Conectar el listener de terminal del hook WebSocket
+    // Conectar el listener de terminal del hook WebSocket sin duplicar stream de pegado/teclado
     const unregister = registerTerminalListener ? registerTerminalListener((msg) => {
       if (termInstanceRef.current) {
         if (msg.type === 'io' && msg.payload) {
+          const isPriorIo = lastMsgTypeRef.current === 'io';
           lastMsgTypeRef.current = 'io';
           const raw = DENORMALIZE[msg.payload] ?? msg.payload;
           if (raw && raw !== '<ARROW>') {
             termInstanceRef.current.write(raw);
           }
         } else if (msg.type === 'command' && (msg.command || msg.payload)) {
-          const prefix = lastMsgTypeRef.current === 'io' ? '\r\n' : '';
-          lastMsgTypeRef.current = 'command';
-          termInstanceRef.current.writeln(`${prefix}\x1b[1;32mwww-data@prod-db-02:~$\x1b[0m ${msg.command || msg.payload}`);
+          // Si no vino precedido por io (ej. ataque simulado), renderizar el comando de forma limpia
+          if (lastMsgTypeRef.current !== 'io') {
+            lastMsgTypeRef.current = 'command';
+            termInstanceRef.current.writeln(`\x1b[1;32mroot@ubuntu:~$\x1b[0m ${msg.command || msg.payload}`);
+          } else {
+            lastMsgTypeRef.current = 'command';
+          }
         } else if (msg.type === 'alert' && msg.payload) {
           lastMsgTypeRef.current = 'alert';
-          termInstanceRef.current.writeln(`\x1b[31m[ALERTA]: ${msg.payload}\x1b[0m`);
+          termInstanceRef.current.writeln(`\r\n\x1b[31m[ALERTA DETECTADA]: ${msg.payload}\x1b[0m`);
         } else if (msg.type === 'connection') {
           lastMsgTypeRef.current = 'connection';
           termInstanceRef.current.writeln(
-            `\x1b[31m[INTRUSION DETECTADA]: ${msg.service || 'ssh'} - ${normalizeIPv4(msg.ip) || 'IP desconocida'} (MAC: ${msg.mac || 'n/a'})\x1b[0m`
+            `\r\n\x1b[31m[INTRUSIÓN DETECTADA]: ${msg.service || 'ssh'} - ${normalizeIPv4(msg.ip) || 'IP desconocida'} (MAC: ${msg.mac || 'n/a'})\x1b[0m`
           );
         } else if (msg.type === 'output' && msg.payload) {
           lastMsgTypeRef.current = 'output';
-          // write crudo (NO writeln): el payload ya trae \r\n y puede contener ANSI (clear)
-          termInstanceRef.current.write(msg.payload);
+          // Escribir salida cruda con normalización limpia de EOL (\r\n)
+          const formattedOut = String(msg.payload).replace(/\r?\n/g, '\r\n');
+          termInstanceRef.current.write(formattedOut);
         }
       }
     }) : () => {};
@@ -187,12 +213,31 @@ export default function TerminalFrame({ activeService, breached = false, registe
     }
   };
 
-  const handleDumpMemory = () => {
-    setDumpStatus('Volcando memoria...');
-    setTimeout(() => {
-      setDumpStatus('Dump guardado: /tmp/honeypot_mem_0x8f.dmp');
+  const handleDumpMemory = async () => {
+    setDumpStatus('Generando volcado de memoria sandbox...');
+    try {
+      const dumpUrl = `${getApiBaseUrl()}/api/dump?service=${encodeURIComponent(activeService)}`;
+      const response = await fetch(dumpUrl);
+      if (!response.ok) throw new Error('Error generando dump');
+      
+      const blob = await response.blob();
+      const filename = `honeypot_memdump_${activeService.replace(/[:]/g, '_')}.dmp`;
+      
+      const downloadUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(downloadUrl);
+
+      setDumpStatus(`✓ Volcado descargado: ${filename}`);
+      setTimeout(() => setDumpStatus(null), 4000);
+    } catch (err) {
+      setDumpStatus('Error al generar volcado forense');
       setTimeout(() => setDumpStatus(null), 3000);
-    }, 1000);
+    }
   };
 
   // Clave de servicio dinámica: "ssh:2223" → ("SSH", 2223); base "ssh" → ("SSH", default)

@@ -174,42 +174,7 @@ func (hm *HoneypotManager) startInstanceLocked(inst *HoneypotInstance) error {
 	case "http":
 		mux := http.NewServeMux()
 		mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			ip, _, _ := net.SplitHostPort(r.RemoteAddr)
-			if banned, reason := globalBanManager.IsBanned(ip); banned {
-				w.Header().Set("Content-Type", "text/html; charset=utf-8")
-				w.WriteHeader(http.StatusForbidden)
-				w.Write([]byte(renderBannedPageHTML(ip, reason)))
-				return
-			}
-			mac := getMACAddress(ip)
-			reqInfo := fmt.Sprintf("%s %s %s", r.Method, r.URL.Path, r.UserAgent())
-			// broadcast directo en el handler HTTP: contadores van aquí porque
-			// no pasa por emitTelemetry
-			bumpConnCount(inst.Config.Type)
-			incrementAttackCounter()
-			broadcast <- TelemetryMessage{
-				Service: fmt.Sprintf("http:%d", inst.Config.Port),
-				Type:    "connection",
-				Payload: fmt.Sprintf("Conexión entrante a Honeypot HTTP %s (Puerto %d)", inst.Config.Name, inst.Config.Port),
-				IP:      ip,
-				MAC:     mac,
-			}
-			broadcast <- TelemetryMessage{
-				Service: fmt.Sprintf("http:%d", inst.Config.Port),
-				Type:    "command",
-				Payload: reqInfo,
-				IP:      ip,
-				MAC:     mac,
-			}
-
-			serverHeader := inst.Config.Banner
-			if serverHeader == "" {
-				serverHeader = "AegisTrap-SOC/2.0"
-			}
-			w.Header().Set("Server", serverHeader)
-			w.Header().Set("Content-Type", "text/html; charset=utf-8")
-			w.WriteHeader(http.StatusOK)
-			w.Write([]byte(renderCloneLoginPageHTML("")))
+			handleAegisStoreHTTPRequest(w, r, inst.Config.Banner, inst.Config.Port)
 		})
 
 		server := &http.Server{Addr: addr, Handler: mux}

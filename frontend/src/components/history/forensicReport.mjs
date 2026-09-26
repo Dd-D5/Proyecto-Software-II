@@ -1,9 +1,10 @@
 // ponytail: parser asume el formato actual de attack_history.txt (key=value + payload entre comillas);
 // si el backend cambia el formato, esto se rompe silenciosamente — upgrade: que el backend emita lineas JSON.
 
+import { getApiBaseUrl } from '../../services/api';
+
 export function fetchAttackHistory() {
-  const host = window.location.hostname || '127.0.0.1';
-  return fetch(`http://${host}:8080/logs/attacks`, { mode: 'cors' }).then((r) => {
+  return fetch(`${getApiBaseUrl()}/logs/attacks`, { mode: 'cors' }).then((r) => {
     if (!r.ok) throw new Error('No hay historial disponible');
     return r.text();
   });
