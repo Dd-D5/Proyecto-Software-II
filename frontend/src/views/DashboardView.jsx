@@ -87,6 +87,7 @@ export default function DashboardView() {
     sessionId,
     systemStats,
     keystrokes,
+    botVerdict,
     isPaused,
     breachByService,
     keystrokeCountByService,
@@ -144,6 +145,7 @@ export default function DashboardView() {
           sessionId={sessionId}
           systemStats={systemStats}
           keystrokes={keystrokes}
+          botVerdict={botVerdict}
           isPaused={isPaused}
           breachByService={breachByService}
           keystrokeCountByService={keystrokeCountByService}

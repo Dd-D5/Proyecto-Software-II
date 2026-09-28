@@ -106,6 +106,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [attackerMac, setAttackerMac] = useState(() => findLastValue(persisted?.history, 'mac') || '00:00:00:00:00:00');
   const [sessionId, setSessionId] = useState(() => normalizeSessionId(findLastValue(persisted?.history, 'session_id')) || '');
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
+  const [botVerdict, setBotVerdict] = useState('');
   const [isPaused, setIsPaused] = useState(false);
   const [breachByService, setBreachByService] = useState(breachRef.current);
   const [keystrokeCountByService, setKeystrokeCountByService] = useState(countRef.current);
@@ -196,6 +197,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       }
     });
     setKeystrokes(activeKeystrokes.slice(0, 50));
+    setBotVerdict(''); // el veredicto es de la sesión/servicio observado
 
     //  instant replay, no pacing delay. Upgrade path: setTimeout loop if typing animation is needed.
     bucket.forEach((m) => {
@@ -310,6 +312,9 @@ export function useWebSocket(activeService = ServiceType.SSH) {
         return;
       }
 
+      if (msg.bot) {
+        setBotVerdict(msg.bot);
+      }
       if (msg.ip) {
         const norm = normalizeIPv4(msg.ip);
         setAttackerIp(norm);
@@ -381,6 +386,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     attackerMac,
     sessionId,
     keystrokes,
+    botVerdict,
     isPaused,
     breachByService,
     keystrokeCountByService,

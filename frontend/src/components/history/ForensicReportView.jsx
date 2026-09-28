@@ -5,6 +5,12 @@ const card = 'bg-surface-container-low border border-hairline rounded-xl p-4 sha
 const cardTitle = 'font-label-caps text-label-caps text-on-surface uppercase tracking-wider flex items-center gap-2 border-b border-hairline pb-2';
 const chip = 'border text-[10px] font-label-code px-2 py-0.5 rounded';
 
+const BOT_BADGES = {
+  human: { label: 'HUMANO', cls: 'border-primary/20 bg-primary/10 text-primary-container' },
+  bot: { label: 'BOT', cls: 'border-error-container/30 bg-error-container/10 text-error' },
+  suspect: { label: 'SOSPECHOSO', cls: 'border-tertiary/30 bg-tertiary/10 text-tertiary' }
+};
+
 function fmtDate(d) {
   return d ? d.toLocaleString() : '—';
 }
@@ -137,6 +143,9 @@ export default function ForensicReportView({ report }) {
                 <span className="bg-primary/10 text-primary-container border border-primary/20 text-[10px] font-label-caps px-2 py-0.5 rounded uppercase">{s.service}</span>
                 <span className="font-label-code text-xs font-bold text-on-surface">{s.ip}</span>
                 <span className="text-[10px] font-label-code text-outline">{s.mac}</span>
+                {s.bot && BOT_BADGES[s.bot] && (
+                  <span className={`${chip} uppercase ${BOT_BADGES[s.bot].cls}`}>{BOT_BADGES[s.bot].label}</span>
+                )}
                 <span className={`${chip} border-tertiary/30 bg-tertiary/10 text-tertiary ml-auto`}>{fmtDuration(s.durationMs)}</span>
                 {s.wpm > 0 && <span className={`${chip} border-primary/20 bg-primary/10 text-primary-container`}>{s.wpm} WPM</span>}
               </div>
@@ -178,6 +187,7 @@ export default function ForensicReportView({ report }) {
                 <th className="px-2 py-1.5 text-left">MAC</th>
                 <th className="px-2 py-1.5 text-left">Servicios</th>
                 <th className="px-2 py-1.5 text-center">Sesiones</th>
+                <th className="px-2 py-1.5 text-center">Sesiones BOT</th>
                 <th className="px-2 py-1.5 text-center">Comandos</th>
                 <th className="px-2 py-1.5 text-center">Alertas</th>
                 <th className="px-2 py-1.5 text-left">Primera vista</th>
@@ -191,6 +201,9 @@ export default function ForensicReportView({ report }) {
                   <td className="px-2 py-1.5 text-outline">{a.macs.join(', ')}</td>
                   <td className="px-2 py-1.5">{a.services.join(', ')}</td>
                   <td className="px-2 py-1.5 text-center">{a.sessionCount}</td>
+                  <td className={`px-2 py-1.5 text-center font-bold ${a.botSessions > 0 ? 'text-error' : 'text-outline'}`}>
+                    {a.botSessions > 0 ? a.botSessions : '—'}
+                  </td>
                   <td className="px-2 py-1.5 text-center">{a.commands.length}</td>
                   <td className="px-2 py-1.5 text-center">{a.alerts}</td>
                   <td className="px-2 py-1.5 text-outline">{fmtDate(a.firstSeen)}</td>

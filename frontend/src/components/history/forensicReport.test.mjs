@@ -116,11 +116,13 @@ assert.equal(wsMessageToEntry(null), null, 'null → null');
 const wsMsg = {
   service: 'ssh:2222', type: 'connection', payload: 'Nuevo intruso',
   ip: '10.0.0.5', mac: 'AA:BB:CC:DD:EE:FF', session_id: '127.0.0.1-123',
-  timestamp: '2026-09-28T10:00:00.5-04:00'
+  timestamp: '2026-09-28T10:00:00.5-04:00',
+  bot: 'human'
 };
 const wsEntry = wsMessageToEntry(wsMsg);
 assert.equal(wsEntry.service, 'ssh:2222');
 assert.equal(wsEntry.event, 'connection');
+assert.equal(wsEntry.bot, 'human', 'la marca bot viaja en los entries vivos');
 assert.equal(wsEntry.ip, '10.0.0.5');
 assert.equal(wsEntry.session_id, '127.0.0.1-123');
 assert.ok(wsEntry.ts > 0, 'ts numérico');
@@ -134,5 +136,45 @@ assert.equal(fromWs.attackers[0].ip, '10.0.0.5');
 // fallback sin timestamp: reloj del cliente (~ahora)
 const noTs = wsMessageToEntry({ service: 'ssh:2222', type: 'io', payload: 'a', ip: '1.2.3.4', mac: 'm', session_id: 's1' });
 assert.ok(Math.abs(noTs.ts - Date.now()) < 5000, 'sin timestamp → ts del cliente');
+
+// --- marca bot= absorbida gratis por parseHistory y agregada por buildReport ---
+const botSample = `[ATTACK 2026-09-28T11:00:00-04:00]
+service=ssh:2222
+event=connection
+ip=10.0.0.7
+mac=AA:BB:CC:DD:EE:FF
+session_id=sBot
+bot=bot
+payload="x"
+---
+[ATTACK 2026-09-28T11:00:01-04:00]
+service=ssh:2222
+event=io
+ip=10.0.0.7
+mac=AA:BB:CC:DD:EE:FF
+session_id=sBot
+bot=bot
+payload="a"
+---
+[ATTACK 2026-09-28T11:00:02-04:00]
+service=ssh:2222
+event=io
+ip=10.0.0.8
+mac=AA:BB:CC:DD:EE:FF
+session_id=sHuman
+bot=human
+payload="z"
+---`;
+const botEntries = parseHistory(botSample);
+assert.equal(botEntries[0].bot, 'bot', 'parser absorbe bot=bot');
+assert.equal(botEntries[2].bot, 'human', 'parser absorbe bot=human');
+const botReport = buildReport(botEntries);
+assert.equal(botReport.sessions.length, 2, 'dos sesiones');
+const sBot = botReport.sessions.find((s) => s.id === 'sBot');
+const sHuman = botReport.sessions.find((s) => s.id === 'sHuman');
+assert.equal(sBot.bot, 'bot', 'sesión marcada por moda de entries');
+assert.equal(sHuman.bot, 'human');
+assert.equal(botReport.attackers.find((a) => a.ip === '10.0.0.7').botSessions, 1, 'atacante con 1 sesión BOT');
+assert.equal(botReport.attackers.find((a) => a.ip === '10.0.0.8').botSessions, 0, 'atacante humano sin sesiones BOT');
 
 console.log('OK: forensicReport pasa todos los asserts');

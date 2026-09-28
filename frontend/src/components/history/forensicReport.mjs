@@ -31,6 +31,7 @@ export function wsMessageToEntry(msg) {
     ip: msg.ip || '',
     mac: msg.mac || '',
     session_id: msg.session_id || '',
+    bot: msg.bot || '',
     payload: msg.payload || ''
   };
 }
@@ -125,7 +126,7 @@ export function reportToPdfDoc(r) {
               {
                 text: [
                   { text: `[${s.service}] ${s.ip}`, bold: true },
-                  { text: ` (${s.mac}) · ${d(s.start)} → ${d(s.end)} · ${s.commands.length} comandos · ${s.alerts} alertas${s.wpm > 0 ? ` · ${s.wpm} WPM` : ''}` }
+                  { text: ` (${s.mac}) · ${d(s.start)} → ${d(s.end)} · ${s.commands.length} comandos · ${s.alerts} alertas${s.wpm > 0 ? ` · ${s.wpm} WPM` : ''}${s.bot ? ` · Clase: ${s.bot === 'human' ? 'HUMANO' : s.bot === 'bot' ? 'BOT' : 'SOSPECHOSO'}` : ''}` }
                 ]
               },
               ...(s.commands.length ? [{ text: `Comandos: ${s.commands.join(' ; ')}`, style: 'mono' }] : []),
@@ -141,11 +142,11 @@ export function reportToPdfDoc(r) {
     {
       table: {
         headerRow: true,
-        widths: ['auto', 'auto', '*', 'auto', 'auto', 'auto', 'auto', 'auto'],
+        widths: ['auto', 'auto', '*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
         body: [
-          ['IP', 'MAC', 'Servicios', 'Sesiones', 'Comandos', 'Alertas', 'Primera vista', 'Última vista'].map((t) => ({ text: t, style: 'th' })),
-          ...r.attackers.map((a, i) => zebra([a.ip, a.macs.join(', '), a.services.join(', '), String(a.sessionCount), String(a.commands.length), String(a.alerts), d(a.firstSeen), d(a.lastSeen)], i + 1)),
-          ...(!r.attackers.length ? [[{ text: 'Sin resultados con los filtros aplicados.', colSpan: 8, alignment: 'center', color: '#777777' }, '', '', '', '', '', '', '']] : [])
+          ['IP', 'MAC', 'Servicios', 'Sesiones', 'Bots', 'Comandos', 'Alertas', 'Primera vista', 'Última vista'].map((t) => ({ text: t, style: 'th' })),
+          ...r.attackers.map((a, i) => zebra([a.ip, a.macs.join(', '), a.services.join(', '), String(a.sessionCount), String(a.botSessions || 0), String(a.commands.length), String(a.alerts), d(a.firstSeen), d(a.lastSeen)], i + 1)),
+          ...(!r.attackers.length ? [[{ text: 'Sin resultados con los filtros aplicados.', colSpan: 9, alignment: 'center', color: '#777777' }, '', '', '', '', '', '', '', '']] : [])
         ]
       },
       layout: GRID
@@ -245,11 +246,12 @@ export function buildReport(entries) {
 
     let s = sessions.get(e.session_id);
     if (!s) {
-      s = { id: e.session_id, ip: e.ip, mac: e.mac, service: e.service, start: Infinity, end: 0, ios: [], commands: [], alerts: 0, outputs: 0, connections: 0 };
+      s = { id: e.session_id, ip: e.ip, mac: e.mac, service: e.service, start: Infinity, end: 0, ios: [], commands: [], alerts: 0, outputs: 0, connections: 0, botCounts: {} };
       sessions.set(e.session_id, s);
     }
     s.start = Math.min(s.start, e.ts);
     s.end = Math.max(s.end, e.ts);
+    if (e.bot) s.botCounts[e.bot] = (s.botCounts[e.bot] || 0) + 1;
     if (e.event === 'io') s.ios.push(e);
     else if (e.event === 'command') s.commands.push(e.payload);
     else if (e.event === 'alert') s.alerts++;
@@ -275,7 +277,9 @@ export function buildReport(entries) {
     const ioSpan = s.ios.length >= 2 ? s.ios[s.ios.length - 1].ts - s.ios[0].ts : 0;
     // ponytail: WPM aproximado sobre el tramo activo de tecleo; <2 teclas = sin dato (0), no inventar.
     const wpm = ioSpan > 0 ? Math.round(s.ios.length / 5 / (ioSpan / 60000)) : 0;
-    return { ...s, typed, wpm, durationMs: s.end - s.start, start: new Date(s.start), end: new Date(s.end) };
+    // Marca de sesión = moda de las marcas de sus entries (human/bot/suspect)
+    const bot = Object.entries(s.botCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || '';
+    return { ...s, typed, wpm, bot, durationMs: s.end - s.start, start: new Date(s.start), end: new Date(s.end) };
   }).sort((a, b) => b.start - a.start);
 
   const attackerList = [...attackers.values()].map((a) => ({
@@ -283,6 +287,8 @@ export function buildReport(entries) {
     macs: [...a.macs],
     services: [...a.services],
     sessionCount: a.sessionIds.size,
+    // Sesiones clasificadas BOT de este atacante (sobre las ya cerradas y las vivas)
+    botSessions: sessionList.filter((s) => s.bot === 'bot' && a.sessionIds.has(s.id)).length,
     commands: a.commands,
     alerts: a.alerts,
     firstSeen: new Date(a.firstSeen),

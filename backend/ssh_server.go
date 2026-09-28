@@ -34,6 +34,7 @@ type AttackHistoryEntry struct {
 	IP        string
 	MAC       string
 	SessionID string
+	Bot       string // human | bot | suspect — marca del detector al momento del evento
 }
 
 // TelemetryMessage incluye metadatos del atacante y la sesión para la interfaz.
@@ -45,6 +46,7 @@ type TelemetryMessage struct {
 	MAC       string `json:"mac"`
 	SessionID string `json:"session_id,omitempty"`
 	Timestamp string `json:"timestamp,omitempty"`
+	Bot       string `json:"bot,omitempty"`
 }
 
 // KeyEvent representa una pulsación individual o un comando completo ejecutado por el atacante.
@@ -207,13 +209,14 @@ func newSessionID(ip string) string {
 }
 
 func appendAttackHistoryEntry(filePath string, entry AttackHistoryEntry) error {
-	block := fmt.Sprintf("[ATTACK %s]\nservice=%s\nevent=%s\nip=%s\nmac=%s\nsession_id=%s\npayload=%q\n---\n",
+	block := fmt.Sprintf("[ATTACK %s]\nservice=%s\nevent=%s\nip=%s\nmac=%s\nsession_id=%s\nbot=%s\npayload=%q\n---\n",
 		entry.Timestamp.Format(time.RFC3339Nano),
 		entry.Service,
 		entry.EventType,
 		entry.IP,
 		entry.MAC,
 		entry.SessionID,
+		entry.Bot,
 		entry.Payload,
 	)
 
@@ -269,6 +272,11 @@ func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
 		incrementAttackCounter()
 	}
 
+	// Detector de bots: observa el evento y estampa la marca de la sesión/IP
+	// en el mensaje broadcast y en el registro del historial.
+	observeEvent(service, eventType, sessionID, ip, time.Now())
+	bot := verdictFor(service, sessionID, ip)
+
 	timestamp := time.Now()
 	msg := TelemetryMessage{
 		Service:   service,
@@ -278,6 +286,7 @@ func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
 		MAC:       mac,
 		SessionID: sessionID,
 		Timestamp: timestamp.Format(time.RFC3339Nano),
+		Bot:       bot,
 	}
 
 	broadcast <- msg
@@ -290,6 +299,7 @@ func emitTelemetry(service, eventType, payload, ip, mac, sessionID string) {
 		IP:        ip,
 		MAC:       mac,
 		SessionID: sessionID,
+		Bot:       bot,
 	}); err != nil {
 		log.Printf("Error guardando historial de ataque: %v", err)
 	}
