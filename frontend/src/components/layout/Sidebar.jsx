@@ -24,7 +24,9 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
       <div className="flex flex-col items-center gap-4 w-full">
         {/* Brand Shield Icon */}
         <div className="flex flex-col items-center">
-          <div
+          <button
+            type="button"
+            aria-label="AegisTrap — ir a la terminal en vivo"
             className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shadow-sm hover:scale-105 transition-transform cursor-pointer"
             title="AegisTrap Defense SOC (presionar 5 veces)"
             onClick={() => {
@@ -33,13 +35,15 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
             }}
           >
             <span className="material-symbols-outlined text-[22px]">shield</span>
-          </div>
+          </button>
         </div>
 
         {/* Navigation Buttons */}
-        <nav className="flex flex-col items-center gap-3 w-full">
+        <nav className="flex flex-col items-center gap-3 w-full" aria-label="Navegación principal">
           {/* Terminal / Live Terminal */}
           <button
+            aria-label="Live Terminal Multi-Widget"
+            aria-current={activeTab === 'terminal' ? 'page' : undefined}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'terminal'
                 ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
@@ -53,6 +57,8 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
 
           {/* Servicios (DNS/Server) */}
           <button
+            aria-label="Gestión de Honeypots y Servicios"
+            aria-current={activeTab === 'servicios' ? 'page' : undefined}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'servicios'
                 ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
@@ -66,6 +72,8 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
 
           {/* Historial */}
           <button
+            aria-label="Historial de ataques"
+            aria-current={activeTab === 'historial' ? 'page' : undefined}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'historial'
                 ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
@@ -79,6 +87,8 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
 
           {/* Reporte Forense */}
           <button
+            aria-label="Reporte Forense Post-Ataque"
+            aria-current={activeTab === 'reporte' ? 'page' : undefined}
             className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
               activeTab === 'reporte'
                 ? 'bg-primary-container text-on-primary shadow-md shadow-primary-container/25 hover:brightness-110'
@@ -97,6 +107,7 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
         {/* Toggle Modo Claro / Oscuro */}
         <button
           onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
           className="w-10 h-10 rounded-xl text-outline hover:text-on-surface hover:bg-surface-container flex items-center justify-center transition-colors"
           title={theme === 'dark' ? 'Cambiar a Modo Claro' : 'Cambiar a Modo Oscuro'}
         >
@@ -108,6 +119,7 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
         {onLogout && (
           <button
             onClick={onLogout}
+            aria-label="Cerrar sesión del SOC"
             className="w-10 h-10 rounded-xl text-error hover:bg-error-container/10 flex items-center justify-center transition-colors"
             title="Cerrar sesión del SOC"
           >
@@ -115,10 +127,6 @@ export default function Sidebar({ activeTab, onSelectTab, onShieldClick, onLogou
           </button>
         )}
 
-        <div className="relative flex items-center justify-center" title="Kernel Daemon Activo">
-          <span className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
-          <span className="absolute w-4 h-4 rounded-full bg-primary/30 animate-ping"></span>
-        </div>
       </div>
     </aside>
   );

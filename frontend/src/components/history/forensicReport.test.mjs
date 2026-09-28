@@ -1,6 +1,6 @@
 // Check mínimo: node src/components/history/forensicReport.test.mjs
 import assert from 'node:assert/strict';
-import { parseHistory, buildReport, reportToPdfDoc, filterEntries } from './forensicReport.mjs';
+import { parseHistory, buildReport, reportToPdfDoc, filterEntries, wsMessageToEntry } from './forensicReport.mjs';
 
 const sample = `[ATTACK 2026-09-23T09:47:22.201199701-04:00]
 service=ssh
@@ -104,5 +104,35 @@ assert.equal(magic, '%PDF-', 'salida con magic %PDF-');
 assert.ok(b64.length > 1000, 'PDF con contenido real');
 const emptyB64 = await pdfMake.createPdf(reportToPdfDoc(buildReport([]))).getBase64();
 assert.ok(Buffer.from(emptyB64, 'base64').slice(0, 5).toString() === '%PDF-', 'reporte vacio -> PDF valido (guard ul)');
+
+// --- wsMessageToEntry: telemetría WS → entry compatible con parseHistory ---
+// null para lo que no va al archivo
+assert.equal(wsMessageToEntry({ type: 'system_stats', connections: {} }), null, 'system_stats → null');
+assert.equal(wsMessageToEntry({ type: 'ban_added', service: 'security', payload: 'x' }), null, 'bans (security) → null');
+assert.equal(wsMessageToEntry({ type: 'raw', payload: 'x', service: 'ssh' }), null, 'tipo desconocido → null');
+assert.equal(wsMessageToEntry(null), null, 'null → null');
+
+// mapping completo de un evento connection
+const wsMsg = {
+  service: 'ssh:2222', type: 'connection', payload: 'Nuevo intruso',
+  ip: '10.0.0.5', mac: 'AA:BB:CC:DD:EE:FF', session_id: '127.0.0.1-123',
+  timestamp: '2026-09-28T10:00:00.5-04:00'
+};
+const wsEntry = wsMessageToEntry(wsMsg);
+assert.equal(wsEntry.service, 'ssh:2222');
+assert.equal(wsEntry.event, 'connection');
+assert.equal(wsEntry.ip, '10.0.0.5');
+assert.equal(wsEntry.session_id, '127.0.0.1-123');
+assert.ok(wsEntry.ts > 0, 'ts numérico');
+assert.equal(wsEntry.timestamp, wsMsg.timestamp, 'timestamp preservado');
+
+// compatibilidad de shape: el entry WS alimenta el mismo buildReport que el parser
+const fromWs = buildReport([wsEntry]);
+assert.equal(fromWs.summary.totalEvents, 1);
+assert.equal(fromWs.attackers[0].ip, '10.0.0.5');
+
+// fallback sin timestamp: reloj del cliente (~ahora)
+const noTs = wsMessageToEntry({ service: 'ssh:2222', type: 'io', payload: 'a', ip: '1.2.3.4', mac: 'm', session_id: 's1' });
+assert.ok(Math.abs(noTs.ts - Date.now()) < 5000, 'sin timestamp → ts del cliente');
 
 console.log('OK: forensicReport pasa todos los asserts');

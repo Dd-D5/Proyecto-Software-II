@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DnsBanManagerView from './DnsBanManagerView';
 import ServiceSearchBar from './ServiceSearchBar';
 import { apiFetch } from '../../services/api';
+import Input, { inputCls, labelCls } from '../../ui/Input';
 
 const EMPTY_FILTERS = { name: '', type: '', port: '', status: '' };
 
@@ -16,6 +17,7 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [notice, setNotice] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
 
   // Clave de breach de una instancia: "http:8090" (igual que emite el backend)
   const breachKeyOf = (hp) => `${hp.type}:${hp.port}`;
@@ -33,14 +35,16 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
   });
 
   const fetchHoneypots = async () => {
+    if (document.hidden) return; // polling pausado en pestaña oculta
     try {
       const response = await apiFetch('/api/honeypots');
       if (response.ok) {
         const data = await response.json();
         setHoneypots(data || []);
+        setFetchError(null);
       }
     } catch (err) {
-      console.error('Error obteniendo honeypots:', err);
+      setFetchError('No se pudo obtener la lista de honeypots. Verifique el backend.');
     }
   };
 
@@ -56,8 +60,8 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
     setNotice(null);
 
     const portNum = parseInt(port, 10);
-    if (!name.trim() || isNaN(portNum) || portNum <= 0) {
-      setError('Por favor ingrese un nombre válido y un número de puerto correcto.');
+    if (!name.trim() || isNaN(portNum) || portNum <= 0 || portNum > 65535) {
+      setError('Por favor ingrese un nombre válido y un puerto entre 1 y 65535.');
       return;
     }
 
@@ -120,9 +124,6 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
       setError('Error al eliminar honeypot');
     }
   };
-
-  const inputCls = 'bg-surface-container border border-hairline-strong focus:border-primary font-label-code text-xs p-2.5 rounded-lg text-on-surface outline-none transition-colors';
-  const labelCls = 'font-label-caps text-[10px] text-outline uppercase';
 
   return (
     <div className="flex flex-col gap-4 h-full overflow-y-auto select-none p-1">
@@ -196,21 +197,20 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
             )}
 
             <form onSubmit={handleCreateHoneypot} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-              <div className="md:col-span-4 flex flex-col gap-1.5">
-                <label className={labelCls}>Nombre del Honeypot:</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Ej: Servidor Web Interno Falso"
-                  className={inputCls}
-                  required
-                />
-              </div>
+              <Input
+                wrapCls="md:col-span-4 flex flex-col gap-1.5"
+                label="Nombre del Honeypot:"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Ej: Servidor Web Interno Falso"
+                required
+              />
 
               <div className="md:col-span-2 flex flex-col gap-1.5">
-                <label className={labelCls}>Tipo de Servicio:</label>
+                <label htmlFor="hp-type" className={labelCls}>Tipo de Servicio:</label>
                 <select
+                  id="hp-type"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                   className={inputCls}
@@ -221,34 +221,32 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
                 </select>
               </div>
 
-              <div className="md:col-span-2 flex flex-col gap-1.5">
-                <label className={labelCls}>Puerto Bind:</label>
-                <input
-                  type="number"
-                  value={port}
-                  onChange={(e) => setPort(e.target.value)}
-                  placeholder="Ej: 8082"
-                  className={inputCls}
-                  required
-                />
-              </div>
+              <Input
+                wrapCls="md:col-span-2 flex flex-col gap-1.5"
+                label="Puerto Bind:"
+                type="number"
+                min="1"
+                max="65535"
+                value={port}
+                onChange={(e) => setPort(e.target.value)}
+                placeholder="Ej: 8082"
+                required
+              />
 
-              <div className="md:col-span-2 flex flex-col gap-1.5">
-                <label className={labelCls}>Banner Falso (Opcional):</label>
-                <input
-                  type="text"
-                  value={banner}
-                  onChange={(e) => setBanner(e.target.value)}
-                  placeholder="Apache/2.4.52"
-                  className={inputCls}
-                />
-              </div>
+              <Input
+                wrapCls="md:col-span-2 flex flex-col gap-1.5"
+                label="Banner Falso (Opcional):"
+                type="text"
+                value={banner}
+                onChange={(e) => setBanner(e.target.value)}
+                placeholder="Apache/2.4.52"
+              />
 
               <div className="md:col-span-2">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps uppercase font-semibold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+                  className="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps uppercase font-semibold py-2.5 px-4 rounded-btn transition-colors flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
                 >
                   <span className="material-symbols-outlined text-[16px]">rocket_launch</span>
                   {loading ? 'Lanzando...' : 'Desplegar'}
@@ -269,6 +267,21 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
             <div className="px-4 py-3 border-b border-hairline">
               <ServiceSearchBar filters={filters} onFilterChange={setFilters} />
             </div>
+
+            {fetchError && (
+              <div role="alert" className="m-3 bg-error-container/10 border border-error-container/30 text-error font-label-code text-xs p-3 rounded-lg flex items-center justify-between gap-2">
+                <span className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[16px]">error</span>
+                  {fetchError}
+                </span>
+                <button
+                  onClick={fetchHoneypots}
+                  className="shrink-0 underline underline-offset-2 hover:brightness-125 cursor-pointer"
+                >
+                  Reintentar
+                </button>
+              </div>
+            )}
 
             {/* ponytail: cap visual ~20 filas (max-h 880px, fila ≈44px); .panel-scroll
                 re-habilita la scrollbar oculta globalmente. Upgrade path: paginación. */}

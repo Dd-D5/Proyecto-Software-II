@@ -1,6 +1,11 @@
 import React from 'react';
 
 export default function KeystrokeInspector({ keystrokes = [] }) {
+  // Cadencia <150ms = tipeo scripted/automatizado — señal forense útil.
+  // ponytail: parse por fila del "Δ Nms" renderizado; barato con cap de 50 filas.
+  // Upgrade path: guardar deltaMs numérico en el entry si la tabla crece.
+  const isFastDelta = (delta) => parseInt(String(delta).replace(/[^\d]/g, ''), 10) < 150;
+
   return (
     <section className="p-4 rounded-xl bg-surface-container-low border border-hairline shadow-sm flex flex-col gap-3 flex-1 min-h-0">
       <div className="flex flex-col gap-0.5">
@@ -29,12 +34,17 @@ export default function KeystrokeInspector({ keystrokes = [] }) {
           </thead>
           <tbody className="divide-y divide-edge-soft bg-ink text-on-surface">
             {keystrokes && keystrokes.length > 0 ? (
-              keystrokes.map((row, idx) => (
-                <tr key={idx} className="hover:bg-surface-container transition-colors">
+              keystrokes.map((row) => (
+                <tr key={row.id} className="hover:bg-surface-container transition-colors">
                   <td className="py-1.5 px-2.5 text-outline">{row.timestamp}</td>
                   <td className="py-1.5 px-2.5 font-bold font-label-code text-on-surface">{row.key}</td>
                   <td className="py-1.5 px-2.5 text-outline">{row.scancode}</td>
-                  <td className="py-1.5 px-2.5 text-right text-primary-container font-bold">{row.delta}</td>
+                  <td
+                    className={`py-1.5 px-2.5 text-right font-bold ${isFastDelta(row.delta) ? 'text-tertiary' : 'text-primary-container'}`}
+                    title={isFastDelta(row.delta) ? 'Cadencia rápida — posible scripted/automatización' : undefined}
+                  >
+                    {row.delta}
+                  </td>
                 </tr>
               ))
             ) : (
@@ -50,7 +60,7 @@ export default function KeystrokeInspector({ keystrokes = [] }) {
 
       {/* Footer Meta */}
       <div className="flex items-center justify-between text-caption font-caption text-outline pt-1">
-        <span>Ventana de muestreo: 300 eventos</span>
+        <span>Ventana de muestreo: 50 eventos</span>
       </div>
     </section>
   );

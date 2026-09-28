@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { apiFetch } from '../../services/api';
+import { labelCls } from '../../ui/Input';
 
 export default function LoginView({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
+  const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -10,9 +12,8 @@ export default function LoginView({ onLoginSuccess }) {
     e.preventDefault();
     setError(null);
 
-    // Saneamiento de entrada local antes de enviar
-    const cleanPass = password.trim().replace(/['"\\;]/g, '');
-    if (!cleanPass) {
+    // La contraseña viaja tal cual fue escrita; la validación es job del backend.
+    if (!password.trim()) {
       setError('Por favor ingrese la contraseña de administración.');
       return;
     }
@@ -22,7 +23,7 @@ export default function LoginView({ onLoginSuccess }) {
     try {
       const response = await apiFetch('/api/login', {
         method: 'POST',
-        body: JSON.stringify({ password: cleanPass }),
+        body: JSON.stringify({ password }),
       });
 
       let data = {};
@@ -41,7 +42,7 @@ export default function LoginView({ onLoginSuccess }) {
       onLoginSuccess(data.token);
     } catch (err) {
       if (err.name === 'TypeError' || (err.message && err.message.toLowerCase().includes('fetch'))) {
-        setError('No se pudo conectar con el servidor backend (puerto 8080). Asegúrese de que aegistrap_backend esté iniciado.');
+        setError('No se pudo conectar con el servidor backend. Asegúrese de que aegistrap_backend esté iniciado.');
       } else {
         setError(err.message || 'Error de conexión con el servidor backend');
       }
@@ -70,7 +71,7 @@ export default function LoginView({ onLoginSuccess }) {
 
         {/* Alerta de Error */}
         {error && (
-          <div className="bg-error-container/10 border border-error-container/30 text-error font-medium text-xs p-3 rounded-lg flex items-center gap-2">
+          <div role="alert" className="bg-error-container/10 border border-error-container/30 text-error font-medium text-xs p-3 rounded-lg flex items-center gap-2">
             <span className="material-symbols-outlined text-[18px]">error</span>
             <span>{error}</span>
           </div>
@@ -79,27 +80,39 @@ export default function LoginView({ onLoginSuccess }) {
         {/* Formulario de Login de Solo Contraseña */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <label className="font-label-caps text-label-caps text-outline uppercase flex items-center gap-1.5">
+            <label htmlFor="login-pass" className={`${labelCls} flex items-center gap-1.5`}>
               <span className="material-symbols-outlined text-[18px]">key</span>
               Contraseña de Administrador
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Ingrese la contraseña"
-              className="bg-surface-container border border-hairline-strong focus:border-primary text-on-surface font-label-code text-sm px-4 py-3 rounded-lg outline-none transition-colors"
-              required
-            />
-            <span className="font-caption text-caption text-outline">
-              * El campo limpia e invalida automáticamente caracteres de inyección.
-            </span>
+            <div className="relative">
+              <input
+                id="login-pass"
+                type={showPass ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Ingrese la contraseña"
+                autoComplete="current-password"
+                autoFocus
+                className="w-full bg-surface-container border border-hairline-strong focus:border-primary text-on-surface font-label-code text-sm px-4 py-3 pr-12 rounded-btn outline-none transition-colors"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPass((v) => !v)}
+                aria-label={showPass ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  {showPass ? 'visibility_off' : 'visibility'}
+                </span>
+              </button>
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-semibold text-sm py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 uppercase tracking-wider disabled:opacity-60 cursor-pointer"
+            className="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-semibold text-sm py-3 px-4 rounded-btn transition-colors flex items-center justify-center gap-2 uppercase tracking-wider disabled:opacity-60 cursor-pointer"
           >
             {loading ? (
               <>

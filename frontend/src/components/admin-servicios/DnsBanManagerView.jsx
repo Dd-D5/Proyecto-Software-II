@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiFetch } from '../../services/api';
+import Input from '../../ui/Input';
 
 export default function DnsBanManagerView() {
   const [bans, setBans] = useState([]);
@@ -10,6 +11,7 @@ export default function DnsBanManagerView() {
   const [successMsg, setSuccessMsg] = useState(null);
 
   const fetchBans = async () => {
+    if (document.hidden) return; // polling pausado en pestaña oculta
     try {
       const response = await apiFetch('/api/bans');
       if (response.ok) {
@@ -17,7 +19,7 @@ export default function DnsBanManagerView() {
         setBans(data || []);
       }
     } catch (err) {
-      console.error('Error obteniendo lista de baneos:', err);
+      // silencioso: reintenta en 4s; el banner de error de acciones basta
     }
   };
 
@@ -64,6 +66,7 @@ export default function DnsBanManagerView() {
   };
 
   const handleRemoveBan = async (targetToRemove) => {
+    if (!window.confirm(`¿Desbanear ${targetToRemove}? El host volverá a tener acceso.`)) return;
     try {
       const response = await apiFetch(`/api/bans?target=${encodeURIComponent(targetToRemove)}`, {
         method: 'DELETE'
@@ -71,6 +74,8 @@ export default function DnsBanManagerView() {
       if (response.ok) {
         setSuccessMsg(`Desbaneo procesado para ${targetToRemove}`);
         fetchBans();
+      } else {
+        setError('No se pudo remover el baneo. Reintente.');
       }
     } catch (err) {
       setError('Error al remover baneo');
@@ -121,34 +126,28 @@ export default function DnsBanManagerView() {
         )}
 
         <form onSubmit={handleAddBan} className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="flex flex-col gap-1.5">
-            <label className="font-label-caps text-[10px] text-outline uppercase">IP o Dominio DNS:</label>
-            <input
-              type="text"
-              value={target}
-              onChange={(e) => setTarget(e.target.value)}
-              placeholder="Ej: 192.168.1.100 o maliciosos.com"
-              className="bg-surface-container border border-hairline-strong focus:border-primary font-label-code text-xs p-2.5 rounded-lg text-on-surface outline-none transition-colors"
-              required
-            />
-          </div>
+          <Input
+            label="IP o Dominio DNS:"
+            type="text"
+            value={target}
+            onChange={(e) => setTarget(e.target.value)}
+            placeholder="Ej: 192.168.1.100 o maliciosos.com"
+            required
+          />
 
-          <div className="flex flex-col gap-1.5">
-            <label className="font-label-caps text-[10px] text-outline uppercase">Razón del Baneo:</label>
-            <input
-              type="text"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-              placeholder="Ej: Ataque VPN / Ejecución sudo"
-              className="bg-surface-container border border-hairline-strong focus:border-primary font-label-code text-xs p-2.5 rounded-lg text-on-surface outline-none transition-colors"
-            />
-          </div>
+          <Input
+            label="Razón del Baneo:"
+            type="text"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            placeholder="Ej: Ataque VPN / Ejecución sudo"
+          />
 
           <div className="flex items-end">
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-error hover:brightness-110 text-on-error font-label-caps text-label-caps uppercase font-semibold py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+              className="w-full bg-error hover:brightness-110 text-on-error font-label-caps text-label-caps uppercase font-semibold py-2.5 px-4 rounded-btn transition-colors flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
             >
               <span className="material-symbols-outlined text-[16px]">gavel</span>
               {loading ? 'Procesando...' : 'Aplicar Baneo'}

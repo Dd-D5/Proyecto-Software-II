@@ -28,13 +28,14 @@ export default function TopBar({ activeTab, onSelectTab, wsStatus = 'desconectad
           
         </div>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1" aria-label="Pestañas">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
                 onClick={() => onSelectTab(tab.id)}
+                aria-current={isActive ? 'page' : undefined}
                 className={`px-3 py-1.5 rounded-lg font-mono-sm text-mono-sm flex items-center gap-1.5 transition-all ${
                   isActive
                     ? 'bg-surface-container-high text-primary font-semibold border border-primary/20 shadow-sm'
@@ -53,6 +54,8 @@ export default function TopBar({ activeTab, onSelectTab, wsStatus = 'desconectad
       <div className="flex items-center gap-3">
         <button
           onClick={() => wsClient.connect()}
+          role="status"
+          aria-label={`WebSocket: ${WS_STATUS[wsStatus]?.label || 'Desconectado'} — click para reconectar`}
           className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border font-label-caps text-label-caps font-semibold uppercase transition-colors ${WS_STATUS[wsStatus]?.cls || WS_STATUS.desconectado.cls}`}
           title={wsStatus === 'desconectado' ? 'Click para reintentar conexión' : `WebSocket: ${wsStatus}`}
         >

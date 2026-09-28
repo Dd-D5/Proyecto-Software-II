@@ -1,24 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../../services/api';
 
-// ponytail: SONDEADO se deriva de keystrokeCountByService (actividad IO sin sesión
-// activa). No hay estado dedicado en el backend. Upgrade path: emitir un evento
-// "probe" real si se necesita distinguir sondeo de conexión.
-const serviceState = (isBreached, activity) => {
-  if (isBreached) return 'ALERTA';
-  return 'ESPERA';
-};
+// Estado por trampa: ALERTA (conexión activa) o ESPERA.
+// ponytail: SONDEADO eliminado — no hay señal de backend que lo distinga.
+// Upgrade path: evento "probe" real del backend si se necesita.
+const serviceState = (isBreached) => (isBreached ? 'ALERTA' : 'ESPERA');
 
-export default function TrapSelector({
+function TrapSelector({
   activeService = 'ssh:2222',
   onSelectService,
   onNavigateToAdmin,
-  wsUrl = 'ws://127.0.0.1:8080/ws',
-  breachByService = {},
-  keystrokeCountByService = {}
+  wsUrl = '',
+  breachByService = {}
 }) {
   const [honeypotsList, setHoneypotsList] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [actionError, setActionError] = useState(null);
   const dropdownRef = useRef(null);
 
   // Chips default
@@ -30,6 +27,7 @@ export default function TrapSelector({
 
   // Obtener honeypots configurados desde la API
   const fetchCustomHoneypots = async () => {
+    if (document.hidden) return; // polling pausado en pestaña oculta
     try {
       const res = await apiFetch('/api/honeypots');
       if (res.ok) {
@@ -37,7 +35,7 @@ export default function TrapSelector({
         setHoneypotsList(data || []);
       }
     } catch (e) {
-      // Ignorar fallo de red si backend reconecta
+      // silencioso: reintenta en 4s; visible en Admin si el backend sigue caído
     }
   };
 
@@ -47,15 +45,22 @@ export default function TrapSelector({
     return () => clearInterval(interval);
   }, []);
 
-  // Cerrar al hacer clic fuera del menú
+  // Cerrar al hacer clic fuera o con Escape
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
     };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setDropdownOpen(false);
+    };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const handleToggleHoneypot = async (id, e) => {
@@ -65,25 +70,26 @@ export default function TrapSelector({
         method: 'POST',
         body: JSON.stringify({ id })
       });
-      if (res.ok) {
-        fetchCustomHoneypots();
-      }
+      if (!res.ok) throw new Error('respuesta no OK');
+      setActionError(null);
+      fetchCustomHoneypots();
     } catch (err) {
-      console.error('Error al conmutar estado:', err);
+      setActionError('No se pudo cambiar el estado del honeypot. Reintente.');
     }
   };
 
   const handleDeleteHoneypot = async (id, e) => {
     e.stopPropagation();
+    if (!window.confirm('¿Eliminar este honeypot? Los puertos dejarán de escuchar.')) return;
     try {
       const res = await apiFetch(`/api/honeypots?id=${encodeURIComponent(id)}`, {
         method: 'DELETE'
       });
-      if (res.ok) {
-        fetchCustomHoneypots();
-      }
+      if (!res.ok) throw new Error('respuesta no OK');
+      setActionError(null);
+      fetchCustomHoneypots();
     } catch (err) {
-      console.error('Error al eliminar honeypot:', err);
+      setActionError('No se pudo eliminar el honeypot. Reintente.');
     }
   };
 
@@ -93,18 +99,18 @@ export default function TrapSelector({
   );
 
   const anyBreach = Object.values(breachByService).some(Boolean);
+  // Conteo solo de INSTANCIAS ("ssh:2223") — la clave base se flipa en el mismo update
+  const breachCount = Object.entries(breachByService).filter(([k, v]) => v && k.includes(':')).length;
   const anyCustomBreach = customHoneypots.some(
     (hp) => !!breachByService[`${hp.type}:${hp.port}`]
   );
 
   const dotClass = {
     ALERTA: 'bg-error',
-    SONDEADO: 'bg-tertiary',
-    ESPERA: 'bg-secondary-container'
+    ESPERA: 'bg-outline'
   };
   const badgeClass = {
     ALERTA: 'bg-error text-ink font-bold',
-    SONDEADO: 'bg-surface-container-high text-outline font-medium',
     ESPERA: 'bg-surface-container-high text-outline font-medium'
   };
 
@@ -129,7 +135,9 @@ export default function TrapSelector({
             <p className="font-body-sm text-body-sm text-outline">Monitor Forense de Ciberdefensa</p>
             <span className="flex items-center gap-1.5 bg-surface-container-lowest border border-hairline px-2 py-0.5 rounded-lg font-mono-sm text-mono-sm text-secondary">
               <span className="material-symbols-outlined text-[13px]">wifi_tethering</span>
-              <span className="truncate max-w-[240px]" id="active-ws-node">{wsUrl}</span>
+              <span className="truncate max-w-[240px]" id="active-ws-node" title={wsUrl}>
+                {wsUrl ? wsUrl.replace(/^ws?:\/\//, '').split('/ws')[0] : '—'}
+              </span>
             </span>
           </div>
         </div>
@@ -145,9 +153,11 @@ export default function TrapSelector({
       >
         <span className={`w-2 h-2 rounded-full ${anyBreach ? 'bg-error-container animate-ping' : 'bg-primary'} `}></span>
         <span className="font-label-code text-label-code text-on-surface font-medium">
-          Estado General de Amenaza:{' '}
+          Estado:{' '}
           <span className={anyBreach ? 'text-error font-semibold' : 'text-primary font-semibold'}>
-            {anyBreach ? 'Intrusión Aislada en Sandbox (Bajo Control)' : 'Perímetro Estable · Sin Intrusión Activa'}
+            {anyBreach
+              ? `Intrusión activa · ${breachCount} ${breachCount === 1 ? 'trampa' : 'trampas'}`
+              : 'Sin intrusión activa'}
           </span>
         </span>
       </div>
@@ -157,7 +167,7 @@ export default function TrapSelector({
         {/* Default Services Chips */}
         {defaultHoneypots.map((hp) => {
           const isActive = activeService === hp.key;
-          const state = serviceState(!!breachByService[hp.key], keystrokeCountByService[hp.key] || 0);
+          const state = serviceState(!!breachByService[hp.key]);
           return (
             <button
               key={hp.key}
@@ -172,7 +182,7 @@ export default function TrapSelector({
               <span className="font-label-code text-label-code text-on-surface font-medium">
                 {hp.label} {hp.port}
               </span>
-              <span className={`font-label-caps text-[10px] px-1 py-0.2 rounded uppercase tracking-wider ${badgeClass[state]}`}>
+              <span className={`font-label-caps text-[11px] px-1 py-0.2 rounded uppercase tracking-wider ${badgeClass[state]}`}>
                 {state.charAt(0) + state.slice(1).toLowerCase()}
               </span>
             </button>
@@ -183,6 +193,8 @@ export default function TrapSelector({
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
+            aria-expanded={dropdownOpen}
+            aria-haspopup="listbox"
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded transition-all font-mono-sm text-xs border ${
               dropdownOpen || anyCustomBreach
                 ? 'bg-secondary/20 border-secondary/50 text-secondary font-bold shadow-sm'
@@ -229,15 +241,22 @@ export default function TrapSelector({
                     const isSelected = activeService === instanceKey;
                     const isBreached = !!breachByService[instanceKey];
                     const isRunning = hp.status === 'running';
+                    const selectRow = () => {
+                      if (onSelectService) onSelectService(instanceKey);
+                      if (onNavigateToAdmin) onNavigateToAdmin('terminal');
+                      setDropdownOpen(false);
+                    };
 
                     return (
                       <div
                         key={hp.id}
-                        onClick={() => {
-                          if (onSelectService) onSelectService(instanceKey);
-                          if (onNavigateToAdmin) onNavigateToAdmin('terminal');
-                          setDropdownOpen(false);
+                        onClick={selectRow}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') selectRow();
                         }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`Abrir terminal de ${hp.name}`}
                         className={`group flex items-center justify-between p-2 rounded-lg border transition-all cursor-pointer ${
                           isSelected
                             ? 'bg-surface-container-high border-secondary/40'
@@ -250,7 +269,7 @@ export default function TrapSelector({
                               isBreached
                                 ? 'bg-error animate-ping'
                                 : isRunning
-                                ? 'bg-emerald-400'
+                                ? 'bg-primary'
                                 : 'bg-outline'
                             }`}
                           />
@@ -268,8 +287,9 @@ export default function TrapSelector({
                         <div className="flex items-center gap-1 shrink-0">
                           <button
                             onClick={(e) => handleToggleHoneypot(hp.id, e)}
+                            aria-label={isRunning ? `Pausar honeypot ${hp.name}` : `Activar honeypot ${hp.name}`}
                             className={`p-1 rounded hover:bg-surface-container transition text-[13px] ${
-                              isRunning ? 'text-emerald-400 hover:text-emerald-300' : 'text-outline hover:text-on-surface'
+                              isRunning ? 'text-primary hover:brightness-110' : 'text-outline hover:text-on-surface'
                             }`}
                             title={isRunning ? 'Pausar Honeypot' : 'Activar Honeypot'}
                           >
@@ -280,6 +300,7 @@ export default function TrapSelector({
 
                           <button
                             onClick={(e) => handleDeleteHoneypot(hp.id, e)}
+                            aria-label={`Eliminar honeypot ${hp.name}`}
                             className="p-1 rounded hover:bg-error/20 text-outline hover:text-error transition text-[13px]"
                             title="Eliminar Honeypot"
                           >
@@ -291,6 +312,13 @@ export default function TrapSelector({
                   })
                 )}
               </div>
+
+              {/* Feedback de acciones fallidas */}
+              {actionError && (
+                <div role="alert" className="mx-1 my-1 bg-error-container/10 border border-error-container/30 text-error font-label-code text-[11px] p-2 rounded-lg">
+                  {actionError}
+                </div>
+              )}
 
               {/* Footer Quick Deploy Link */}
               <div className="pt-2 border-t border-hairline mt-1">
@@ -312,4 +340,8 @@ export default function TrapSelector({
     </section>
   );
 }
+
+// memo: TrapSelector re-renderizaba por cada tecla del atacante (via prop de
+// contadores ya eliminada). Props restantes estables en el flush rAF.
+export default React.memo(TrapSelector);
 

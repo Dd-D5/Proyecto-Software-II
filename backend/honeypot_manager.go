@@ -286,7 +286,9 @@ func handleDynamicFTPConnection(conn net.Conn, banner, name string, port int) {
 	defer func() {
 		emitTelemetry(serviceName, "connection_end", fmt.Sprintf("El intruso cerró FTP %s", name), ip, mac, sessionID)
 	}()
+	defer sessionEnd(serviceName, sessionID)
 
+	sessionStart(serviceName, sessionID)
 	emitTelemetry(serviceName, "connection", fmt.Sprintf("Nuevo intruso en Honeypot FTP %s (Puerto %d)", name, port), ip, mac, sessionID)
 
 	if banner == "" {

@@ -28,8 +28,14 @@ export default function NetworkFingerprintCard({
             </span>
           </div>
         </div>
-        <span className="font-label-caps text-[10px] px-2 py-0.5 rounded bg-primary/15 text-primary-container border border-primary/20 font-semibold shrink-0">
-          VERIFICADO
+        <span
+          className={`font-label-caps text-[10px] px-2 py-0.5 rounded font-semibold border shrink-0 ${
+            mac && mac !== '00:00:00:00:00:00'
+              ? 'bg-primary/15 text-primary-container border-primary/20'
+              : 'bg-surface-container-high text-outline border-outline-variant'
+          }`}
+        >
+          {mac && mac !== '00:00:00:00:00:00' ? 'VERIFICADO' : 'SIN DATOS'}
         </span>
       </div>
 
@@ -45,12 +51,14 @@ export default function NetworkFingerprintCard({
         </div>
         <button
           onClick={handleCopy}
+          aria-label={copied ? 'MAC copiada al portapapeles' : 'Copiar MAC'}
           className="p-1.5 rounded hover:bg-surface-bright text-outline hover:text-on-surface transition-colors border border-transparent hover:border-outline-variant shrink-0"
           title={copied ? '¡Copiado!' : 'Copiar MAC'}
         >
           <span className="material-symbols-outlined text-[18px]">
             {copied ? 'check' : 'content_copy'}
           </span>
+          {copied && <span role="status" className="sr-only">Copiado</span>}
         </button>
       </div>
 

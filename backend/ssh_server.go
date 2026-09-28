@@ -336,6 +336,11 @@ func startFakeShellForService(channel ssh.Channel, ip, mac, sessionID, serviceNa
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel() // Cancela inmediatamente subprocesos y workers al cerrar/banear sesión
 
+	// sessionStart/End pareado por defer con el connection_end: toda sesión
+	// registrada se des-registra (KISS, sin leaks si el canal muere de golpe).
+	sessionStart(serviceName, sessionID)
+	defer sessionEnd(serviceName, sessionID)
+
 	defer channel.Close()
 	defer emitTelemetry(serviceName, "connection_end", "El intruso cerró la terminal", ip, mac, sessionID)
 

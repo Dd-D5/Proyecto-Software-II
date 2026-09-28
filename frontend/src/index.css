@@ -82,9 +82,10 @@ html.light {
   --c-outline-variant: 211 206 191;
   --c-surface-tint: 5 150 105;
   --c-primary: 5 150 105;
-  --c-on-primary: 252 251 249;
+  /* DESIGN.md: texto near-black sobre el verde (nunca blanco) */
+  --c-on-primary: 28 25 23;
   --c-primary-container: 5 150 105;
-  --c-on-primary-container: 252 251 249;
+  --c-on-primary-container: 28 25 23;
   --c-inverse-primary: 4 120 87;
   --c-secondary: 87 83 78;
   --c-on-secondary: 252 251 249;
@@ -167,6 +168,11 @@ html.theme-transition * {
 @media (prefers-reduced-motion: reduce) {
   html.theme-transition * {
     transition: none !important;
+  }
+  /* Pulses/pings decorativos se apagan globalmente para usuarios sensibles */
+  .animate-pulse,
+  .animate-ping {
+    animation: none;
   }
 }
 

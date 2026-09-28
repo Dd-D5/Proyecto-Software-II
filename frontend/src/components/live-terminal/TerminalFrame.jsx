@@ -3,7 +3,8 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
 import { normalizeIPv4 } from '../../hooks/useWebSocket';
-import { getApiBaseUrl } from '../../services/api';
+import { apiFetch } from '../../services/api';
+import { wsClient } from '../../services/wsClient';
 
 // Desnormalización: el backend (normalizeInput) envía <BACKSPACE> etc. como texto legible.
 // El inspector de teclas conserva la versión normalizada; solo la terminal recibe secuencias reales.
@@ -71,6 +72,13 @@ export default function TerminalFrame({ activeService, breached = false, registe
   const fitAddonRef = useRef(null);
   const lastMsgTypeRef = useRef(null);
   const [dumpStatus, setDumpStatus] = useState(null);
+  const [wsStatus, setWsStatus] = useState(wsClient.status);
+
+  // Estado WS → overlay sobre la terminal (antes: solo el pill del TopBar cambiaba)
+  useEffect(() => {
+    const unsub = wsClient.onStatusChange(setWsStatus);
+    return unsub;
+  }, []);
 
   // Clear terminal screen when active service changes (child effect runs before parent hook replay effect)
   useEffect(() => {
@@ -216,8 +224,8 @@ export default function TerminalFrame({ activeService, breached = false, registe
   const handleDumpMemory = async () => {
     setDumpStatus('Generando volcado de memoria sandbox...');
     try {
-      const dumpUrl = `${getApiBaseUrl()}/api/dump?service=${encodeURIComponent(activeService)}`;
-      const response = await fetch(dumpUrl);
+      const dumpUrl = `/api/dump?service=${encodeURIComponent(activeService)}`;
+      const response = await apiFetch(dumpUrl);
       if (!response.ok) throw new Error('Error generando dump');
       
       const blob = await response.blob();
@@ -264,18 +272,21 @@ export default function TerminalFrame({ activeService, breached = false, registe
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-label-code text-[11px] px-1.5 py-0.5 rounded bg-surface-container border border-hairline text-secondary">
-            pts/3
+          <span
+            className="font-label-code text-[11px] px-1.5 py-0.5 rounded bg-surface-container border border-hairline text-secondary"
+            title={`Instancia activa: ${activeService}`}
+          >
+            {String(activeService).replace('default-', '')}
           </span>
           <div
             className={`flex items-center gap-1.5 px-2 py-0.5 rounded font-label-caps text-label-caps font-medium border ${
               breached
-                ? 'bg-primary/10 text-primary-container border-primary/20'
+                ? 'bg-error-container/10 text-error border-error-container/30'
                 : 'bg-surface-container text-outline border-hairline'
             }`}
           >
-            <span className={`w-1.5 h-1.5 rounded-full ${breached ? 'bg-primary animate-pulse' : 'bg-outline'}`}></span>
-            <span>{breached ? 'TRANSMITIENDO' : 'EN ESPERA'}</span>
+            <span className={`w-1.5 h-1.5 rounded-full ${breached ? 'bg-error animate-pulse' : 'bg-outline'}`}></span>
+            <span>{breached ? 'INTRUSIÓN ACTIVA' : 'EN ESPERA'}</span>
           </div>
         </div>
       </div>
@@ -283,6 +294,32 @@ export default function TerminalFrame({ activeService, breached = false, registe
       {/* xterm.js Mount Container */}
       <div className="p-3 flex-1 overflow-hidden relative bg-surface-container-lowest">
         <div ref={terminalRef} className="w-full h-full" />
+        {wsStatus !== 'conectado' && (
+          <div
+            role="status"
+            aria-live="polite"
+            className={`absolute inset-3 rounded-lg flex flex-col items-center justify-center gap-2 ${
+              wsStatus === 'desconectado'
+                ? 'bg-error-container/10 border border-error-container/30'
+                : 'bg-surface-container/80 border border-hairline'
+            }`}
+          >
+            <span className="material-symbols-outlined text-error text-[28px]">
+              {wsStatus === 'desconectado' ? 'cloud_off' : 'cloud_sync'}
+            </span>
+            <span className="font-label-caps text-label-caps uppercase text-on-surface font-semibold">
+              {wsStatus === 'desconectado'
+                ? 'Conexión perdida — reintentando automáticamente...'
+                : 'Conectando al servidor de telemetría...'}
+            </span>
+            <button
+              onClick={() => wsClient.connect()}
+              className="px-3 py-1.5 rounded-md bg-surface-container hover:bg-surface-bright text-on-surface border border-outline-variant font-label-code text-label-code transition-colors cursor-pointer"
+            >
+              Reintentar ahora
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Terminal Action Bottom Bar */}
@@ -310,9 +347,6 @@ export default function TerminalFrame({ activeService, breached = false, registe
             <span className="material-symbols-outlined text-[16px]">developer_board</span>
             <span>Dump Memoria</span>
           </button>
-          <span className="font-label-code text-[11px] text-outline hidden md:inline ml-2">
-            Evasión activa: Atacante auditado en /dev/pts3
-          </span>
         </div>
 
         {dumpStatus && (

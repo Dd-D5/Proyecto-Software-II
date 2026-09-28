@@ -32,7 +32,6 @@ export default function LiveTerminalView({
         onNavigateToAdmin={onNavigateToAdmin}
         wsUrl={wsUrl}
         breachByService={breachByService}
-        keystrokeCountByService={keystrokeCountByService}
       />
 
       {/* 2. Top 5 KPI Metrics Cards Row */}

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { wsClient, getWebSocketUrl } from '../services/wsClient';
-import { EventType, ServiceType } from '../services/types';
+import { wsClient, getWebSocketUrl } from '../services/wsClient.js';
+import { EventType, ServiceType } from '../services/types.js';
 
 const STORAGE_KEY = 'aegistrap:history:v1';
 
@@ -71,10 +71,13 @@ const formatTimestamp = (date) => {
   return `[${hours}:${minutes}:${seconds}.${ms}]`;
 };
 
-const buildKeystrokeEntry = (char, rawTime, prevTime) => {
+let keystrokeSeq = 0;
+
+export const buildKeystrokeEntry = (char, rawTime, prevTime) => {
   const deltaMs = Math.min(rawTime - prevTime, 9999);
   const keyDisplay = char === ' ' ? "'Space'" : char === '\n' || char === '\r' ? "'Enter'" : `'${char}'`;
   return {
+    id: ++keystrokeSeq, // key estable para React (idx rompía el diff con newest-first)
     timestamp: formatTimestamp(new Date(rawTime)),
     event: 'KeyDown',
     key: keyDisplay,
@@ -93,10 +96,8 @@ export function useWebSocket(activeService = ServiceType.SSH) {
 
   const historyRef = useRef(persisted?.history || { ssh: [], ftp: [], http: [] });
   const countRef = useRef(persisted?.counters || { ssh: 0, ftp: 0, http: 0 });
-  // breach en vivo — NO se restaura del histórico. Recargar con un
-  // atacante aún conectado no re-enciende el rojo (el backend no re-emite 'connection'
-  // de una sesión ya establecida). Upgrade path: snapshot de sesiones activas al
-  // conectarse el WS si ese falso negativo llega a molestar.
+  // breach en vivo. Tras un F5 no hay 'connection' que re-encender el rojo, pero el
+  // backend reporta sesiones activas en cada system_stats (1s) → re-assert abajo.
   const breachRef = useRef({ ssh: false, ftp: false, http: false });
 
   const [status, setStatus] = useState(wsClient.status);
@@ -105,7 +106,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   const [attackerMac, setAttackerMac] = useState(() => findLastValue(persisted?.history, 'mac') || '00:00:00:00:00:00');
   const [sessionId, setSessionId] = useState(() => normalizeSessionId(findLastValue(persisted?.history, 'session_id')) || '');
   const [keystrokes, setKeystrokes] = useState(INITIAL_KEYSTROKES);
-  const [lastMessage, setLastMessage] = useState(null);
   const [isPaused, setIsPaused] = useState(false);
   const [breachByService, setBreachByService] = useState(breachRef.current);
   const [keystrokeCountByService, setKeystrokeCountByService] = useState(countRef.current);
@@ -123,6 +123,11 @@ export function useWebSocket(activeService = ServiceType.SSH) {
   // ponytail: timer booleano por servicio; si pausa activa, mensajes no llegan y timer puede
   // apagar breach HTTP aunque el atacante siga — techo aceptado. Upgrade: pausar el timer también.
   const httpBreachTimerRef = useRef(null);
+  // Batch de keystrokes: un setState por frame (rAF), no uno por tecla.
+  // ponytail: en pestañas de fondo rAF se pausa → las teclas se acumulan y
+  // llegan de golpe al volver el foco. Upgrade path: flush por setTimeout 1s.
+  const pendingKeysRef = useRef([]);
+  const flushRafRef = useRef(null);
 
   // ponytail: geolocalización vía ipapi.co solo para IPs públicas; LAN muestra texto
   // fijo. Upgrade path: proveedor local/offline si la privacidad lo exige.
@@ -228,6 +233,19 @@ export function useWebSocket(activeService = ServiceType.SSH) {
           total_attacks: Math.max(prev.total_attacks || 0, msg.total_attacks || 0),
           connections: msg.connections || prev.connections || {}
         }));
+
+        // Re-assert de intrusión desde el backend: sesiones activas sobreviven
+        // al F5. Solo set-TRUE — connection_end y el timer HTTP siguen siendo
+        // dueños del apagado. El guard evita setState por segundo.
+        for (const [instance, count] of Object.entries(msg.active_sessions || {})) {
+          if (count > 0) {
+            const baseSvc = baseServiceOf(instance);
+            if (!breachRef.current[instance] || !breachRef.current[baseSvc]) {
+              breachRef.current = { ...breachRef.current, [instance]: true, [baseSvc]: true };
+              setBreachByService(breachRef.current);
+            }
+          }
+        }
         return;
       }
 
@@ -283,7 +301,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
           [svc]: (c[svc] || 0) + 1,
           [baseSvc]: (c[baseSvc] || 0) + 1
         };
-        setKeystrokeCountByService(countRef.current);
       }
 
       scheduleSave();
@@ -292,8 +309,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       if (msg.service && !isServiceMatch(msg.service, activeService)) {
         return;
       }
-
-      setLastMessage(stampedMsg);
 
       if (msg.ip) {
         const norm = normalizeIPv4(msg.ip);
@@ -311,7 +326,16 @@ export function useWebSocket(activeService = ServiceType.SSH) {
       if (msg.type === EventType.IO && msg.payload) {
         const newEntry = buildKeystrokeEntry(msg.payload, now, lastKeystrokeTimeRef.current);
         lastKeystrokeTimeRef.current = now;
-        setKeystrokes((prev) => [newEntry, ...prev.slice(0, 49)]);
+        pendingKeysRef.current.push(newEntry);
+        if (!flushRafRef.current) {
+          flushRafRef.current = requestAnimationFrame(() => {
+            flushRafRef.current = null;
+            const batch = pendingKeysRef.current;
+            pendingKeysRef.current = [];
+            setKeystrokes((prev) => [...batch.slice().reverse(), ...prev].slice(0, 50));
+            setKeystrokeCountByService(countRef.current);
+          });
+        }
       }
 
       // Notificar a listeners de terminal (xterm)
@@ -331,6 +355,7 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     return () => {
       unsubStatus();
       unsubMsg();
+      if (flushRafRef.current) cancelAnimationFrame(flushRafRef.current);
       window.removeEventListener('pagehide', handlePageHide);
     };
   }, [activeService, isPaused, saveNow]);
@@ -356,7 +381,6 @@ export function useWebSocket(activeService = ServiceType.SSH) {
     attackerMac,
     sessionId,
     keystrokes,
-    lastMessage,
     isPaused,
     breachByService,
     keystrokeCountByService,

@@ -3,8 +3,10 @@
  */
 
 export function getWebSocketUrl() {
-  const hostname = window.location.hostname;
-  const host = (!hostname || hostname === 'localhost') ? '127.0.0.1' : hostname;
+  // Sin reescribir localhost→127.0.0.1: el relay de WSL2 solo registra [::1],
+  // forzar IPv4 mataba el WS mientras el REST funcionaba. Dejar que el browser
+  // resuelva (mismo criterio que api.js).
+  const host = window.location.hostname || '127.0.0.1';
   const token = localStorage.getItem('aegis_token') || '';
   const port = (import.meta && import.meta.env && import.meta.env.VITE_API_PORT) || '8085';
   return `ws://${host}:${port}/ws?token=${encodeURIComponent(token)}`;
@@ -14,7 +16,7 @@ export class WebSocketClient {
   constructor() {
     this.url = null;
     this.socket = null;
-    this.reconnectInterval = 2000;
+    this.reconnectAttempts = 0;
     this.reconnectTimer = null;
     this.listeners = new Set();
     this.statusListeners = new Set();
@@ -35,6 +37,7 @@ export class WebSocketClient {
       this.socket = new WebSocket(this.url);
 
       this.socket.onopen = () => {
+        this.reconnectAttempts = 0;
         this.setStatus('conectado');
         if (this.reconnectTimer) {
           clearTimeout(this.reconnectTimer);
@@ -70,14 +73,19 @@ export class WebSocketClient {
 
   scheduleReconnect() {
     if (this.reconnectTimer) return;
+    // ponytail: backoff 2s→30s cap; sin jitter. Upgrade path: jitter si hay
+    // muchos clientes reconectando en masa tras un reinicio del backend.
+    const delay = Math.min(2000 * 1.5 ** this.reconnectAttempts, 30000);
+    this.reconnectAttempts++;
     this.reconnectTimer = setTimeout(() => {
       this.reconnectTimer = null;
       this.connect();
-    }, this.reconnectInterval);
+    }, delay);
   }
 
   disconnect() {
     this.shouldReconnect = false;
+    this.reconnectAttempts = 0;
     if (this.reconnectTimer) {
       clearTimeout(this.reconnectTimer);
       this.reconnectTimer = null;

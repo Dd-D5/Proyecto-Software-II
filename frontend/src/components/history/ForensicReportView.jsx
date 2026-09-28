@@ -15,17 +15,18 @@ function fmtDuration(ms) {
   return `${Math.floor(ms / 60000)}m ${Math.round((ms % 60000) / 1000)}s`;
 }
 
-export default function ForensicReportView({ report, onBack }) {
+export default function ForensicReportView({ report }) {
   const { summary, sessions, attackers, iocs } = report;
   const generatedAt = new Date().toLocaleString();
-  const showBack = typeof onBack === 'function';
   const [isGenerating, setIsGenerating] = useState(false);
+  const [pdfError, setPdfError] = useState(null);
 
   // ponytail: descarga silenciosa vector justificada porque el Chrome del operador no ofrece
   // destino "Guardar como PDF" en el dialogo; si eso se arregla, este boton es candidato a borrar.
   const handleDownloadPdf = async () => {
     if (isGenerating) return;
     setIsGenerating(true);
+    setPdfError(null);
     try {
       const [{ default: pdfMake }, { default: fontContainer }] = await Promise.all([
         import('pdfmake'),
@@ -34,6 +35,8 @@ export default function ForensicReportView({ report, onBack }) {
       if (typeof pdfMake.addFontContainer === 'function') pdfMake.addFontContainer(fontContainer);
       const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-');
       pdfMake.createPdf(reportToPdfDoc(report)).download(`reporte_forense_${stamp}.pdf`);
+    } catch (err) {
+      setPdfError('No se pudo generar el PDF. Intente nuevamente o use Imprimir → Guardar como PDF.');
     } finally {
       setIsGenerating(false);
     }
@@ -57,21 +60,11 @@ export default function ForensicReportView({ report, onBack }) {
           </div>
         </div>
         <div className="flex gap-2 print:hidden">
-          {showBack && (
-            <button
-              type="button"
-              onClick={onBack}
-              className="bg-surface-container hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase py-2.5 px-4 rounded-lg border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[16px]">arrow_back</span>
-              Volver
-            </button>
-          )}
           <button
             type="button"
             onClick={handleDownloadPdf}
             disabled={isGenerating}
-            className="bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps uppercase font-semibold py-2.5 px-4 rounded-lg transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-wait"
+            className="bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps uppercase font-semibold py-2.5 px-4 rounded-btn transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-wait"
           >
             <span className="material-symbols-outlined text-[16px]">download</span>
             {isGenerating ? 'Generando...' : 'Descargar PDF'}
@@ -84,6 +77,9 @@ export default function ForensicReportView({ report, onBack }) {
             <span className="material-symbols-outlined text-[16px]">print</span>
             Imprimir
           </button>
+          {pdfError && (
+            <span role="alert" className="self-center font-label-code text-xs text-error">{pdfError}</span>
+          )}
         </div>
       </div>
 

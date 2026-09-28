@@ -54,8 +54,12 @@ export default function BreachToast({ breachByService = {}, onNewBreach }) {
       {toasts.map((t) => (
         <div
           key={t.id}
+          tabIndex={0}
           onClick={() => setToasts((ts) => ts.filter((x) => x.id !== t.id))}
-          className="bg-surface-container-low border border-error-container/40 rounded-xl p-3 shadow-lg cursor-pointer animate-pulse flex items-start gap-2.5"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === 'Escape') setToasts((ts) => ts.filter((x) => x.id !== t.id));
+          }}
+          className="bg-surface-container-low border border-error-container/40 rounded-xl p-3 shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-error/50 flex items-start gap-2.5"
           role="alert"
         >
           <span className="material-symbols-outlined text-error text-[22px] shrink-0">gpp_maybe</span>
@@ -68,7 +72,7 @@ export default function BreachToast({ breachByService = {}, onNewBreach }) {
             <span className="font-label-code text-[13px] text-on-surface font-semibold truncate">
               {fmtService(t.service)}
             </span>
-            <span className="font-caption text-[10px] text-outline">Click para cerrar</span>
+            <span className="font-caption text-[10px] text-outline">Enter o click para cerrar</span>
           </div>
         </div>
       ))}

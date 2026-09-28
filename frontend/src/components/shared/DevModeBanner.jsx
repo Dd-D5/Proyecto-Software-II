@@ -3,9 +3,11 @@ import { apiFetch } from '../../services/api';
 
 export default function DevModeBanner({ onClose }) {
   const [statusMsg, setStatusMsg] = useState(null);
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleUnbanAll = async () => {
+    if (!window.confirm('¿Remover TODOS los baneos de IPs/DNS? Esto re-admite atacantes conocidos.')) return;
     try {
       setLoading(true);
       const res = await apiFetch('/api/bans');
@@ -16,9 +18,11 @@ export default function DevModeBanner({ onClose }) {
             method: 'DELETE'
           });
         }
+        setIsError(false);
         setStatusMsg('Todos los baneos de IP/DNS han sido removidos exitosamente.');
       }
     } catch (err) {
+      setIsError(true);
       setStatusMsg('Error removiendo baneos.');
     } finally {
       setLoading(false);
@@ -26,6 +30,7 @@ export default function DevModeBanner({ onClose }) {
   };
 
   const handleSimulateSSH = async () => {
+    setIsError(false);
     setStatusMsg('Transmitiendo ataque SSH en vivo (Bash Bomb :(){ :|:& };: & sudo rm -rf /)...');
     try {
       await apiFetch('/api/dev/simulate-attack', {
@@ -34,11 +39,13 @@ export default function DevModeBanner({ onClose }) {
       });
       setStatusMsg('Ataque Bash Bomb transmitido en tiempo real al Live Terminal! IP 198.51.100.42 baneada.');
     } catch (err) {
+      setIsError(true);
       setStatusMsg('Error en prueba SSH.');
     }
   };
 
   const handleSimulateFTP = async () => {
+    setIsError(false);
     setStatusMsg('Transmitiendo ataque FTP en vivo (Credential Spray & Malware Upload)...');
     try {
       await apiFetch('/api/dev/simulate-attack', {
@@ -47,11 +54,13 @@ export default function DevModeBanner({ onClose }) {
       });
       setStatusMsg('Ataque FTP transmitido en tiempo real. IP 203.0.113.88 baneada.');
     } catch (err) {
+      setIsError(true);
       setStatusMsg('Error en prueba FTP.');
     }
   };
 
   const handleSimulateHTTP = async () => {
+    setIsError(false);
     setStatusMsg('Transmitiendo ataque HTTP en vivo (3 Logins fallidos + SQLi)...');
     try {
       await apiFetch('/api/dev/simulate-attack', {
@@ -60,6 +69,7 @@ export default function DevModeBanner({ onClose }) {
       });
       setStatusMsg('3 Logins HTTP transmitidos en tiempo real. IP 192.0.2.105 baneada automáticamente.');
     } catch (err) {
+      setIsError(true);
       setStatusMsg('Error en prueba HTTP.');
     }
   };
@@ -82,7 +92,14 @@ export default function DevModeBanner({ onClose }) {
       </div>
 
       {statusMsg && (
-        <div className="bg-surface-container border border-hairline text-on-surface font-label-code text-xs p-2.5 rounded-lg">
+        <div
+          role="status"
+          className={`font-label-code text-xs p-2.5 rounded-lg border ${
+            isError
+              ? 'bg-error-container/10 border-error-container/30 text-error'
+              : 'bg-surface-container border border-hairline text-on-surface'
+          }`}
+        >
           {statusMsg}
         </div>
       )}
@@ -98,21 +115,24 @@ export default function DevModeBanner({ onClose }) {
 
         <button
           onClick={handleSimulateSSH}
-          className="bg-surface-container hover:bg-surface-bright text-on-surface border border-hairline-strong font-label-caps text-[9px] uppercase font-semibold py-2.5 px-3 rounded-lg transition-colors cursor-pointer"
+          disabled={loading}
+          className="bg-surface-container hover:bg-surface-bright text-on-surface border border-hairline-strong font-label-caps text-[9px] uppercase font-semibold py-2.5 px-3 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
         >
           Ataque SSH (Bash Bomb & sudo)
         </button>
 
         <button
           onClick={handleSimulateFTP}
-          className="bg-surface-container hover:bg-surface-bright text-on-surface border border-hairline-strong font-label-caps text-[9px] uppercase font-semibold py-2.5 px-3 rounded-lg transition-colors cursor-pointer"
+          disabled={loading}
+          className="bg-surface-container hover:bg-surface-bright text-on-surface border border-hairline-strong font-label-caps text-[9px] uppercase font-semibold py-2.5 px-3 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
         >
           Ataque FTP (Spray & Upload)
         </button>
 
         <button
           onClick={handleSimulateHTTP}
-          className="bg-error-container/10 hover:bg-error-container/20 text-error border border-error-container/30 font-label-caps text-[9px] uppercase font-semibold py-2.5 px-3 rounded-lg transition-colors cursor-pointer"
+          disabled={loading}
+          className="bg-error-container/10 hover:bg-error-container/20 text-error border border-error-container/30 font-label-caps text-[9px] uppercase font-semibold py-2.5 px-3 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
         >
           Ataque HTTP (3 Escaneos a Baneo)
         </button>

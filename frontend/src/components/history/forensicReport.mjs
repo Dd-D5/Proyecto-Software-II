@@ -1,13 +1,38 @@
 // ponytail: parser asume el formato actual de attack_history.txt (key=value + payload entre comillas);
 // si el backend cambia el formato, esto se rompe silenciosamente — upgrade: que el backend emita lineas JSON.
 
-import { getApiBaseUrl } from '../../services/api';
+import { getApiBaseUrl } from '../../services/api.js';
 
 export function fetchAttackHistory() {
   return fetch(`${getApiBaseUrl()}/logs/attacks`, { mode: 'cors' }).then((r) => {
     if (!r.ok) throw new Error('No hay historial disponible');
     return r.text();
   });
+}
+
+// Mapa de un TelemetryMessage del WS → entry del mismo shape que produce parseHistory.
+// Sustituye re-polling del archivo: el WS ya entrega todos los campos que el reporte usa.
+// Solo eventos que van al attack_history (system_stats y bans "security" no van al archivo).
+const WS_EVENT_TYPES = ['connection', 'connection_end', 'io', 'command', 'alert', 'output'];
+
+export function wsMessageToEntry(msg) {
+  if (!msg || msg.type === 'system_stats' || msg.service === 'security' || !WS_EVENT_TYPES.includes(msg.type)) {
+    return null;
+  }
+  // ponytail: sin timestamp (raro, emitTelemetry siempre lo setea) usamos reloj del
+  // cliente — puede desalinearse con los ts del archivo en el dedup por ts.
+  // Upgrade path: timestamp obligatorio en el backend (quitar omitempty).
+  const ts = msg.timestamp ? Number(new Date(msg.timestamp)) : Date.now();
+  return {
+    timestamp: msg.timestamp || new Date().toISOString(),
+    ts,
+    service: msg.service,
+    event: msg.type,
+    ip: msg.ip || '',
+    mac: msg.mac || '',
+    session_id: msg.session_id || '',
+    payload: msg.payload || ''
+  };
 }
 
 // ponytail: limites from/to interpretados en la zona horaria local del operador (las entradas traen su

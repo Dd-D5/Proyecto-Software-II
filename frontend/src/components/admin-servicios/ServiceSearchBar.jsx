@@ -1,18 +1,17 @@
 import React from 'react';
+import { inputCls, labelCls } from '../../ui/Input';
 
 // Barra de búsqueda de honeypots: controlada por el padre (AdminServiciosView).
 // filters = { name, type, port, status } — status 'alerta' = intrusión activa.
-const inputCls = 'bg-surface-container border border-hairline-strong focus:border-primary font-label-code text-xs px-2.5 py-1.5 rounded-lg text-on-surface outline-none transition-colors';
-const labelCls = 'font-label-caps text-[10px] text-outline uppercase';
-
 export default function ServiceSearchBar({ filters, onFilterChange }) {
   const set = (key) => (e) => onFilterChange({ ...filters, [key]: e.target.value });
 
   return (
     <div className="bg-surface-container-low border border-hairline rounded-xl px-4 py-2.5 shadow-sm grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
       <div className="md:col-span-2 flex flex-col gap-1">
-        <label className={labelCls}>Nombre</label>
+        <label htmlFor="f-name" className={labelCls}>Nombre</label>
         <input
+          id="f-name"
           type="text"
           value={filters.name}
           onChange={set('name')}
@@ -22,8 +21,8 @@ export default function ServiceSearchBar({ filters, onFilterChange }) {
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className={labelCls}>Tipo de servicio</label>
-        <select value={filters.type} onChange={set('type')} className={inputCls}>
+        <label htmlFor="f-type" className={labelCls}>Tipo de servicio</label>
+        <select id="f-type" value={filters.type} onChange={set('type')} className={inputCls}>
           <option value="">Todos</option>
           <option value="ssh">SSH</option>
           <option value="ftp">FTP</option>
@@ -32,8 +31,9 @@ export default function ServiceSearchBar({ filters, onFilterChange }) {
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className={labelCls}>Puerto</label>
+        <label htmlFor="f-port" className={labelCls}>Puerto</label>
         <input
+          id="f-port"
           type="text"
           inputMode="numeric"
           value={filters.port}
@@ -44,8 +44,8 @@ export default function ServiceSearchBar({ filters, onFilterChange }) {
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className={labelCls}>Estado</label>
-        <select value={filters.status} onChange={set('status')} className={inputCls}>
+        <label htmlFor="f-status" className={labelCls}>Estado</label>
+        <select id="f-status" value={filters.status} onChange={set('status')} className={inputCls}>
           <option value="">Todos</option>
           <option value="running">Activo</option>
           <option value="stopped">Detenido</option>

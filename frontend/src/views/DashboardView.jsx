@@ -11,8 +11,6 @@ import { useWebSocket } from '../hooks/useWebSocket';
 import { wsClient } from '../services/wsClient';
 
 const KONAMI_CODE = ['w', 'w', 's', 's', 'a', 'd', 'a', 'd', 'b', 'a'];
-// Breach sobre estas claves NO redirige (solo toast): bases + 3 defaults
-const DEFAULT_BREACH_KEYS = ['ssh', 'ftp', 'http', 'ssh:2222', 'ftp:2121', 'http:8081'];
 
 export default function DashboardView() {
   const [token, setToken] = useState(() => localStorage.getItem('aegis_token') || '');
@@ -61,6 +59,8 @@ export default function DashboardView() {
   // Código Konami (W, W, S, S, A, D, A, D, B, A) → modo desarrollador
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // No capturar el Konami mientras el usuario escribe en un campo
+      if (e.target instanceof HTMLElement && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) return;
       const key = e.key.toLowerCase();
       if (['w', 's', 'a', 'd', 'b'].includes(key)) {
         keyBufferRef.current = [...keyBufferRef.current, key].slice(-10);
@@ -98,11 +98,6 @@ export default function DashboardView() {
     return <LoginView onLoginSuccess={handleLoginSuccess} />;
   }
 
-  // Breach en cualquier honeypot: se notifica por Toast sin forzar cambio de pestaña involuntario
-  const handleNewBreach = (keys) => {
-    // Los toasts flotantes informan de la intrusión sin interrumpir la vista activa del operador
-  };
-
   // Fila de honeypot / selector → cambiar a la terminal de ESA instancia
   const handleOpenService = (serviceKey) => {
     setActiveService(serviceKey);
@@ -124,7 +119,7 @@ export default function DashboardView() {
        */}
 
       {/* Toasts de intrusión (top-right) */}
-      <BreachToast breachByService={breachByService} onNewBreach={handleNewBreach} />
+      <BreachToast breachByService={breachByService} />
 
       {/* Banner de Pista / Mensaje Dev */}
       {devHintMsg && (

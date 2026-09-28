@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -17,16 +18,60 @@ var globalAttackCounter int64 = 0
 // emitTelemetry en cada evento "connection" — cubre honeypots default y dinámicos.
 var connCounts = map[string]*atomic.Int64{"ssh": {}, "ftp": {}, "http": {}}
 
+// Sesiones activas por instancia ("ssh:2222" → set de session IDs). Es la fuente
+// de verdad para que el frontend re-encienda el estado de intrusión tras un F5:
+// viaja en cada system_stats (1s), sin endpoint nuevo ni polling del cliente.
+// ponytail: HTTP no se trackea — request-scoped, nunca emite connection_end;
+// el frontend lo degrada con su timer de 10s. Upgrade path: trackear HTTP si
+// algún honeypot llega a mantener conexiones persistentes reales.
+var (
+	activeSessionsMu sync.Mutex
+	activeSessions   = map[string]map[string]bool{}
+)
+
+func sessionStart(instance, sessionID string) {
+	activeSessionsMu.Lock()
+	defer activeSessionsMu.Unlock()
+	set, ok := activeSessions[instance]
+	if !ok {
+		set = map[string]bool{}
+		activeSessions[instance] = set
+	}
+	set[sessionID] = true
+}
+
+func sessionEnd(instance, sessionID string) {
+	activeSessionsMu.Lock()
+	defer activeSessionsMu.Unlock()
+	if set := activeSessions[instance]; set != nil {
+		delete(set, sessionID)
+		if len(set) == 0 {
+			delete(activeSessions, instance)
+		}
+	}
+}
+
+func activeSessionCounts() map[string]int {
+	activeSessionsMu.Lock()
+	defer activeSessionsMu.Unlock()
+	out := make(map[string]int, len(activeSessions))
+	for inst, set := range activeSessions {
+		out[inst] = len(set)
+	}
+	return out
+}
+
 type SystemTelemetry struct {
-	Type          string           `json:"type"`
-	CPUPercent    float64          `json:"cpu_percent"`
-	RAMUsedMB     float64          `json:"ram_used_mb"`
-	RAMTotalMB    float64          `json:"ram_total_mb"`
-	UptimeSeconds float64          `json:"uptime_seconds"`
-	TotalAttacks  int64            `json:"total_attacks"`
-	ServerMAC     string           `json:"server_mac"`
-	NIC           string           `json:"nic"`
-	Connections   map[string]int64 `json:"connections"`
+	Type           string           `json:"type"`
+	CPUPercent     float64          `json:"cpu_percent"`
+	RAMUsedMB      float64          `json:"ram_used_mb"`
+	RAMTotalMB     float64          `json:"ram_total_mb"`
+	UptimeSeconds  float64          `json:"uptime_seconds"`
+	TotalAttacks   int64            `json:"total_attacks"`
+	ServerMAC      string           `json:"server_mac"`
+	NIC            string           `json:"nic"`
+	Connections    map[string]int64 `json:"connections"`
+	ActiveSessions map[string]int   `json:"active_sessions,omitempty"`
 }
 
 func incrementAttackCounter() {
@@ -196,15 +241,16 @@ func startSystemStatsTicker() {
 			// Directo al canal: es un sample periódico, NO evidencia de ataque
 			// (no pasa por appendAttackHistoryEntry).
 			broadcast <- SystemTelemetry{
-				Type:          "system_stats",
-				CPUPercent:    cpuStr,
-				RAMUsedMB:     ramUsedStr,
-				RAMTotalMB:    ramTotalStr,
-				UptimeSeconds: uptime,
-				TotalAttacks:  attacks,
-				ServerMAC:     mac,
-				NIC:           nic,
-				Connections:   conns,
+				Type:           "system_stats",
+				CPUPercent:     cpuStr,
+				RAMUsedMB:      ramUsedStr,
+				RAMTotalMB:     ramTotalStr,
+				UptimeSeconds:  uptime,
+				TotalAttacks:   attacks,
+				ServerMAC:      mac,
+				NIC:            nic,
+				Connections:    conns,
+				ActiveSessions: activeSessionCounts(),
 			}
 		}
 	}()
