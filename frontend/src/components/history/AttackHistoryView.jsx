@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { apiFetch } from '../../services/api';
+import { fetchAttackHistory } from './forensicReport.mjs';
 
 export default function AttackHistoryView() {
   const [history, setHistory] = useState('');
@@ -9,12 +9,8 @@ export default function AttackHistoryView() {
   const loadHistory = async () => {
     try {
       setIsLoading(true);
-      // apiFetch (no fetch crudo): un 401 dispara el logout global
-      const response = await apiFetch('/logs/attacks');
-      if (!response.ok) {
-        throw new Error('respuesta no OK');
-      }
-      const text = await response.text();
+      // dispara un preflight CORS que la ruta (sin AuthMiddleware) no contesta.
+      const text = await fetchAttackHistory();
       setHistory(text || 'No hay ataques registrados aún.');
       setLoadError(null);
     } catch (error) {

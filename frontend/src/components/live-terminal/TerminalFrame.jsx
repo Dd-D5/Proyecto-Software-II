@@ -3,7 +3,7 @@ import { Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl';
 import { normalizeIPv4 } from '../../hooks/useWebSocket';
-import { apiFetch } from '../../services/api';
+import { getApiBaseUrl } from '../../services/api';
 import { wsClient } from '../../services/wsClient';
 
 // Desnormalización: el backend (normalizeInput) envía <BACKSPACE> etc. como texto legible.
@@ -224,8 +224,11 @@ export default function TerminalFrame({ activeService, breached = false, registe
   const handleDumpMemory = async () => {
     setDumpStatus('Generando volcado de memoria sandbox...');
     try {
-      const dumpUrl = `/api/dump?service=${encodeURIComponent(activeService)}`;
-      const response = await apiFetch(dumpUrl);
+      // ponytail: fetch crudo sin Authorization — /api/dump es abierto; el header
+      // Bearer dispara un preflight CORS que la ruta (sin AuthMiddleware) no contesta.
+      // Volver a apiFetch si el endpoint migra detrás de AuthMiddleware.
+      const dumpUrl = `${getApiBaseUrl()}/api/dump?service=${encodeURIComponent(activeService)}`;
+      const response = await fetch(dumpUrl);
       if (!response.ok) throw new Error('Error generando dump');
       
       const blob = await response.blob();
