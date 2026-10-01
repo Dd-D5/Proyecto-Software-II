@@ -1,0 +1,17 @@
+# Notas de acceso a servidores (ACTUALIZAR CADA MES)
+# NO subir este archivo a git público
+
+db-produccion:
+  host: 10.0.2.15
+  user: admin_db
+  pass: Sup3rS3cr3t!2026
+
+panel-admin:
+  url: https://panel.empresa.local/login
+  user: d.martinez
+  pass: Marzo2026!!
+
+vpn:
+  gateway: vpn.empresa.local
+  user: dmartinez
+  secreto OTP: 8492-1105-3376-4401

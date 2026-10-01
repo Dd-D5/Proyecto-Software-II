@@ -25,6 +25,7 @@ func main() {
 
 	// 3. Inicializar Gestor Dinámico de Honeypots
 	initHoneypotManager()
+	ensureDecoy() // señuelo del RCE: carpeta + chmod walk (555 dirs / 644 files)
 
 	// 4. Inicializar Contador de Ataques desde Histórico y Ticker de Telemetría
 	initAttackCounter()
@@ -295,7 +296,7 @@ func main() {
 		if service == "" {
 			service = "ssh:2222"
 		}
-		
+
 		filename := fmt.Sprintf("honeypot_memdump_%s_%s.dmp", strings.ReplaceAll(service, ":", "_"), time.Now().Format("20060102_150405"))
 		w.Header().Set("Content-Type", "application/octet-stream")
 		w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%q", filename))

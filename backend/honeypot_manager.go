@@ -514,6 +514,6 @@ func handleDynamicSSHConnection(conn net.Conn, banner, name string, port int) {
 		}
 		go handleSessionRequests(requests)
 		shellStarted = true
-		go startFakeShellForService(channel, ip, mac, sessionID, serviceName)
+		go startFakeShellForService(channel, ip, mac, sessionID, serviceName, banner)
 	}
 }
