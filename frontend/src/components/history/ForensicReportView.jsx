@@ -161,14 +161,14 @@ export default function ForensicReportView({ report }) {
               <div className="flex flex-wrap items-center gap-2">
                 <span className="bg-primary/10 text-primary-container border border-primary/20 text-[10px] font-label-caps px-2 py-0.5 rounded uppercase">{s.service}</span>
                 <span className="font-label-code text-xs font-bold text-on-surface">{s.ip}</span>
-                <span className="text-[10px] font-label-code text-outline">{s.mac}</span>
+                <span className="text-xs font-label-code text-on-surface">{s.mac}</span>
                 {s.bot && BOT_BADGES[s.bot] && (
                   <span className={`${chip} uppercase ${BOT_BADGES[s.bot].cls}`}>{BOT_BADGES[s.bot].label}</span>
                 )}
                 <span className={`${chip} border-tertiary/30 bg-tertiary/10 text-tertiary ml-auto`}>{fmtDuration(s.durationMs)}</span>
                 {s.wpm > 0 && <span className={`${chip} border-primary/20 bg-primary/10 text-primary-container`}>{s.wpm} WPM</span>}
               </div>
-              <div className="text-[10px] font-label-code text-outline">
+              <div className="text-xs font-label-code text-on-surface">
                 {fmtDate(s.start)} → {fmtDate(s.end)} · {s.commands.length} comandos · {s.alerts} alertas · sesión {s.id}
               </div>
               {s.commands.length > 0 && (

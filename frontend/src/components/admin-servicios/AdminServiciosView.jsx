@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DnsBanManagerView from './DnsBanManagerView';
 import ServiceSearchBar from './ServiceSearchBar';
 import { apiFetch } from '../../services/api';
@@ -18,6 +18,20 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
   const [error, setError] = useState(null);
   const [notice, setNotice] = useState(null);
   const [fetchError, setFetchError] = useState(null);
+  // Error de despliegue/arranque con motivo del backend → popup modal
+  const [createError, setCreateError] = useState(null);
+  const closeBtnRef = useRef(null);
+
+  // Popup: foco al botón y Escape cierra (click-fuera en el overlay del JSX)
+  useEffect(() => {
+    if (!createError) return undefined;
+    closeBtnRef.current?.focus();
+    const onKey = (e) => {
+      if (e.key === 'Escape') setCreateError(null);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [createError]);
 
   // Clave de breach de una instancia: "http:8090" (igual que emite el backend)
   const breachKeyOf = (hp) => `${hp.type}:${hp.port}`;
@@ -88,7 +102,8 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
       setBanner('');
       fetchHoneypots();
     } catch (err) {
-      setError(err.message);
+      // Fallo real de despliegue (kernel/puerto tomado) → popup con el motivo del backend
+      setCreateError(err.message);
     } finally {
       setLoading(false);
     }
@@ -102,9 +117,13 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
       });
       if (response.ok) {
         fetchHoneypots();
+      } else {
+        // Arrancar un detenido cuyo puerto fue tomado = mismo motivo kernel → popup
+        const data = await response.json().catch(() => ({}));
+        setCreateError(data.error || 'Error al cambiar estado del honeypot');
       }
     } catch (err) {
-      setError('Error al cambiar estado del honeypot');
+      setCreateError('Error al cambiar estado del honeypot');
     }
   };
 
@@ -330,10 +349,12 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
                             className={`font-label-caps text-[9px] px-2 py-0.5 rounded border uppercase font-semibold ${
                               hp.status === 'running'
                                 ? 'bg-primary/10 text-primary-container border-primary/20'
+                                : hp.status === 'error'
+                                ? 'bg-error-container/15 text-error border-error-container/40'
                                 : 'bg-error-container/10 text-error border-error-container/30'
                             }`}
                           >
-                            {hp.status === 'running' ? '● Activo' : '○ Detenido'}
+                            {hp.status === 'running' ? '● Activo' : hp.status === 'error' ? '⚠ Error' : '○ Detenido'}
                           </span>
                         )}
                       </td>
@@ -363,6 +384,41 @@ export default function AdminServiciosView({ breachByService = {}, onOpenService
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Popup de error de despliegue con el motivo real del backend
+          (kernel: puerto ocupado/privilegiado · honeypot: puerto ya registrado).
+          ponytail: dialog inline — extraer a ui/Dialog.jsx cuando exista un
+          segundo consumidor. Upgrade path: componente compartido + focus trap. */}
+      {createError && (
+        <div
+          className="fixed inset-0 z-[70] bg-ink/70 flex items-center justify-center p-4"
+          onClick={() => setCreateError(null)}
+        >
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-label="Error al desplegar honeypot"
+            className="bg-surface-container-low border border-error-container/40 rounded-xl p-6 max-w-md w-full shadow-xl flex flex-col gap-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-error text-[28px]">error</span>
+              <h3 className="font-headline-sm text-headline-sm font-semibold text-on-surface">
+                No se pudo desplegar el honeypot
+              </h3>
+            </div>
+            <p className="font-label-code text-xs text-error leading-5">{createError}</p>
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={() => setCreateError(null)}
+              className="self-end px-4 py-2 rounded-btn bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps uppercase font-bold transition-colors cursor-pointer"
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       )}

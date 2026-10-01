@@ -5,6 +5,7 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
+	"errors"
 	"fmt"
 	"log"
 	"net"
@@ -12,6 +13,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	"golang.org/x/crypto/ssh"
@@ -94,10 +96,12 @@ func (hm *HoneypotManager) CreateHoneypot(name, serviceType string, port int, ba
 	hm.mu.Lock()
 	defer hm.mu.Unlock()
 
-	// Verificar si el puerto ya está en uso por otro honeypot
+	// Conflicto contra CUALQUIER instancia (running/stopped/error): un honeypot
+	// detenido sigue siendo dueño de su puerto; permitir el duplicado solo
+	// mueve el error al momento de reactivar el detenido, con motivo críptico.
 	for _, inst := range hm.instances {
-		if inst.Config.Port == port && inst.Config.Status == "running" {
-			return nil, fmt.Errorf("el puerto %d ya está en uso por otro Honeypot (%s)", port, inst.Config.Name)
+		if inst.Config.Port == port {
+			return nil, fmt.Errorf("el puerto %d ya pertenece al honeypot '%s' (estado: %s)", port, inst.Config.Name, inst.Config.Status)
 		}
 	}
 
@@ -117,13 +121,28 @@ func (hm *HoneypotManager) CreateHoneypot(name, serviceType string, port int, ba
 	}
 	hm.instances[id] = inst
 
-	// Iniciar inmediatamente el Honeypot recién creado
+	// Iniciar inmediatamente el Honeypot recién creado.
+	// Bind fallido → ROLLBACK: la instancia no queda en la lista y el error
+	// clasifica el motivo (kernel vs honeypot) para el popup del operador.
 	if err := hm.startInstanceLocked(inst); err != nil {
-		log.Printf("⚠️ Error al iniciar honeypot %s: %v", name, err)
-		return &inst.Config, nil // Se guarda como detenido
+		delete(hm.instances, id)
+		log.Printf("⚠️ Honeypot %s descartado (puerto %d): %v", name, port, err)
+		return nil, classifyBindError(port, err)
 	}
 
 	return &inst.Config, nil
+}
+
+// classifyBindError traduce el errno de net.Listen a un motivo legible para el popup.
+func classifyBindError(port int, err error) error {
+	switch {
+	case errors.Is(err, syscall.EADDRINUSE):
+		return fmt.Errorf("el kernel rechazó el puerto %d: ya está ocupado por otro proceso del sistema", port)
+	case errors.Is(err, syscall.EACCES):
+		return fmt.Errorf("el kernel rechazó el puerto %d: puerto privilegiado (<1024), requiere permisos de administrador", port)
+	default:
+		return fmt.Errorf("el kernel no pudo reservar el puerto %d: %v", port, err)
+	}
 }
 
 func (hm *HoneypotManager) ToggleHoneypot(id string) (*HoneypotConfig, error) {
