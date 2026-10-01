@@ -33,6 +33,22 @@ type HoneypotInstance struct {
 	Config   HoneypotConfig
 	listener net.Listener
 	stopChan chan struct{}
+	// Conexiones vivas del atacante: al pausar/eliminar hay que cortarlas,
+	// cerrar el listener solo bloquea conexiones NUEVAS.
+	connsMu sync.Mutex
+	conns   map[net.Conn]struct{}
+}
+
+func (inst *HoneypotInstance) trackConn(c net.Conn) {
+	inst.connsMu.Lock()
+	inst.conns[c] = struct{}{}
+	inst.connsMu.Unlock()
+}
+
+func (inst *HoneypotInstance) untrackConn(c net.Conn) {
+	inst.connsMu.Lock()
+	delete(inst.conns, c)
+	inst.connsMu.Unlock()
 }
 
 type HoneypotManager struct {
@@ -188,6 +204,9 @@ func (hm *HoneypotManager) DeleteHoneypot(id string) error {
 
 func (hm *HoneypotManager) startInstanceLocked(inst *HoneypotInstance) error {
 	addr := fmt.Sprintf("0.0.0.0:%d", inst.Config.Port)
+	if inst.conns == nil {
+		inst.conns = make(map[net.Conn]struct{})
+	}
 
 	switch inst.Config.Type {
 	case "http":
@@ -238,7 +257,11 @@ func (hm *HoneypotManager) startInstanceLocked(inst *HoneypotInstance) error {
 						continue
 					}
 				}
-				go handleDynamicFTPConnection(conn, inst.Config.Banner, inst.Config.Name, inst.Config.Port)
+				go func(c net.Conn) {
+					inst.trackConn(c)
+					defer inst.untrackConn(c)
+					handleDynamicFTPConnection(c, inst.Config.Banner, inst.Config.Name, inst.Config.Port)
+				}(conn)
 			}
 		}()
 
@@ -268,7 +291,11 @@ func (hm *HoneypotManager) startInstanceLocked(inst *HoneypotInstance) error {
 						continue
 					}
 				}
-				go handleDynamicSSHConnection(conn, inst.Config.Banner, inst.Config.Name, inst.Config.Port)
+				go func(c net.Conn) {
+					inst.trackConn(c)
+					defer inst.untrackConn(c)
+					handleDynamicSSHConnection(c, inst.Config.Banner, inst.Config.Name, inst.Config.Port)
+				}(conn)
 			}
 		}()
 
@@ -287,6 +314,16 @@ func (hm *HoneypotManager) stopInstanceLocked(inst *HoneypotInstance) {
 	if inst.stopChan != nil {
 		close(inst.stopChan)
 	}
+	// Cortar las conexiones VIVAS: el listener solo bloquea conexiones nuevas.
+	// Sin esto el atacante conserva su shell/FTP en un honeypot "Detenido" y el
+	// connection_end (que limpia breach, active_sessions y el detector) nunca se emite.
+	// ponytail: HTTP no se trackea — sus requests in-flight mueren solos en ms
+	// (request-scoped). Upgrade: guardar *http.Server y server.Close() si importa.
+	inst.connsMu.Lock()
+	for c := range inst.conns {
+		c.Close()
+	}
+	inst.connsMu.Unlock()
 	inst.Config.Status = "stopped"
 	log.Printf("🛑 Honeypot Dinámico [%s] en puerto %d detenido", inst.Config.Name, inst.Config.Port)
 }
@@ -294,9 +331,13 @@ func (hm *HoneypotManager) stopInstanceLocked(inst *HoneypotInstance) {
 func handleDynamicFTPConnection(conn net.Conn, banner, name string, port int) {
 	defer conn.Close()
 	ip, _, _ := net.SplitHostPort(conn.RemoteAddr().String())
-	if banned, reason := globalBanManager.IsBanned(ip); banned {
-		conn.Write([]byte(fmt.Sprintf("421 Service unavailable, IP baneada: %s\r\n", reason)))
-		return
+	// Mismo nil-guard que el handler SSH: en producción siempre está inicializado,
+	// pero el handler no debe morir si el manager aún no existe (p.ej. tests).
+	if globalBanManager != nil {
+		if banned, reason := globalBanManager.IsBanned(ip); banned {
+			conn.Write([]byte(fmt.Sprintf("421 Service unavailable, IP baneada: %s\r\n", reason)))
+			return
+		}
 	}
 	mac := getMACAddress(ip)
 	sessionID := fmt.Sprintf("ftp-%s-%d", strings.ReplaceAll(ip, ":", "_"), time.Now().UnixNano())
@@ -443,6 +484,17 @@ func handleDynamicSSHConnection(conn net.Conn, banner, name string, port int) {
 
 	emitTelemetry(serviceName, "connection", fmt.Sprintf("Nuevo intruso conectado a Honeypot SSH %s (Puerto %d)", name, port), ip, mac, sessionID)
 
+	// Pareo del "connection": si esta conexión nunca abre un shell (handshake
+	// fallido, scanner tipo nmap, o pausa/eliminación del honeypot), nadie más
+	// emite el connection_end → el breach del frontend queda clavado en rojo.
+	// El defer solo dispara si no hubo shell; el shell emite el suyo propio.
+	shellStarted := false
+	defer func() {
+		if !shellStarted {
+			emitTelemetry(serviceName, "connection_end", "Conexión SSH terminada sin sesión abierta (handshake fallido, pausa o eliminación)", ip, mac, sessionID)
+		}
+	}()
+
 	sConn, chans, reqs, err := ssh.NewServerConn(conn, config)
 	if err != nil {
 		log.Printf("Error en el handshake SSH dinámico en puerto %d: %v", port, err)
@@ -461,6 +513,7 @@ func handleDynamicSSHConnection(conn net.Conn, banner, name string, port int) {
 			continue
 		}
 		go handleSessionRequests(requests)
+		shellStarted = true
 		go startFakeShellForService(channel, ip, mac, sessionID, serviceName)
 	}
 }
