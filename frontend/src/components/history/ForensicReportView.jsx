@@ -27,22 +27,40 @@ export default function ForensicReportView({ report }) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [pdfError, setPdfError] = useState(null);
 
-  // ponytail: descarga silenciosa vector justificada porque el Chrome del operador no ofrece
-  // destino "Guardar como PDF" en el dialogo; si eso se arregla, este boton es candidato a borrar.
+  // Fuente única: Descargar e Imprimir parten del MISMO doc pdfmake (reportToPdfDoc).
+  // El botón de guardado sigue justificado como descarga silenciosa vector.
+  const buildPdf = async () => {
+    const [{ default: pdfMake }, { default: fontContainer }] = await Promise.all([
+      import('pdfmake'),
+      import('pdfmake/build/fonts/Roboto.js')
+    ]);
+    if (typeof pdfMake.addFontContainer === 'function') pdfMake.addFontContainer(fontContainer);
+    return pdfMake.createPdf(reportToPdfDoc(report));
+  };
+
   const handleDownloadPdf = async () => {
     if (isGenerating) return;
     setIsGenerating(true);
     setPdfError(null);
     try {
-      const [{ default: pdfMake }, { default: fontContainer }] = await Promise.all([
-        import('pdfmake'),
-        import('pdfmake/build/fonts/Roboto.js')
-      ]);
-      if (typeof pdfMake.addFontContainer === 'function') pdfMake.addFontContainer(fontContainer);
       const stamp = new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-');
-      pdfMake.createPdf(reportToPdfDoc(report)).download(`reporte_forense_${stamp}.pdf`);
+      (await buildPdf()).download(`reporte_forense_${stamp}.pdf`);
     } catch (err) {
-      setPdfError('No se pudo generar el PDF. Intente nuevamente o use Imprimir → Guardar como PDF.');
+      setPdfError('No se pudo generar el PDF. Intente nuevamente o use Imprimir.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // Imprimir usa el MISMO pipeline pdfmake y realiza .print() abriendo la ventana de impresion
+  const handlePrintPdf = async () => {
+    if (isGenerating) return;
+    setIsGenerating(true);
+    setPdfError(null);
+    try {
+      (await buildPdf()).print();
+    } catch (err) {
+      setPdfError('No se pudo abrir el diálogo de impresión. Intente con Descargar PDF.');
     } finally {
       setIsGenerating(false);
     }
@@ -77,11 +95,12 @@ export default function ForensicReportView({ report }) {
           </button>
           <button
             type="button"
-            onClick={() => window.print()}
-            className="bg-surface-container hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase py-2.5 px-4 rounded-lg border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer"
+            onClick={handlePrintPdf}
+            disabled={isGenerating}
+            className="bg-surface-container hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase py-2.5 px-4 rounded-lg border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-wait"
           >
             <span className="material-symbols-outlined text-[16px]">print</span>
-            Imprimir
+            {isGenerating ? 'Generando...' : 'Imprimir'}
           </button>
           {pdfError && (
             <span role="alert" className="self-center font-label-code text-xs text-error">{pdfError}</span>
